@@ -1,0 +1,3 @@
+# Install instructions
+1. Make sure you've got [NodeJS](https://nodejs.org/en/download/) installed
+2. TODO...
