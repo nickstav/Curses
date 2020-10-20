@@ -8,7 +8,7 @@
 
 </script>
 
-<div id="canvasHolder" class="w-full flex-1" style="--canvasW: {$cursesCanvas.canvasWidth};--canvasH: {$cursesCanvas.canvasHeight}">
+<div id="canvasHolder" class="w-full flex-1 flex items-center justify-center" style="--canvasW: {$cursesCanvas.canvasWidth}px;--canvasH: {$cursesCanvas.canvasHeight}px">
     <div id="canvasBackground" style="width: var(--canvasW); height: var(--canvasH); background-image: url('./grid.png')">
         <canvas 
         bind:this={canvas}
