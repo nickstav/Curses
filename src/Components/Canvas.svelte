@@ -8,15 +8,17 @@
 
 </script>
 
-<div id="canvasHolder" class="w-full flex-1" style="background-image: url('./grid.png')">
-    <canvas 
+<div id="canvasHolder" class="w-full flex-1" style="--canvasW: {$cursesCanvas.canvasWidth};--canvasH: {$cursesCanvas.canvasHeight}">
+    <div id="canvasBackground" style="width: var(--canvasW); height: var(--canvasH); background-image: url('./grid.png')">
+        <canvas 
         bind:this={canvas}
         id="cursesCanvas" 
-        width="full"
-        height="full"
+        width={$cursesCanvas.canvasWidth}
+        height={$cursesCanvas.canvasHeight}
         on:mousemove={handleMouseMove}
         on:mousedown={handleMouseDown}
         on:mouseup={handleMouseRelease}
         >
     </canvas>
+    </div>
 </div>
