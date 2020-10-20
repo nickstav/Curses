@@ -9,12 +9,10 @@ function changeTool(buttonPressed) {
 
 // function to handle when the mouse button is pressed & held
 function handleMouseDown(event) {
-    let isDrawing = get(cursesCanvas).isDrawing;
+    // update the start position of the cursor when the mouse is first clicked
     let canvasElement = get(cursesCanvas).canvasElement;
-    if (!isDrawing) {
-        // update the start position of the cursor when the mouse is first clicked
-        cursesCanvas.updateStartPosition(event, canvasElement);
-    }
+    cursesCanvas.updateStartPosition(event, canvasElement);
+
     // confirm that the canvas is being drawn on now the button is being held down
     cursesCanvas.startDrawing();
 }
