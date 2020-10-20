@@ -8,11 +8,12 @@
 
 </script>
 
-<div id="canvasHolder" class="w-full h-canvasHeight" style="background-image: url('./grid.png')">
+<div id="canvasHolder" class="w-full flex-1" style="background-image: url('./grid.png')">
     <canvas 
         bind:this={canvas}
         id="cursesCanvas" 
-        class="w-full h-full"
+        width="full"
+        height="full"
         on:mousemove={handleMouseMove}
         on:mousedown={handleMouseDown}
         on:mouseup={handleMouseRelease}
