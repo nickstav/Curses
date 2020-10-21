@@ -1,17 +1,28 @@
 import { cursesCanvas } from './store.js';
 import { get } from 'svelte/store';
 import { drawLine } from './line.js';
+import { writeText } from './text.js';
 
 // function to select which canvas tool has been clicked in the toolbar
 function changeTool(buttonPressed) {
     cursesCanvas.changeCanvasTool(buttonPressed);
+    let canvasElement = get(cursesCanvas).canvasElement;
 
     if (buttonPressed === "line") {
-        let canvasElement = get(cursesCanvas).canvasElement;
         canvasElement.style.cursor = "crosshair";
     } else {
-        let canvasElement = get(cursesCanvas).canvasElement;
         canvasElement.style.cursor = "default";
+    }
+}
+
+function handleMouseClick(event) {
+    let toolSelected = get(cursesCanvas).tool;
+    let canvasElement = get(cursesCanvas).canvasElement;
+
+    // if text tool is selected, carry out line drawing functions
+    if (toolSelected === 'text') {
+        cursesCanvas.updateMousePosition(event, canvasElement);
+        writeText();
     }
 }
 
@@ -58,4 +69,4 @@ function clearCanvas() {
 }
 
 
-export { changeTool, handleMouseDown, handleMouseMove, handleMouseRelease }
+export { changeTool, handleMouseClick, handleMouseDown, handleMouseMove, handleMouseRelease }
