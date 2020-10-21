@@ -1,4 +1,3 @@
-import { text } from 'svelte/internal';
 import { writable } from 'svelte/store';
 
  const defaultValues = {

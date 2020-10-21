@@ -1,5 +1,5 @@
 import { get } from 'svelte/store';
-import { cursesCanvas } from './store.js';
+import { cursesCanvas } from '../stores/store.js';
 
 
 export function drawLine() {

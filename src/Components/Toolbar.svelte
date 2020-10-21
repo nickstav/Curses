@@ -1,6 +1,6 @@
 <script>
     import Button from './Button.svelte';
-    import { cursesCanvas } from '../JS/store.js';
+    import { cursesCanvas } from '../JS/stores/store.js';
     import { changeTool } from '../JS/eventHandling.js';
 </script>
 

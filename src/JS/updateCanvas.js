@@ -1,6 +1,6 @@
 import { get } from 'svelte/store';
-import { cursesCanvas } from './store.js';
-import { canvasObjects } from './objects.js';
+import { cursesCanvas } from './stores/store.js';
+import { canvasObjects } from './stores/objects.js';
 
 function addTextToCanvas() {
     let textObjects = get(canvasObjects).text;
