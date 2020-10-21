@@ -10,5 +10,6 @@ export function drawLine() {
    context.beginPath();
    context.moveTo(startPosition.x, startPosition.y);
    context.lineTo(currentLocation.x, currentLocation.y);
+   context.lineWidth = 10;
    context.stroke();
 }
