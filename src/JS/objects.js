@@ -1,31 +1,31 @@
 import { writable } from 'svelte/store';
 
  const defaultValues = {
-    lines = {},
-    rectangles = [],
-    text = {},
-    progress = {}
+    lines: [],
+    rectangles: [],
+    text: [],
+    progress: []
 };
 
 function setUpStore() {
 
   const { subscribe, set, update } = writable(defaultValues);
 
-  function saveLine(newLine) {
+  function saveTextObject(newText) {
     update(objects => {
       return {
           ...objects,
-          lines: objects.lines.push(newLine)
+          text: objects.text.push(newText)
       };
     });
   }
 
   return {
-	subscribe,
+	  subscribe,
     set,
-    saveLine
+    saveTextObject
 	};
 
 }
 
-export const canvasOjects = setUpStore();
+export const canvasObjects = setUpStore();

@@ -2,6 +2,7 @@ import { cursesCanvas } from './store.js';
 import { get } from 'svelte/store';
 import { drawLine } from './line.js';
 import { writeText, highlightSquare } from './text.js';
+import { addTextToCanvas } from './updateCanvas.js';
 
 // function to select which canvas tool has been clicked in the toolbar
 function changeTool(buttonPressed) {
@@ -59,7 +60,7 @@ function handleMouseMove(event) {
     if (toolSelected === 'text') {
         //stop highlighting/clearing the canvas once a location has been selected
         if (isDrawing) return;
-        
+
         cursesCanvas.updateMousePosition(event, canvasElement);
         clearCanvas();
         highlightSquare();
@@ -71,12 +72,13 @@ function handleMouseRelease() {
     cursesCanvas.stopDrawing();
 }
 
-// function to clear the entire canvas
+// function to clear the canvas of preview animations and draw saved objects
 function clearCanvas() {
     let context = get(cursesCanvas).context;
     const canvasElement = get(cursesCanvas).canvasElement;
 
     context.clearRect(0, 0, canvasElement.width, canvasElement.height);
+    addTextToCanvas();
 }
 
 

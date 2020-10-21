@@ -1,5 +1,6 @@
 import { get } from 'svelte/store';
 import { cursesCanvas } from './store.js';
+import { canvasObjects } from './objects.js';
 import { getGridLocation } from './placement.js';
 
 function writeText() {
@@ -9,25 +10,15 @@ function writeText() {
     highlightSquare(gridLocation);
 
     let userText = prompt("Enter text/characters:");
-    addTextToCanvas(userText, gridLocation);
+    addTextToStore(userText, gridLocation);
 }
 
-function addTextToCanvas(text, location) {
-    let context = get(cursesCanvas).context;
-    let gridDimension = get(cursesCanvas).gridDimension;
-    context.fillStyle = 'black';
-    context.font = "17px Consolas";
-
-    for (let i = 0; i < text.length; i++) {
-        //get the next character in the string
-        let character = text.charAt(i);
-    
-        let Xcoordinate = (i + location.x) * gridDimension.x;
-        // y location needs to be the square below as axis is measured from the top
-        let Ycoordinate = (location.y + 1) * gridDimension.y;
-
-        context.fillText(character, Xcoordinate, Ycoordinate);
-    };
+function addTextToStore(text, location) {
+    let textInfo = {
+        text: text,
+        location: location
+    }
+    canvasObjects.saveTextObject(textInfo);
 }
 
 // function to highlight the grid location that the cursor is currently over
