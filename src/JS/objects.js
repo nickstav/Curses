@@ -1,3 +1,4 @@
+import { text } from 'svelte/internal';
 import { writable } from 'svelte/store';
 
  const defaultValues = {
@@ -15,7 +16,7 @@ function setUpStore() {
     update(objects => {
       return {
           ...objects,
-          text: objects.text.push(newText)
+          text: [...objects.text, newText]
       };
     });
   }
