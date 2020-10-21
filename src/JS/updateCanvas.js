@@ -16,7 +16,7 @@ function writeTextToCanvas(text, location) {
     let gridDimension = get(cursesCanvas).gridDimension;
     let context = get(cursesCanvas).context;
     context.fillStyle = 'black';
-    context.font = "17px Consolas";
+    context.font = "15px Consolas";
 
     for (let i = 0; i < text.length; i++) {
         //get the next character in the string
