@@ -1,8 +1,8 @@
 import { writable } from 'svelte/store';
 
  const defaultValues = {
-    canvasHeight: 500,
-    canvasWidth: 250,
+    canvasHeight: 20,
+    canvasWidth: 50,
     canvasElement: undefined,
     context: undefined,
     tool: undefined,
@@ -82,7 +82,7 @@ function setUpStore() {
   }
 
   return {
-	subscribe,
+	  subscribe,
     set,
     removeCanvas,
     createCanvas,

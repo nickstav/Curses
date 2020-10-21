@@ -5,6 +5,14 @@ import { drawLine } from './line.js';
 // function to select which canvas tool has been clicked in the toolbar
 function changeTool(buttonPressed) {
     cursesCanvas.changeCanvasTool(buttonPressed);
+
+    if (buttonPressed === "line") {
+        let canvasElement = get(cursesCanvas).canvasElement;
+        canvasElement.style.cursor = "crosshair";
+    } else {
+        let canvasElement = get(cursesCanvas).canvasElement;
+        canvasElement.style.cursor = "default";
+    }
 }
 
 // function to handle when the mouse button is pressed & held
