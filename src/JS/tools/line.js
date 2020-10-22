@@ -1,7 +1,7 @@
 import { get } from 'svelte/store';
-import { cursesCanvas } from './store.js';
+import { cursesCanvas } from '../stores/store.js';
 
-
+// ToDo................
 export function drawLine() {
    let context = get(cursesCanvas).context;
    let startPosition = get(cursesCanvas).startPosition;

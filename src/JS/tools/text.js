@@ -1,18 +1,18 @@
 import { get } from 'svelte/store';
-import { cursesCanvas } from './store.js';
-import { canvasObjects } from './objects.js';
-import { getGridLocation } from './placement.js';
+import { cursesCanvas } from '../stores/store.js';
+import { canvasObjects } from '../stores/objects.js';
+import { getGridLocation } from '../draw/location.js';
 
+// prompts user to enter text at a desired location, then saves that text and location to a store
 function writeText() {
-    let currentLocation = get(cursesCanvas).mousePosition;
-    
-    let gridLocation = getGridLocation(currentLocation);
-    highlightSquare(gridLocation);
+    let mouseLocation = get(cursesCanvas).mousePosition;
+    let gridLocation = getGridLocation(mouseLocation);
 
     let userText = prompt("Enter text/characters:");
     addTextToStore(userText, gridLocation);
 }
 
+// save the entered text to objects store
 function addTextToStore(text, location) {
     let textInfo = {
         text: text,
