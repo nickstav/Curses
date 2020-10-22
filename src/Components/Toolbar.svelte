@@ -1,7 +1,7 @@
 <script>
     import Button from './Button.svelte';
     import { cursesCanvas } from '../JS/stores/store.js';
-    import { changeTool } from '../JS/eventHandling.js';
+    import { changeTool } from '../JS/draw/eventHandling.js';
 </script>
 
 <div id="toolbar" class="bg-gray-300 w-full h-10 text-gray700 flex justify-between items-center py-0 px-5">

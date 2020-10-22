@@ -3,6 +3,8 @@ import { writable } from 'svelte/store';
  const defaultValues = {
     canvasHeight: 20,
     canvasWidth: 50,
+    minDimensions: {width: 5, height: 5},
+    maxDimensions: {width: 100, height: 100},
     gridDimension: {x: 11, y: 24},
     canvasElement: undefined,
     context: undefined,

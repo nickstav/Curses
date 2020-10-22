@@ -1,7 +1,7 @@
 <script>
     import { onMount } from 'svelte';
     import { cursesCanvas } from '../JS/stores/store.js';
-    import { handleMouseClick, handleMouseMove, handleMouseDown, handleMouseRelease } from '../JS/eventHandling.js';
+    import { handleMouseClick, handleMouseMove, handleMouseDown, handleMouseRelease } from '../JS/draw/eventHandling.js';
     import { gridAxis } from '../JS/stores/grid.js';
     
     let canvas;

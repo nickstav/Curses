@@ -1,5 +1,5 @@
 import { get } from 'svelte/store';
-import { cursesCanvas } from './stores/store.js';
+import { cursesCanvas } from '../stores/store.js';
 
 export function getGridLocation(mousePosition) {
     let gridDimension = get(cursesCanvas).gridDimension;

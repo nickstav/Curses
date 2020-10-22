@@ -1,7 +1,7 @@
-import { cursesCanvas } from './stores/store.js';
+import { cursesCanvas } from '../stores/store.js';
 import { get } from 'svelte/store';
-import { drawLine } from './canvasObjects/line.js';
-import { writeText, highlightSquare } from './canvasObjects/text.js';
+import { drawLine } from '../tools/line.js';
+import { writeText, highlightSquare } from '../tools/text.js';
 import { addTextToCanvas } from './updateCanvas.js';
 
 // function to select which canvas tool has been clicked in the toolbar
