@@ -15,6 +15,7 @@ function drawRectangle() {
     createRectangle(startSquare, currentSquare);
 }
 
+// save rectangle coordinates to the object store
 function saveRectangleToStore() {
     let startPosition = get(cursesCanvas).startPosition;
     let currentLocation = get(cursesCanvas).mousePosition;
@@ -30,6 +31,7 @@ function saveRectangleToStore() {
     canvasObjects.saveRectangleObject(rectangleInfo);
 }
 
+// create a rectangle at the specified coordinates
 function createRectangle(startSquare, endSquare) {
     let context = get(cursesCanvas).context;
     let gridDimension = get(cursesCanvas).gridDimension;

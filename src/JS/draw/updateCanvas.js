@@ -14,6 +14,7 @@ function addTextToCanvas() {
     }
 }
 
+//get all saved rectangle objects from the store and add it to the canvas
 function addRectanglesToCanvas() {
     let rectangleObjects = get(canvasObjects).rectangles;
 
