@@ -1,4 +1,5 @@
 <script>
+    import SizeParagraph from './SizeParagraph.svelte';
     import Button from './Button.svelte';
     import { cursesCanvas } from '../JS/stores/store.js';
     import { changeTool } from '../JS/draw/eventHandling.js';
@@ -23,3 +24,5 @@
         <Button editCanvas={()=>{changeTool('erase')}} img={"url('./button_images/eraser.png')"}/>
     </div>
 </div>
+
+<SizeParagraph/>

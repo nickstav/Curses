@@ -6,10 +6,9 @@
     
     let canvas;
     onMount(()=> cursesCanvas.createCanvas(canvas));
-
 </script>
 
-<div id="canvasHolder" class="w-full flex-1 flex items-center justify-center" style="--canvasW: {$gridAxis.x}px;--canvasH: {$gridAxis.y}px; --squareW: {$cursesCanvas.gridDimension.x}px; --squareH: {$cursesCanvas.gridDimension.y}px">
+<div id="canvasHolder" class="w-full flex justify-center items-center flex-1" style="--canvasW: {$gridAxis.x}px;--canvasH: {$gridAxis.y}px; --squareW: {$cursesCanvas.gridDimension.x}px; --squareH: {$cursesCanvas.gridDimension.y}px">
     <div id="canvasBackground" style="width: var(--canvasW); height: var(--canvasH); background-image: url(./grid_square.png); background-size: var(--squareW) var(--squareH);">
         <canvas 
         bind:this={canvas}
