@@ -3,6 +3,7 @@ import { cursesCanvas } from '../stores/store.js';
 import { canvasObjects } from '../stores/objects.js';
 import { getGridLocation } from '../draw/location.js';
 
+// prompts user to enter text at a desired location, then saves that text and location to a store
 function writeText() {
     let mouseLocation = get(cursesCanvas).mousePosition;
     let gridLocation = getGridLocation(mouseLocation);

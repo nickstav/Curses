@@ -11,7 +11,7 @@ const gridAxis = derived(
     })
 )
 
-// values to confirm whether user entered width/height are below/above min max values
+// live values to confirm whether user entered width/height are below/above min max values
 const checkUserInput = derived(
     cursesCanvas,
     $cursesCanvas => ({

@@ -1,5 +1,7 @@
 import { writable } from 'svelte/store';
 
+// a store to contain all variables related to the canvas element
+
  const defaultValues = {
     canvasHeight: 20,
     canvasWidth: 50,

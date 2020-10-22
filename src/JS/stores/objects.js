@@ -1,5 +1,7 @@
 import { writable } from 'svelte/store';
 
+// a store in which all objects created on the canvas are saved
+
  const defaultValues = {
     lines: [],
     rectangles: [],

@@ -9,6 +9,7 @@ function changeTool(buttonPressed) {
     cursesCanvas.changeCanvasTool(buttonPressed);
     let canvasElement = get(cursesCanvas).canvasElement;
 
+    //change the mouse icon depending on what tool has been selected
     if (buttonPressed === "line") {
         canvasElement.style.cursor = "crosshair";
     } else if (buttonPressed === "text") {
@@ -22,16 +23,15 @@ function handleMouseClick(event) {
     let toolSelected = get(cursesCanvas).tool;
     let canvasElement = get(cursesCanvas).canvasElement;
 
-    // if text tool is selected, carry out line drawing functions
+    // if text tool is selected, carry out text functions at clicked location
     if (toolSelected === 'text') {
         cursesCanvas.updateMousePosition(event, canvasElement);
         writeText();
     }
 }
 
-// function to handle when the mouse button is pressed & held
 function handleMouseDown(event) {
-    // update the start position of the cursor when the mouse is first clicked
+    // update the start position of the cursor when the mouse is first pressed
     let canvasElement = get(cursesCanvas).canvasElement;
     cursesCanvas.updateStartPosition(event, canvasElement);
 
@@ -46,7 +46,7 @@ function handleMouseMove(event) {
 
     // if line tool is selected, carry out line drawing functions if button is pressed
     if (toolSelected === 'line') {
-        // only run function if mouse button is pressed
+        // only run function if mouse button is being held down
         if (!isDrawing) return;
         // continually update the current mouse position
         cursesCanvas.updateMousePosition(event, canvasElement);
@@ -78,7 +78,7 @@ function clearCanvas() {
     const canvasElement = get(cursesCanvas).canvasElement;
 
     context.clearRect(0, 0, canvasElement.width, canvasElement.height);
-    
+
     addTextToCanvas();
 }
 

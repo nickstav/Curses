@@ -2,6 +2,7 @@ import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/store.js';
 import { canvasObjects } from '../stores/objects.js';
 
+//get all saved text objects from the store and add it to the canvas
 function addTextToCanvas() {
     let textObjects = get(canvasObjects).text;
 
@@ -12,6 +13,7 @@ function addTextToCanvas() {
     }
 }
 
+//write a string at its specified grid location
 function writeTextToCanvas(text, location) {
     let gridDimension = get(cursesCanvas).gridDimension;
     let context = get(cursesCanvas).context;
@@ -25,6 +27,7 @@ function writeTextToCanvas(text, location) {
         let xCoordinate = getGridSquare(i, location, gridDimension).x;
         let yCoordinate = getGridSquare(i, location, gridDimension).y;
 
+        //add the character to its assigned grid square
         context.fillText(character, xCoordinate, yCoordinate);
     };
 }
