@@ -2,7 +2,8 @@ import { cursesCanvas } from '../stores/store.js';
 import { get } from 'svelte/store';
 import { drawLine } from '../tools/line.js';
 import { writeText, highlightSquare } from '../tools/text.js';
-import { addTextToCanvas } from './updateCanvas.js';
+import { addTextToCanvas, addRectanglesToCanvas } from './updateCanvas.js';
+import { drawRectangle, saveRectangleToStore } from '../tools/rectangle.js';
 
 // function to select which canvas tool has been clicked in the toolbar
 function changeTool(buttonPressed) {
@@ -10,7 +11,7 @@ function changeTool(buttonPressed) {
     let canvasElement = get(cursesCanvas).canvasElement;
 
     //change the mouse icon depending on what tool has been selected
-    if (buttonPressed === "line") {
+    if (buttonPressed === "line" || buttonPressed === "rectangle") {
         canvasElement.style.cursor = "crosshair";
     } else if (buttonPressed === "text") {
         canvasElement.style.cursor = "pointer";
@@ -56,6 +57,13 @@ function handleMouseMove(event) {
         drawLine();
     }
 
+    if (toolSelected === "rectangle") {
+        if (!isDrawing) return;
+        cursesCanvas.updateMousePosition(event, canvasElement);
+        clearCanvas();
+        drawRectangle();
+    }
+
     // if text, highlight the grid square to enter text from
     if (toolSelected === 'text') {
         //stop highlighting/clearing the canvas once a location has been selected
@@ -69,7 +77,17 @@ function handleMouseMove(event) {
 
 // if mouse button is released, canvas is no longer being drawn on
 function handleMouseRelease() {
+    let toolSelected = get(cursesCanvas).tool;
+    
     cursesCanvas.stopDrawing();
+
+    if (toolSelected === "rectangle") {
+        saveRectangleToStore();
+    }
+}
+
+function handleMouseOut() {
+    clearCanvas();
 }
 
 // function to clear the canvas of preview animations and draw saved objects
@@ -80,7 +98,8 @@ function clearCanvas() {
     context.clearRect(0, 0, canvasElement.width, canvasElement.height);
 
     addTextToCanvas();
+    addRectanglesToCanvas();
 }
 
 
-export { changeTool, handleMouseClick, handleMouseDown, handleMouseMove, handleMouseRelease }
+export { changeTool, handleMouseClick, handleMouseDown, handleMouseMove, handleMouseRelease, handleMouseOut }

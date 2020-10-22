@@ -22,10 +22,20 @@ function setUpStore() {
     });
   }
 
+  function saveRectangleObject(newRectangle) {
+    update(objects => {
+      return {
+          ...objects,
+          rectangles: [...objects.rectangles, newRectangle]
+      };
+    });
+  }
+
   return {
 	  subscribe,
     set,
-    saveTextObject
+    saveTextObject,
+    saveRectangleObject
 	};
 
 }
