@@ -4,15 +4,14 @@ import { canvasObjects } from '../stores/objects.js';
 import { getGridLocation } from '../draw/location.js';
 
 function writeText() {
-    let currentLocation = get(cursesCanvas).mousePosition;
-    
-    let gridLocation = getGridLocation(currentLocation);
-    highlightSquare(gridLocation);
+    let mouseLocation = get(cursesCanvas).mousePosition;
+    let gridLocation = getGridLocation(mouseLocation);
 
     let userText = prompt("Enter text/characters:");
     addTextToStore(userText, gridLocation);
 }
 
+// save the entered text to objects store
 function addTextToStore(text, location) {
     let textInfo = {
         text: text,

@@ -78,6 +78,7 @@ function clearCanvas() {
     const canvasElement = get(cursesCanvas).canvasElement;
 
     context.clearRect(0, 0, canvasElement.width, canvasElement.height);
+    
     addTextToCanvas();
 }
 
