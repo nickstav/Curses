@@ -21,13 +21,25 @@ function writeTextToCanvas(text, location) {
     for (let i = 0; i < text.length; i++) {
         //get the next character in the string
         let character = text.charAt(i);
-    
-        let Xcoordinate = (i + location.x) * gridDimension.x;
-        // y location needs to be the square below as axis is measured from the top
-        let Ycoordinate = (location.y + 1) * gridDimension.y;
 
-        context.fillText(character, Xcoordinate, Ycoordinate);
+        let xCoordinate = getGridSquare(i, location, gridDimension).x;
+        let yCoordinate = getGridSquare(i, location, gridDimension).y;
+
+        context.fillText(character, xCoordinate, yCoordinate);
     };
+}
+
+function getGridSquare(position, location, gridDimension) {
+    let canvasWidth = get(cursesCanvas).canvasWidth;
+
+    // y location needs to be the square below as axis measured from the top, plus any new lines started
+    let yCorrection = 1 + Math.floor((position + location.x) / canvasWidth);
+
+    return {
+        // the remainder of gridSqaure / squareWidth will give the x coordinate of required
+        x: ((position + location.x) % canvasWidth) * gridDimension.x,
+        y: (location.y + yCorrection) * gridDimension.y
+    }
 }
 
 export { addTextToCanvas }
