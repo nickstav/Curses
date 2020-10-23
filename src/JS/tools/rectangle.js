@@ -3,7 +3,7 @@ import { cursesCanvas } from '../stores/store.js';
 import { canvasObjects } from '../stores/objects.js';
 import { getGridLocation} from '../draw/location.js';
 
-// get start coords and mouse coords to draw a rectangle
+// get start coords and mouse coords to draw a rectangle based on current mouse position
 function drawRectangle() {
     let startPosition = get(cursesCanvas).startPosition;
     let currentLocation = get(cursesCanvas).mousePosition;

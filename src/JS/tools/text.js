@@ -21,23 +21,6 @@ function addTextToStore(text, location) {
     canvasObjects.saveTextObject(textInfo);
 }
 
-// function to highlight the grid location that the cursor is currently over
-function highlightSquare(){
-    let context = get(cursesCanvas).context;
-    let gridDimension = get(cursesCanvas).gridDimension;
-    let currentLocation = get(cursesCanvas).mousePosition;
-    let gridLocation = getGridLocation(currentLocation);
-
-    context.fillStyle = 'rgb(100, 149, 237, 0.2)';
-    context.fillRect(
-        gridLocation.x * gridDimension.x, 
-        gridLocation.y * gridDimension.y, 
-        gridDimension.x, 
-        gridDimension.y
-    );
-    context.stroke();
-}
-
 /* --------------- Writing text to the canvas once saved to the object store -------------- */
 
 //write a string at its specified grid location
@@ -72,4 +55,4 @@ function getGridSquare(position, location, gridDimension) {
     }
 }
 
-export { writeText, highlightSquare, writeTextToCanvas }
+export { writeText, writeTextToCanvas }

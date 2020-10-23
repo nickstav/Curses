@@ -1,15 +1,16 @@
 import { cursesCanvas } from '../stores/store.js';
 import { get } from 'svelte/store';
 import { drawLine } from '../tools/line.js';
-import { writeText, highlightSquare } from '../tools/text.js';
+import { writeText } from '../tools/text.js';
+import { highlightSquare } from './location.js';
 import { addTextToCanvas, addRectanglesToCanvas } from './updateCanvas.js';
 import { drawRectangle, saveRectangleToStore } from '../tools/rectangle.js';
 
 // function to select which canvas tool has been clicked in the toolbar
 function changeTool(buttonPressed) {
     cursesCanvas.changeCanvasTool(buttonPressed);
-    let canvasElement = get(cursesCanvas).canvasElement;
 
+    let canvasElement = get(cursesCanvas).canvasElement;
     //change the mouse icon depending on what tool has been selected
     if (buttonPressed === "line" || buttonPressed === "rectangle") {
         canvasElement.style.cursor = "crosshair";
