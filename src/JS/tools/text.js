@@ -1,6 +1,7 @@
 import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/store.js';
 import { canvasObjects } from '../stores/objects.js';
+import { gridStatus } from '../stores/grid.js';
 import { getGridLocation } from '../draw/location.js';
 
 // prompts user to enter text at a desired location, then saves that text and location to a store
@@ -40,6 +41,9 @@ function writeTextToCanvas(text, location) {
         //add the character to its assigned coordinates
         context.fillText(character, xCoordinate, yCoordinate);
     };
+
+    // mark the relevant square as filled
+    //gridStatus.markSquareAsFilled(location);
 }
 
 function getCoordinates(position, location, gridDimension) {

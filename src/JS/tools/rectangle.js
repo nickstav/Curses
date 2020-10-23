@@ -1,6 +1,7 @@
 import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/store.js';
 import { canvasObjects } from '../stores/objects.js';
+import { gridStatus } from '../stores/grid.js';
 import { getGridLocation} from '../draw/location.js';
 
 // get start coords and mouse coords to draw a rectangle based on current mouse position
@@ -57,6 +58,12 @@ function addCorners(cornerSquares, context, gridDimension) {
     context.fillText('+', cornerSquares.topRight.x * gridDimension.x, cornerSquares.topRight.y * gridDimension.y);
     context.fillText('+', cornerSquares.bottomLeft.x * gridDimension.x, cornerSquares.bottomLeft.y * gridDimension.y);
     context.fillText('+', cornerSquares.bottomRight.x * gridDimension.x, cornerSquares.bottomRight.y * gridDimension.y);
+
+    // mark the relevant square as filled
+    //gridStatus.markSquareAsFilled(cornerSquares.topLeft);
+    //gridStatus.markSquareAsFilled(cornerSquares.topRight);
+    //gridStatus.markSquareAsFilled(cornerSquares.bottomLeft);
+    //gridStatus.markSquareAsFilled(cornerSquares.bottomRight);
 }
 
 // use "|" character for the verticals

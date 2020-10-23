@@ -27,4 +27,13 @@ function highlightSquare(){
     context.stroke();
 }
 
-export { getGridLocation, highlightSquare }
+// function to create a matrix of 0s that correspond to the grid of m x n squares
+function createMatrix(dimensions) {
+    let result = []
+    for(let i = 0; i < dimensions.y; i++) {
+        result.push(new Array(dimensions.x).fill(0))
+    }
+    return result
+}
+
+export { getGridLocation, highlightSquare, createMatrix }
