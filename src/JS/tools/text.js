@@ -34,15 +34,15 @@ function writeTextToCanvas(text, location) {
         //get the next character in the string
         let character = text.charAt(i);
 
-        let xCoordinate = getGridSquare(i, location, gridDimension).x;
-        let yCoordinate = getGridSquare(i, location, gridDimension).y;
+        let xCoordinate = getCoordinates(i, location, gridDimension).x;
+        let yCoordinate = getCoordinates(i, location, gridDimension).y;
 
-        //add the character to its assigned grid square
+        //add the character to its assigned coordinates
         context.fillText(character, xCoordinate, yCoordinate);
     };
 }
 
-function getGridSquare(position, location, gridDimension) {
+function getCoordinates(position, location, gridDimension) {
     let canvasWidth = get(cursesCanvas).canvasWidth;
 
     // y location needs to be the square below as axis measured from the top, plus any new lines started
