@@ -53,7 +53,7 @@ function handleMouseMove(event) {
         // continually update the current mouse position
         cursesCanvas.updateMousePosition(event, canvasElement);
         // clear any prevously drawn lines from previous loop
-        clearCanvas();
+        updateCanvas();
         // draw a new line based on new mouse position
         drawLine();
     }
@@ -61,7 +61,7 @@ function handleMouseMove(event) {
     if (toolSelected === "rectangle") {
         if (!isDrawing) return;
         cursesCanvas.updateMousePosition(event, canvasElement);
-        clearCanvas();
+        updateCanvas();
         drawRectangle();
     }
 
@@ -71,7 +71,7 @@ function handleMouseMove(event) {
         if (isDrawing) return;
 
         cursesCanvas.updateMousePosition(event, canvasElement);
-        clearCanvas();
+        updateCanvas();
         highlightSquare();
     }
 }
@@ -88,11 +88,11 @@ function handleMouseRelease() {
 }
 
 function handleMouseOut() {
-    clearCanvas();
+    updateCanvas();
 }
 
 // function to clear the canvas of preview animations and draw saved objects
-function clearCanvas() {
+function updateCanvas() {
     let context = get(cursesCanvas).context;
     const canvasElement = get(cursesCanvas).canvasElement;
 
@@ -103,4 +103,4 @@ function clearCanvas() {
 }
 
 
-export { changeTool, handleMouseClick, handleMouseDown, handleMouseMove, handleMouseRelease, handleMouseOut }
+export { changeTool, handleMouseClick, handleMouseDown, handleMouseMove, handleMouseRelease, handleMouseOut, updateCanvas }
