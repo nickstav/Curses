@@ -1,9 +1,9 @@
 import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/store.js';
 import { canvasObjects } from '../stores/objects.js';
-import { getGridLocation} from '../draw/location.js';
+import { getGridLocation, clearPreviousCharacter} from '../draw/location.js';
 
-// get start coords and mouse coords to draw a rectangle
+// get start coords and mouse coords to draw a rectangle based on current mouse position
 function drawRectangle() {
     let startPosition = get(cursesCanvas).startPosition;
     let currentLocation = get(cursesCanvas).mousePosition;
@@ -53,10 +53,17 @@ function createRectangle(startSquare, endSquare) {
 
 // use "+" character for the corners
 function addCorners(cornerSquares, context, gridDimension) {
+    
+    clearPreviousCharacter(cornerSquares.topLeft, gridDimension, context);
+    clearPreviousCharacter(cornerSquares.topRight, gridDimension, context);
+    clearPreviousCharacter(cornerSquares.bottomLeft, gridDimension, context);
+    clearPreviousCharacter(cornerSquares.bottomRight, gridDimension, context);
+
+
     context.fillText('+', cornerSquares.topLeft.x * gridDimension.x, cornerSquares.topLeft.y * gridDimension.y);
     context.fillText('+', cornerSquares.topRight.x * gridDimension.x, cornerSquares.topRight.y * gridDimension.y);
     context.fillText('+', cornerSquares.bottomLeft.x * gridDimension.x, cornerSquares.bottomLeft.y * gridDimension.y);
-    context.fillText('+', cornerSquares.bottomRight.x * gridDimension.x, cornerSquares.bottomRight.y * gridDimension.y);
+    context.fillText('+', cornerSquares.bottomRight.x * gridDimension.x, cornerSquares.bottomRight.y * gridDimension.y);   
 }
 
 // use "|" character for the verticals
@@ -75,7 +82,10 @@ function addVerticals(coords, context, gridDimension) {
             verticalCoordinate_A = {x: coords.topLeft.x, y: coords.topLeft.y - i};
             verticalCoordinate_B = {x: coords.topRight.x, y: coords.topRight.y - i};
         }
-        
+
+        clearPreviousCharacter(verticalCoordinate_A, gridDimension, context);
+        clearPreviousCharacter(verticalCoordinate_B, gridDimension, context);
+
         context.fillText('|', verticalCoordinate_A.x * gridDimension.x, verticalCoordinate_A.y * gridDimension.y);
         context.fillText('|', verticalCoordinate_B.x * gridDimension.x, verticalCoordinate_B.y * gridDimension.y);
     }
@@ -97,6 +107,9 @@ function addHorizontals(coords, context, gridDimension) {
             horizCoordinate_A = {x: coords.topLeft.x - i, y: coords.topLeft.y};
             horizCoordinate_B = {x: coords.bottomLeft.x - i, y: coords.bottomLeft.y};
         }
+
+        clearPreviousCharacter(horizCoordinate_A, gridDimension, context);
+        clearPreviousCharacter(horizCoordinate_B, gridDimension, context);
 
         context.fillText('-', horizCoordinate_A.x * gridDimension.x, horizCoordinate_A.y * gridDimension.y);
         context.fillText('-', horizCoordinate_B.x * gridDimension.x, horizCoordinate_B.y * gridDimension.y);

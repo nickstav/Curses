@@ -1,6 +1,5 @@
 import { cursesCanvas } from './store.js';
-import { derived } from 'svelte/store';
-import { get } from 'svelte/store';
+import { derived, writable, get } from 'svelte/store';
 
 // store to take cursesCanvas width/height values and draw correct canvas size
 const gridAxis = derived(
@@ -11,7 +10,9 @@ const gridAxis = derived(
     })
 )
 
-// live values to confirm whether user entered width/height are below/above min max values
+/* ------------------------------------------------------------------------------------------------- */
+
+// store to give live values to confirm whether user entered width/height are below/above min max values
 const checkUserInput = derived(
     cursesCanvas,
     $cursesCanvas => ({
@@ -20,6 +21,7 @@ const checkUserInput = derived(
     })
 )
 
+/* ------------------------------------------------------------------------------------------------- */
 
 // function to ensure a min/max value of the canvas element
 function adjustForMinMax(direction, length) {
