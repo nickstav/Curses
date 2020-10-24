@@ -27,13 +27,16 @@ function highlightSquare(){
     context.stroke();
 }
 
-// function to create a matrix of 0s that correspond to the grid of m x n squares
-function createMatrix(dimensions) {
-    let result = []
-    for(let i = 0; i < dimensions.y; i++) {
-        result.push(new Array(dimensions.x).fill(0))
-    }
-    return result
+// function to clear the grid square of any previous characters before adding a character
+function clearPreviousCharacter(gridLocation, gridDimension, context) {
+    context.clearRect(
+        gridLocation.x * gridDimension.x, 
+        (gridLocation.y - 1) * gridDimension.y,
+        gridDimension.x, 
+        gridDimension.y
+    );
+    /* note grid location is defined by the top corner. Text is added on top of this so we actually 
+       need to clear the rectangle above this point, hence the -1 correction */
 }
 
-export { getGridLocation, highlightSquare, createMatrix }
+export { getGridLocation, highlightSquare, clearPreviousCharacter }

@@ -20,7 +20,6 @@
         on:mousedown={handleMouseDown}
         on:mouseup={handleMouseRelease}
         on:mouseout={handleMouseOut}
-
         >
     </canvas>
     </div>

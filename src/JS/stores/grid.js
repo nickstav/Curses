@@ -1,6 +1,5 @@
 import { cursesCanvas } from './store.js';
-import { derived, get } from 'svelte/store';
-import { createMatrix } from '../draw/location.js';
+import { derived, writable, get } from 'svelte/store';
 
 // store to take cursesCanvas width/height values and draw correct canvas size
 const gridAxis = derived(
@@ -10,39 +9,6 @@ const gridAxis = derived(
         y: adjustForMinMax('height', $cursesCanvas.canvasHeight) * $cursesCanvas.gridDimension.y
     })
 )
-
-/* ------------------------------------------------------------------------------------------------- */
-
-// store to mark grid squares as filled once objects are added to the canvas
-function setUpDerivedStore() {
-    const { subscribe, update } = derived(
-        cursesCanvas, 
-        $cursesCanvas => {
-            let dimensions = {
-                x: adjustForMinMax('width', $cursesCanvas.canvasWidth),
-                y: adjustForMinMax('height', $cursesCanvas.canvasHeight)
-             }
-
-            return createMatrix(dimensions)
-        }
-    )
-
-    function markSquareAsFilled(location) {
-        update(matrix =>{
-            let newMatrix = matrix;
-            newMatrix[location.x, location.y] = 1;
-
-            return {newMatrix};
-        })
-    }
-
-	return {
-        subscribe,
-        markSquareAsFilled
-	};
-}
-
-const gridStatus = setUpDerivedStore();
 
 /* ------------------------------------------------------------------------------------------------- */
 
@@ -103,4 +69,4 @@ function checkMaxValues(input) {
 
 
 
-export { gridAxis, gridStatus, checkUserInput }
+export { gridAxis, checkUserInput }

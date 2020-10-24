@@ -1,8 +1,7 @@
 import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/store.js';
 import { canvasObjects } from '../stores/objects.js';
-import { gridStatus } from '../stores/grid.js';
-import { getGridLocation } from '../draw/location.js';
+import { getGridLocation, clearPreviousCharacter } from '../draw/location.js';
 
 // prompts user to enter text at a desired location, then saves that text and location to a store
 function writeText() {
@@ -10,7 +9,9 @@ function writeText() {
     let gridLocation = getGridLocation(mouseLocation);
 
     let userText = prompt("Enter text/characters:");
-    addTextToStore(userText, gridLocation);
+    if (userText !== null) {
+        addTextToStore(userText, gridLocation);
+    }
 }
 
 // save the entered text to objects store
@@ -35,18 +36,20 @@ function writeTextToCanvas(text, location) {
         //get the next character in the string
         let character = text.charAt(i);
 
-        let xCoordinate = getCoordinates(i, location, gridDimension).x;
-        let yCoordinate = getCoordinates(i, location, gridDimension).y;
+        let coordinates = {
+            x: getGridSquare(i, location).x,
+            y: getGridSquare(i, location).y
+        }
+
+        //clear any previous characters in that grid square
+        clearPreviousCharacter(coordinates, gridDimension, context);
 
         //add the character to its assigned coordinates
-        context.fillText(character, xCoordinate, yCoordinate);
+        context.fillText(character, coordinates.x * gridDimension.x, coordinates.y * gridDimension.y);
     };
-
-    // mark the relevant square as filled
-    //gridStatus.markSquareAsFilled(location);
 }
 
-function getCoordinates(position, location, gridDimension) {
+function getGridSquare(position, location) {
     let canvasWidth = get(cursesCanvas).canvasWidth;
 
     // y location needs to be the square below as axis measured from the top, plus any new lines started
@@ -54,8 +57,8 @@ function getCoordinates(position, location, gridDimension) {
 
     return {
         // the remainder of gridSqaure / squareWidth will give the x coordinate of required
-        x: ((position + location.x) % canvasWidth) * gridDimension.x,
-        y: (location.y + yCorrection) * gridDimension.y
+        x: ((position + location.x) % canvasWidth),
+        y: (location.y + yCorrection)
     }
 }
 
