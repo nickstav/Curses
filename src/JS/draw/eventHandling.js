@@ -1,10 +1,12 @@
 import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/store.js';
 import { updateCanvas } from './updateCanvas.js';
+import { showCurrentSquare } from './location.js';
 import { tools } from '../tools/toolsList.js';
 import { drawLiveLine, saveLineToStore } from '../tools/line.js';
 import { drawLiveRectangle, saveRectangleToStore } from '../tools/rectangle.js';
-import { highlightSquareForTextEntry, writeText } from '../tools/text.js';
+import { writeText } from '../tools/text.js';
+import { markSquareAsErased } from '../tools/erase.js';
 
 function handleMouseClick(event) {
     let toolSelected = get(cursesCanvas).tool;
@@ -15,6 +17,9 @@ function handleMouseClick(event) {
             cursesCanvas.updateMousePosition(event, canvasElement);
             writeText();
             break;
+        case(tools.ERASE):
+            cursesCanvas.updateMousePosition(event, canvasElement);
+            markSquareAsErased();
     }
 }
 
@@ -40,7 +45,8 @@ function handleMouseMove(event) {
             drawLiveRectangle(event, isDrawing, canvasElement);
             break;
         case(tools.TEXT):
-            highlightSquareForTextEntry(event, isDrawing, canvasElement);
+        case(tools.ERASE):
+            showCurrentSquare(event, isDrawing, canvasElement);
             break;
     };
 }

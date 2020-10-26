@@ -1,19 +1,8 @@
 import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/store.js';
 import { canvasObjects } from '../stores/objects.js';
-import { updateCanvas } from '../draw/updateCanvas.js';
-import { getGridLocation, clearPreviousCharacter, highlightSquare } from '../draw/location.js';
+import { getGridLocation, clearPreviousCharacter } from '../draw/location.js';
 
-function highlightSquareForTextEntry(event, isDrawing, canvasElement) {
-    //stop highlighting/clearing the canvas once a location has been selected
-    if (isDrawing) return;
-
-    cursesCanvas.updateMousePosition(event, canvasElement);
-    updateCanvas();
-    highlightSquare();
-}
-
-/* --------------------------------------------------------------------------------------------- */
 
 // prompts user to enter text at a desired location, then saves that text and location to a store
 function writeText() {
@@ -105,4 +94,4 @@ function getNewLines(charPosition, location, canvasWidth, newLine) {
     }
 }
 
-export { highlightSquareForTextEntry, writeText, writeTextToCanvas }
+export { writeText, writeTextToCanvas }

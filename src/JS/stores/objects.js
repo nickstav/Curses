@@ -7,6 +7,7 @@ import { writable } from 'svelte/store';
     rectangles: [],
     text: [],
     progress: [],
+    erasedSquares: [],
     numberOfObjects: 0
 };
 
@@ -44,12 +45,23 @@ function setUpStore() {
     });
   }
 
+  function markSquareToErase(erasedSquare) {
+    update(objects => {
+      return {
+          ...objects,
+          erasedSquares: [...objects.erasedSquares, erasedSquare],
+          numberOfObjects: objects.numberOfObjects + 1
+      };
+    });
+  }
+
   return {
 	  subscribe,
     set,
     saveLineObject,
     saveTextObject,
-    saveRectangleObject
+    saveRectangleObject,
+    markSquareToErase
 	};
 
 }

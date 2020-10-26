@@ -4,6 +4,7 @@ import { canvasObjects } from '../stores/objects.js';
 import { createRectangle } from '../tools/rectangle.js';
 import { writeTextToCanvas } from '../tools/text.js';
 import { drawLineOnGrid } from '../tools/line.js';
+import { eraseSquare } from '../tools/erase.js';
 
 // function to clear the canvas of preview animations and draw saved objects
 function updateCanvas() {
@@ -18,6 +19,7 @@ function updateCanvas() {
         addLineToCanvas(i);
         addTextToCanvas(i);
         addRectanglesToCanvas(i);
+        eraseMarkedSquares(i);
     }
 }
 
@@ -58,6 +60,16 @@ function addRectanglesToCanvas(order) {
             let startSquare = rectangleObjects[i].startPoint;
             let endSquare = rectangleObjects[i].endPoint;
             createRectangle(startSquare, endSquare);
+        }
+    }
+}
+
+function eraseMarkedSquares(order) {
+    let erasedSquares = get(canvasObjects).erasedSquares;
+
+    for (let i = 0; i < erasedSquares.length; i++) {
+        if (erasedSquares[i].order === order) {
+            eraseSquare(erasedSquares[i].location);
         }
     }
 }
