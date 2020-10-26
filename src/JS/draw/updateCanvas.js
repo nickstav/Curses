@@ -4,7 +4,7 @@ import { createRectangle } from '../tools/rectangle.js';
 import { writeTextToCanvas } from '../tools/text.js';
 import { drawLineOnGrid } from '../tools/line.js';
 
-//get all saved line objects from the store and add it to the canvas
+//check for the current object number and draw it if it's a line
 function addLineToCanvas(order) {
     let lineObjects = get(canvasObjects).lines;
 
@@ -16,7 +16,7 @@ function addLineToCanvas(order) {
     }
 }
 
-//get all saved text objects from the store and add it to the canvas
+//check for the current object number and draw it if it's a text object
 function addTextToCanvas(order) {
     let textObjects = get(canvasObjects).text;
 
@@ -29,7 +29,7 @@ function addTextToCanvas(order) {
     }
 }
 
-//get all saved rectangle objects from the store and add it to the canvas
+//check for the current object number and draw it if it's a rectangle
 function addRectanglesToCanvas(order) {
     let rectangleObjects = get(canvasObjects).rectangles;
 
