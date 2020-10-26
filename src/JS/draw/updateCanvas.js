@@ -24,7 +24,8 @@ function addTextToCanvas(order) {
         if (textObjects[i].order === order) {
             let text = textObjects[i].text;
             let location = textObjects[i].location;
-            writeTextToCanvas(text, location);
+            let newLine = textObjects[i].newLine;
+            writeTextToCanvas(text, location, newLine);
         }
     }
 }
