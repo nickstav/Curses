@@ -1,7 +1,21 @@
 import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/store.js';
-import { getGridLocation, clearPreviousCharacter} from '../draw/location.js';
 import { canvasObjects } from '../stores/objects.js';
+import { updateCanvas } from '../draw/updateCanvas.js';
+import { getGridLocation, clearPreviousCharacter} from '../draw/location.js';
+
+
+function drawLiveLine(event, isDrawing, canvasElement) {
+   if (!isDrawing) return;
+   // continually update the current mouse position
+   cursesCanvas.updateMousePosition(event, canvasElement);
+   // clear any prevously drawn lines from previous loop
+   updateCanvas();
+   // draw a new line based on new mouse position
+   drawLine();
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 //get start point & end point of a line, find it's relevant start/end grid squares, then draw on the grid
 function drawLine() {
@@ -13,6 +27,8 @@ function drawLine() {
 
    drawLineOnGrid(startSquare.x, startSquare.y, currentSquare.x, currentSquare.y);
 }
+
+/* --------------------------------------------------------------------------------------------- */
 
 // save a drawn line to the objects store
 function saveLineToStore() {
@@ -186,4 +202,4 @@ function getKeyCharacterForLine(deltaX, deltaY) {
 
 /* --------------------------------------------------------------------------------------------- */
 
-export { drawLine, drawLineOnGrid, saveLineToStore }
+export { drawLine, drawLiveLine, drawLineOnGrid, saveLineToStore }
