@@ -1,9 +1,10 @@
 import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/store.js';
 import { getGridLocation, clearPreviousCharacter} from '../draw/location.js';
+import { canvasObjects } from '../stores/objects.js';
 
 //get start point & end point of a line, find it's relevant start/end grid squares, then draw on the grid
-export function drawLine() {
+function drawLine() {
    let startPosition = get(cursesCanvas).startPosition;
    let currentLocation = get(cursesCanvas).mousePosition;
 
@@ -11,6 +12,19 @@ export function drawLine() {
    let currentSquare = getGridLocation(currentLocation);
 
    drawLineOnGrid(startSquare.x, startSquare.y, currentSquare.x, currentSquare.y);
+}
+
+// save a drawn line to the objects store
+function saveLineToStore() {
+   let startPosition = get(cursesCanvas).startPosition;
+   let currentLocation = get(cursesCanvas).mousePosition;
+
+   let lineInfo = {
+      start: getGridLocation(startPosition),
+      finish: getGridLocation(currentLocation)
+   }
+
+   canvasObjects.saveLineObject(lineInfo);
 }
 
 /* we want lines to be drawn on the grid, so use Bresenham's algorithm to mark relevant
@@ -27,23 +41,26 @@ function drawLineOnGrid(x1, y1, x2, y2) {
    let deltaX = x2 - x1;
    let deltaY = y2 - y1;   
 
+   // function to return one of "-" or "X" depending on line orientation
+   let keyCharacter = getKeyCharacterForLine(deltaX, deltaY);
+
    // if the line has gradient < 1
    if (Math.abs(deltaY) <= Math.abs(deltaX)) { 
       if (deltaX >= 0) {
          // line is drawn left to right
-         drawShallowLine(x1, y1, x2, deltaX, deltaY);
+         drawShallowLine(x1, y1, x2, deltaX, deltaY, keyCharacter);
       } else {
          // line is drawn right to left
-         drawShallowLine(x2, y2, x1, deltaX, deltaY);
+         drawShallowLine(x2, y2, x1, deltaX, deltaY, keyCharacter);
       }    
    // if the line has gradient > 1   
    } else {         
       if (deltaY >= 0) {
          // line is drawn downwards
-         drawSteepLine(x1, y1, y2, deltaX, deltaY)
+         drawSteepLine(x1, y1, y2, deltaX, deltaY, keyCharacter)
       } else { 
          // line is drawn upwards
-         drawSteepLine(x2, y2, y1, deltaX, deltaY)
+         drawSteepLine(x2, y2, y1, deltaX, deltaY, keyCharacter)
       }        
    }
 }
@@ -51,14 +68,14 @@ function drawLineOnGrid(x1, y1, x2, y2) {
 /* --------------------------------------------------------------------------------------------- */
 
 // run algorithm across x-axis of the line
-function drawShallowLine(xInit, yInit, xFinal, deltaX, deltaY) {
+function drawShallowLine(xInit, yInit, xFinal, deltaX, deltaY, keyCharacter) {
 
    // start at inital point on the line
    let x = xInit;
    let y = yInit;
 
    // fill square with character  
-   addCharacterToSquare(x, y);
+   addCharacterToSquare(x, y, keyCharacter);
    
    // as per Bresenham's Algorithm
    let diffBetweenPoints = 2 * Math.abs(deltaY) - Math.abs(deltaX);
@@ -82,7 +99,7 @@ function drawShallowLine(xInit, yInit, xFinal, deltaX, deltaY) {
       diffBetweenPoints = diffBetweenPoints + 2 * (Math.abs(deltaY) - Math.abs(deltaX));
       };
       //mark new square
-      addCharacterToSquare(x, y);
+      addCharacterToSquare(x, y, keyCharacter);
    };
 
 }
@@ -90,14 +107,14 @@ function drawShallowLine(xInit, yInit, xFinal, deltaX, deltaY) {
 /* --------------------------------------------------------------------------------------------- */
 
 // run algorithm across y-axis of the line
-function drawSteepLine(xInit, yInit, yFinal, deltaX, deltaY) {
+function drawSteepLine(xInit, yInit, yFinal, deltaX, deltaY, keyCharacter) {
 
    // start at inital point on the line
    let x = xInit;
    let y = yInit;
    
    // fill square with character
-   addCharacterToSquare(x, y);
+   addCharacterToSquare(x, y, keyCharacter);
 
    // as per Bresenham's Algorithm
    let diffBetweenPoints = 2 * Math.abs(deltaX) - Math.abs(deltaY);
@@ -121,17 +138,33 @@ function drawSteepLine(xInit, yInit, yFinal, deltaX, deltaY) {
          diffBetweenPoints = diffBetweenPoints + 2 * (Math.abs(deltaX) - Math.abs(deltaY));
       };
       //mark new square
-      addCharacterToSquare(x, y);
+      addCharacterToSquare(x, y, keyCharacter);
    };
 }
 
 /* --------------------------------------------------------------------------------------------- */
 
 // Add relevant character to square
-function addCharacterToSquare(xCoord, yCoord) {
+function addCharacterToSquare(xCoord, yCoord, keyCharacter) {
    let context = get(cursesCanvas).context;
    let gridDimension = get(cursesCanvas).gridDimension;
 
    // add 1 to the y value as coordinate is top corner of grid square
-   context.fillText('X', xCoord * gridDimension.x, (yCoord + 1) * gridDimension.y);
+   context.fillText(keyCharacter, xCoord * gridDimension.x, (yCoord + 1) * gridDimension.y);
 }
+
+/* --------------------------------------------------------------------------------------------- */
+
+function getKeyCharacterForLine(deltaX, deltaY) {
+   if (deltaX === 0) {
+      return '|';
+   } else if (deltaY === 0) {
+      return '-'
+   } else {
+      return 'X';
+   }
+}
+
+/* --------------------------------------------------------------------------------------------- */
+
+export { drawLine, drawLineOnGrid, saveLineToStore }

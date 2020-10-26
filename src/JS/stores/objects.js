@@ -13,6 +13,15 @@ function setUpStore() {
 
   const { subscribe, set, update } = writable(defaultValues);
 
+  function saveLineObject(newLine) {
+    update(objects => {
+      return {
+          ...objects,
+          lines: [...objects.lines, newLine]
+      };
+    });
+  }
+
   function saveTextObject(newText) {
     update(objects => {
       return {
@@ -34,6 +43,7 @@ function setUpStore() {
   return {
 	  subscribe,
     set,
+    saveLineObject,
     saveTextObject,
     saveRectangleObject
 	};

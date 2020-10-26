@@ -2,6 +2,17 @@ import { get } from 'svelte/store';
 import { canvasObjects } from '../stores/objects.js';
 import { createRectangle } from '../tools/rectangle.js';
 import { writeTextToCanvas } from '../tools/text.js';
+import { drawLineOnGrid } from '../tools/line.js';
+
+//get all saved line objects from the store and add it to the canvas
+function addLineToCanvas() {
+    let lineObjects = get(canvasObjects).lines;
+
+    for (let i = 0; i < lineObjects.length; i++) {
+        let line = lineObjects[i];
+        drawLineOnGrid(line.start.x, line.start.y, line.finish.x, line.finish.y);
+    }
+}
 
 //get all saved text objects from the store and add it to the canvas
 function addTextToCanvas() {
@@ -27,4 +38,4 @@ function addRectanglesToCanvas() {
 
 
 
-export { addTextToCanvas, addRectanglesToCanvas }
+export { addLineToCanvas, addTextToCanvas, addRectanglesToCanvas }
