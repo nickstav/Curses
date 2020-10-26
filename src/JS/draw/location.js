@@ -1,5 +1,6 @@
 import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/store.js';
+import { updateCanvas } from './updateCanvas.js';
 
 // function to return the coordinates of the grid square at which the mouse is at
 function getGridLocation(mousePosition) {
@@ -8,6 +9,13 @@ function getGridLocation(mousePosition) {
         x: Math.floor(mousePosition.x / gridDimension.x),
         y: Math.floor(mousePosition.y / gridDimension.y)
     }
+}
+
+// function to highlight the current grid square that the mouse is over
+function showCurrentSquare(event, canvasElement) {
+    cursesCanvas.updateMousePosition(event, canvasElement);
+    updateCanvas();
+    highlightSquare();
 }
 
 // function to highlight the grid location that the cursor is currently over
@@ -40,4 +48,4 @@ function clearPreviousCharacter(gridLocation, gridDimension, context) {
     */
 }
 
-export { getGridLocation, highlightSquare, clearPreviousCharacter }
+export { getGridLocation, showCurrentSquare, highlightSquare, clearPreviousCharacter }
