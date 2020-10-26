@@ -1,8 +1,27 @@
 import { get } from 'svelte/store';
+import { cursesCanvas } from '../stores/store.js';
 import { canvasObjects } from '../stores/objects.js';
 import { createRectangle } from '../tools/rectangle.js';
 import { writeTextToCanvas } from '../tools/text.js';
 import { drawLineOnGrid } from '../tools/line.js';
+
+// function to clear the canvas of preview animations and draw saved objects
+function updateCanvas() {
+    let context = get(cursesCanvas).context;
+    const canvasElement = get(cursesCanvas).canvasElement;
+
+    context.clearRect(0, 0, canvasElement.width, canvasElement.height);
+
+    //loop through the saved objects in order, so most recent overlap older objects
+    let objects = get(canvasObjects).numberOfObjects;
+    for (let i = 1; i <= objects; i++) {
+        addLineToCanvas(i);
+        addTextToCanvas(i);
+        addRectanglesToCanvas(i);
+    }
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 //check for the current object number and draw it if it's a line
 function addLineToCanvas(order) {
@@ -44,5 +63,4 @@ function addRectanglesToCanvas(order) {
 }
 
 
-
-export { addLineToCanvas, addTextToCanvas, addRectanglesToCanvas }
+export { updateCanvas }

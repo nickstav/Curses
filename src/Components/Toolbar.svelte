@@ -3,9 +3,8 @@
     import SizeParagraph from './SizeParagraph.svelte';
     import Button from './Button.svelte';
     import TextOptions from './TextOptions.svelte';
-
     import { cursesCanvas } from '../JS/stores/store.js';
-    import { changeTool } from '../JS/draw/eventHandling.js';
+    import { changeTool } from '../JS/tools/select.js';
     import { tools } from '../JS/tools/toolsList.js';
 </script>
 

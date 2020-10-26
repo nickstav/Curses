@@ -1,6 +1,6 @@
 <script>
       import { cursesCanvas } from '../JS/stores/store.js'; 
-      import { updateCanvas } from '../JS/draw/eventHandling.js';
+      import { updateCanvas } from '../JS/draw/updateCanvas.js';
 </script>
 
 <form>

@@ -49,6 +49,8 @@ function adjustForMinMax(direction, length) {
     }
 }
 
+/* ------------------------------------------------------------------------------------------------- */
+
 // function to compare width/height values against their min dimensions
 function checkMinValues(input) {
     if (input.canvasWidth < input.minDimensions.width || input.canvasHeight < input.minDimensions.height ) {

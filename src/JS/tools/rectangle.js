@@ -1,7 +1,20 @@
 import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/store.js';
 import { canvasObjects } from '../stores/objects.js';
+import { updateCanvas } from '../draw/updateCanvas.js';
 import { getGridLocation, clearPreviousCharacter} from '../draw/location.js';
+
+function drawLiveRectangle(event, isDrawing, canvasElement) {
+    if (!isDrawing) return;
+
+    // continually update the current mouse position
+    cursesCanvas.updateMousePosition(event, canvasElement);
+    
+    updateCanvas();
+    drawRectangle();
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 // get start coords and mouse coords to draw a rectangle based on current mouse position
 function drawRectangle() {
@@ -118,4 +131,4 @@ function addHorizontals(coords, context, gridDimension) {
     }
 }
 
-export {drawRectangle, saveRectangleToStore, createRectangle }
+export {drawLiveRectangle, saveRectangleToStore, createRectangle }

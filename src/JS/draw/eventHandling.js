@@ -1,33 +1,10 @@
 import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/store.js';
-import { canvasObjects } from '../stores/objects.js';
-
-import { addLineToCanvas, addTextToCanvas, addRectanglesToCanvas } from './updateCanvas.js';
-import { highlightSquare } from './location.js';
-
+import { updateCanvas } from './updateCanvas.js';
 import { tools } from '../tools/toolsList.js';
-import { drawLine, saveLineToStore } from '../tools/line.js';
-import { writeText } from '../tools/text.js';
-import { drawRectangle, saveRectangleToStore } from '../tools/rectangle.js';
-
-
-// function to select which canvas tool has been clicked in the toolbar
-function changeTool(buttonPressed) {
-    cursesCanvas.changeCanvasTool(buttonPressed);
-
-    let canvasElement = get(cursesCanvas).canvasElement;
-    switch(buttonPressed) {
-        case(tools.LINE):
-        case(tools.RECTANGLE):
-            canvasElement.style.cursor = "crosshair";
-            break;
-        case(tools.TEXT):
-            canvasElement.style.cursor = "pointer";
-            break;
-        default:
-            canvasElement.style.cursor = "default"; 
-    }
-}
+import { drawLiveLine, saveLineToStore } from '../tools/line.js';
+import { drawLiveRectangle, saveRectangleToStore } from '../tools/rectangle.js';
+import { highlightSquareForTextEntry, writeText } from '../tools/text.js';
 
 function handleMouseClick(event) {
     let toolSelected = get(cursesCanvas).tool;
@@ -57,27 +34,13 @@ function handleMouseMove(event) {
 
     switch(toolSelected) {
         case(tools.LINE):
-            if (!isDrawing) return;
-            // continually update the current mouse position
-            cursesCanvas.updateMousePosition(event, canvasElement);
-            // clear any prevously drawn lines from previous loop
-            updateCanvas();
-            // draw a new line based on new mouse position
-            drawLine();
+            drawLiveLine(event, isDrawing, canvasElement);
             break;
         case(tools.RECTANGLE):
-            if (!isDrawing) return;
-            cursesCanvas.updateMousePosition(event, canvasElement);
-            updateCanvas();
-            drawRectangle();
+            drawLiveRectangle(event, isDrawing, canvasElement);
             break;
         case(tools.TEXT):
-            //stop highlighting/clearing the canvas once a location has been selected
-            if (isDrawing) return;
-
-            cursesCanvas.updateMousePosition(event, canvasElement);
-            updateCanvas();
-            highlightSquare();
+            highlightSquareForTextEntry(event, isDrawing, canvasElement);
             break;
     };
 }
@@ -95,29 +58,18 @@ function handleMouseRelease() {
         case(tools.RECTANGLE):
             saveRectangleToStore();
             break;
-
     }
 }
 
+// ensure canvas remains up to date when the mouse leaves the canvas window
 function handleMouseOut() {
     updateCanvas();
 }
 
-// function to clear the canvas of preview animations and draw saved objects
-function updateCanvas() {
-    let context = get(cursesCanvas).context;
-    const canvasElement = get(cursesCanvas).canvasElement;
-
-    context.clearRect(0, 0, canvasElement.width, canvasElement.height);
-
-    //loop through the saved objects in order, so most recent overlap older objects
-    let objects = get(canvasObjects).numberOfObjects;
-    for (let i = 1; i <= objects; i++) {
-        addLineToCanvas(i);
-        addTextToCanvas(i);
-        addRectanglesToCanvas(i);
-    }
+export { 
+    handleMouseClick, 
+    handleMouseDown, 
+    handleMouseMove, 
+    handleMouseRelease, 
+    handleMouseOut
 }
-
-
-export { changeTool, handleMouseClick, handleMouseDown, handleMouseMove, handleMouseRelease, handleMouseOut, updateCanvas }

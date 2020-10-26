@@ -1,7 +1,19 @@
 import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/store.js';
 import { canvasObjects } from '../stores/objects.js';
-import { getGridLocation, clearPreviousCharacter } from '../draw/location.js';
+import { updateCanvas } from '../draw/updateCanvas.js';
+import { getGridLocation, clearPreviousCharacter, highlightSquare } from '../draw/location.js';
+
+function highlightSquareForTextEntry(event, isDrawing, canvasElement) {
+    //stop highlighting/clearing the canvas once a location has been selected
+    if (isDrawing) return;
+
+    cursesCanvas.updateMousePosition(event, canvasElement);
+    updateCanvas();
+    highlightSquare();
+}
+
+/* --------------------------------------------------------------------------------------------- */
 
 // prompts user to enter text at a desired location, then saves that text and location to a store
 function writeText() {
@@ -29,7 +41,7 @@ function addTextToStore(text, location) {
 
 /* --------------- Writing text to the canvas once saved to the object store -------------- */
 
-//write a string at its specified grid location
+// write a string at its specified canvas location
 function writeTextToCanvas(text, location, newLine) {
     let gridDimension = get(cursesCanvas).gridDimension;
     let context = get(cursesCanvas).context;
@@ -54,6 +66,7 @@ function writeTextToCanvas(text, location, newLine) {
     };
 }
 
+// get the grid square coordinates for a given character in a text object
 function getGridSquare(charPosition, location, newLine) {
     let canvasWidth = get(cursesCanvas).canvasWidth;
 
@@ -67,6 +80,7 @@ function getGridSquare(charPosition, location, newLine) {
     }
 }
 
+// calculate position (x,y) of text in case of indented/to margin new lines
 function getNewLines(charPosition, location, canvasWidth, newLine) {
     // calculate the position of the character on the grid
     let xPosition;
@@ -91,4 +105,4 @@ function getNewLines(charPosition, location, canvasWidth, newLine) {
     }
 }
 
-export { writeText, writeTextToCanvas }
+export { highlightSquareForTextEntry, writeText, writeTextToCanvas }
