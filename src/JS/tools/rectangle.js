@@ -19,11 +19,13 @@ function drawRectangle() {
 function saveRectangleToStore() {
     let startPosition = get(cursesCanvas).startPosition;
     let currentLocation = get(cursesCanvas).mousePosition;
+    let objects = get(canvasObjects).numberOfObjects;
 
     let startSquare = getGridLocation(startPosition);
     let currentSquare = getGridLocation(currentLocation);
 
     let rectangleInfo = {
+        order: objects + 1,
         startPoint: startSquare,
         endPoint: currentSquare
     }

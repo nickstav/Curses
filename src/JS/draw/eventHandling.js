@@ -5,6 +5,7 @@ import { writeText } from '../tools/text.js';
 import { highlightSquare } from './location.js';
 import { addLineToCanvas, addTextToCanvas, addRectanglesToCanvas } from './updateCanvas.js';
 import { drawRectangle, saveRectangleToStore } from '../tools/rectangle.js';
+import { canvasObjects } from '../stores/objects.js';
 
 // function to select which canvas tool has been clicked in the toolbar
 function changeTool(buttonPressed) {
@@ -102,9 +103,13 @@ function updateCanvas() {
 
     context.clearRect(0, 0, canvasElement.width, canvasElement.height);
 
-    addLineToCanvas();
-    addTextToCanvas();
-    addRectanglesToCanvas();
+    let objects = get(canvasObjects).numberOfObjects;
+    //loop through the saved objects in order, so most recent overlap older objects
+    for (let i = 1; i <= objects; i++) {
+        addLineToCanvas(i);
+        addTextToCanvas(i);
+        addRectanglesToCanvas(i);
+    }
 }
 
 

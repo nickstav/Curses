@@ -18,8 +18,10 @@ function drawLine() {
 function saveLineToStore() {
    let startPosition = get(cursesCanvas).startPosition;
    let currentLocation = get(cursesCanvas).mousePosition;
+   let objects = get(canvasObjects).numberOfObjects;
 
    let lineInfo = {
+      order: objects + 1,
       start: getGridLocation(startPosition),
       finish: getGridLocation(currentLocation)
    }

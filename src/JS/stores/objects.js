@@ -6,7 +6,8 @@ import { writable } from 'svelte/store';
     lines: [],
     rectangles: [],
     text: [],
-    progress: []
+    progress: [],
+    numberOfObjects: 0
 };
 
 function setUpStore() {
@@ -17,7 +18,8 @@ function setUpStore() {
     update(objects => {
       return {
           ...objects,
-          lines: [...objects.lines, newLine]
+          lines: [...objects.lines, newLine],
+          numberOfObjects: objects.numberOfObjects + 1
       };
     });
   }
@@ -26,7 +28,8 @@ function setUpStore() {
     update(objects => {
       return {
           ...objects,
-          text: [...objects.text, newText]
+          text: [...objects.text, newText],
+          numberOfObjects: objects.numberOfObjects + 1
       };
     });
   }
@@ -35,7 +38,8 @@ function setUpStore() {
     update(objects => {
       return {
           ...objects,
-          rectangles: [...objects.rectangles, newRectangle]
+          rectangles: [...objects.rectangles, newRectangle],
+          numberOfObjects: objects.numberOfObjects + 1
       };
     });
   }

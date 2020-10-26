@@ -16,7 +16,10 @@ function writeText() {
 
 // save the entered text to objects store
 function addTextToStore(text, location) {
+    let objects = get(canvasObjects).numberOfObjects;
+
     let textInfo = {
+        order: objects + 1,
         text: text,
         location: location
     }
