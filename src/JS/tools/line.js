@@ -69,11 +69,18 @@ function drawLineOnGrid(x1, y1, x2, y2) {
 
 // run algorithm across x-axis of the line
 function drawShallowLine(xInit, yInit, xFinal, deltaX, deltaY, keyCharacter) {
+   let gridDimension = get(cursesCanvas).gridDimension;
+   let context = get(cursesCanvas).context;
+   context.fillStyle = 'black';
+   context.font = "15px Consolas";
 
    // start at inital point on the line
    let x = xInit;
    let y = yInit;
 
+   // clear any previous characters in the relevant grid square
+   // add 1 to the y value as coordinate is top corner of grid square
+   clearPreviousCharacter({x: x, y: y + 1}, gridDimension, context);
    // fill square with character  
    addCharacterToSquare(x, y, keyCharacter);
    
@@ -98,6 +105,8 @@ function drawShallowLine(xInit, yInit, xFinal, deltaX, deltaY, keyCharacter) {
          };
       diffBetweenPoints = diffBetweenPoints + 2 * (Math.abs(deltaY) - Math.abs(deltaX));
       };
+      // clear any previous characters in the relevant grid square
+      clearPreviousCharacter({x: x, y: y + 1}, gridDimension, context);
       //mark new square
       addCharacterToSquare(x, y, keyCharacter);
    };
@@ -108,11 +117,17 @@ function drawShallowLine(xInit, yInit, xFinal, deltaX, deltaY, keyCharacter) {
 
 // run algorithm across y-axis of the line
 function drawSteepLine(xInit, yInit, yFinal, deltaX, deltaY, keyCharacter) {
+   let gridDimension = get(cursesCanvas).gridDimension;
+   let context = get(cursesCanvas).context;
+   context.fillStyle = 'black';
+   context.font = "15px Consolas";
 
    // start at inital point on the line
    let x = xInit;
    let y = yInit;
    
+   // clear any previous characters in the relevant grid square
+   clearPreviousCharacter({x: x, y: y + 1}, gridDimension, context);
    // fill square with character
    addCharacterToSquare(x, y, keyCharacter);
 
@@ -137,6 +152,8 @@ function drawSteepLine(xInit, yInit, yFinal, deltaX, deltaY, keyCharacter) {
          };
          diffBetweenPoints = diffBetweenPoints + 2 * (Math.abs(deltaX) - Math.abs(deltaY));
       };
+      // clear any previous characters in the relevant grid square
+      clearPreviousCharacter({x: x, y: y + 1}, gridDimension, context);
       //mark new square
       addCharacterToSquare(x, y, keyCharacter);
    };
