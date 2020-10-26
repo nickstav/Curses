@@ -13,7 +13,8 @@ import { writable } from 'svelte/store';
     tool: undefined,
     startPosition: {x: 0, y: 0},
     isDrawing: false,
-    mousePosition: {x: 0, y: 0}
+    mousePosition: {x: 0, y: 0},
+    textNewLine: 'indented'
 };
 
 function setUpStore() {

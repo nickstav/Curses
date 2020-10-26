@@ -1,10 +1,11 @@
 import { cursesCanvas } from '../stores/store.js';
 import { get } from 'svelte/store';
-import { drawLine } from '../tools/line.js';
+import { drawLine, saveLineToStore } from '../tools/line.js';
 import { writeText } from '../tools/text.js';
 import { highlightSquare } from './location.js';
-import { addTextToCanvas, addRectanglesToCanvas } from './updateCanvas.js';
+import { addLineToCanvas, addTextToCanvas, addRectanglesToCanvas } from './updateCanvas.js';
 import { drawRectangle, saveRectangleToStore } from '../tools/rectangle.js';
+import { canvasObjects } from '../stores/objects.js';
 
 // function to select which canvas tool has been clicked in the toolbar
 function changeTool(buttonPressed) {
@@ -53,7 +54,7 @@ function handleMouseMove(event) {
         // continually update the current mouse position
         cursesCanvas.updateMousePosition(event, canvasElement);
         // clear any prevously drawn lines from previous loop
-        clearCanvas();
+        updateCanvas();
         // draw a new line based on new mouse position
         drawLine();
     }
@@ -61,7 +62,7 @@ function handleMouseMove(event) {
     if (toolSelected === "rectangle") {
         if (!isDrawing) return;
         cursesCanvas.updateMousePosition(event, canvasElement);
-        clearCanvas();
+        updateCanvas();
         drawRectangle();
     }
 
@@ -71,7 +72,7 @@ function handleMouseMove(event) {
         if (isDrawing) return;
 
         cursesCanvas.updateMousePosition(event, canvasElement);
-        clearCanvas();
+        updateCanvas();
         highlightSquare();
     }
 }
@@ -85,22 +86,31 @@ function handleMouseRelease() {
     if (toolSelected === "rectangle") {
         saveRectangleToStore();
     }
+
+    if (toolSelected === "line") {
+        saveLineToStore();
+    }
 }
 
 function handleMouseOut() {
-    clearCanvas();
+    updateCanvas();
 }
 
 // function to clear the canvas of preview animations and draw saved objects
-function clearCanvas() {
+function updateCanvas() {
     let context = get(cursesCanvas).context;
     const canvasElement = get(cursesCanvas).canvasElement;
 
     context.clearRect(0, 0, canvasElement.width, canvasElement.height);
 
-    addTextToCanvas();
-    addRectanglesToCanvas();
+    let objects = get(canvasObjects).numberOfObjects;
+    //loop through the saved objects in order, so most recent overlap older objects
+    for (let i = 1; i <= objects; i++) {
+        addLineToCanvas(i);
+        addTextToCanvas(i);
+        addRectanglesToCanvas(i);
+    }
 }
 
 
-export { changeTool, handleMouseClick, handleMouseDown, handleMouseMove, handleMouseRelease, handleMouseOut }
+export { changeTool, handleMouseClick, handleMouseDown, handleMouseMove, handleMouseRelease, handleMouseOut, updateCanvas }

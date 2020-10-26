@@ -36,7 +36,8 @@ function clearPreviousCharacter(gridLocation, gridDimension, context) {
         gridDimension.y
     );
     /* note grid location is defined by the top corner. Text is added on top of this so we actually 
-       need to clear the rectangle above this point, hence the -1 correction */
+       need to clear the rectangle above this point, hence the -1 correction 
+    */
 }
 
 export { getGridLocation, highlightSquare, clearPreviousCharacter }

@@ -16,7 +16,11 @@ function writeText() {
 
 // save the entered text to objects store
 function addTextToStore(text, location) {
+    let objects = get(canvasObjects).numberOfObjects;
+
     let textInfo = {
+        order: objects + 1,
+        newLine: get(cursesCanvas).textNewLine,
         text: text,
         location: location
     }
@@ -26,7 +30,7 @@ function addTextToStore(text, location) {
 /* --------------- Writing text to the canvas once saved to the object store -------------- */
 
 //write a string at its specified grid location
-function writeTextToCanvas(text, location) {
+function writeTextToCanvas(text, location, newLine) {
     let gridDimension = get(cursesCanvas).gridDimension;
     let context = get(cursesCanvas).context;
     context.fillStyle = 'black';
@@ -35,10 +39,11 @@ function writeTextToCanvas(text, location) {
     for (let i = 0; i < text.length; i++) {
         //get the next character in the string
         let character = text.charAt(i);
+        let gridSquare = getGridSquare(i, location, newLine);
 
         let coordinates = {
-            x: getGridSquare(i, location).x,
-            y: getGridSquare(i, location).y
+            x: gridSquare.x,
+            y: gridSquare.y
         }
 
         //clear any previous characters in that grid square
@@ -49,16 +54,40 @@ function writeTextToCanvas(text, location) {
     };
 }
 
-function getGridSquare(position, location) {
+function getGridSquare(charPosition, location, newLine) {
     let canvasWidth = get(cursesCanvas).canvasWidth;
 
-    // y location needs to be the square below as axis measured from the top, plus any new lines started
-    let yCorrection = 1 + Math.floor((position + location.x) / canvasWidth);
+    //get new line and any required indentation
+    let positionUpdate = getNewLines(charPosition, location, canvasWidth, newLine);
 
     return {
-        // the remainder of gridSqaure / squareWidth will give the x coordinate of required
-        x: ((position + location.x) % canvasWidth),
-        y: (location.y + yCorrection)
+        x: positionUpdate.x,
+        y: (1 + location.y + positionUpdate.y)
+        // y location needs to be the square below (+1) as axis measured from the top,
+    }
+}
+
+function getNewLines(charPosition, location, canvasWidth, newLine) {
+    // calculate the position of the character on the grid
+    let xPosition;
+    // calculate new lines started
+    let yCorrection;
+
+    if (newLine === "indented") {
+        let indentedWidth = canvasWidth - location.x;
+        yCorrection = Math.floor(charPosition / indentedWidth);
+        // start a new line indented below the start of the text
+        xPosition =  (charPosition + location.x) - (indentedWidth * yCorrection);
+
+    } else if (newLine === "toLeft") {
+        // the remainder of gridSquare / squareWidth will give the x coordinate of required square
+        xPosition = ((charPosition + location.x) % canvasWidth),
+        yCorrection = Math.floor((charPosition + location.x) / canvasWidth);
+    }
+
+    return {
+        x: xPosition,
+        y: yCorrection
     }
 }
 
