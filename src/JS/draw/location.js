@@ -12,10 +12,7 @@ function getGridLocation(mousePosition) {
 }
 
 // function to highlight the current grid square that the mouse is over
-function showCurrentSquare(event, isDrawing, canvasElement) {
-    // only carry out if mouse is moving
-    if (isDrawing) return;
-
+function showCurrentSquare(event, canvasElement) {
     cursesCanvas.updateMousePosition(event, canvasElement);
     updateCanvas();
     highlightSquare();

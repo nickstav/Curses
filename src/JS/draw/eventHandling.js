@@ -19,7 +19,7 @@ function handleMouseClick(event) {
             break;
         case(tools.ERASE):
             cursesCanvas.updateMousePosition(event, canvasElement);
-            markSquareAsErased();
+            markSquareAsErased(event, canvasElement);
     }
 }
 
@@ -46,7 +46,12 @@ function handleMouseMove(event) {
             break;
         case(tools.TEXT):
         case(tools.ERASE):
-            showCurrentSquare(event, isDrawing, canvasElement);
+            if (isDrawing) {
+                cursesCanvas.updateMousePosition(event, canvasElement);
+                markSquareAsErased();
+            } else {
+                showCurrentSquare(event, canvasElement);
+            }
             break;
     };
 }
