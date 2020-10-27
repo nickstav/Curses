@@ -7,7 +7,7 @@ import { writeTextToCanvas } from './text.js';
 
 // function to define the apperance of a progress bar
 function getProgressBarValues(numberOfBars) {
-    let bars = '▮'.repeat(numberOfBars);
+    let bars = '▮'.repeat(Math.round(numberOfBars/2));
     let text = 'Progress: ' + bars + ' 50%';
     let divider = '-'.repeat(text.length);
 
