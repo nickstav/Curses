@@ -71,7 +71,12 @@ function addProgressBarsToCanvas(order) {
 
     for (let i = 0; i < progressObjects.length; i++) {
         if (progressObjects[i].order === order) {
-            drawProgressBar(progressObjects[i].location, progressObjects[i].size);
+            drawProgressBar(
+                progressObjects[i].location, 
+                progressObjects[i].size,
+                progressObjects[i].title,
+                progressObjects[i].status
+            );
         }
     }
 }
