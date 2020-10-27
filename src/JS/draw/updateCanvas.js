@@ -4,6 +4,7 @@ import { canvasObjects } from '../stores/objects.js';
 import { createRectangle } from '../tools/rectangle.js';
 import { writeTextToCanvas } from '../tools/text.js';
 import { drawLineOnGrid } from '../tools/line.js';
+import { drawProgressBar } from '../tools/progress.js';
 import { eraseSquare } from '../tools/erase.js';
 
 // function to clear the canvas of preview animations and draw saved objects
@@ -19,6 +20,7 @@ function updateCanvas() {
         addLineToCanvas(i);
         addTextToCanvas(i);
         addRectanglesToCanvas(i);
+        addProgressBarsToCanvas(i);
         eraseMarkedSquares(i);
     }
 }
@@ -60,6 +62,16 @@ function addRectanglesToCanvas(order) {
             let startSquare = rectangleObjects[i].startPoint;
             let endSquare = rectangleObjects[i].endPoint;
             createRectangle(startSquare, endSquare);
+        }
+    }
+}
+
+function addProgressBarsToCanvas(order) {
+    let progressObjects = get(canvasObjects).progress;
+
+    for (let i = 0; i < progressObjects.length; i++) {
+        if (progressObjects[i].order === order) {
+            drawProgressBar(progressObjects[i].location, progressObjects[i].size);
         }
     }
 }

@@ -14,7 +14,8 @@ import { writable } from 'svelte/store';
     startPosition: {x: 0, y: 0},
     isDrawing: false,
     mousePosition: {x: 0, y: 0},
-    textNewLine: 'indented'
+    textNewLine: 'indented',
+    progressBars: 10
 };
 
 function setUpStore() {

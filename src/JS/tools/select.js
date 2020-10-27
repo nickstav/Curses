@@ -13,6 +13,7 @@ export function changeTool(buttonPressed) {
             canvasElement.style.cursor = "crosshair";
             break;
         case(tools.TEXT):
+        case(tools.PROGRESS):
         case(tools.ERASE):
             canvasElement.style.cursor = "pointer";
             break;
