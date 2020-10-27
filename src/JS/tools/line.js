@@ -196,7 +196,7 @@ function getKeyCharacterForLine(deltaX, deltaY) {
    } else if (deltaY === 0) {
       return '-'
    } else {
-      return 'X';
+      return 'x';
    }
 }
 
