@@ -6,6 +6,7 @@ import { tools } from '../tools/toolsList.js';
 import { drawLiveLine, saveLineToStore } from '../tools/line.js';
 import { drawLiveRectangle, saveRectangleToStore } from '../tools/rectangle.js';
 import { writeText } from '../tools/text.js';
+import { previewProgressSize, saveProgressBarToStore } from '../tools/progress.js';
 import { markSquareAsErased } from '../tools/erase.js';
 
 function handleMouseClick(event) {
@@ -20,7 +21,12 @@ function handleMouseClick(event) {
         case(tools.ERASE):
             cursesCanvas.updateMousePosition(event, canvasElement);
             markSquareAsErased(event, canvasElement);
+        case(tools.PROGRESS):
+            cursesCanvas.updateMousePosition(event, canvasElement);
+            saveProgressBarToStore();
     }
+    //show updated canvas with any added/erased objects when clicking
+    updateCanvas();
 }
 
 function handleMouseDown(event) {
@@ -52,6 +58,10 @@ function handleMouseMove(event) {
             } else {
                 showCurrentSquare(event, canvasElement);
             }
+            break;
+        case(tools.PROGRESS):
+            cursesCanvas.updateMousePosition(event, canvasElement);
+            previewProgressSize();
             break;
     };
 }

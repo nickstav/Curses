@@ -45,6 +45,16 @@ function setUpStore() {
     });
   }
 
+  function saveProgressBarObject(newProgressBar) {
+    update(objects => {
+      return {
+          ...objects,
+          progress: [...objects.progress, newProgressBar],
+          numberOfObjects: objects.numberOfObjects + 1
+      };
+    });
+  }
+
   function markSquareToErase(erasedSquare) {
     update(objects => {
       return {
@@ -61,6 +71,7 @@ function setUpStore() {
     saveLineObject,
     saveTextObject,
     saveRectangleObject,
+    saveProgressBarObject,
     markSquareToErase
 	};
 

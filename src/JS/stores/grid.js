@@ -1,5 +1,5 @@
 import { cursesCanvas } from './store.js';
-import { derived, writable, get } from 'svelte/store';
+import { derived, get } from 'svelte/store';
 
 // store to take cursesCanvas width/height values and draw correct canvas size
 const gridAxis = derived(

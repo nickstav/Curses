@@ -3,6 +3,7 @@
     import SizeParagraph from './SizeParagraph.svelte';
     import Button from './Button.svelte';
     import TextOptions from './TextOptions.svelte';
+    import ProgressOptions from './ProgressOptions.svelte';
     import { cursesCanvas } from '../JS/stores/store.js';
     import { changeTool } from '../JS/tools/select.js';
     import { tools } from '../JS/tools/toolsList.js';
@@ -22,7 +23,9 @@
         <Button editCanvas={()=>{changeTool(tools.ERASE)}} img={"url('./button_images/eraser.png')"}/>
     </div>
 </div>
-{#if $cursesCanvas.tool === 'text'}
+{#if $cursesCanvas.tool === tools.TEXT}
     <TextOptions/>
+{:else if $cursesCanvas.tool === tools.PROGRESS}
+    <ProgressOptions/>
 {/if}
 <SizeParagraph/>
