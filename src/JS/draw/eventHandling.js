@@ -8,22 +8,23 @@ import { drawLiveRectangle, saveRectangleToStore } from '../tools/rectangle.js';
 import { writeText } from '../tools/text.js';
 import { previewProgressSize, saveProgressBarToStore } from '../tools/progress.js';
 import { markSquareAsErased } from '../tools/erase.js';
+import { moveObject, selectObject } from '../tools/drag.js';
 
 function handleMouseClick(event) {
     let toolSelected = get(cursesCanvas).tool;
     let canvasElement = get(cursesCanvas).canvasElement;
 
+    cursesCanvas.updateMousePosition(event, canvasElement);
     switch(toolSelected) {
         case(tools.TEXT):
-            cursesCanvas.updateMousePosition(event, canvasElement);
             writeText();
             break;
         case(tools.ERASE):
-            cursesCanvas.updateMousePosition(event, canvasElement);
             markSquareAsErased(event, canvasElement);
         case(tools.PROGRESS):
-            cursesCanvas.updateMousePosition(event, canvasElement);
             saveProgressBarToStore();
+        case(tools.DRAG):
+            selectObject();    
     }
     //show updated canvas with any added/erased objects when clicking
     updateCanvas();
@@ -62,6 +63,9 @@ function handleMouseMove(event) {
         case(tools.PROGRESS):
             cursesCanvas.updateMousePosition(event, canvasElement);
             previewProgressSize();
+            break;
+        case(tools.DRAG):
+            moveObject(event, isDrawing, canvasElement);
             break;
     };
 }

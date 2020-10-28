@@ -18,7 +18,7 @@
         <Button editCanvas={()=>{changeTool(tools.LINE)}} img={"url('./button_images/line.png')"}/>
         <Button editCanvas={()=>{changeTool(tools.RECTANGLE)}} img={"url('./button_images/rectangle.png')"}/>
         <Button editCanvas={()=>{changeTool(tools.TEXT)}} img={"url('./button_images/text.png')"}/>
-        <Button editCanvas={()=>{changeTool(tools.GRAB)}} img={"url('./button_images/drag.png')"}/>
+        <Button editCanvas={()=>{changeTool(tools.DRAG)}} img={"url('./button_images/drag.png')"}/>
         <Button editCanvas={()=>{changeTool(tools.PROGRESS)}} img={"url('./button_images/progress.png')"}/>
         <Button editCanvas={()=>{changeTool(tools.ERASE)}} img={"url('./button_images/eraser.png')"}/>
     </div>

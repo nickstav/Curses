@@ -65,6 +65,23 @@ function setUpStore() {
     });
   }
 
+  function updateObjectLocation(objectNumber, newLocation) {
+    update(objects => {
+
+      let updatedText = objects.text;
+      for (let i = 0; i < updatedText.length; i++) {
+        if (updatedText[i].order === objectNumber) {
+          updatedText[i].location = newLocation;
+        }
+      }
+      
+      return {
+        ...objects,
+        text: updatedText
+      };
+    });
+  }
+
   return {
 	  subscribe,
     set,
@@ -72,7 +89,8 @@ function setUpStore() {
     saveTextObject,
     saveRectangleObject,
     saveProgressBarObject,
-    markSquareToErase
+    markSquareToErase,
+    updateObjectLocation
 	};
 
 }
