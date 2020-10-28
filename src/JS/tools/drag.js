@@ -3,6 +3,8 @@ import { cursesCanvas } from '../stores/store.js';
 import { canvasObjects } from '../stores/objects.js';
 import { getGridLocation } from '../draw/location.js';
 import { updateCanvas } from '../draw/updateCanvas.js';
+import { tools } from './toolsList.js';
+import { writeTextToCanvas, addTextToStore } from './text.js';
 
 // function to select any object that is clicked on the canvas
 function selectObject() {
@@ -16,7 +18,7 @@ function selectObject() {
     // if no objects exist, then the user has clicked off the object so reset the draggable function
     if (!textExists) {
         canvasElement.style.cursor = "grab";
-        cursesCanvas.deselectAnyMovableObject();
+        canvasObjects.createMovableObject({});
     }
 }
 
@@ -32,8 +34,30 @@ function moveObject(event, isDrawing, canvasElement) {
     updateCanvas();
 
     // move the object to the new location
-    let objectNumber = get(cursesCanvas).objectToMove;
-    canvasObjects.updateObjectLocation(objectNumber, currentGridLocation);
+    let objectToMove = get(canvasObjects).objectToMove;
+    switch(objectToMove.type) {
+        case(tools.TEXT):
+            // get the object info highlighted to be moved & save the info
+            let objectInfo = get(canvasObjects).objectToMove;
+            // draw the object at the current location
+            writeTextToCanvas(objectInfo.textInfo.text, currentGridLocation, objectInfo.textInfo.newLine);
+            // delete the object from the store
+            canvasObjects.deleteTextObject(objectInfo.objectIndex);
+    }
+ 
+}
+
+function saveNewObject() {
+    let mousePosition = get(cursesCanvas).mousePosition;
+    let currentGridLocation = getGridLocation(mousePosition);
+    let objectToMove = get(canvasObjects).objectToMove;
+
+    switch(objectToMove.type) {
+        case(tools.TEXT):
+        // get the object info highlighted to be moved
+        let textInfo = get(canvasObjects).objectToMove.textInfo;
+        addTextToStore(textInfo.text, currentGridLocation)
+    }
 }
 
 // compare all saved text objects' location to the mouse's clicked location
@@ -47,7 +71,12 @@ function checkIsTextObject(clickedPosition) {
 
         if (location.x === clickedPosition.x && location.y === clickedPosition.y) {
             canvasElement.style.cursor = "move";
-            cursesCanvas.selectObjectToMove(textObjects[i].order);
+            let objectInfo = {
+                type: tools.TEXT,
+                objectIndex: i,
+                textInfo: textObjects[i]
+            }
+            canvasObjects.createMovableObject(objectInfo);
             return true;
         }
     }
@@ -58,4 +87,4 @@ function highlightTextObject(location, length) {
   
 }
 
-export {  selectObject, moveObject }
+export {  selectObject, moveObject, saveNewObject }

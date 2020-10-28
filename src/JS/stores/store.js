@@ -14,8 +14,7 @@ import { writable } from 'svelte/store';
     startPosition: {x: 0, y: 0},
     isDrawing: false,
     mousePosition: {x: 0, y: 0},
-    textNewLine: 'indented',
-    objectToMove: undefined
+    textNewLine: 'indented'
 };
 
 function setUpStore() {
@@ -88,24 +87,6 @@ function setUpStore() {
     });
   }
 
-  function selectObjectToMove(objectNumber) {
-    update(status => {
-      return {
-          ...status,
-          objectToMove: objectNumber
-      };
-    });
-  }
-
-  function deselectAnyMovableObject() {
-    update(status => {
-      return {
-          ...status,
-          objectToMove: undefined
-      };
-    });
-  }
-
   return {
 	  subscribe,
     set,
@@ -115,9 +96,7 @@ function setUpStore() {
     startDrawing,
     stopDrawing,
     updateStartPosition,
-    updateMousePosition,
-    selectObjectToMove,
-    deselectAnyMovableObject
+    updateMousePosition
 	};
 
 }

@@ -94,4 +94,4 @@ function getNewLines(charPosition, location, canvasWidth, newLine) {
     }
 }
 
-export { writeText, writeTextToCanvas }
+export { writeText, writeTextToCanvas, addTextToStore }

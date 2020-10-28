@@ -1,3 +1,4 @@
+import { text } from 'svelte/internal';
 import { writable } from 'svelte/store';
 
 // a store in which all objects created on the canvas are saved
@@ -8,7 +9,8 @@ import { writable } from 'svelte/store';
     text: [],
     progress: [],
     erasedSquares: [],
-    numberOfObjects: 0
+    numberOfObjects: 0,
+    objectToMove: {}
 };
 
 function setUpStore() {
@@ -65,22 +67,24 @@ function setUpStore() {
     });
   }
 
-  function updateObjectLocation(objectNumber, newLocation) {
+  function createMovableObject(objectInfo) {
     update(objects => {
-
-      let updatedText = objects.text;
-      for (let i = 0; i < updatedText.length; i++) {
-        if (updatedText[i].order === objectNumber) {
-          updatedText[i].location = newLocation;
-        }
-      }
-      
       return {
-        ...objects,
-        text: updatedText
+          ...objects,
+         objectToMove: objectInfo
       };
     });
   }
+
+  function deleteTextObject(index) {
+    update(objects => {
+      return {
+          ...objects,
+          text: objects.text.splice(index, 1)
+      };
+    });
+  }
+
 
   return {
 	  subscribe,
@@ -90,7 +94,8 @@ function setUpStore() {
     saveRectangleObject,
     saveProgressBarObject,
     markSquareToErase,
-    updateObjectLocation
+    createMovableObject,
+    deleteTextObject
 	};
 
 }

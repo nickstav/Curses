@@ -8,7 +8,7 @@ import { drawLiveRectangle, saveRectangleToStore } from '../tools/rectangle.js';
 import { writeText } from '../tools/text.js';
 import { previewProgressSize, saveProgressBarToStore } from '../tools/progress.js';
 import { markSquareAsErased } from '../tools/erase.js';
-import { moveObject, selectObject } from '../tools/drag.js';
+import { moveObject, selectObject, saveNewObject } from '../tools/drag.js';
 
 function handleMouseClick(event) {
     let toolSelected = get(cursesCanvas).tool;
@@ -83,6 +83,8 @@ function handleMouseRelease() {
         case(tools.RECTANGLE):
             saveRectangleToStore();
             break;
+        case(tools.DRAG):
+            saveNewObject();
     }
 }
 

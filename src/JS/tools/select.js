@@ -1,6 +1,7 @@
 import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/store.js';
 import { tools } from './toolsList.js';
+import { canvasObjects } from '../stores/objects.js';
 
 // function to select which canvas tool has been clicked in the toolbar
 export function changeTool(buttonPressed) {
