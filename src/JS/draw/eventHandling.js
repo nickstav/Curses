@@ -9,6 +9,7 @@ import { writeText } from '../tools/text.js';
 import { previewProgressSize, saveProgressBarToStore } from '../tools/progress.js';
 import { markSquareAsErased } from '../tools/erase.js';
 import { moveObject, selectObject, saveNewObject } from '../tools/drag.js';
+import { canvasObjects } from '../stores/objects.js';
 
 function handleMouseClick(event) {
     let toolSelected = get(cursesCanvas).tool;
@@ -85,6 +86,7 @@ function handleMouseRelease() {
             break;
         case(tools.DRAG):
             saveNewObject();
+            break;
     }
 }
 

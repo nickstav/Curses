@@ -74,17 +74,13 @@ function checkIsTextObject(clickedPosition) {
                 textInfo: textObjects[i]
             }
             canvasObjects.createMovableObject(objectInfo);
-             // delete the object from the store
-             canvasObjects.deleteTextObject(objectInfo.objectIndex);
-            
+            // delete the original object from the store
+            canvasObjects.deleteTextObject(i);
+
             return true;
         }
     }
     return false;
-}
-
-function highlightTextObject(location, length) {
-  
 }
 
 export {  selectObject, moveObject, saveNewObject }

@@ -10,7 +10,7 @@ import { writable } from 'svelte/store';
     progress: [],
     erasedSquares: [],
     numberOfObjects: 0,
-    objectToMove: {}
+    objectToMove: {},
 };
 
 function setUpStore() {
@@ -70,8 +70,8 @@ function setUpStore() {
   function createMovableObject(objectInfo) {
     update(objects => {
       return {
-          ...objects,
-         objectToMove: objectInfo
+        ...objects,
+        objectToMove: objectInfo
       };
     });
   }
