@@ -18,6 +18,7 @@ function selectObject() {
     // if no objects exist, then the user has clicked off the object so reset the draggable function
     if (!textExists) {
         canvasElement.style.cursor = "grab";
+        // reset the movable object info
         canvasObjects.createMovableObject({});
     }
 }
@@ -25,26 +26,22 @@ function selectObject() {
 function moveObject(event, isDrawing, canvasElement) {
     if (!isDrawing) return;
 
+    // update the canvas
+    updateCanvas();
+
     // continually update the current mouse position
     cursesCanvas.updateMousePosition(event, canvasElement);
     let mousePosition = get(cursesCanvas).mousePosition;
     let currentGridLocation = getGridLocation(mousePosition);
 
-    // update the canvas
-    updateCanvas();
-
     // move the object to the new location
     let objectToMove = get(canvasObjects).objectToMove;
+
     switch(objectToMove.type) {
         case(tools.TEXT):
-            // get the object info highlighted to be moved & save the info
-            let objectInfo = get(canvasObjects).objectToMove;
             // draw the object at the current location
-            writeTextToCanvas(objectInfo.textInfo.text, currentGridLocation, objectInfo.textInfo.newLine);
-            // delete the object from the store
-            canvasObjects.deleteTextObject(objectInfo.objectIndex);
+            writeTextToCanvas(objectToMove.textInfo.text, currentGridLocation, objectToMove.textInfo.newLine);
     }
- 
 }
 
 function saveNewObject() {
@@ -77,6 +74,9 @@ function checkIsTextObject(clickedPosition) {
                 textInfo: textObjects[i]
             }
             canvasObjects.createMovableObject(objectInfo);
+             // delete the object from the store
+             canvasObjects.deleteTextObject(objectInfo.objectIndex);
+            
             return true;
         }
     }
