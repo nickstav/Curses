@@ -68,11 +68,13 @@ function checkIsTextObject(clickedPosition) {
 
         if (location.x === clickedPosition.x && location.y === clickedPosition.y) {
             canvasElement.style.cursor = "move";
+
             let objectInfo = {
                 type: tools.TEXT,
                 objectIndex: i,
                 textInfo: textObjects[i]
             }
+            // create a movable object to move about the canvas
             canvasObjects.createMovableObject(objectInfo);
             // delete the original object from the store
             canvasObjects.deleteTextObject(i);
