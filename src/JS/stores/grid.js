@@ -1,12 +1,13 @@
-import { cursesCanvas } from './store.js';
-import { derived, get } from 'svelte/store';
+import { cursesCanvas } from './project.js';
+import { derived } from 'svelte/store';
+import { minDimensions, maxDimensions, gridDimension} from '../constants/canvasSize.js';
 
 // store to take cursesCanvas width/height values and draw correct canvas size
 const gridAxis = derived(
     cursesCanvas,
     $cursesCanvas => ({
-        x: adjustForMinMax('width', $cursesCanvas.canvasWidth) * $cursesCanvas.gridDimension.x,
-        y: adjustForMinMax('height', $cursesCanvas.canvasHeight) * $cursesCanvas.gridDimension.y
+        x: adjustForMinMax('width', $cursesCanvas.canvasWidth) * gridDimension.x,
+        y: adjustForMinMax('height', $cursesCanvas.canvasHeight) * gridDimension.y
     })
 )
 
@@ -25,24 +26,22 @@ const checkUserInput = derived(
 
 // function to ensure a min/max value of the canvas element
 function adjustForMinMax(direction, length) {
-    let min = get(cursesCanvas).minDimensions;
-    let max = get(cursesCanvas).maxDimensions;
 
     if (direction === 'width') {
-        if (length < min.width) {
-            return min.width;
-        } else if (length > max.width) {
-            return max.width;
+        if (length < minDimensions.width) {
+            return minDimensions.width;
+        } else if (length > maxDimensions.width) {
+            return maxDimensions.width;
         } else {
             return length;
         }
     }
 
     if (direction === 'height') {
-        if (length < min.height) {
-            return min.height;
-        } else if (length > max.height) {
-            return max.height;
+        if (length < minDimensions.height) {
+            return minDimensions.height;
+        } else if (length > maxDimensions.height) {
+            return maxDimensions.height;
         } else {
             return length;
         }
@@ -53,7 +52,7 @@ function adjustForMinMax(direction, length) {
 
 // function to compare width/height values against their min dimensions
 function checkMinValues(input) {
-    if (input.canvasWidth < input.minDimensions.width || input.canvasHeight < input.minDimensions.height ) {
+    if (input.canvasWidth < minDimensions.width || input.canvasHeight < minDimensions.height ) {
         return true;
     } else {
         return false;
@@ -62,7 +61,7 @@ function checkMinValues(input) {
 
 // function to compare width/height values against their max dimensions
 function checkMaxValues(input) {
-    if (input.canvasWidth > input.maxDimensions.width || input.canvasHeight > input.maxDimensions.height ) {
+    if (input.canvasWidth > maxDimensions.width || input.canvasHeight > maxDimensions.height ) {
         return true;
     } else {
         return false;

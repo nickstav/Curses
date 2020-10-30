@@ -1,5 +1,5 @@
 <script>
-      import { cursesCanvas } from '../JS/stores/store.js'; 
+    import { cursesCanvas } from '../JS/stores/project.js';
       import { updateCanvas } from '../JS/draw/updateCanvas.js';
 </script>
 

@@ -1,29 +1,35 @@
 import { get } from 'svelte/store';
-import { cursesCanvas } from '../stores/store.js';
+import { cursesCanvas } from '../stores/project.js';
+
+import { tools } from '../constants/toolsList.js';
 import { updateCanvas } from './updateCanvas.js';
-import { showCurrentSquare } from './location.js';
-import { tools } from '../tools/toolsList.js';
-import { drawLiveLine, saveLineToStore } from '../tools/line.js';
-import { drawLiveRectangle, saveRectangleToStore } from '../tools/rectangle.js';
-import { writeText } from '../tools/text.js';
-import { previewProgressSize, saveProgressBarToStore } from '../tools/progress.js';
-import { markSquareAsErased } from '../tools/erase.js';
+import { getGridLocation, showCurrentSquare } from './location.js';
+
+import { TextItem } from '../items/textItem.js';
+import { canvasObjects } from '../stores/objects.js';
+
 
 function handleMouseClick(event) {
     let toolSelected = get(cursesCanvas).tool;
     let canvasElement = get(cursesCanvas).canvasElement;
+    
+    cursesCanvas.updateMousePosition(event, canvasElement);
+    let mouseLocation = get(cursesCanvas).mousePosition;
+    let gridLocation = getGridLocation(mouseLocation);
 
     switch(toolSelected) {
         case(tools.TEXT):
-            cursesCanvas.updateMousePosition(event, canvasElement);
-            writeText();
+            let userText = prompt("Enter text/characters:");
+            if (userText !== null) {
+                canvasObjects.saveObjectToStore(new TextItem(userText, gridLocation));
+            }
             break;
         case(tools.ERASE):
-            cursesCanvas.updateMousePosition(event, canvasElement);
-            markSquareAsErased(event, canvasElement);
+            //markSquareAsErased(event, canvasElement);
         case(tools.PROGRESS):
-            cursesCanvas.updateMousePosition(event, canvasElement);
-            saveProgressBarToStore();
+            //saveProgressBarToStore();
+        case(tools.DRAG):
+            //selectObject();    
     }
     //show updated canvas with any added/erased objects when clicking
     updateCanvas();
@@ -45,23 +51,26 @@ function handleMouseMove(event) {
 
     switch(toolSelected) {
         case(tools.LINE):
-            drawLiveLine(event, isDrawing, canvasElement);
+            //drawLiveLine(event, isDrawing, canvasElement);
             break;
         case(tools.RECTANGLE):
-            drawLiveRectangle(event, isDrawing, canvasElement);
+            //drawLiveRectangle(event, isDrawing, canvasElement);
             break;
         case(tools.TEXT):
         case(tools.ERASE):
             if (isDrawing) {
-                cursesCanvas.updateMousePosition(event, canvasElement);
-                markSquareAsErased();
+                //cursesCanvas.updateMousePosition(event, canvasElement);
+                //markSquareAsErased();
             } else {
                 showCurrentSquare(event, canvasElement);
             }
             break;
         case(tools.PROGRESS):
-            cursesCanvas.updateMousePosition(event, canvasElement);
-            previewProgressSize();
+            //cursesCanvas.updateMousePosition(event, canvasElement);
+            //previewProgressSize();
+            break;
+        case(tools.DRAG):
+            //moveObject(event, isDrawing, canvasElement);
             break;
     };
 }
@@ -74,10 +83,13 @@ function handleMouseRelease() {
 
     switch(toolSelected) {
         case(tools.LINE):
-            saveLineToStore();
+            //saveLineToStore();
             break;
         case(tools.RECTANGLE):
-            saveRectangleToStore();
+            //saveRectangleToStore();
+            break;
+        case(tools.DRAG):
+            //saveNewObject();
             break;
     }
 }

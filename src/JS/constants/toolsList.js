@@ -3,6 +3,6 @@ export const tools = {
     RECTANGLE: "rectangle",
     TEXT: "text",
     PROGRESS: "progress",
-    GRAB: "grab",
+    DRAG: "drag",
     ERASE: "erase"
 }
