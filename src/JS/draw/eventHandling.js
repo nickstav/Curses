@@ -1,6 +1,8 @@
 import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/project.js';
+
 import { tools } from '../constants/toolsList.js';
+import { updateCanvas } from './updateCanvas.js';
 
 
 function handleMouseClick(event) {
@@ -20,7 +22,7 @@ function handleMouseClick(event) {
             //selectObject();    
     }
     //show updated canvas with any added/erased objects when clicking
-    //updateCanvas();
+    updateCanvas();
 }
 
 function handleMouseDown(event) {
@@ -84,7 +86,7 @@ function handleMouseRelease() {
 
 // ensure canvas remains up to date when the mouse leaves the canvas window
 function handleMouseOut() {
-    //updateCanvas();
+    updateCanvas();
 }
 
 export { 

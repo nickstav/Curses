@@ -17,7 +17,6 @@ function showCurrentSquare(event, canvasElement) {
     highlightSquare();
 }
 
-// function to highlight the grid location that the cursor is currently over
 function highlightSquare(){
     let context = get(cursesCanvas).context;
     let currentLocation = get(cursesCanvas).mousePosition;
@@ -32,6 +31,7 @@ function highlightSquare(){
     );
     context.stroke();
 }
+
 /*
 // function to clear the grid square of any previous characters before adding a character
 function clearPreviousCharacter(gridLocation, gridDimension, context) {
@@ -46,4 +46,5 @@ function clearPreviousCharacter(gridLocation, gridDimension, context) {
     
 }
 */
+
 export { getGridLocation, showCurrentSquare, highlightSquare }

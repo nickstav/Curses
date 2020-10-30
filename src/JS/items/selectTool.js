@@ -6,6 +6,7 @@ import { tools } from '../constants/toolsList.js';
 export function changeTool(buttonPressed) {
     cursesCanvas.changeCanvasTool(buttonPressed);
 
+    //change the cursor icon depending on the current tool
     let canvasElement = get(cursesCanvas).canvasElement;
     switch(buttonPressed) {
         case(tools.LINE):
