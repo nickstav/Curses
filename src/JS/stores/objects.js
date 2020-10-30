@@ -11,11 +11,11 @@ function setUpStore() {
 
   const { subscribe, set, update } = writable(defaultValues);
 
-  function saveObjectToStore(objectInfo) {
-    update(objects => {
+  function saveObjectToStore(object) {
+    update(store => {
       return {
-        ...objects,
-        items: [...items, objectInfo] 
+        ...store,
+        items: [...store.items, object] 
       };
     });
   }

@@ -3,9 +3,10 @@ import { cursesCanvas } from '../stores/project.js';
 
 import { tools } from '../constants/toolsList.js';
 import { updateCanvas } from './updateCanvas.js';
-import { getGridLocation } from './location.js';
+import { getGridLocation, showCurrentSquare } from './location.js';
 
 import { TextItem } from '../items/textItem.js';
+import { canvasObjects } from '../stores/objects.js';
 
 
 function handleMouseClick(event) {
@@ -20,8 +21,7 @@ function handleMouseClick(event) {
         case(tools.TEXT):
             let userText = prompt("Enter text/characters:");
             if (userText !== null) {
-                let newTextItem = new TextItem(userText, gridLocation);
-                newTextItem.draw();
+                canvasObjects.saveObjectToStore(new TextItem(userText, gridLocation));
             }
             break;
         case(tools.ERASE):
@@ -32,7 +32,7 @@ function handleMouseClick(event) {
             //selectObject();    
     }
     //show updated canvas with any added/erased objects when clicking
-    //updateCanvas();
+    updateCanvas();
 }
 
 function handleMouseDown(event) {
@@ -62,7 +62,7 @@ function handleMouseMove(event) {
                 //cursesCanvas.updateMousePosition(event, canvasElement);
                 //markSquareAsErased();
             } else {
-                //showCurrentSquare(event, canvasElement);
+                showCurrentSquare(event, canvasElement);
             }
             break;
         case(tools.PROGRESS):
