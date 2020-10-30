@@ -1,4 +1,20 @@
 import { get } from 'svelte/store';
+import { cursesCanvas } from '../stores/project.js';
+
+
+function updateCanvas() {
+    let context = get(cursesCanvas).context;
+    const canvasElement = get(cursesCanvas).canvasElement;
+
+    context.clearRect(0, 0, canvasElement.width, canvasElement.height);
+}
+
+export { updateCanvas }
+
+
+
+/*
+import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/store.js';
 import { canvasObjects } from '../stores/objects.js';
 import { createRectangle } from '../tools/rectangle.js';
@@ -6,6 +22,8 @@ import { writeTextToCanvas } from '../tools/text.js';
 import { drawLineOnGrid } from '../tools/line.js';
 import { drawProgressBar } from '../tools/progress.js';
 import { eraseSquare } from '../tools/erase.js';
+
+
 
 // function to clear the canvas of preview animations and draw saved objects
 function updateCanvas() {
@@ -24,8 +42,6 @@ function updateCanvas() {
         eraseMarkedSquares(i);
     }
 }
-
-/* --------------------------------------------------------------------------------------------- */
 
 //check for the current object number and draw it if it's a line
 function addLineToCanvas(order) {
@@ -93,3 +109,5 @@ function eraseMarkedSquares(order) {
 
 
 export { updateCanvas }
+
+*/

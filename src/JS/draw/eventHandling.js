@@ -1,15 +1,7 @@
 import { get } from 'svelte/store';
-import { cursesCanvas } from '../stores/store.js';
-import { updateCanvas } from './updateCanvas.js';
-import { showCurrentSquare } from './location.js';
-import { tools } from '../tools/toolsList.js';
-import { drawLiveLine, saveLineToStore } from '../tools/line.js';
-import { drawLiveRectangle, saveRectangleToStore } from '../tools/rectangle.js';
-import { writeText } from '../tools/text.js';
-import { previewProgressSize, saveProgressBarToStore } from '../tools/progress.js';
-import { markSquareAsErased } from '../tools/erase.js';
-import { moveObject, selectObject, saveNewObject } from '../tools/drag.js';
-import { canvasObjects } from '../stores/objects.js';
+import { cursesCanvas } from '../stores/project.js';
+import { tools } from '../constants/toolsList.js';
+
 
 function handleMouseClick(event) {
     let toolSelected = get(cursesCanvas).tool;
@@ -18,17 +10,17 @@ function handleMouseClick(event) {
     cursesCanvas.updateMousePosition(event, canvasElement);
     switch(toolSelected) {
         case(tools.TEXT):
-            writeText();
+            //writeText();
             break;
         case(tools.ERASE):
-            markSquareAsErased(event, canvasElement);
+            //markSquareAsErased(event, canvasElement);
         case(tools.PROGRESS):
-            saveProgressBarToStore();
+            //saveProgressBarToStore();
         case(tools.DRAG):
-            selectObject();    
+            //selectObject();    
     }
     //show updated canvas with any added/erased objects when clicking
-    updateCanvas();
+    //updateCanvas();
 }
 
 function handleMouseDown(event) {
@@ -47,26 +39,26 @@ function handleMouseMove(event) {
 
     switch(toolSelected) {
         case(tools.LINE):
-            drawLiveLine(event, isDrawing, canvasElement);
+            //drawLiveLine(event, isDrawing, canvasElement);
             break;
         case(tools.RECTANGLE):
-            drawLiveRectangle(event, isDrawing, canvasElement);
+            //drawLiveRectangle(event, isDrawing, canvasElement);
             break;
         case(tools.TEXT):
         case(tools.ERASE):
             if (isDrawing) {
-                cursesCanvas.updateMousePosition(event, canvasElement);
-                markSquareAsErased();
+                //cursesCanvas.updateMousePosition(event, canvasElement);
+                //markSquareAsErased();
             } else {
-                showCurrentSquare(event, canvasElement);
+                //showCurrentSquare(event, canvasElement);
             }
             break;
         case(tools.PROGRESS):
-            cursesCanvas.updateMousePosition(event, canvasElement);
-            previewProgressSize();
+            //cursesCanvas.updateMousePosition(event, canvasElement);
+            //previewProgressSize();
             break;
         case(tools.DRAG):
-            moveObject(event, isDrawing, canvasElement);
+            //moveObject(event, isDrawing, canvasElement);
             break;
     };
 }
@@ -79,20 +71,20 @@ function handleMouseRelease() {
 
     switch(toolSelected) {
         case(tools.LINE):
-            saveLineToStore();
+            //saveLineToStore();
             break;
         case(tools.RECTANGLE):
-            saveRectangleToStore();
+            //saveRectangleToStore();
             break;
         case(tools.DRAG):
-            saveNewObject();
+            //saveNewObject();
             break;
     }
 }
 
 // ensure canvas remains up to date when the mouse leaves the canvas window
 function handleMouseOut() {
-    updateCanvas();
+    //updateCanvas();
 }
 
 export { 

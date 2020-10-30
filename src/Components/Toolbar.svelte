@@ -4,9 +4,9 @@
     import Button from './Button.svelte';
     import TextOptions from './TextOptions.svelte';
     import ProgressOptions from './ProgressOptions.svelte';
-    import { cursesCanvas } from '../JS/stores/store.js';
-    import { changeTool } from '../JS/tools/select.js';
-    import { tools } from '../JS/tools/toolsList.js';
+    import { cursesCanvas } from '../JS/stores/project.js';
+    import { changeTool } from '../JS/items/selectTool.js';
+    import { tools } from '../JS/constants/toolsList.js';
 </script>
 
 <div id="toolbar" class="bg-gray-300 w-full h-10 text-gray700 flex justify-between items-center py-0 px-5">
