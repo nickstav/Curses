@@ -14,7 +14,7 @@ function selectObject(gridLocation) {
                 gridLocation.x === object.filledSquares[i].x && 
                 gridLocation.y + 1 === object.filledSquares[i].y
                 ) {
-                // if mouse location matches an object's location, mark it as selected
+                    // if mouse location matches an object's location, mark it as selected
                     object.toggleSelect();
                     console.debug(object.type, 'clicked');
                     objectClicked = true;

@@ -4,10 +4,12 @@ import { cursesCanvas } from '../stores/project.js';
 import { tools } from '../constants/toolsList.js';
 import { updateCanvas } from './updateCanvas.js';
 import { selectObject, dragObject } from './drag.js';
+import { eraseObject } from './erase.js';
 import { getGridLocation, showCurrentSquare } from './location.js';
 
 import { TextItem } from '../items/textItem.js';
 import { canvasObjects } from '../stores/objects.js';
+
 
 
 function handleMouseClick(event) {
@@ -25,19 +27,21 @@ function handleMouseClick(event) {
                 canvasObjects.saveObjectToStore(new TextItem(userText, gridLocation));
             }
             break;
-        case(tools.ERASE):
-            //markSquareAsErased(event, canvasElement);
         case(tools.PROGRESS):
             //saveProgressBarToStore();
+            break;
         case(tools.DRAG):
-            selectObject(gridLocation);    
+            selectObject(gridLocation);  
+            break;  
+        case(tools.ERASE):
+            eraseObject(gridLocation);
+            break;
     }
     //show updated canvas with any added/erased objects when clicking
     updateCanvas();
 }
 
 function handleMouseDown(event) {
-    let toolSelected = get(cursesCanvas).tool;
     // update the start position of the cursor when the mouse is first pressed
     let canvasElement = get(cursesCanvas).canvasElement;
     cursesCanvas.updateStartPosition(event, canvasElement);
@@ -63,13 +67,7 @@ function handleMouseMove(event) {
             //drawLiveRectangle(event, isDrawing, canvasElement);
             break;
         case(tools.TEXT):
-        case(tools.ERASE):
-            if (isDrawing) {
-                //cursesCanvas.updateMousePosition(event, canvasElement);
-                //markSquareAsErased();
-            } else {
-                showCurrentSquare(event, canvasElement);
-            }
+            showCurrentSquare(event, canvasElement);
             break;
         case(tools.PROGRESS):
             //cursesCanvas.updateMousePosition(event, canvasElement);

@@ -8,8 +8,8 @@
         <input type="text" id="title" size="10" bind:value={$progressBarAppearance.title}>
     </div>
     <div id="statusInput">
-        <label for="title">Status text:</label>
-        <input type="text" id="title" size="10" bind:value={$progressBarAppearance.status}>
+        <label for="status">Status text:</label>
+        <input type="text" id="status" size="10" bind:value={$progressBarAppearance.status}>
     </div>
     <div id="barsInput">
         <label for="bars">Number of bars:</label>
