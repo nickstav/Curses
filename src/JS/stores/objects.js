@@ -20,10 +20,20 @@ function setUpStore() {
     });
   }
 
+  function eraseObjectFromStore(object) {
+    update(store => {
+      return {
+        ...store,
+        items: store.items.filter(item => item != object)
+      };
+    });
+  }
+
   return {
 	  subscribe,
     set,
-    saveObjectToStore
+    saveObjectToStore,
+    eraseObjectFromStore
 	};
 
 }
