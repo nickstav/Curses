@@ -47,6 +47,11 @@ export class TextItem extends CanvasItem {
         this.endSquare = this.filledSquares[this.filledSquares.length - 1];
     }
 
+    highlight() {
+        super.highlight();
+        //TODO - edit highlighting for text that starts a new line
+    }
+
     // calculate position (x,y) of text in case of indented/to margin new lines
     getGridSquare(charPosition) {
         // calculate the position of the character on the grid
