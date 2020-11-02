@@ -2,7 +2,6 @@ import { CanvasItem } from './objectClass.js';
 
 import { get } from 'svelte/store';
 import { canvasObjects } from '../stores/objects.js';
-import { cursesCanvas } from '../stores/project.js';
 
 import { tools } from '../constants/toolsList.js';
 import { gridDimension } from '../constants/canvasSize.js';
@@ -35,9 +34,17 @@ export class TextItem extends CanvasItem {
 
             //add the character to its assigned coordinates
             this.context.fillText(character, canvasCoordinates.x, canvasCoordinates.y);
+
+            //mark the current grid sqaure as filled by the text item
+            //only run for the first draw loop to avoid multiple
+            if (this.filledSquares.length < this.text.length) {
+                this.filledSquares.push(gridSquare);
+            }
         };
 
-        console.debug("Text object drawn")
+        console.debug("Text object drawn");
+        // log the end square so we can get the highlighting dimensions when required
+        this.endSquare = this.filledSquares[this.filledSquares.length - 1];
     }
 
     // calculate position (x,y) of text in case of indented/to margin new lines
@@ -66,7 +73,6 @@ export class TextItem extends CanvasItem {
             // y location needs to be the square below (+1) as axis measured from the top,
         }
     }
-
 }
 
 

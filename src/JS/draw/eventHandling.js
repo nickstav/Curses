@@ -3,6 +3,7 @@ import { cursesCanvas } from '../stores/project.js';
 
 import { tools } from '../constants/toolsList.js';
 import { updateCanvas } from './updateCanvas.js';
+import { selectObject, dragObject } from './drag.js';
 import { getGridLocation, showCurrentSquare } from './location.js';
 
 import { TextItem } from '../items/textItem.js';
@@ -29,13 +30,14 @@ function handleMouseClick(event) {
         case(tools.PROGRESS):
             //saveProgressBarToStore();
         case(tools.DRAG):
-            //selectObject();    
+            selectObject(gridLocation);    
     }
     //show updated canvas with any added/erased objects when clicking
     updateCanvas();
 }
 
 function handleMouseDown(event) {
+    let toolSelected = get(cursesCanvas).tool;
     // update the start position of the cursor when the mouse is first pressed
     let canvasElement = get(cursesCanvas).canvasElement;
     cursesCanvas.updateStartPosition(event, canvasElement);
@@ -48,6 +50,10 @@ function handleMouseMove(event) {
     let isDrawing = get(cursesCanvas).isDrawing;
     let toolSelected = get(cursesCanvas).tool;
     let canvasElement = get(cursesCanvas).canvasElement;
+
+    cursesCanvas.updateMousePosition(event, canvasElement);
+    let mouseLocation = get(cursesCanvas).mousePosition;
+    let gridLocation = getGridLocation(mouseLocation);
 
     switch(toolSelected) {
         case(tools.LINE):
@@ -70,7 +76,8 @@ function handleMouseMove(event) {
             //previewProgressSize();
             break;
         case(tools.DRAG):
-            //moveObject(event, isDrawing, canvasElement);
+            dragObject(isDrawing, gridLocation);
+            updateCanvas();
             break;
     };
 }
@@ -78,6 +85,7 @@ function handleMouseMove(event) {
 // if mouse button is released, canvas is no longer being drawn on
 function handleMouseRelease() {
     let toolSelected = get(cursesCanvas).tool;
+    let canvasElement = get(cursesCanvas).canvasElement;
     
     cursesCanvas.stopDrawing();
 
@@ -89,7 +97,7 @@ function handleMouseRelease() {
             //saveRectangleToStore();
             break;
         case(tools.DRAG):
-            //saveNewObject();
+            canvasElement.style.cursor = "grab";
             break;
     }
 }
