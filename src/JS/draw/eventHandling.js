@@ -34,9 +34,6 @@ function handleMouseClick(event) {
         case(tools.DRAG):
             selectObject(gridLocation);  
             break;  
-        case(tools.ERASE):
-            eraseObject(gridLocation);
-            break;
     }
     //show updated canvas with any added/erased objects when clicking
     updateCanvas();
@@ -118,10 +115,18 @@ function handleMouseOut() {
     updateCanvas();
 }
 
+function handleKeyDown(event) {
+    if (event.key === "Backspace" || event.key === "Delete") {
+        eraseObject();
+        updateCanvas();
+    }
+}
+
 export { 
     handleMouseClick, 
     handleMouseDown, 
     handleMouseMove, 
     handleMouseRelease, 
-    handleMouseOut
+    handleMouseOut,
+    handleKeyDown
 }
