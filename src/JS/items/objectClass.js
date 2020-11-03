@@ -12,7 +12,7 @@ export class CanvasItem {
         // array to keep track of what squares have been filled by the object
         this.filledSquares = [];
         /* variables to help highlight the object */
-        this.endSquare = undefined;
+        this.endPosition = undefined;
         this.selectedRectWidth = undefined;
         this.selectedRectHeight = undefined;
     }
@@ -37,21 +37,26 @@ export class CanvasItem {
         this.filledSquares = [];
     }
 
-    highlight() {
+    highlight(objectSize) {
         // width total is + 2 square due to... 
         // the 1/2 square padding either side (+1)
-        // a width of x squares will have counted across (x-1) times to the end, so + 1 correction for this
-        this.selectedRectWidth = Math.abs(this.endSquare.x - this.position.x) + 2;
-        this.selectedRectHeight = Math.abs(this.position.y - this.endSquare.y);
+        // a width of x squares will have counted across (x-1) times to the end, so + 1 correction
+        let rectWidth = objectSize.width + 2;
+      
+        //find the top left corner of the object area from which to draw the highlighting rectangle
+        this.rectRefPoint = {
+            x: Math.min(this.position.x, this.endPosition.x),
+            y: Math.min(this.position.y, this.endPosition.y)
+        }
 
         // highlight the object with a dashed rectangle around it
         this.context.beginPath();
         this.context.setLineDash([5,10]);
         this.context.rect(
-            (this.position.x - 0.5) * gridDimension.x, // 1/2 square padding for highlighting box
-            this.position.y * gridDimension.y,
-            this.selectedRectWidth * gridDimension.x,
-            (this.selectedRectHeight + 0.5) * gridDimension.y // 1/2 square padding for highlighting box
+            (this.rectRefPoint.x - 0.5) * gridDimension.x, // 1/2 square padding for highlighting box
+            this.rectRefPoint.y * gridDimension.y,
+            rectWidth * gridDimension.x,
+            (objectSize.height + 0.5) * gridDimension.y // 1/2 square padding for highlighting box
         );
         this.context.stroke();
     }
@@ -72,7 +77,7 @@ export class CanvasItem {
             &&
             this.filledSquares.some(position => position.y === location.y)
         ) {
-            console.debug('location already in filledSquares array');
+            return;
         } else {
             this.filledSquares.push(location);
         }

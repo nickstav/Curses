@@ -14,8 +14,6 @@ export class TextItem extends CanvasItem {
         this.type = tools.TEXT;
         this.text = text;
         this.newLine = get(canvasObjects).textNewLine;
-
-        console.debug("Text item created, with text", this.text);
     }
 
     draw() {
@@ -40,18 +38,25 @@ export class TextItem extends CanvasItem {
             this.markGridSquareAsFilled(gridSquare);
         };
 
-        console.debug("Text object drawn");
         // log the end square so we can get the highlighting dimensions when required
-        this.endSquare = this.filledSquares[this.filledSquares.length - 1];
+        this.endPosition = this.filledSquares[this.filledSquares.length - 1];
     }
 
     highlight() {
+        let width;
         // if text goes to a new line, highlight to the end of the canvas
-        if (this.endSquare.y !== this.position.y + 1) {
-            //TODO............
-            super.selectedRectWidth = this.canvasWidth - this.position.x;
+        if (this.endPosition.y !== this.position.y + 1) {
+            width = this.canvasWidth - this.position.x;
+        } else {
+            width =  Math.abs(this.position.x - this.endPosition.x)
         }
-        super.highlight();
+
+        let objectSize = {
+            width: width,
+            height: Math.abs(this.position.y - this.endPosition.y)
+        }
+
+        super.highlight(objectSize);
     }
 
     // calculate position (x,y) of text in case of indented/to margin new lines

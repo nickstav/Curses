@@ -13,9 +13,6 @@ export class LineItem extends CanvasItem {
         super(startLocation)
         this.type = tools.LINE;
         this.endPosition = endLocation;
-
-
-        console.debug("Line item created");
     }
 
     draw() {
@@ -25,8 +22,11 @@ export class LineItem extends CanvasItem {
     }
 
     highlight() {
-        super.highlight();
-        //TODO - Add highlighting for lines that go in a upwards / left direction
+        let objectSize = {
+            width: Math.abs(this.position.x - this.endPosition.x),
+            height: Math.abs(this.position.y - this.endPosition.y) + 1
+        }
+        super.highlight(objectSize);
     }
 
     updatePosition(newPosition) {
