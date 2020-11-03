@@ -25,7 +25,7 @@ export class CanvasItem {
         }
 
         this.context.fillStyle = 'black';
-        this.context.font = "15px Consolas";
+        this.context.font = "15px monospace";
     }
 
     toggleSelect() {
