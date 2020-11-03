@@ -24,6 +24,7 @@ function selectObject(gridLocation) {
         // (i.e. the user has clicked off an object)
         if (!objectClicked && object.selected) {
             object.toggleSelect();
+            objectClicked = false;
         }
     });
 }
