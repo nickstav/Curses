@@ -1,5 +1,6 @@
 import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/project.js';
+import { canvasObjects } from '../stores/objects.js';
 
 import { tools } from '../constants/toolsList.js';
 import { updateCanvas } from './updateCanvas.js';
@@ -8,7 +9,6 @@ import { eraseObject } from './erase.js';
 import { getGridLocation, showCurrentSquare } from './location.js';
 
 import { TextItem } from '../items/textItem.js';
-import { canvasObjects } from '../stores/objects.js';
 import { LineItem } from '../items/lineItem.js';
 
 

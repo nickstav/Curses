@@ -33,19 +33,4 @@ function highlightSquare(){
     context.stroke();
 }
 
-/*
-// function to clear the grid square of any previous characters before adding a character
-function clearPreviousCharacter(gridLocation, gridDimension, context) {
-    context.clearRect(
-        gridLocation.x * gridDimension.x, 
-        (gridLocation.y - 1) * gridDimension.y,
-        gridDimension.x, 
-        gridDimension.y
-    );
-    // note grid location is defined by the top corner. Text is added on top of this so we actually 
-    // need to clear the rectangle above this point, hence the -1 correction 
-    
-}
-*/
-
 export { getGridLocation, showCurrentSquare }
