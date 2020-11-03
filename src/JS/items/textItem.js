@@ -37,11 +37,7 @@ export class TextItem extends CanvasItem {
             //add the character to its assigned coordinates
             this.context.fillText(character, canvasCoordinates.x, canvasCoordinates.y);
 
-            //mark the current grid sqaure as filled by the text item
-            //only run for the first draw loop to avoid multiple
-            if (this.filledSquares.length < this.text.length) {
-                this.filledSquares.push(gridSquare);
-            }
+            this.markGridSquareAsFilled(gridSquare);
         };
 
         console.debug("Text object drawn");
@@ -50,12 +46,11 @@ export class TextItem extends CanvasItem {
     }
 
     highlight() {
-        super.highlight();
-
         // if text goes to a new line, highlight to the end of the canvas
         if (this.endSquare.y !== this.position.y + 1) {
-            this.selectedRectWidth = this.canvasWidth - this.position.x;
+            super.selectedRectWidth = this.canvasWidth - this.position.x;
         }
+        super.highlight();
     }
 
     // calculate position (x,y) of text in case of indented/to margin new lines

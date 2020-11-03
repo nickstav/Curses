@@ -65,4 +65,16 @@ export class CanvasItem {
             gridDimension.y
         );
     }
+
+    // mark a grid square location as filled whilst avoiding repeated entries
+    markGridSquareAsFilled(location) {
+        if (this.filledSquares.some(position => position.x === location.x) 
+            &&
+            this.filledSquares.some(position => position.y === location.y)
+        ) {
+            console.debug('location already in filledSquares array');
+        } else {
+            this.filledSquares.push(location);
+        }
+    }
 }

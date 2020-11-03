@@ -20,10 +20,15 @@ export class LineItem extends CanvasItem {
 
     draw() {
         super.draw();
-
+  
         this.drawLineOnGrid(this.position.x, this.position.y, this.endPosition.x, this.endPosition.y);
     }
 
+    highlight() {
+        super.highlight();
+    }
+
+  
     // draw a line on a grid from (x1, y1) to (x2, y2)
     drawLineOnGrid(x1, y1, x2, y2) { 
 
@@ -52,6 +57,8 @@ export class LineItem extends CanvasItem {
               this.drawSteepLine(x2, y2, y1, deltaX, deltaY, keyCharacter)
            }        
         }
+        // log the end square so we can get the highlighting dimensions when required
+        this.endSquare = this.filledSquares[this.filledSquares.length - 1];
     }
 
     // run algorithm across x-axis of the line
@@ -143,6 +150,9 @@ export class LineItem extends CanvasItem {
     addCharacterToSquare(xCoord, yCoord, keyCharacter) {
         // add 1 to the y value as coordinate is top corner of grid square
         this.context.fillText(keyCharacter, xCoord * gridDimension.x, (yCoord + 1) * gridDimension.y);
+        
+        //mark the grid square as filled
+        this.markGridSquareAsFilled({x: xCoord, y: yCoord});
     }
  
 
