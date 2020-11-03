@@ -30,6 +30,7 @@ export class LineItem extends CanvasItem {
 
         super.updatePosition(newPosition);
 
+        // update the line end point as well as the start position
         this.endPosition = {
             x: this.endPosition.x + xChange,
             y: this.endPosition.y + yChange

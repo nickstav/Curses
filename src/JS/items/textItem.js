@@ -48,6 +48,7 @@ export class TextItem extends CanvasItem {
     highlight() {
         // if text goes to a new line, highlight to the end of the canvas
         if (this.endSquare.y !== this.position.y + 1) {
+            //TODO............
             super.selectedRectWidth = this.canvasWidth - this.position.x;
         }
         super.highlight();
