@@ -9,6 +9,7 @@ import { getGridLocation, showCurrentSquare } from './location.js';
 
 import { TextItem } from '../items/textItem.js';
 import { canvasObjects } from '../stores/objects.js';
+import { LineItem } from '../items/lineItem.js';
 
 
 
@@ -55,13 +56,21 @@ function handleMouseMove(event) {
     let toolSelected = get(cursesCanvas).tool;
     let canvasElement = get(cursesCanvas).canvasElement;
 
+    let startPosition = get(cursesCanvas).startPosition;
+    let startGridLocation = getGridLocation(startPosition);
+
     cursesCanvas.updateMousePosition(event, canvasElement);
     let mouseLocation = get(cursesCanvas).mousePosition;
-    let gridLocation = getGridLocation(mouseLocation);
+    let currentGridLocation = getGridLocation(mouseLocation);
+
+    updateCanvas();
 
     switch(toolSelected) {
         case(tools.LINE):
-            //drawLiveLine(event, isDrawing, canvasElement);
+            if (isDrawing) {
+                let liveLine = new LineItem(startGridLocation, currentGridLocation);
+                liveLine.draw();
+            }
             break;
         case(tools.RECTANGLE):
             //drawLiveRectangle(event, isDrawing, canvasElement);
@@ -74,8 +83,7 @@ function handleMouseMove(event) {
             //previewProgressSize();
             break;
         case(tools.DRAG):
-            dragObject(isDrawing, gridLocation);
-            updateCanvas();
+            dragObject(isDrawing, currentGridLocation);
             break;
     };
 }
@@ -87,9 +95,14 @@ function handleMouseRelease() {
     
     cursesCanvas.stopDrawing();
 
+    let startPosition = get(cursesCanvas).startPosition;
+    let startGridLocation = getGridLocation(startPosition);
+    let mouseLocation = get(cursesCanvas).mousePosition;
+    let currentGridLocation = getGridLocation(mouseLocation);
+
     switch(toolSelected) {
         case(tools.LINE):
-            //saveLineToStore();
+            canvasObjects.saveObjectToStore(new LineItem(startGridLocation, currentGridLocation));
             break;
         case(tools.RECTANGLE):
             //saveRectangleToStore();

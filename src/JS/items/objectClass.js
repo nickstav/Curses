@@ -53,7 +53,7 @@ export class CanvasItem {
             this.selectedRectWidth * gridDimension.x,
             (this.selectedRectHeight + 0.5) * gridDimension.y // 1/2 square padding for highlighting box
         );
-        this.context.stroke();   
+        this.context.stroke();
     }
 
     // clear any previous characters in the grid square (so latest object is drawn "on top")

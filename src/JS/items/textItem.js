@@ -51,7 +51,11 @@ export class TextItem extends CanvasItem {
 
     highlight() {
         super.highlight();
-        //TODO - edit highlighting for text that starts a new line
+
+        // if text goes to a new line, highlight to the end of the canvas
+        if (this.endSquare.y !== this.position.y + 1) {
+            this.selectedRectWidth = this.canvasWidth - this.position.x;
+        }
     }
 
     // calculate position (x,y) of text in case of indented/to margin new lines
