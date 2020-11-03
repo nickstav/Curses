@@ -24,6 +24,11 @@ export class LineItem extends CanvasItem {
         this.drawLineOnGrid(this.position.x, this.position.y, this.endPosition.x, this.endPosition.y);
     }
 
+    highlight() {
+        super.highlight();
+        //TODO - Add highlighting for lines that go in a upwards / left direction
+    }
+
     updatePosition(newPosition) {
         let xChange = newPosition.x - this.position.x;
         let yChange = newPosition.y - this.position.y;
