@@ -31,6 +31,8 @@ export class TextItem extends CanvasItem {
                 x: gridSquare.x * gridDimension.x,
                 y: gridSquare.y * gridDimension.y
             }
+             // remove any object characters "beneath" this object
+            this.clearPreviousCharacter(gridSquare);
 
             //add the character to its assigned coordinates
             this.context.fillText(character, canvasCoordinates.x, canvasCoordinates.y);

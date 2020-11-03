@@ -55,4 +55,14 @@ export class CanvasItem {
         );
         this.context.stroke();   
     }
+
+    // clear any previous characters in the grid square (so latest object is drawn "on top")
+    clearPreviousCharacter(currentLocation) {
+        this.context.clearRect(
+            currentLocation.x * gridDimension.x, 
+            (currentLocation.y - 1) * gridDimension.y,
+            gridDimension.x, 
+            gridDimension.y
+        );
+    }
 }

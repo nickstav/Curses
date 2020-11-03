@@ -1,5 +1,4 @@
 import { get } from 'svelte/store';
-import { CanvasItem } from '../items/objectClass.js';
 import { canvasObjects } from '../stores/objects.js';
 
 export function eraseObject(gridLocation) {
