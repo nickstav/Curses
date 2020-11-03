@@ -24,8 +24,16 @@ export class LineItem extends CanvasItem {
         this.drawLineOnGrid(this.position.x, this.position.y, this.endPosition.x, this.endPosition.y);
     }
 
-    highlight() {
-        super.highlight();
+    updatePosition(newPosition) {
+        let xChange = newPosition.x - this.position.x;
+        let yChange = newPosition.y - this.position.y;
+
+        super.updatePosition(newPosition);
+
+        this.endPosition = {
+            x: this.endPosition.x + xChange,
+            y: this.endPosition.y + yChange
+        }
     }
 
   
@@ -152,7 +160,7 @@ export class LineItem extends CanvasItem {
         this.context.fillText(keyCharacter, xCoord * gridDimension.x, (yCoord + 1) * gridDimension.y);
         
         //mark the grid square as filled
-        this.markGridSquareAsFilled({x: xCoord, y: yCoord});
+        this.markGridSquareAsFilled({x: xCoord, y: yCoord + 1});
     }
  
 
