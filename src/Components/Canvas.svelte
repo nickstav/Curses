@@ -4,11 +4,13 @@
     import { gridAxis } from '../JS/stores/grid.js';
     import { gridDimension } from '../JS/constants/canvasSize.js';
 
-    import { handleMouseClick, handleMouseMove, handleMouseDown, handleMouseRelease, handleMouseOut } from '../JS/draw/eventHandling.js';
+    import { handleMouseClick, handleMouseMove, handleMouseDown, handleMouseRelease, handleMouseOut, handleKeyDown } from '../JS/draw/eventHandling.js';
   
     let canvas;
     onMount(()=> cursesCanvas.createCanvas(canvas));
 </script>
+
+<svelte:window on:keydown={handleKeyDown}/>
 
 <div id="canvasHolder" class="w-full flex justify-center items-center flex-1" style="--canvasW: {$gridAxis.x}px;--canvasH: {$gridAxis.y}px; --squareW: {gridDimension.x}px; --squareH: {gridDimension.y}px">
     <div id="canvasBackground" style="width: var(--canvasW); height: var(--canvasH); background-image: url(./grid_square.png); background-size: var(--squareW) var(--squareH);">

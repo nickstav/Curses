@@ -14,8 +14,6 @@ export class TextItem extends CanvasItem {
         this.type = tools.TEXT;
         this.text = text;
         this.newLine = get(canvasObjects).textNewLine;
-
-        console.debug("Text item created, with text", this.text);
     }
 
     draw() {
@@ -31,25 +29,34 @@ export class TextItem extends CanvasItem {
                 x: gridSquare.x * gridDimension.x,
                 y: gridSquare.y * gridDimension.y
             }
+             // remove any object characters "beneath" this object
+            this.clearPreviousCharacter(gridSquare);
 
             //add the character to its assigned coordinates
             this.context.fillText(character, canvasCoordinates.x, canvasCoordinates.y);
 
-            //mark the current grid sqaure as filled by the text item
-            //only run for the first draw loop to avoid multiple
-            if (this.filledSquares.length < this.text.length) {
-                this.filledSquares.push(gridSquare);
-            }
+            this.markGridSquareAsFilled(gridSquare);
         };
 
-        console.debug("Text object drawn");
         // log the end square so we can get the highlighting dimensions when required
-        this.endSquare = this.filledSquares[this.filledSquares.length - 1];
+        this.endPosition = this.filledSquares[this.filledSquares.length - 1];
     }
 
     highlight() {
-        super.highlight();
-        //TODO - edit highlighting for text that starts a new line
+        let width;
+        // if text goes to a new line, highlight to the end of the canvas
+        if (this.endPosition.y !== this.position.y + 1) {
+            width = this.canvasWidth - this.position.x;
+        } else {
+            width =  Math.abs(this.position.x - this.endPosition.x)
+        }
+
+        let objectSize = {
+            width: width,
+            height: Math.abs(this.position.y - this.endPosition.y)
+        }
+
+        super.highlight(objectSize);
     }
 
     // calculate position (x,y) of text in case of indented/to margin new lines

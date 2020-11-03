@@ -4,5 +4,4 @@ export const tools = {
     TEXT: "text",
     PROGRESS: "progress",
     DRAG: "drag",
-    ERASE: "erase"
 }

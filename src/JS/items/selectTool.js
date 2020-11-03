@@ -15,11 +15,8 @@ export function changeTool(buttonPressed) {
             break;
         case(tools.TEXT):
         case(tools.PROGRESS):
-        case(tools.ERASE):
-            canvasElement.style.cursor = "pointer";
-            break;
         case(tools.DRAG):
-            canvasElement.style.cursor = "grab";
+            canvasElement.style.cursor = "pointer";
             break;
         default:
             canvasElement.style.cursor = "default"; 

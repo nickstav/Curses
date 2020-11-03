@@ -24,19 +24,20 @@ function selectObject(gridLocation) {
         // (i.e. the user has clicked off an object)
         if (!objectClicked && object.selected) {
             object.toggleSelect();
+            objectClicked = false;
         }
     });
 }
 
 
-function dragObject(isDrawing, gridLocation) {
+function dragObject(isDrawing, currentGridLocation) {
     let canvasItems = get(canvasObjects).items;
     
     // if mouse button is held, update the object's live position as it is being dragged
     if (isDrawing) {
         canvasItems.forEach(object => {
             if (object.selected) {
-                object.updatePosition(gridLocation);
+                object.updatePosition(currentGridLocation);
             }
         });
     }
