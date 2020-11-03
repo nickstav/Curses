@@ -14,16 +14,18 @@ export class CanvasItem {
         /* variables to help highlight the object */
         this.endPosition = undefined;
         this.rectRefPoint = undefined;
+        this.rectCorners = undefined;
     }
 
     draw() {
-        this.context.fillStyle = 'black';
-        this.context.font = "15px Consolas";
 
         // if the item has been selected, call the highlight function to draw a rectangle around it
         if (this.selected) {
             this.highlight();
         }
+
+        this.context.fillStyle = 'black';
+        this.context.font = "15px Consolas";
     }
 
     toggleSelect() {
@@ -37,9 +39,11 @@ export class CanvasItem {
     }
 
     highlight(objectSize) {
-        // width total is + 2 square due to... 
-        // the 1/2 square padding either side (+1)
-        // a width of x squares will have counted across (x-1) times to the end, so + 1 correction
+        /* 
+        width total is + 2 square due to... 
+        ... the 1/2 square padding either side (+1)
+        ... a width of x squares will have counted across (x-1) times to the end, so + 1 correction
+        */
         let rectWidth = objectSize.width + 2;
       
         //find the top left corner of the object area from which to draw the highlighting rectangle
@@ -47,17 +51,16 @@ export class CanvasItem {
             x: Math.min(this.position.x, this.endPosition.x),
             y: Math.min(this.position.y, this.endPosition.y)
         }
+        this.rectCorners = this.getRectangleCorners(this.rectRefPoint, rectWidth, objectSize.height);
 
-        // highlight the object with a dashed rectangle around it
-        this.context.beginPath();
-        this.context.setLineDash([5,10]);
-        this.context.rect(
-            (this.rectRefPoint.x - 0.5) * gridDimension.x, // 1/2 square padding for highlighting box
-            this.rectRefPoint.y * gridDimension.y,
-            rectWidth * gridDimension.x,
-            (objectSize.height + 0.5) * gridDimension.y // 1/2 square padding for highlighting box
-        );
-        this.context.stroke();
+
+        // highlight the object with a blue rectangle around it
+        this.drawHighlightingRectangle(this.rectCorners.topL, rectWidth, objectSize.height)
+        // border the rectangle with circles
+        this.addHighlightingShapes(this.rectCorners.topL);
+        this.addHighlightingShapes(this.rectCorners.topR);
+        this.addHighlightingShapes(this.rectCorners.bottomL);
+        this.addHighlightingShapes(this.rectCorners.bottomR);
     }
 
     // clear any previous characters in the grid square (so latest object is drawn "on top")
@@ -80,5 +83,46 @@ export class CanvasItem {
         } else {
             this.filledSquares.push(location);
         }
+    }
+    getRectangleCorners(refPoint, width, height) {
+        return {
+            topL: {
+                x: (refPoint.x - 0.5) * gridDimension.x, // 1/2 square padding for highlighting box
+                y: refPoint.y * gridDimension.y
+            },
+            topR: {
+                x: (refPoint.x - 0.5 + width) * gridDimension.x,
+                y: refPoint.y * gridDimension.y
+            },
+            bottomL: {
+                x: (refPoint.x - 0.5) * gridDimension.x,
+                y: (refPoint.y + height + 0.5) * gridDimension.y // 1/2 square padding for highlighting box
+            },
+            bottomR: {
+                x: (refPoint.x - 0.5 + width) * gridDimension.x,
+                y: (refPoint.y + height + 0.5) * gridDimension.y // 1/2 square padding for highlighting box
+            }
+        }
+    }
+
+    drawHighlightingRectangle(topLeftCoords, width, height) {
+        this.context.beginPath();
+        this.context.strokeStyle = "#6495ED";
+        this.context.rect(
+            topLeftCoords.x,
+            topLeftCoords.y,
+            width * gridDimension.x,
+            (height + 0.5) * gridDimension.y // 1/2 square padding for highlighting box
+        );
+        this.context.stroke();
+    }
+    
+    addHighlightingShapes(coords) {
+        this.context.beginPath();
+        this.context.arc(coords.x, coords.y, 3, 0, 2 * Math.PI);
+        this.context.fillStyle = "#6495ED";
+        this.context.fill();
+        this.context.strokeStyle = '#003300';
+        this.context.stroke();
     }
 }
