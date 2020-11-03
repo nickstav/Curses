@@ -13,8 +13,7 @@ export class CanvasItem {
         this.filledSquares = [];
         /* variables to help highlight the object */
         this.endPosition = undefined;
-        this.selectedRectWidth = undefined;
-        this.selectedRectHeight = undefined;
+        this.rectRefPoint = undefined;
     }
 
     draw() {
