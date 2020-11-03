@@ -30,14 +30,14 @@ function selectObject(gridLocation) {
 }
 
 
-function dragObject(isDrawing, gridLocation) {
+function dragObject(isDrawing, currentGridLocation) {
     let canvasItems = get(canvasObjects).items;
     
     // if mouse button is held, update the object's live position as it is being dragged
     if (isDrawing) {
         canvasItems.forEach(object => {
             if (object.selected) {
-                object.updatePosition(gridLocation);
+                object.updatePosition(currentGridLocation);
             }
         });
     }
