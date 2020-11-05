@@ -29,9 +29,11 @@ export class CanvasItem {
         this.context.font = "15px monospace";
     }
 
-    toggleSelect(mouseLocation) {
+    toggleSelect() {
         this.selected = !this.selected;
+    }
 
+    getMouseOffset(mouseLocation) {
         // get the offset from where the mouse clicked to the object reference position
         this.mouseOffset = {
             x: this.position.x - mouseLocation.x,
