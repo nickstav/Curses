@@ -43,7 +43,7 @@ export class LineItem extends CanvasItem {
     }
 
     resizeObject(newPosition) {
-        //check which end of the line is being adjusted
+        //check which end of the line is being adjusted by checking which end is closer (using Pythagoras)
         let distanceToStartPoint =
             Math.sqrt(
                 Math.pow((this.position.x - newPosition.x), 2) +
