@@ -58,6 +58,7 @@ function editObject(isDrawing, currentGridLocation, canvasElement) {
                     break;
                 case(cornerSelected.NONE):
                     canvasElement.style.cursor = "grab";
+                    object.deselectForResizing();
                     break;
             }
 
