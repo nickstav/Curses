@@ -42,6 +42,34 @@ export class LineItem extends CanvasItem {
         }
     }
 
+    resizeObject(newPosition) {
+        //check which end of the line is being adjusted
+        let distanceToStartPoint =
+            Math.sqrt(
+                Math.pow((this.position.x - newPosition.x), 2) +
+                Math.pow((this.position.y - newPosition.y), 2)
+            );
+        let distanceToEndPoint = 
+            Math.sqrt(
+                Math.pow((this.endPosition.x - newPosition.x), 2) +
+                Math.pow((this.endPosition.y - newPosition.y), 2)
+            );
+
+        if (distanceToStartPoint > distanceToEndPoint) {
+            this.endPosition = {
+                x: newPosition.x,
+                y: newPosition.y
+            }
+        } else {
+            this.position = {
+                x: newPosition.x,
+                y: newPosition.y
+            }
+        }
+        // remove the filledSquares array so it can be updated on the next draw loop
+        this.filledSquares = [];
+    }
+
   
     // draw a line on a grid from (x1, y1) to (x2, y2)
     drawLineOnGrid(x1, y1, x2, y2) { 

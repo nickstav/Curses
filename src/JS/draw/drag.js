@@ -43,8 +43,12 @@ function editObject(isDrawing, currentGridLocation, canvasElement) {
     canvasItems.forEach(object => {
         if (object.selected) {
             
-            checkMouseOverCorner(object, mousePosition, canvasElement);
+            //check whether the mouse is placed to resize or move the object
+            if (!isDrawing) {
+                checkMouseOverCorner(object, mousePosition, canvasElement);
+            }
 
+            // once the button is held, carry out either the resize or the move
             if (isDrawing) {
                 switch(object.editMode) {
                     case(editMode.MOVE):

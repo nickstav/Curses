@@ -57,7 +57,7 @@ export class CanvasItem {
     }
 
     selectForMoving() {
-        this.isResizing = editMode.MOVE;
+        this.editMode = editMode.MOVE;
     }
 
     resizeObject(newPosition) {
