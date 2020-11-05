@@ -40,6 +40,7 @@ function dragObject(isDrawing, currentGridLocation, canvasElement) {
         canvasItems.forEach(object => {
             if (object.selected) {
                 object.updatePosition(currentGridLocation);
+                canvasElement.style.cursor = "grabbing";
             }
         });
     }
