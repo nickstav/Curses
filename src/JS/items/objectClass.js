@@ -1,6 +1,7 @@
 import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/project.js';
 import { gridDimension } from '../constants/canvasSize.js';
+import { cornerSelected, editMode } from '../constants/objectStates.js';
 
 export class CanvasItem {
     constructor(location) {
@@ -9,10 +10,12 @@ export class CanvasItem {
         this.type = null;
         this.position = location;
         this.selected = false;
+        this.editMode = editMode.MOVE;
         // array to keep track of what squares have been filled by the object
         this.filledSquares = [];
-        /* variables to help highlight the object */
+        /* variables to help highlight and drag the object */
         this.endPosition = undefined;
+        this.mouseOffset = undefined;
         this.rectRefPoint = undefined;
         this.rectCorners = undefined;
     }
@@ -25,17 +28,45 @@ export class CanvasItem {
         }
 
         this.context.fillStyle = 'black';
-        this.context.font = "15px Consolas";
+        this.context.font = "15px monospace";
     }
 
     toggleSelect() {
         this.selected = !this.selected;
     }
 
+    getMouseOffset(mouseLocation) {
+        // get the offset from where the mouse clicked to the object reference position
+        this.mouseOffset = {
+            x: this.position.x - mouseLocation.x,
+            y: this.position.y - mouseLocation.y
+        }
+    }
+
     updatePosition(newPosition) {
-        this.position = newPosition;
+        this.position = {
+           x: newPosition.x + this.mouseOffset.x,
+           y: newPosition.y + this.mouseOffset.y
+        }
         // remove the filledSquares array so it can be updated on the next draw loop
         this.filledSquares = [];
+    }
+
+    selectForResizing() {
+        this.editMode = editMode.RESIZE;
+    }
+
+    selectForMoving() {
+        this.editMode = editMode.MOVE;
+    }
+
+    resizeObject(newPosition) {
+        this.position = {
+            x: newPosition.x + this.mouseOffset.x,
+            y: newPosition.y + this.mouseOffset.y
+         }
+         // remove the filledSquares array so it can be updated on the next draw loop
+         this.filledSquares = [];
     }
 
     highlight(objectSize) {
@@ -124,5 +155,39 @@ export class CanvasItem {
         this.context.fill();
         this.context.strokeStyle = '#003300';
         this.context.stroke();
+    }
+
+    // function to return what corner a mouse position is over
+    isMouseOverCorner(mousePosition) {
+        // variable to define when the mouse cursor is over a rectangle corner
+        let mouseSensitivity = 5;
+    
+        if (
+            Math.abs(mousePosition.x - this.rectCorners.topL.x) < mouseSensitivity
+            && 
+            Math.abs(mousePosition.y - this.rectCorners.topL.y) < mouseSensitivity
+        ) {
+            return cornerSelected.TL;
+        } else if (
+            Math.abs(mousePosition.x - this.rectCorners.topR.x) < mouseSensitivity 
+            && 
+            Math.abs(mousePosition.y - this.rectCorners.topR.y) < mouseSensitivity
+            ) {
+            return cornerSelected.TR;
+        } else if (
+            Math.abs(mousePosition.x - this.rectCorners.bottomL.x) < mouseSensitivity
+            && 
+            Math.abs(mousePosition.y - this.rectCorners.bottomL.y) < mouseSensitivity
+        ) {
+            return cornerSelected.BL;
+        } else if (
+            Math.abs(mousePosition.x - this.rectCorners.bottomR.x) < mouseSensitivity
+            && 
+            Math.abs(mousePosition.y - this.rectCorners.bottomR.y) < mouseSensitivity
+        ) {
+            return cornerSelected.BR;
+        } else {
+            return cornerSelected.NONE;
+        }
     }
 }

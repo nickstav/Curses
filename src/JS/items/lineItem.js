@@ -37,9 +37,37 @@ export class LineItem extends CanvasItem {
 
         // update the line end point as well as the start position
         this.endPosition = {
-            x: this.endPosition.x + xChange,
-            y: this.endPosition.y + yChange
+            x: this.endPosition.x + this.mouseOffset.x + xChange,
+            y: this.endPosition.y + this.mouseOffset.y + yChange
         }
+    }
+
+    resizeObject(newPosition) {
+        //check which end of the line is being adjusted by checking which end is closer (using Pythagoras)
+        let distanceToStartPoint =
+            Math.sqrt(
+                Math.pow((this.position.x - newPosition.x), 2) +
+                Math.pow((this.position.y - newPosition.y), 2)
+            );
+        let distanceToEndPoint = 
+            Math.sqrt(
+                Math.pow((this.endPosition.x - newPosition.x), 2) +
+                Math.pow((this.endPosition.y - newPosition.y), 2)
+            );
+
+        if (distanceToStartPoint > distanceToEndPoint) {
+            this.endPosition = {
+                x: newPosition.x,
+                y: newPosition.y
+            }
+        } else {
+            this.position = {
+                x: newPosition.x,
+                y: newPosition.y
+            }
+        }
+        // remove the filledSquares array so it can be updated on the next draw loop
+        this.filledSquares = [];
     }
 
   

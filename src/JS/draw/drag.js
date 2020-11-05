@@ -1,7 +1,10 @@
 import { get } from 'svelte/store';
+import { cornerSelected, editMode } from '../constants/objectStates.js';
 import { canvasObjects } from '../stores/objects.js';
+import { cursesCanvas } from '../stores/project.js';
 
-function selectObject(gridLocation) {
+
+function selectObject(gridLocation, canvasElement) {
     let canvasItems = get(canvasObjects).items;
 
     canvasItems.forEach(object => {
@@ -16,8 +19,10 @@ function selectObject(gridLocation) {
                 ) {
                     // if mouse location matches an object's location, mark it as selected
                     object.toggleSelect();
+                    object.getMouseOffset(gridLocation)
                     console.debug(object.type, 'clicked');
                     objectClicked = true;
+                    canvasElement.style.cursor = "grab";
             }
         };
         // if no object exists at mouse location, deselect any selected object
@@ -25,22 +30,60 @@ function selectObject(gridLocation) {
         if (!objectClicked && object.selected) {
             object.toggleSelect();
             objectClicked = false;
+            canvasElement.style.cursor = "pointer";
         }
     });
 }
 
 
-function dragObject(isDrawing, currentGridLocation) {
+function editObject(isDrawing, currentGridLocation, canvasElement) {
     let canvasItems = get(canvasObjects).items;
-    
-    // if mouse button is held, update the object's live position as it is being dragged
-    if (isDrawing) {
-        canvasItems.forEach(object => {
-            if (object.selected) {
-                object.updatePosition(currentGridLocation);
+    let mousePosition = get(cursesCanvas).mousePosition;
+
+    canvasItems.forEach(object => {
+        if (object.selected) {
+            
+            //check whether the mouse is placed to resize or move the object
+            if (!isDrawing) {
+                checkMouseOverCorner(object, mousePosition, canvasElement);
             }
-        });
+
+            // once the button is held, carry out either the resize or the move
+            if (isDrawing) {
+                switch(object.editMode) {
+                    case(editMode.MOVE):
+                        object.updatePosition(currentGridLocation);
+                        canvasElement.style.cursor = "grabbing";
+                        break;
+                    case(editMode.RESIZE):
+                        object.resizeObject(currentGridLocation);
+                        break;
+                }
+            }
+        }
+    });
+}
+
+function checkMouseOverCorner(object, mousePosition, canvasElement) {
+    // check if the mouse is over the highlighting rectangle's corner
+    let cornerUnderMouse = object.isMouseOverCorner(mousePosition);
+
+    switch(cornerUnderMouse) {
+        case(cornerSelected.TL):
+        case(cornerSelected.BR):
+            canvasElement.style.cursor = "nwse-resize";
+            object.selectForResizing();
+            break;
+        case(cornerSelected.TR):
+        case(cornerSelected.BL):
+            canvasElement.style.cursor = "nesw-resize";
+            object.selectForResizing();
+            break;
+        case(cornerSelected.NONE):
+            canvasElement.style.cursor = "grab";
+            object.selectForMoving();
+            break;
     }
 }
 
-export { selectObject, dragObject }
+export { selectObject, editObject }

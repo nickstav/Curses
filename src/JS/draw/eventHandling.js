@@ -4,7 +4,7 @@ import { canvasObjects } from '../stores/objects.js';
 
 import { tools } from '../constants/toolsList.js';
 import { updateCanvas } from './updateCanvas.js';
-import { selectObject, dragObject } from './drag.js';
+import { selectObject, editObject } from './drag.js';
 import { eraseObject } from './erase.js';
 import { getGridLocation, showCurrentSquare } from './location.js';
 
@@ -32,7 +32,7 @@ function handleMouseClick(event) {
             //saveProgressBarToStore();
             break;
         case(tools.DRAG):
-            selectObject(gridLocation);  
+            selectObject(gridLocation, canvasElement); 
             break;  
     }
     //show updated canvas with any added/erased objects when clicking
@@ -80,7 +80,7 @@ function handleMouseMove(event) {
             //previewProgressSize();
             break;
         case(tools.DRAG):
-            dragObject(isDrawing, currentGridLocation);
+            editObject(isDrawing, currentGridLocation, canvasElement);
             break;
     };
 }
@@ -105,7 +105,7 @@ function handleMouseRelease() {
             //saveRectangleToStore();
             break;
         case(tools.DRAG):
-            canvasElement.style.cursor = "grab";
+            canvasElement.style.cursor = "pointer";
             break;
     }
 }
