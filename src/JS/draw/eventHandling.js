@@ -4,7 +4,7 @@ import { canvasObjects } from '../stores/objects.js';
 
 import { tools } from '../constants/toolsList.js';
 import { updateCanvas } from './updateCanvas.js';
-import { selectObject, dragObject } from './drag.js';
+import { selectObject, editObject } from './drag.js';
 import { eraseObject } from './erase.js';
 import { getGridLocation, showCurrentSquare } from './location.js';
 
@@ -80,7 +80,7 @@ function handleMouseMove(event) {
             //previewProgressSize();
             break;
         case(tools.DRAG):
-            dragObject(isDrawing, currentGridLocation, canvasElement);
+            editObject(isDrawing, currentGridLocation, canvasElement);
             break;
     };
 }

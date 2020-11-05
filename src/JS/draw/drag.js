@@ -1,5 +1,8 @@
 import { get } from 'svelte/store';
+import { cornerSelected } from '../constants/corners.js';
 import { canvasObjects } from '../stores/objects.js';
+import { cursesCanvas } from '../stores/project.js';
+
 
 function selectObject(gridLocation, canvasElement) {
     let canvasItems = get(canvasObjects).items;
@@ -33,22 +36,41 @@ function selectObject(gridLocation, canvasElement) {
 }
 
 
-function dragObject(isDrawing, currentGridLocation, canvasElement) {
+function editObject(isDrawing, currentGridLocation, canvasElement) {
     let canvasItems = get(canvasObjects).items;
-    
-    // if mouse button is held, update the object's live position as it is being dragged
-    if (isDrawing) {
-        canvasItems.forEach(object => {
-            if (object.selected) {
-                object.updatePosition(currentGridLocation);
-                canvasElement.style.cursor = "grabbing";
+    let mousePosition = get(cursesCanvas).mousePosition;
+
+    canvasItems.forEach(object => {
+        if (object.selected) {
+            // check if the mouse is over the highlighting rectangle's corner
+            let cornerUnderMouse = object.isMouseOverCorner(mousePosition);
+
+            switch(cornerUnderMouse) {
+                case(cornerSelected.TL):
+                case(cornerSelected.BR):
+                    canvasElement.style.cursor = "nwse-resize";
+                    object.selectForResizing();
+                    break;
+                case(cornerSelected.TR):
+                case(cornerSelected.BL):
+                    canvasElement.style.cursor = "nesw-resize";
+                    object.selectForResizing();
+                    break;
+                case(cornerSelected.NONE):
+                    canvasElement.style.cursor = "grab";
+                    break;
             }
-        });
-    }
+
+            if (isDrawing) {
+                if (object.isResizing) {
+                    object.resizeObject(currentGridLocation);
+                } else {
+                    object.updatePosition(currentGridLocation);
+                    canvasElement.style.cursor = "grabbing";
+                }
+            }
+        }
+    });
 }
 
-function resizeObject(isDrawing, currentGridLocation, canvasElement) {
-
-}
-
-export { selectObject, dragObject }
+export { selectObject, editObject }

@@ -1,6 +1,7 @@
 import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/project.js';
 import { gridDimension } from '../constants/canvasSize.js';
+import { cornerSelected } from '../constants/corners.js';
 
 export class CanvasItem {
     constructor(location) {
@@ -9,6 +10,7 @@ export class CanvasItem {
         this.type = null;
         this.position = location;
         this.selected = false;
+        this.isResizing = false;
         // array to keep track of what squares have been filled by the object
         this.filledSquares = [];
         /* variables to help highlight and drag the object */
@@ -48,6 +50,23 @@ export class CanvasItem {
         }
         // remove the filledSquares array so it can be updated on the next draw loop
         this.filledSquares = [];
+    }
+
+    selectForResizing() {
+        this.isResizing = true;
+    }
+
+    deselectForResizing() {
+        this.isResizing = false;
+    }
+
+    resizeObject(newPosition) {
+        this.position = {
+            x: newPosition.x + this.mouseOffset.x,
+            y: newPosition.y + this.mouseOffset.y
+         }
+         // remove the filledSquares array so it can be updated on the next draw loop
+         this.filledSquares = [];
     }
 
     highlight(objectSize) {
@@ -136,5 +155,39 @@ export class CanvasItem {
         this.context.fill();
         this.context.strokeStyle = '#003300';
         this.context.stroke();
+    }
+
+    // function to return what corner a mouse position is over
+    isMouseOverCorner(mousePosition) {
+        // variable to define when the mouse cursor is over a rectangle corner
+        let mouseSensitivity = 5;
+    
+        if (
+            Math.abs(mousePosition.x - this.rectCorners.topL.x) < mouseSensitivity
+            && 
+            Math.abs(mousePosition.y - this.rectCorners.topL.y) < mouseSensitivity
+        ) {
+            return cornerSelected.TL;
+        } else if (
+            Math.abs(mousePosition.x - this.rectCorners.topR.x) < mouseSensitivity 
+            && 
+            Math.abs(mousePosition.y - this.rectCorners.topR.y) < mouseSensitivity
+            ) {
+            return cornerSelected.TR;
+        } else if (
+            Math.abs(mousePosition.x - this.rectCorners.bottomL.x) < mouseSensitivity
+            && 
+            Math.abs(mousePosition.y - this.rectCorners.bottomL.y) < mouseSensitivity
+        ) {
+            return cornerSelected.BL;
+        } else if (
+            Math.abs(mousePosition.x - this.rectCorners.bottomR.x) < mouseSensitivity
+            && 
+            Math.abs(mousePosition.y - this.rectCorners.bottomR.y) < mouseSensitivity
+        ) {
+            return cornerSelected.BR;
+        } else {
+            return cornerSelected.NONE;
+        }
     }
 }

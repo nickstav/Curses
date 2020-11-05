@@ -5,6 +5,7 @@ import { canvasObjects } from '../stores/objects.js';
 
 import { tools } from '../constants/toolsList.js';
 import { gridDimension } from '../constants/canvasSize.js';
+import { cornerSelected } from '../constants/corners.js';
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -84,6 +85,11 @@ export class TextItem extends CanvasItem {
             y: (this.position.y + 1) + yCorrection
             // y location needs to be the square below (+1) as axis measured from the top,
         }
+    }
+
+    isMouseOverCorner(mousePosition) {
+        //text items cannot be resized so return NONE as default
+        return cornerSelected.NONE;
     }
 }
 
