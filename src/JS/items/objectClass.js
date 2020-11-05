@@ -1,7 +1,7 @@
 import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/project.js';
 import { gridDimension } from '../constants/canvasSize.js';
-import { cornerSelected } from '../constants/corners.js';
+import { cornerSelected, editMode } from '../constants/objectStates.js';
 
 export class CanvasItem {
     constructor(location) {
@@ -10,7 +10,7 @@ export class CanvasItem {
         this.type = null;
         this.position = location;
         this.selected = false;
-        this.isResizing = false;
+        this.editMode = editMode.MOVE;
         // array to keep track of what squares have been filled by the object
         this.filledSquares = [];
         /* variables to help highlight and drag the object */
@@ -53,11 +53,11 @@ export class CanvasItem {
     }
 
     selectForResizing() {
-        this.isResizing = true;
+        this.editMode = editMode.RESIZE;
     }
 
-    deselectForResizing() {
-        this.isResizing = false;
+    selectForMoving() {
+        this.isResizing = editMode.MOVE;
     }
 
     resizeObject(newPosition) {

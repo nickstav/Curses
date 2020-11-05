@@ -5,7 +5,7 @@ import { canvasObjects } from '../stores/objects.js';
 
 import { tools } from '../constants/toolsList.js';
 import { gridDimension } from '../constants/canvasSize.js';
-import { cornerSelected } from '../constants/corners.js';
+import { cornerSelected } from '../constants/objectStates.js';
 
 /* ---------------------------------------------------------------------------------------------- */
 

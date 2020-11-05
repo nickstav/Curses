@@ -1,5 +1,5 @@
 import { get } from 'svelte/store';
-import { cornerSelected } from '../constants/corners.js';
+import { cornerSelected, editMode } from '../constants/objectStates.js';
 import { canvasObjects } from '../stores/objects.js';
 import { cursesCanvas } from '../stores/project.js';
 
@@ -42,36 +42,44 @@ function editObject(isDrawing, currentGridLocation, canvasElement) {
 
     canvasItems.forEach(object => {
         if (object.selected) {
-            // check if the mouse is over the highlighting rectangle's corner
-            let cornerUnderMouse = object.isMouseOverCorner(mousePosition);
-
-            switch(cornerUnderMouse) {
-                case(cornerSelected.TL):
-                case(cornerSelected.BR):
-                    canvasElement.style.cursor = "nwse-resize";
-                    object.selectForResizing();
-                    break;
-                case(cornerSelected.TR):
-                case(cornerSelected.BL):
-                    canvasElement.style.cursor = "nesw-resize";
-                    object.selectForResizing();
-                    break;
-                case(cornerSelected.NONE):
-                    canvasElement.style.cursor = "grab";
-                    object.deselectForResizing();
-                    break;
-            }
+            
+            checkMouseOverCorner(object, mousePosition, canvasElement);
 
             if (isDrawing) {
-                if (object.isResizing) {
-                    object.resizeObject(currentGridLocation);
-                } else {
-                    object.updatePosition(currentGridLocation);
-                    canvasElement.style.cursor = "grabbing";
+                switch(object.editMode) {
+                    case(editMode.MOVE):
+                        object.updatePosition(currentGridLocation);
+                        canvasElement.style.cursor = "grabbing";
+                        break;
+                    case(editMode.RESIZE):
+                        object.resizeObject(currentGridLocation);
+                        break;
                 }
             }
         }
     });
+}
+
+function checkMouseOverCorner(object, mousePosition, canvasElement) {
+    // check if the mouse is over the highlighting rectangle's corner
+    let cornerUnderMouse = object.isMouseOverCorner(mousePosition);
+
+    switch(cornerUnderMouse) {
+        case(cornerSelected.TL):
+        case(cornerSelected.BR):
+            canvasElement.style.cursor = "nwse-resize";
+            object.selectForResizing();
+            break;
+        case(cornerSelected.TR):
+        case(cornerSelected.BL):
+            canvasElement.style.cursor = "nesw-resize";
+            object.selectForResizing();
+            break;
+        case(cornerSelected.NONE):
+            canvasElement.style.cursor = "grab";
+            object.selectForMoving();
+            break;
+    }
 }
 
 export { selectObject, editObject }

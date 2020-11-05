@@ -32,7 +32,7 @@ function handleMouseClick(event) {
             //saveProgressBarToStore();
             break;
         case(tools.DRAG):
-            selectObject(gridLocation, canvasElement);  
+            selectObject(gridLocation, canvasElement); 
             break;  
     }
     //show updated canvas with any added/erased objects when clicking
