@@ -32,7 +32,7 @@ function handleMouseClick(event) {
             //saveProgressBarToStore();
             break;
         case(tools.DRAG):
-            selectObject(gridLocation);  
+            selectObject(gridLocation, canvasElement);  
             break;  
     }
     //show updated canvas with any added/erased objects when clicking
@@ -80,7 +80,7 @@ function handleMouseMove(event) {
             //previewProgressSize();
             break;
         case(tools.DRAG):
-            dragObject(isDrawing, currentGridLocation);
+            dragObject(isDrawing, currentGridLocation, canvasElement);
             break;
     };
 }
@@ -105,7 +105,7 @@ function handleMouseRelease() {
             //saveRectangleToStore();
             break;
         case(tools.DRAG):
-            canvasElement.style.cursor = "grab";
+            canvasElement.style.cursor = "pointer";
             break;
     }
 }

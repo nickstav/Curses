@@ -1,7 +1,7 @@
 import { get } from 'svelte/store';
 import { canvasObjects } from '../stores/objects.js';
 
-function selectObject(gridLocation) {
+function selectObject(gridLocation, canvasElement) {
     let canvasItems = get(canvasObjects).items;
 
     canvasItems.forEach(object => {
@@ -15,22 +15,24 @@ function selectObject(gridLocation) {
                 gridLocation.y + 1 === object.filledSquares[i].y
                 ) {
                     // if mouse location matches an object's location, mark it as selected
-                    object.toggleSelect();
+                    object.toggleSelect(gridLocation);
                     console.debug(object.type, 'clicked');
                     objectClicked = true;
+                    canvasElement.style.cursor = "grab";
             }
         };
         // if no object exists at mouse location, deselect any selected object
         // (i.e. the user has clicked off an object)
         if (!objectClicked && object.selected) {
-            object.toggleSelect();
+            object.toggleSelect(gridLocation);
             objectClicked = false;
+            canvasElement.style.cursor = "pointer";
         }
     });
 }
 
 
-function dragObject(isDrawing, currentGridLocation) {
+function dragObject(isDrawing, currentGridLocation, canvasElement) {
     let canvasItems = get(canvasObjects).items;
     
     // if mouse button is held, update the object's live position as it is being dragged

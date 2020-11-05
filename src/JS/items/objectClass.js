@@ -11,8 +11,9 @@ export class CanvasItem {
         this.selected = false;
         // array to keep track of what squares have been filled by the object
         this.filledSquares = [];
-        /* variables to help highlight the object */
+        /* variables to help highlight and drag the object */
         this.endPosition = undefined;
+        this.mouseOffset = undefined;
         this.rectRefPoint = undefined;
         this.rectCorners = undefined;
     }
@@ -28,12 +29,21 @@ export class CanvasItem {
         this.context.font = "15px monospace";
     }
 
-    toggleSelect() {
+    toggleSelect(mouseLocation) {
         this.selected = !this.selected;
+
+        // get the offset from where the mouse clicked to the object reference position
+        this.mouseOffset = {
+            x: this.position.x - mouseLocation.x,
+            y: this.position.y - mouseLocation.y
+        }
     }
 
     updatePosition(newPosition) {
-        this.position = newPosition;
+        this.position = {
+           x: newPosition.x + this.mouseOffset.x,
+           y: newPosition.y + this.mouseOffset.y
+        }
         // remove the filledSquares array so it can be updated on the next draw loop
         this.filledSquares = [];
     }

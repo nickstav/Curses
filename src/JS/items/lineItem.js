@@ -37,8 +37,8 @@ export class LineItem extends CanvasItem {
 
         // update the line end point as well as the start position
         this.endPosition = {
-            x: this.endPosition.x + xChange,
-            y: this.endPosition.y + yChange
+            x: this.endPosition.x + this.mouseOffset.x + xChange,
+            y: this.endPosition.y + this.mouseOffset.y + yChange
         }
     }
 
