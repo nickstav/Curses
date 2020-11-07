@@ -32,8 +32,12 @@ export class CanvasItem {
         this.context.font = "15px monospace";
     }
 
-    toggleSelect() {
-        this.selected = !this.selected;
+    selectObject() {
+        this.selected = true;
+    }
+
+    deselectObject() {
+        this.selected = false;
     }
 
     getMouseOffset(mouseLocation) {

@@ -21,6 +21,9 @@ function handleMouseClick(event) {
     let mouseLocation = get(cursesCanvas).mousePosition;
     let gridLocation = getGridLocation(mouseLocation);
 
+    //show updated canvas with any added/erased objects when clicking
+    updateCanvas();
+
     switch(toolSelected) {
         case(tools.TEXT):
             let userText = prompt("Enter text/characters:");
@@ -34,9 +37,7 @@ function handleMouseClick(event) {
         case(tools.DRAG):
             selectObject(gridLocation, canvasElement); 
             break;  
-    }
-    //show updated canvas with any added/erased objects when clicking
-    updateCanvas();
+    } 
 }
 
 function handleMouseDown(event) {
@@ -90,7 +91,7 @@ function handleMouseMove(event) {
 function handleMouseRelease() {
     let toolSelected = get(cursesCanvas).tool;
     let canvasElement = get(cursesCanvas).canvasElement;
-    
+
     cursesCanvas.stopDrawing();
 
     let startPosition = get(cursesCanvas).startPosition;

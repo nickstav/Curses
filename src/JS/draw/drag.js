@@ -8,6 +8,7 @@ function selectObject(gridLocation, canvasElement) {
     let canvasItems = get(canvasObjects);
 
     canvasItems.forEach(object => {
+
         //define variable to confirm whether an object has been clicked or not
         let objectClicked = false;
 
@@ -18,9 +19,8 @@ function selectObject(gridLocation, canvasElement) {
                 gridLocation.y + 1 === object.filledSquares[i].y
                 ) {
                     // if mouse location matches an object's location, mark it as selected
-                    object.toggleSelect();
+                    object.selectObject();
                     object.getMouseOffset(gridLocation)
-                    console.debug(object.type, 'clicked');
                     objectClicked = true;
                     canvasElement.style.cursor = "grab";
             }
@@ -28,7 +28,7 @@ function selectObject(gridLocation, canvasElement) {
         // if no object exists at mouse location, deselect any selected object
         // (i.e. the user has clicked off an object)
         if (!objectClicked && object.selected) {
-            object.toggleSelect();
+            object.deselectObject();
             objectClicked = false;
             canvasElement.style.cursor = "pointer";
         }
