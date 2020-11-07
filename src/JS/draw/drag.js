@@ -20,7 +20,6 @@ function selectObject(gridLocation, canvasElement) {
                 ) {
                     // if mouse location matches an object's location, mark it as selected
                     object.selectObject();
-                    object.getMouseOffset(gridLocation)
                     objectClicked = true;
                     canvasElement.style.cursor = "grab";
             }
@@ -64,6 +63,17 @@ function editObject(isDrawing, currentGridLocation, canvasElement) {
     });
 }
 
+// get the location of where the mouse is pressed on the object from its reference position
+function getMouseOffset(gridLocation) {
+    let canvasItems = get(canvasObjects);
+    
+    canvasItems.forEach(object => {
+        if (object.selected) {
+            object.getMouseOffset(gridLocation);
+        }
+    });
+}
+
 function checkMouseOverCorner(object, mousePosition, canvasElement) {
     // check if the mouse is over the highlighting rectangle's corner
     let cornerUnderMouse = object.isMouseOverCorner(mousePosition);
@@ -86,4 +96,4 @@ function checkMouseOverCorner(object, mousePosition, canvasElement) {
     }
 }
 
-export { selectObject, editObject }
+export { selectObject, editObject, getMouseOffset }

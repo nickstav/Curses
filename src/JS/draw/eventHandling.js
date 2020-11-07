@@ -4,7 +4,7 @@ import { canvasObjects } from '../stores/objects.js';
 
 import { tools } from '../constants/toolsList.js';
 import { updateCanvas } from './updateCanvas.js';
-import { selectObject, editObject } from './drag.js';
+import { selectObject, editObject, getMouseOffset } from './drag.js';
 import { eraseObject } from './erase.js';
 import { getGridLocation, showCurrentSquare } from './location.js';
 
@@ -41,12 +41,25 @@ function handleMouseClick(event) {
 }
 
 function handleMouseDown(event) {
-    // update the start position of the cursor when the mouse is first pressed
+    let toolSelected = get(cursesCanvas).tool;
     let canvasElement = get(cursesCanvas).canvasElement;
+
+    // update the current position of the mouse
+    cursesCanvas.updateMousePosition(event, canvasElement);
+    let mouseLocation = get(cursesCanvas).mousePosition;
+    let gridLocation = getGridLocation(mouseLocation);
+
+    // update the start position of the cursor when the mouse is first pressed
     cursesCanvas.updateStartPosition(event, canvasElement);
 
     // confirm that the canvas is being drawn on now the button is being held down
     cursesCanvas.startDrawing();
+
+    switch(toolSelected) {
+        case(tools.DRAG):
+            getMouseOffset(gridLocation);
+            break;
+    }
 }
 
 function handleMouseMove(event) {
