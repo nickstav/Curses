@@ -8,7 +8,7 @@ function updateCanvas() {
     const canvasElement = get(cursesCanvas).canvasElement;
     context.clearRect(0, 0, canvasElement.width, canvasElement.height);
 
-    let canvasItems = get(canvasObjects).items;
+    let canvasItems = get(canvasObjects);
     canvasItems.forEach(object => {
          object.draw();
     })

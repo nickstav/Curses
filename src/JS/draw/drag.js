@@ -5,7 +5,7 @@ import { cursesCanvas } from '../stores/project.js';
 
 
 function selectObject(gridLocation, canvasElement) {
-    let canvasItems = get(canvasObjects).items;
+    let canvasItems = get(canvasObjects);
 
     canvasItems.forEach(object => {
         //define variable to confirm whether an object has been clicked or not
@@ -37,7 +37,7 @@ function selectObject(gridLocation, canvasElement) {
 
 
 function editObject(isDrawing, currentGridLocation, canvasElement) {
-    let canvasItems = get(canvasObjects).items;
+    let canvasItems = get(canvasObjects);
     let mousePosition = get(cursesCanvas).mousePosition;
 
     canvasItems.forEach(object => {
