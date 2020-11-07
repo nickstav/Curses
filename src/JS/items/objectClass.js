@@ -12,6 +12,7 @@ export class CanvasItem {
         this.selected = false;
         this.editMode = editMode.MOVE;
         // array to keep track of what squares have been filled by the object
+        // in form {x: gridCoord.x, y: gridCoord.y}
         this.filledSquares = [];
         /* variables to help highlight and drag the object */
         this.endPosition = undefined;
@@ -24,7 +25,7 @@ export class CanvasItem {
 
         // if the item has been selected, call the highlight function to draw a rectangle around it
         if (this.selected) {
-            this.highlight();
+            this.drawBorder();
         }
 
         this.context.fillStyle = 'black';
@@ -69,7 +70,7 @@ export class CanvasItem {
          this.filledSquares = [];
     }
 
-    highlight(objectSize) {
+    drawBorder(objectSize) {
         /* 
         width total is + 2 square due to... 
         ... the 1/2 square padding either side (+1)
@@ -160,30 +161,30 @@ export class CanvasItem {
     // function to return what corner a mouse position is over
     isMouseOverCorner(mousePosition) {
         // variable to define when the mouse cursor is over a rectangle corner
-        let mouseSensitivity = 5;
+        let distanceFromMouseToCorner = 5;
     
         if (
-            Math.abs(mousePosition.x - this.rectCorners.topL.x) < mouseSensitivity
+            Math.abs(mousePosition.x - this.rectCorners.topL.x) < distanceFromMouseToCorner
             && 
-            Math.abs(mousePosition.y - this.rectCorners.topL.y) < mouseSensitivity
+            Math.abs(mousePosition.y - this.rectCorners.topL.y) < distanceFromMouseToCorner
         ) {
             return cornerSelected.TL;
         } else if (
-            Math.abs(mousePosition.x - this.rectCorners.topR.x) < mouseSensitivity 
+            Math.abs(mousePosition.x - this.rectCorners.topR.x) < distanceFromMouseToCorner 
             && 
-            Math.abs(mousePosition.y - this.rectCorners.topR.y) < mouseSensitivity
+            Math.abs(mousePosition.y - this.rectCorners.topR.y) < distanceFromMouseToCorner
             ) {
             return cornerSelected.TR;
         } else if (
-            Math.abs(mousePosition.x - this.rectCorners.bottomL.x) < mouseSensitivity
+            Math.abs(mousePosition.x - this.rectCorners.bottomL.x) < distanceFromMouseToCorner
             && 
-            Math.abs(mousePosition.y - this.rectCorners.bottomL.y) < mouseSensitivity
+            Math.abs(mousePosition.y - this.rectCorners.bottomL.y) < distanceFromMouseToCorner
         ) {
             return cornerSelected.BL;
         } else if (
-            Math.abs(mousePosition.x - this.rectCorners.bottomR.x) < mouseSensitivity
+            Math.abs(mousePosition.x - this.rectCorners.bottomR.x) < distanceFromMouseToCorner
             && 
-            Math.abs(mousePosition.y - this.rectCorners.bottomR.y) < mouseSensitivity
+            Math.abs(mousePosition.y - this.rectCorners.bottomR.y) < distanceFromMouseToCorner
         ) {
             return cornerSelected.BR;
         } else {

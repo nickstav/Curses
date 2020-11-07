@@ -60,6 +60,7 @@ function handleMouseMove(event) {
     let mouseLocation = get(cursesCanvas).mousePosition;
     let currentGridLocation = getGridLocation(mouseLocation);
 
+    //clear the canvas of any previous "live" drawn shapes and add all saved objects to the canvas
     updateCanvas();
 
     switch(toolSelected) {
