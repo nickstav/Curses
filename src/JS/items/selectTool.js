@@ -31,7 +31,7 @@ export function changeTool(buttonPressed) {
 
 // deselect any relevant objects if clicked off the select tool
 function deselectAnySelectedObjects() {
-    let canvasItems = get(canvasObjects).items;
+    let canvasItems = get(canvasObjects);
 
     canvasItems.forEach(object => {
         if (object.selected) {
