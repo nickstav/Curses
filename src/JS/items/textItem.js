@@ -1,11 +1,12 @@
 import { CanvasItem } from './objectClass.js';
 
 import { get } from 'svelte/store';
-import { canvasObjects } from '../stores/objects.js';
+import { cursesCanvas } from '../stores/project.js';
 
 import { tools } from '../constants/toolsList.js';
 import { gridDimension } from '../constants/canvasSize.js';
 import { cornerSelected } from '../constants/objectStates.js';
+
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -14,7 +15,7 @@ export class TextItem extends CanvasItem {
         super(location)
         this.type = tools.TEXT;
         this.text = text;
-        this.newLine = get(canvasObjects).textNewLine;
+        this.newLine = get(cursesCanvas).textNewLine;
     }
 
     draw() {

@@ -8,6 +8,7 @@ import { writable } from 'svelte/store';
     canvasElement: undefined,
     context: undefined,
     tool: undefined,
+    textNewLine: 'indented',
     startPosition: {x: 0, y: 0},
     isDrawing: false,
     mousePosition: {x: 0, y: 0}

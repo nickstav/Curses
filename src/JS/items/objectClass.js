@@ -62,8 +62,8 @@ export class CanvasItem {
 
     resizeObject(newPosition) {
         this.position = {
-            x: newPosition.x + this.mouseOffset.x,
-            y: newPosition.y + this.mouseOffset.y
+            x: newPosition.x,
+            y: newPosition.y
          }
          // remove the filledSquares array so it can be updated on the next draw loop
          this.filledSquares = [];

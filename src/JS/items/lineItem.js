@@ -56,18 +56,17 @@ export class LineItem extends CanvasItem {
             );
 
         if (distanceToStartPoint > distanceToEndPoint) {
+            // update the end point rather than the reference point
             this.endPosition = {
                 x: newPosition.x,
                 y: newPosition.y
             }
+            // remove the filledSquares array so it can be updated on the next draw loop
+             this.filledSquares = [];
         } else {
-            this.position = {
-                x: newPosition.x,
-                y: newPosition.y
-            }
+            // update the reference point as per the Object Class
+           super.resizeObject(newPosition);
         }
-        // remove the filledSquares array so it can be updated on the next draw loop
-        this.filledSquares = [];
     }
 
   
