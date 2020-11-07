@@ -3,7 +3,7 @@ import { CanvasItem } from './objectClass.js';
 import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/project.js';
 
-import { tools } from '../constants/toolsList.js';
+import { tools, textNewLine } from '../constants/toolsList.js';
 import { gridDimension } from '../constants/canvasSize.js';
 import { cornerSelected } from '../constants/objectStates.js';
 
@@ -44,7 +44,7 @@ export class TextItem extends CanvasItem {
         this.endPosition = this.filledSquares[this.filledSquares.length - 1];
     }
 
-    highlight() {
+    drawBorder() {
         let width;
         // if text goes to a new line, highlight to the end of the canvas
         if (this.endPosition.y !== this.position.y + 1) {
@@ -58,7 +58,7 @@ export class TextItem extends CanvasItem {
             height: Math.abs(this.position.y - this.endPosition.y)
         }
 
-        super.highlight(objectSize);
+        super.drawBorder(objectSize);
     }
 
     // calculate position (x,y) of text in case of indented/to margin new lines
@@ -68,14 +68,14 @@ export class TextItem extends CanvasItem {
         // calculate new lines started
         let yCorrection;
 
-        if (this.newLine === "indented") {
+        if (this.newLine === textNewLine.INDENTED) {
             let indentedWidth = this.canvasWidth - this.position.x;
             // move down to the next row for every completed indentedWidth 
             yCorrection = Math.floor(charPosition / indentedWidth);
             // start a new line indented below the start of the text
             xPosition =  (charPosition + this.position.x) - (indentedWidth * yCorrection);
 
-        } else if (this.newLine === "toLeft") {
+        } else if (this.newLine === textNewLine.TOLEFT) {
             // the remainder of gridSquare / squareWidth will give the x coordinate of required square
             xPosition = ((charPosition + this.position.x) % this.canvasWidth),
             yCorrection = Math.floor((charPosition + this.position.x) / this.canvasWidth);

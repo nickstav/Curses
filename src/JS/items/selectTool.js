@@ -35,7 +35,7 @@ function deselectAnySelectedObjects() {
 
     canvasItems.forEach(object => {
         if (object.selected) {
-            object.toggleSelect();
+            object.deselectObject();
         }
     });
 }

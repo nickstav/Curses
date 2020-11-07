@@ -8,6 +8,7 @@ function selectObject(gridLocation, canvasElement) {
     let canvasItems = get(canvasObjects);
 
     canvasItems.forEach(object => {
+
         //define variable to confirm whether an object has been clicked or not
         let objectClicked = false;
 
@@ -18,9 +19,7 @@ function selectObject(gridLocation, canvasElement) {
                 gridLocation.y + 1 === object.filledSquares[i].y
                 ) {
                     // if mouse location matches an object's location, mark it as selected
-                    object.toggleSelect();
-                    object.getMouseOffset(gridLocation)
-                    console.debug(object.type, 'clicked');
+                    object.selectObject();
                     objectClicked = true;
                     canvasElement.style.cursor = "grab";
             }
@@ -28,7 +27,7 @@ function selectObject(gridLocation, canvasElement) {
         // if no object exists at mouse location, deselect any selected object
         // (i.e. the user has clicked off an object)
         if (!objectClicked && object.selected) {
-            object.toggleSelect();
+            object.deselectObject();
             objectClicked = false;
             canvasElement.style.cursor = "pointer";
         }
@@ -64,6 +63,17 @@ function editObject(isDrawing, currentGridLocation, canvasElement) {
     });
 }
 
+// get the location of where the mouse is pressed on the object from its reference position
+function getMouseOffset(gridLocation) {
+    let canvasItems = get(canvasObjects);
+    
+    canvasItems.forEach(object => {
+        if (object.selected) {
+            object.getMouseOffset(gridLocation);
+        }
+    });
+}
+
 function checkMouseOverCorner(object, mousePosition, canvasElement) {
     // check if the mouse is over the highlighting rectangle's corner
     let cornerUnderMouse = object.isMouseOverCorner(mousePosition);
@@ -86,4 +96,4 @@ function checkMouseOverCorner(object, mousePosition, canvasElement) {
     }
 }
 
-export { selectObject, editObject }
+export { selectObject, editObject, getMouseOffset }

@@ -1,8 +1,5 @@
 import { CanvasItem } from './objectClass.js';
 
-import { get } from 'svelte/store';
-import { canvasObjects } from '../stores/objects.js';
-
 import { tools } from '../constants/toolsList.js';
 import { gridDimension } from '../constants/canvasSize.js';
 
@@ -21,12 +18,12 @@ export class LineItem extends CanvasItem {
         this.drawLineOnGrid(this.position.x, this.position.y, this.endPosition.x, this.endPosition.y);
     }
 
-    highlight() {
+    drawBorder() {
         let objectSize = {
             width: Math.abs(this.position.x - this.endPosition.x),
             height: Math.abs(this.position.y - this.endPosition.y) + 1
         }
-        super.highlight(objectSize);
+        super.drawBorder(objectSize);
     }
 
     updatePosition(newPosition) {
