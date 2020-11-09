@@ -11,6 +11,7 @@ import { writable } from 'svelte/store';
     textNewLine: 'indented',
     startPosition: {x: 0, y: 0},
     isDrawing: false,
+    isHighlighting: false,
     mousePosition: {x: 0, y: 0}
 };
 
@@ -75,6 +76,24 @@ function setUpStore() {
     });
   }
 
+  function turnOnSquareHighlighting() {
+    update(status => {
+      return {
+          ...status,
+          isHighlighting: true
+      };
+    });
+  }
+
+  function turnOffSquareHighlighting() {
+    update(status => {
+      return {
+          ...status,
+          isHighlighting: false
+      };
+    });
+  }
+
   function updateMousePosition(event, canvasElement) {
     update(status => {
       return {
@@ -92,6 +111,8 @@ function setUpStore() {
     changeCanvasTool,
     startDrawing,
     stopDrawing,
+    turnOnSquareHighlighting,
+    turnOffSquareHighlighting,
     updateStartPosition,
     updateMousePosition
 	};

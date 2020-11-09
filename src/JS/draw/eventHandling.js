@@ -6,7 +6,7 @@ import { tools } from '../constants/toolsList.js';
 import { updateCanvas } from './updateCanvas.js';
 import { selectObject, editObject, getMouseOffset } from './drag.js';
 import { eraseObject } from './erase.js';
-import { getGridLocation, showCurrentSquare } from './location.js';
+import { getGridLocation } from './location.js';
 
 import { TextItem } from '../items/textItem.js';
 import { LineItem } from '../items/lineItem.js';
@@ -20,9 +20,6 @@ function handleMouseClick(event) {
     cursesCanvas.updateMousePosition(event, canvasElement);
     let mouseLocation = get(cursesCanvas).mousePosition;
     let gridLocation = getGridLocation(mouseLocation);
-
-    //show updated canvas with any added/erased objects when clicking
-    updateCanvas();
 
     switch(toolSelected) {
         case(tools.TEXT):
@@ -38,6 +35,9 @@ function handleMouseClick(event) {
             selectObject(gridLocation, canvasElement); 
             break;  
     } 
+
+    //show updated canvas with any added/erased objects when clicking
+    updateCanvas();
 }
 
 function handleMouseDown(event) {
@@ -74,21 +74,17 @@ function handleMouseMove(event) {
     let mouseLocation = get(cursesCanvas).mousePosition;
     let currentGridLocation = getGridLocation(mouseLocation);
 
-    //clear the canvas of any previous "live" drawn shapes and add all saved objects to the canvas
-    updateCanvas();
+    // define a variable to pass any live drawn shapes to updateCanvas() 
+    let liveObject = null;
 
     switch(toolSelected) {
         case(tools.LINE):
             if (isDrawing) {
-                let liveLine = new LineItem(startGridLocation, currentGridLocation);
-                liveLine.draw();
+                liveObject = new LineItem(startGridLocation, currentGridLocation);
             }
             break;
         case(tools.RECTANGLE):
             //drawLiveRectangle(event, isDrawing, canvasElement);
-            break;
-        case(tools.TEXT):
-            showCurrentSquare(event, canvasElement);
             break;
         case(tools.PROGRESS):
             //cursesCanvas.updateMousePosition(event, canvasElement);
@@ -98,6 +94,9 @@ function handleMouseMove(event) {
             editObject(isDrawing, currentGridLocation, canvasElement);
             break;
     };
+
+    //clear the canvas of any previous "live" drawn shapes and add all live/saved objects to the canvas
+    updateCanvas(liveObject);
 }
 
 // if mouse button is released, canvas is no longer being drawn on

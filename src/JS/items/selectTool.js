@@ -12,15 +12,18 @@ export function changeTool(buttonPressed) {
     switch(buttonPressed) {
         case(tools.LINE):
         case(tools.RECTANGLE):
+            cursesCanvas.turnOffSquareHighlighting();
             deselectAnySelectedObjects()
             canvasElement.style.cursor = "crosshair";
             break;
         case(tools.TEXT):
         case(tools.PROGRESS):
+            cursesCanvas.turnOnSquareHighlighting();
             deselectAnySelectedObjects()
             canvasElement.style.cursor = "pointer";
             break;
         case(tools.DRAG):
+            cursesCanvas.turnOffSquareHighlighting();
             canvasElement.style.cursor = "pointer";
             break;
         default:
