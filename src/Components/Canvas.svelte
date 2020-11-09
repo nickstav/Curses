@@ -4,7 +4,7 @@
     import { gridAxis } from '../JS/stores/grid.js';
     import { gridDimension } from '../JS/constants/canvasSize.js';
 
-    import { handleMouseClick, handleMouseMove, handleMouseDown, handleMouseRelease, handleMouseOut, handleKeyDown } from '../JS/draw/eventHandling.js';
+    import { handleMouseClick, handleMouseMove, handleMouseDown, handleMouseRelease, handleMouseOut, handleMouseEnter, handleKeyDown } from '../JS/draw/eventHandling.js';
   
     let canvas;
     onMount(()=> cursesCanvas.createCanvas(canvas));
@@ -24,6 +24,7 @@
         on:mousedown={handleMouseDown}
         on:mouseup={handleMouseRelease}
         on:mouseout={handleMouseOut}
+        on:mouseenter={handleMouseEnter}
         >
     </canvas>
     </div>

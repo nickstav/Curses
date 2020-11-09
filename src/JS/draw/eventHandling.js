@@ -126,7 +126,16 @@ function handleMouseRelease() {
 
 // ensure canvas remains up to date when the mouse leaves the canvas window
 function handleMouseOut() {
+    cursesCanvas.turnOffSquareHighlighting();
     updateCanvas();
+}
+
+// turn on square highlighting for relevant tools
+function handleMouseEnter() {
+    let toolSelected = get(cursesCanvas).tool;
+    if (toolSelected === tools.TEXT) {
+        cursesCanvas.turnOnSquareHighlighting();
+    }
 }
 
 function handleKeyDown(event) {
@@ -142,5 +151,6 @@ export {
     handleMouseMove, 
     handleMouseRelease, 
     handleMouseOut,
+    handleMouseEnter,
     handleKeyDown
 }
