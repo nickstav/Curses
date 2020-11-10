@@ -1,4 +1,5 @@
 import { get } from 'svelte/store';
+import { gridDimension } from '../constants/canvasSize.js';
 import { cornerSelected, editMode } from '../constants/objectStates.js';
 import { canvasObjects } from '../stores/objects.js';
 import { cursesCanvas } from '../stores/project.js';
@@ -30,9 +31,13 @@ function selectObject(gridLocation, canvasElement) {
         // if no object exists at mouse location, deselect any selected object
         // (i.e. the user has clicked off an object)
         if (!objectClicked && objects[z].selected) {
-            objects[z].deselectObject();
-            objectClicked = false;
-            canvasElement.style.cursor = "pointer";
+            //criteria for deselection is if mouse is clicked outside of the bordering shape
+            let mouseInsideObject = checkMouseIsInsideObjectBorder(gridLocation, objects[z]);
+            if (!mouseInsideObject) {
+                objects[z].deselectObject();
+                objectClicked = false;
+                canvasElement.style.cursor = "pointer";
+            } 
         }
     };
 }
@@ -98,6 +103,32 @@ function checkMouseOverCorner(object, mousePosition, canvasElement) {
             canvasElement.style.cursor = "grab";
             object.selectForMoving();
             break;
+    }
+}
+
+// check if the mouse location is within the border of a specific object
+function checkMouseIsInsideObjectBorder(currentGridLocation, object) {
+    let xLimits = {
+        min: object.rectCorners.topL.x,
+        max: object.rectCorners.topR.x
+    }
+    let yLimits = {
+        min: object.rectCorners.topL.y,
+        max: object.rectCorners.bottomL.y
+    }
+    let mouseLocation = {
+        x: currentGridLocation.x * gridDimension.x,
+        y: currentGridLocation.y * gridDimension.y
+    }
+
+    if ( 
+        mouseLocation.x > xLimits.min && mouseLocation.x < xLimits.max
+        &&
+        mouseLocation.y > yLimits.min && mouseLocation.y < yLimits.max
+        ) {
+            return true;
+    } else {
+        return false;
     }
 }
 
