@@ -5,7 +5,8 @@ import { cursesCanvas } from '../stores/project.js';
 
 import { tools } from '../constants/toolsList.js';
 import { gridDimension } from '../constants/canvasSize.js';
-import { cornerSelected } from '../constants/objectStates.js';
+import { progressBarSize } from '../constants/progressBar.js';
+
 
 
 /* ---------------------------------------------------------------------------------------------- */
@@ -68,14 +69,26 @@ export class ProgressBarItem extends CanvasItem {
         if (distanceToStartPoint > distanceToEndPoint) {
             // calculate the amount to increase/decrease the progress bar size
             let numberOfBarsToAdd = newPosition.x - this.endPosition.x;
-            // keep the start position and increase the number of bars
-            this.numberOfBars = this.numberOfBars + numberOfBarsToAdd;
+            // keep the start position and increase the number of bars (adhering to min/max values)
+            if (
+                this.numberOfBars + numberOfBarsToAdd >= progressBarSize.min
+                &&
+                this.numberOfBars + numberOfBarsToAdd <= progressBarSize.max
+            ) {
+                    this.numberOfBars = this.numberOfBars + numberOfBarsToAdd;
+            };
         } else {
             // calculate the amount to increase/decrease the progress bar size
             let numberOfBarsToAdd = this.position.x - newPosition.x;
-            // move the start position as the number of bars changes
-            this.position.x = this.position.x - numberOfBarsToAdd;
-            this.numberOfBars = this.numberOfBars + numberOfBarsToAdd;
+            // move the start position as the number of bars changes (adhering to min/max values)
+            if (
+                this.numberOfBars + numberOfBarsToAdd >= progressBarSize.min
+                &&
+                this.numberOfBars + numberOfBarsToAdd <= progressBarSize.max
+            ) {
+                    this.position.x = this.position.x - numberOfBarsToAdd;
+                    this.numberOfBars = this.numberOfBars + numberOfBarsToAdd;
+            }
         }
     }
 
