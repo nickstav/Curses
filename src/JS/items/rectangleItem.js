@@ -44,6 +44,75 @@ export class RectangleItem extends CanvasItem {
         }
     }
 
+    resizeObject(newPosition) {
+        //check which corner of the square is being selected (using Pythagoras)
+        let distanceToStartPoint =
+            Math.sqrt(
+                Math.pow((this.position.x - newPosition.x), 2) +
+                Math.pow((this.position.y - newPosition.y), 2)
+            );
+        let distanceToPointAdjacentToStart =
+            Math.sqrt(
+                Math.pow((this.endPosition.x - newPosition.x), 2) +
+                Math.pow((this.position.y - newPosition.y), 2)
+            );
+        let distanceToEndPoint = 
+            Math.sqrt(
+                Math.pow((this.endPosition.x - newPosition.x), 2) +
+                Math.pow((this.endPosition.y - newPosition.y), 2)
+            );
+        let distanceToPointAdjacentToEnd =
+            Math.sqrt(
+                Math.pow((this.position.x - newPosition.x), 2) +
+                Math.pow((this.endPosition.y - newPosition.y), 2)
+            );
+        let closestCorner = Math.min(
+            distanceToStartPoint,
+            distanceToPointAdjacentToStart,
+            distanceToEndPoint,
+            distanceToPointAdjacentToEnd
+        );
+
+        // remove the filledSquares array so it can be updated on the next draw loop
+        this.filledSquares = [];
+
+        switch(closestCorner) {
+            case(distanceToStartPoint):
+                //resize based on start position as per object parent class
+                super.resizeObject(newPosition);
+                break;
+            case(distanceToEndPoint):
+                // update the end point rather than the reference point
+                this.endPosition = {
+                    x: newPosition.x,
+                    y: newPosition.y
+                }
+                break;
+            case(distanceToPointAdjacentToStart):
+                //update both start and end points based on the resizing of current corner
+                this.position = {
+                    x: this.position.x,
+                    y: newPosition.y 
+                }
+                this.endPosition = {
+                    x: newPosition.x,
+                    y: this.endPosition.y
+                }
+                break;
+            case(distanceToPointAdjacentToEnd):
+                //update both start and end points based on the resizing of current corner
+                this.position = {
+                    x: newPosition.x,
+                    y: this.position.y
+                }
+                this.endPosition = {
+                    x: this.endPosition.x,
+                    y: newPosition.y
+                }
+                break;
+        }
+    }
+
     drawRectangle(startSquare, endSquare) {
         let width = endSquare.x - startSquare.x;
          // y location needs to be the square below as axis measured from the top
