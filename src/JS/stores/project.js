@@ -9,6 +9,8 @@ import { writable } from 'svelte/store';
     context: undefined,
     tool: undefined,
     textNewLine: 'indented',
+    sizeOfProgressBar: 4,
+    showProgressPercentage: true,
     startPosition: {x: 0, y: 0},
     isDrawing: false,
     isHighlighting: false,
