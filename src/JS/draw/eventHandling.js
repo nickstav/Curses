@@ -10,7 +10,8 @@ import { getGridLocation } from './location.js';
 
 import { TextItem } from '../items/textItem.js';
 import { LineItem } from '../items/lineItem.js';
-import { RectangleItem } from '../items/rectangleItem.js'
+import { RectangleItem } from '../items/rectangleItem.js';
+import { ProgressBarItem } from '../items/progressBarItem.js';
 
 
 
@@ -30,7 +31,7 @@ function handleMouseClick(event) {
             }
             break;
         case(tools.PROGRESS):
-            //saveProgressBarToStore();
+            canvasObjects.saveObjectToStore(new ProgressBarItem(gridLocation));
             break;
         case(tools.DRAG):
             selectObject(gridLocation, canvasElement); 
@@ -85,16 +86,15 @@ function handleMouseMove(event) {
             }
             break;
         case(tools.RECTANGLE):
-        if (isDrawing) {
-            liveObject = new RectangleItem(startGridLocation, currentGridLocation);
-        }
-            break;
-        case(tools.PROGRESS):
-            //cursesCanvas.updateMousePosition(event, canvasElement);
-            //previewProgressSize();
+            if (isDrawing) {
+                liveObject = new RectangleItem(startGridLocation, currentGridLocation);
+            }
             break;
         case(tools.DRAG):
             editObject(isDrawing, currentGridLocation, canvasElement);
+            break;
+        case(tools.PROGRESS):
+            liveObject = new ProgressBarItem(currentGridLocation);
             break;
     };
 
