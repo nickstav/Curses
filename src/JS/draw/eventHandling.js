@@ -10,6 +10,7 @@ import { getGridLocation } from './location.js';
 
 import { TextItem } from '../items/textItem.js';
 import { LineItem } from '../items/lineItem.js';
+import { RectangleItem } from '../items/rectangleItem.js'
 
 
 
@@ -84,7 +85,9 @@ function handleMouseMove(event) {
             }
             break;
         case(tools.RECTANGLE):
-            //drawLiveRectangle(event, isDrawing, canvasElement);
+        if (isDrawing) {
+            liveObject = new RectangleItem(startGridLocation, currentGridLocation);
+        }
             break;
         case(tools.PROGRESS):
             //cursesCanvas.updateMousePosition(event, canvasElement);
@@ -116,7 +119,7 @@ function handleMouseRelease() {
             canvasObjects.saveObjectToStore(new LineItem(startGridLocation, currentGridLocation));
             break;
         case(tools.RECTANGLE):
-            //saveRectangleToStore();
+            canvasObjects.saveObjectToStore(new RectangleItem(startGridLocation, currentGridLocation));
             break;
         case(tools.DRAG):
             canvasElement.style.cursor = "pointer";

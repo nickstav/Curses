@@ -118,10 +118,7 @@ export class CanvasItem {
 
     // mark a grid square location as filled whilst avoiding repeated entries
     markGridSquareAsFilled(location) {
-        if (this.filledSquares.some(position => position.x === location.x) 
-            &&
-            this.filledSquares.some(position => position.y === location.y)
-        ) {
+        if (this.filledSquares.some(position => (position.x === location.x && position.y === location.y))) {
             return;
         } else {
             this.filledSquares.push(location);
