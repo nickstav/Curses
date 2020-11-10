@@ -19,7 +19,8 @@ export class TextItem extends CanvasItem {
     }
 
     draw() {
-        super.draw()
+    
+        super.setFontAndColour();
  
         for (let i = 0; i < this.text.length; i++) {
             //get the next character in the string
@@ -42,6 +43,9 @@ export class TextItem extends CanvasItem {
 
         // log the end square so we can get the highlighting dimensions when required
         this.endPosition = this.filledSquares[this.filledSquares.length - 1];
+
+        //now coordinates have been updated we can call the parent draw function
+        super.draw()
     }
 
     drawBorder() {

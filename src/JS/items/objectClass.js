@@ -18,18 +18,22 @@ export class CanvasItem {
         this.endPosition = undefined;
         this.mouseOffset = undefined;
         this.rectRefPoint = undefined;
+        this.rectWidth = undefined;
         this.rectCorners = undefined;
     }
 
+    setFontAndColour() {
+        this.context.fillStyle = 'black';
+        this.context.font = "15px monospace";
+    }
+
     draw() {
+        this.setFontAndColour();
 
         // if the item has been selected, call the highlight function to draw a rectangle around it
         if (this.selected) {
             this.drawBorder();
         }
-
-        this.context.fillStyle = 'black';
-        this.context.font = "15px monospace";
     }
 
     selectObject() {
@@ -80,23 +84,26 @@ export class CanvasItem {
         ... the 1/2 square padding either side (+1)
         ... a width of x squares will have counted across (x-1) times to the end, so + 1 correction
         */
-        let rectWidth = objectSize.width + 2;
+        this.rectWidth = objectSize.width + 2;
       
         //find the top left corner of the object area from which to draw the highlighting rectangle
         this.rectRefPoint = {
             x: Math.min(this.position.x, this.endPosition.x),
             y: Math.min(this.position.y, this.endPosition.y)
         }
-        this.rectCorners = this.getRectangleCorners(this.rectRefPoint, rectWidth, objectSize.height);
+        this.rectCorners = this.getRectangleCorners(this.rectRefPoint, this.rectWidth, objectSize.height);
 
 
         // highlight the object with a blue rectangle around it
-        this.drawHighlightingRectangle(this.rectCorners.topL, rectWidth, objectSize.height)
+        this.drawHighlightingRectangle(this.rectCorners.topL, this.rectWidth, objectSize.height)
         // border the rectangle with circles
         this.addHighlightingShapes(this.rectCorners.topL);
         this.addHighlightingShapes(this.rectCorners.topR);
         this.addHighlightingShapes(this.rectCorners.bottomL);
         this.addHighlightingShapes(this.rectCorners.bottomR);
+
+        // return to default font colour once borders have been drawn
+        this.setFontAndColour();
     }
 
     // clear any previous characters in the grid square (so latest object is drawn "on top")
