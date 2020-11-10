@@ -6,6 +6,7 @@ import { progressBarAppearance } from '../stores/progressBarAppearance.js';
 import { tools } from '../constants/toolsList.js';
 import { gridDimension } from '../constants/canvasSize.js';
 import { progressLayout } from './helperFunctions/progressHelper.js';
+import { cornerSelected } from '../constants/objectStates.js';
 
 
 /* ---------------------------------------------------------------------------------------------- */
@@ -33,6 +34,20 @@ export class ProgressBarItem extends CanvasItem {
         this.addCharactersToCanvas(appearance.statusText, progressLayout.FIRSTLINE);
         this.addCharactersToCanvas(appearance.divider, progressLayout.SECONDLINE);
         this.addCharactersToCanvas(appearance.progressText, progressLayout.THIRDLINE);
+
+        // log the end square so we can get the highlighting dimensions when required
+        this.endPosition = this.filledSquares[this.filledSquares.length - 1];
+    }
+
+    drawBorder() {
+        let width =  Math.abs(this.position.x - this.endPosition.x)
+
+        let objectSize = {
+            width: width,
+            height: Math.abs(this.position.y - this.endPosition.y)
+        }
+
+        super.drawBorder(objectSize);
     }
 
     // write a line of the progress bar layout
@@ -89,6 +104,11 @@ export class ProgressBarItem extends CanvasItem {
             progressText: text,
             divider: divider
         }
+    }
+
+    isMouseOverCorner(mousePosition) {
+        //progress bar items cannot be resized so return NONE as default
+        return cornerSelected.NONE;
     }
 
 }
