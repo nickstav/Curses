@@ -45,70 +45,34 @@ export class RectangleItem extends CanvasItem {
     }
 
     resizeObject(newPosition) {
-        //check which corner of the square is being selected (using Pythagoras)
-        let distanceToStartPoint =
-            Math.sqrt(
-                Math.pow((this.position.x - newPosition.x), 2) +
-                Math.pow((this.position.y - newPosition.y), 2)
-            );
-        let distanceToPointAdjacentToStart =
-            Math.sqrt(
-                Math.pow((this.endPosition.x - newPosition.x), 2) +
-                Math.pow((this.position.y - newPosition.y), 2)
-            );
-        let distanceToEndPoint = 
-            Math.sqrt(
-                Math.pow((this.endPosition.x - newPosition.x), 2) +
-                Math.pow((this.endPosition.y - newPosition.y), 2)
-            );
-        let distanceToPointAdjacentToEnd =
-            Math.sqrt(
-                Math.pow((this.position.x - newPosition.x), 2) +
-                Math.pow((this.endPosition.y - newPosition.y), 2)
-            );
-        let closestCorner = Math.min(
-            distanceToStartPoint,
-            distanceToPointAdjacentToStart,
-            distanceToEndPoint,
-            distanceToPointAdjacentToEnd
-        );
+
+        // get the coords of the new position
+        const {x, y} = newPosition;
+
+        // get the distance to each corner & the closest corner to coords {x, y}
+        let cornersInfo = this.getCornersInfo(x, y);
 
         // remove the filledSquares array so it can be updated on the next draw loop
         this.filledSquares = [];
 
-        switch(closestCorner) {
-            case(distanceToStartPoint):
-                //resize based on start position as per object parent class
+        switch(cornersInfo.closestCorner) {
+            case(cornersInfo.distanceToStartPoint):
+                // resize based on start position as per object parent class
                 super.resizeObject(newPosition);
                 break;
-            case(distanceToEndPoint):
+            case(cornersInfo.distanceToEndPoint):
                 // update the end point rather than the reference point
-                this.endPosition = {
-                    x: newPosition.x,
-                    y: newPosition.y
-                }
+                this.endPosition = {x, y}
                 break;
-            case(distanceToPointAdjacentToStart):
+            case(cornersInfo.distanceToPointAdjacentToStart):
                 //update both start and end points based on the resizing of current corner
-                this.position = {
-                    x: this.position.x,
-                    y: newPosition.y 
-                }
-                this.endPosition = {
-                    x: newPosition.x,
-                    y: this.endPosition.y
-                }
+                this.position = {x: this.position.x, y}
+                this.endPosition = {x, y: this.endPosition.y};
                 break;
-            case(distanceToPointAdjacentToEnd):
+            case(cornersInfo.distanceToPointAdjacentToEnd):
                 //update both start and end points based on the resizing of current corner
-                this.position = {
-                    x: newPosition.x,
-                    y: this.position.y
-                }
-                this.endPosition = {
-                    x: this.endPosition.x,
-                    y: newPosition.y
-                }
+                this.position = {x, y: this.position.y};
+                this.endPosition = {x: this.endPosition.x, y};
                 break;
         }
     }
@@ -183,7 +147,44 @@ export class RectangleItem extends CanvasItem {
     addCharacterToSquare(xCoord, yCoord, keyCharacter) {
         this.context.fillText(keyCharacter, xCoord * gridDimension.x, yCoord * gridDimension.y);
         
-        //mark the grid square as filled
+        // mark the grid square as filled
         this.markGridSquareAsFilled({x: xCoord, y: yCoord});
+    }
+
+    // check which corner of the rectangle is closest to coords {x, y}
+    getCornersInfo(x, y) {
+        let distanceToStartPoint =
+            Math.sqrt(
+                Math.pow((this.position.x - x), 2) +
+                Math.pow((this.position.y - y), 2)
+            );
+        let distanceToPointAdjacentToStart =
+            Math.sqrt(
+                Math.pow((this.endPosition.x - x), 2) +
+                Math.pow((this.position.y - y), 2)
+            );
+        let distanceToEndPoint = 
+            Math.sqrt(
+                Math.pow((this.endPosition.x - x), 2) +
+                Math.pow((this.endPosition.y - y), 2)
+            );
+        let distanceToPointAdjacentToEnd =
+            Math.sqrt(
+                Math.pow((this.position.x - x), 2) +
+                Math.pow((this.endPosition.y - y), 2)
+            );
+        let closestCorner = Math.min(
+            distanceToStartPoint,
+            distanceToPointAdjacentToStart,
+            distanceToEndPoint,
+            distanceToPointAdjacentToEnd
+        );
+        return {
+            closestCorner,
+            distanceToStartPoint,
+            distanceToPointAdjacentToStart,
+            distanceToEndPoint,
+            distanceToPointAdjacentToEnd
+        }
     }
 }
