@@ -21,15 +21,18 @@ export class CanvasItem {
         this.rectCorners = undefined;
     }
 
+    setFontAndColour() {
+        this.context.fillStyle = 'black';
+        this.context.font = "15px monospace";
+    }
+
     draw() {
+        this.setFontAndColour();
 
         // if the item has been selected, call the highlight function to draw a rectangle around it
         if (this.selected) {
             this.drawBorder();
         }
-
-        this.context.fillStyle = 'black';
-        this.context.font = "15px monospace";
     }
 
     selectObject() {
@@ -97,6 +100,9 @@ export class CanvasItem {
         this.addHighlightingShapes(this.rectCorners.topR);
         this.addHighlightingShapes(this.rectCorners.bottomL);
         this.addHighlightingShapes(this.rectCorners.bottomR);
+
+        // return to default font colour once borders have been drawn
+        this.setFontAndColour();
     }
 
     // clear any previous characters in the grid square (so latest object is drawn "on top")

@@ -124,8 +124,9 @@ function handleMouseRelease() {
     }
 }
 
-// ensure canvas remains up to date when the mouse leaves the canvas window
+// turn off any drawing & ensure canvas remains up to date when the mouse leaves the canvas window
 function handleMouseOut() {
+    cursesCanvas.stopDrawing();
     cursesCanvas.turnOffSquareHighlighting();
     updateCanvas();
 }

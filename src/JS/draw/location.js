@@ -16,6 +16,7 @@ function highlightSquare(){
     let gridLocation = getGridLocation(currentLocation);
 
     context.fillStyle = 'rgb(100, 149, 237, 0.2)';
+    context.beginPath();
     context.fillRect(
         gridLocation.x * gridDimension.x, 
         gridLocation.y * gridDimension.y, 
