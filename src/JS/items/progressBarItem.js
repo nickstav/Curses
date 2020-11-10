@@ -1,11 +1,10 @@
 import { CanvasItem } from './objectClass.js';
 
 import { get } from 'svelte/store';
-import { progressBarAppearance } from '../stores/progressBarAppearance.js';
+import { cursesCanvas } from '../stores/project.js';
 
 import { tools } from '../constants/toolsList.js';
 import { gridDimension } from '../constants/canvasSize.js';
-import { progressLayout } from './helperFunctions/progressHelper.js';
 import { cornerSelected } from '../constants/objectStates.js';
 
 
@@ -15,10 +14,11 @@ export class ProgressBarItem extends CanvasItem {
     constructor(location) {
         super(location)
         this.type = tools.PROGRESS;
-        this.numberOfBars = get(progressBarAppearance).numberOfBars;
-        this.title = get(progressBarAppearance).title;
-        this.status = get(progressBarAppearance).status;
-        this.barChar = get(progressBarAppearance).bars;
+        this.bar = '▮',
+        this.emptyBar = '▯',
+        this.numberOfBars = get(cursesCanvas).sizeOfProgressBar;
+        this.percentageValue = 50,
+        this.showPercentage = get(cursesCanvas).showProgressPercentage;
     }
 
     draw() {
@@ -29,11 +29,9 @@ export class ProgressBarItem extends CanvasItem {
 
     // draw a progress bar onto the canvas
     drawProgressBar() {
-        let appearance = this.getProgressBarValues();
+        let progressText = this.getProgressBarValues();
 
-        this.addCharactersToCanvas(appearance.statusText, progressLayout.FIRSTLINE);
-        this.addCharactersToCanvas(appearance.divider, progressLayout.SECONDLINE);
-        this.addCharactersToCanvas(appearance.progressText, progressLayout.THIRDLINE);
+        this.addCharactersToCanvas(progressText);
 
         // log the end square so we can get the highlighting dimensions when required
         this.endPosition = this.filledSquares[this.filledSquares.length - 1];
@@ -50,37 +48,54 @@ export class ProgressBarItem extends CanvasItem {
         super.drawBorder(objectSize);
     }
 
+    resizeObject(newPosition) {
+
+        // remove the filledSquares array so it can be updated on the next draw loop
+        this.filledSquares = [];
+
+        //check which end of the line is being adjusted by checking which end is closer (using Pythagoras)
+        let distanceToStartPoint =
+            Math.sqrt(
+                Math.pow((this.position.x - newPosition.x), 2) +
+                Math.pow((this.position.y - newPosition.y), 2)
+            );
+        let distanceToEndPoint = 
+            Math.sqrt(
+                Math.pow((this.endPosition.x - newPosition.x), 2) +
+                Math.pow((this.endPosition.y - newPosition.y), 2)
+            );
+
+        if (distanceToStartPoint > distanceToEndPoint) {
+            // calculate the amount to increase/decrease the progress bar size
+            let numberOfBarsToAdd = newPosition.x - this.endPosition.x;
+            // keep the start position and increase the number of bars
+            this.numberOfBars = this.numberOfBars + numberOfBarsToAdd;
+        } else {
+            // calculate the amount to increase/decrease the progress bar size
+            let numberOfBarsToAdd = this.position.x - newPosition.x;
+            // move the start position as the number of bars changes
+            this.position.x = this.position.x - numberOfBarsToAdd;
+            this.numberOfBars = this.numberOfBars + numberOfBarsToAdd;
+        }
+    }
+
     // write a line of the progress bar layout
-    addCharactersToCanvas(text, line) {
+    addCharactersToCanvas(text) {
         for (let i = 0; i < text.length; i++) {
             //get the next character in the string
             let character = text.charAt(i);
-            
-            //define grid Coords based on what part of the progress bar we are drawing
-            let lineIndent;
-            switch(line) {
-                case(progressLayout.FIRSTLINE):
-                    lineIndent = 1;
-                    break;
-                case(progressLayout.SECONDLINE):
-                    lineIndent = 2;
-                    break;
-                case(progressLayout.THIRDLINE):
-                    lineIndent = 3;
-                    break;
-            }
 
             let canvasCoordinates = {
                 x: (this.position.x + i) * gridDimension.x,
-                y: (this.position.y + lineIndent) * gridDimension.y
+                y: (this.position.y + 1) * gridDimension.y
             }
              // remove any object characters "beneath" this object
-            this.clearPreviousCharacter({x: this.position.x + i, y: this.position.y + lineIndent});
+            this.clearPreviousCharacter({x: this.position.x + i, y: this.position.y + 1});
 
             //add the character to its assigned coordinates
             this.context.fillText(character, canvasCoordinates.x, canvasCoordinates.y);
 
-            this.markGridSquareAsFilled({x: this.position.x + i, y: this.position.y + lineIndent});
+            this.markGridSquareAsFilled({x: this.position.x + i, y: this.position.y + 1});
         };
     }
 
@@ -88,27 +103,15 @@ export class ProgressBarItem extends CanvasItem {
     getProgressBarValues() {
     
         //initially set a 50% complete progress bar for illustrative purposes
-        let amountCompleted = Math.round(this.numberOfBars/2);
-        let amountToGo = ' '.repeat(this.numberOfBars - amountCompleted);
-        let amountCompletedAsPerc = (amountCompleted/this.numberOfBars) * 100;
+        let amountCompleted = Math.round(this.numberOfBars*(this.percentageValue/100));
+        let amountToGo = this.emptyBar.repeat(this.numberOfBars - amountCompleted);
     
         // repeat the ascii character for the filled section of the progress bar
-       let filledBars = this.barChar.repeat(amountCompleted);
+        let filledBars = this.bar.repeat(amountCompleted);
         // write the progress bar section using all defined values
-        let text = this.title + ': ' + filledBars + amountToGo + `${amountCompletedAsPerc}%`;
-        // add a divider of same length between status and progress bar
-        let divider = '-'.repeat(text.length);
+        let progressText = filledBars + amountToGo + ` ${this.percentageValue}%`;
 
-        return {
-            statusText: this.status,
-            progressText: text,
-            divider: divider
-        }
-    }
-
-    isMouseOverCorner(mousePosition) {
-        //progress bar items cannot be resized so return NONE as default
-        return cornerSelected.NONE;
+        return progressText;
     }
 
 }
