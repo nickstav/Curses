@@ -93,9 +93,6 @@ function handleMouseMove(event) {
         case(tools.DRAG):
             editObject(isDrawing, currentGridLocation, canvasElement);
             break;
-        case(tools.PROGRESS):
-            liveObject = new ProgressBarItem(currentGridLocation);
-            break;
     };
 
     //clear the canvas of any previous "live" drawn shapes and add all live/saved objects to the canvas
@@ -137,7 +134,7 @@ function handleMouseOut() {
 // turn on square highlighting for relevant tools
 function handleMouseEnter() {
     let toolSelected = get(cursesCanvas).tool;
-    if (toolSelected === tools.TEXT) {
+    if (toolSelected === tools.TEXT || toolSelected === tools.PROGRESS) {
         cursesCanvas.turnOnSquareHighlighting();
     }
 }

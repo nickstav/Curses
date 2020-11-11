@@ -1,7 +1,7 @@
 import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/project.js';
 import { canvasObjects } from '../stores/objects.js';
-import { highlightSquare } from './location.js';
+import { highlightSquares } from './location.js';
 
 
 function updateCanvas(liveObject=null) {
@@ -23,7 +23,7 @@ function updateCanvas(liveObject=null) {
     //highlight the current square if highlighting is turned on
     let isHighlighting = get(cursesCanvas).isHighlighting;
     if (isHighlighting) {
-        highlightSquare();
+        highlightSquares();
     }
 }
 
