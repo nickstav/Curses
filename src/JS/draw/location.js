@@ -2,8 +2,6 @@ import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/project.js';
 import { gridDimension } from '../constants/canvasSize.js';
 import { tools } from '../constants/toolsList.js';
-import { ProgressBarItem } from '../items/progressBarItem.js';
-import { progressBarSize } from '../stores/progressBar.js';
 
 // function to return the coordinates of the grid square at which the mouse is at
 function getGridLocation(mousePosition) {

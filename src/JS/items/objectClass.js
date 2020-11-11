@@ -23,7 +23,7 @@ export class CanvasItem {
     }
 
     setFontAndColour() {
-        this.context.fillStyle = 'black';
+        this.context.fillStyle = 'white';
         this.context.font = "15px monospace";
     }
 
