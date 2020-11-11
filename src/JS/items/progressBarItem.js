@@ -5,7 +5,7 @@ import { cursesCanvas } from '../stores/project.js';
 
 import { tools } from '../constants/toolsList.js';
 import { gridDimension } from '../constants/canvasSize.js';
-import { progressBarSize } from '../constants/progressBar.js';
+import { progressBarSize } from '../stores/progressBar.js';
 
 
 

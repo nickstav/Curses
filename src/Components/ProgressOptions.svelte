@@ -1,6 +1,6 @@
 <script>
     import { cursesCanvas } from '../JS/stores/project.js';
-    import { progressBarSize } from '../JS/constants/progressBar.js';
+    import { progressBarSize } from '../JS/stores/progressBar.js';
 </script>
 
 <div id="progressOptions" class="bg-gray-300 w-full h-10 text-xs flex justify-center items-center py-0 px-5">
