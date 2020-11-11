@@ -75,25 +75,17 @@ export class ProgressBarItem extends CanvasItem {
             // calculate the amount to increase/decrease the progress bar size
             let numberOfBarsToAdd = newPosition.x - this.endPosition.x;
             // keep the start position and increase the number of bars (adhering to min/max values)
-            if (
-                this.numberOfBars + numberOfBarsToAdd >= this.progressBarSize.min
-                &&
-                this.numberOfBars + numberOfBarsToAdd <= this.progressBarSize.max
-            ) {
-                    this.numberOfBars = this.numberOfBars + numberOfBarsToAdd;
+            if (this.checkIsWithinMinMaxValues(numberOfBarsToAdd)) {
+                this.numberOfBars = this.numberOfBars + numberOfBarsToAdd;
             };
         } else {
             // calculate the amount to increase/decrease the progress bar size
             let numberOfBarsToAdd = this.position.x - newPosition.x;
             // move the start position as the number of bars changes (adhering to min/max values)
-            if (
-                this.numberOfBars + numberOfBarsToAdd >= this.progressBarSize.min
-                &&
-                this.numberOfBars + numberOfBarsToAdd <= this.progressBarSize.max
-            ) {
-                    this.position.x = this.position.x - numberOfBarsToAdd;
-                    this.numberOfBars = this.numberOfBars + numberOfBarsToAdd;
-            }
+            if (this.checkIsWithinMinMaxValues(numberOfBarsToAdd)) {
+                this.position.x = this.position.x - numberOfBarsToAdd;
+                this.numberOfBars = this.numberOfBars + numberOfBarsToAdd;
+            };
         }
     }
 
@@ -135,6 +127,19 @@ export class ProgressBarItem extends CanvasItem {
         }
 
         return progressText;
+    }
+
+    // function to check any increase/decrease in number of bars stays within the min/max values
+    checkIsWithinMinMaxValues(changeofBars) {
+        if (
+            this.numberOfBars + changeofBars >= this.progressBarSize.min
+            &&
+            this.numberOfBars + changeofBars <= this.progressBarSize.max
+        ) {
+                return true;
+        } else {
+                return false;
+        };
     }
 
 }
