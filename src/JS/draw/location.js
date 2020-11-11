@@ -15,29 +15,10 @@ function getGridLocation(mousePosition) {
 
 function highlightSquares(){
     let context = get(cursesCanvas).context;
-    let toolSelected = get(cursesCanvas).tool;
-    let progressBarInfo = {
-        showPerc: get(cursesCanvas).showProgressPercentage,
-        numberOfBars: get(cursesCanvas).sizeOfProgressBar
-    }
     let currentLocation = get(cursesCanvas).mousePosition;
-
     let gridLocation = getGridLocation(currentLocation);
 
-    // define a varaible for the number of grid squares to highlight
-    let numberOfSquaresToFill;
-
-    if (toolSelected === tools.PROGRESS) {
-        // show the full area of a progress bar object at current grid location
-        if (progressBarInfo.showPerc) {
-            numberOfSquaresToFill = progressBarInfo.numberOfBars + 4;
-        } else {
-            numberOfSquaresToFill = progressBarInfo.numberOfBars;
-        }
-    } else {
-        // only highlight the square that the mouse is over
-        numberOfSquaresToFill = 1;
-    }
+    let numberOfSquaresToFill = getNumberOfSquaresToHighlight();
 
     context.fillStyle = 'rgb(100, 149, 237, 0.2)';
     context.beginPath();
@@ -48,6 +29,31 @@ function highlightSquares(){
         gridDimension.y
     );
     context.stroke();
+}
+
+function getNumberOfSquaresToHighlight() {
+        let toolSelected = get(cursesCanvas).tool;
+        let progressBarInfo = {
+            showPerc: get(cursesCanvas).showProgressPercentage,
+            numberOfBars: get(cursesCanvas).sizeOfProgressBar
+        }
+
+        // define a varaible for the number of grid squares to highlight
+        let numberOfSquaresToFill;
+
+        if (toolSelected === tools.PROGRESS) {
+            // show the full area of a progress bar object at current grid location
+            if (progressBarInfo.showPerc) {
+                numberOfSquaresToFill = progressBarInfo.numberOfBars + 4;
+            } else {
+                numberOfSquaresToFill = progressBarInfo.numberOfBars;
+            }
+        } else {
+            // only highlight the square that the mouse is over
+            numberOfSquaresToFill = 1;
+        }
+
+        return numberOfSquaresToFill;
 }
 
 
