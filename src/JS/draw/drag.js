@@ -11,34 +11,33 @@ function selectObject(gridLocation, canvasElement) {
     // loop through the items array in reverse to only select the object "on top"
     for (let z = objects.length - 1; z >= 0; z--) {
 
-        //define variable to confirm whether an object has been clicked or not
-        let objectClicked = false;
+        if (objects[z].selected) {
+            //criteria for deselection is if mouse is clicked outside of the bordering shape
+            let mouseInsideObject = checkMouseIsInsideObjectBorder(gridLocation, objects[z]);
+            if (!mouseInsideObject) {
+                objects[z].deselectObject();
+                canvasElement.style.cursor = "pointer";
+            }
+            // if an object is already selected, stop function from continuing and selecting another object
+            return;
+        }
 
+        // if no object already selected, loop through object's grid squares
         for (let i = 0; i < objects[z].filledSquares.length; i++) {
+
             if (
                 //check every grid square of an object to see if it exists at the mouse click
-                gridLocation.x === objects[z].filledSquares[i].x && 
+                gridLocation.x === objects[z].filledSquares[i].x
+                && 
                 gridLocation.y + 1 === objects[z].filledSquares[i].y
                 ) {
                     // if mouse location matches an object's location, mark it as selected
                     objects[z].selectObject();
-                    objectClicked = true;
                     canvasElement.style.cursor = "grab";
                     //stop the loop once one object has been selected
                     return;
             }
         };
-        // if no object exists at mouse location, deselect any selected object
-        // (i.e. the user has clicked off an object)
-        if (!objectClicked && objects[z].selected) {
-            //criteria for deselection is if mouse is clicked outside of the bordering shape
-            let mouseInsideObject = checkMouseIsInsideObjectBorder(gridLocation, objects[z]);
-            if (!mouseInsideObject) {
-                objects[z].deselectObject();
-                objectClicked = false;
-                canvasElement.style.cursor = "pointer";
-            } 
-        }
     };
 }
 
