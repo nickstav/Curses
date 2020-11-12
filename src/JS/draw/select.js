@@ -26,6 +26,23 @@ function selectObject(gridLocation, canvasElement) {
         };
     };
 
+    // check if mouse click is outside all selected objects' borders and deselect them if so
+    checkClickLocationToDeselectObjects(objects, gridLocation, canvasElement);
+}
+
+// get the location of where the mouse is pressed on the object from its reference position
+function getMouseOffset(gridLocation) {
+    let canvasItems = get(canvasObjects);
+    
+    canvasItems.forEach(object => {
+        if (object.selected) {
+            object.getMouseOffset(gridLocation);
+        }
+    });
+}
+
+function checkClickLocationToDeselectObjects(objects, gridLocation, canvasElement) {
+    
     // returns true if mouse position is outside a selected object
     const isOutsideBorder = (object) => {
         if (object.selected) {
@@ -42,17 +59,6 @@ function selectObject(gridLocation, canvasElement) {
         });
         canvasElement.style.cursor = "pointer";
     }
-}
-
-// get the location of where the mouse is pressed on the object from its reference position
-function getMouseOffset(gridLocation) {
-    let canvasItems = get(canvasObjects);
-    
-    canvasItems.forEach(object => {
-        if (object.selected) {
-            object.getMouseOffset(gridLocation);
-        }
-    });
 }
 
 
