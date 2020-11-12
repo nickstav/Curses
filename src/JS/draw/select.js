@@ -1,7 +1,13 @@
 import { get } from 'svelte/store';
-import { gridDimension } from '../constants/canvasSize.js';
 import { canvasObjects } from '../stores/objects.js';
+import { cursesCanvas } from '../stores/project.js';
 
+import { gridDimension } from '../constants/canvasSize.js';
+import { RectangleItem } from '../items/rectangleItem.js';
+
+/* -------------------------------------------------------------------------------------------------- */
+
+// function to check if a mouse click at gridLocation is over an object and select it if so
 function selectObject(gridLocation, canvasElement) {
     let objects = get(canvasObjects);
 
@@ -30,6 +36,44 @@ function selectObject(gridLocation, canvasElement) {
     checkClickLocationToDeselectObjects(objects, gridLocation, canvasElement);
 }
 
+/* -------------------------------------------------------------------------------------------------- */
+
+//return a rectangle to highlight an area on the grid, and update the store's selected area coords
+function selectAreaOnGrid(startGridLocation, currentGridLocation) {
+
+    let liveObject = new RectangleItem(startGridLocation, currentGridLocation);
+    cursesCanvas.saveSelectedAreaCoords(startGridLocation, currentGridLocation);
+
+    return liveObject;
+}
+
+// check if any part of an object is in the highlighted area and select it if so
+function selectObjectsInsideArea() {
+    let canvasItems = get(canvasObjects);
+    let selectedAreaCoords = get(cursesCanvas).selectedAreaCoords;
+
+    let areaInfo = getSelectedAreaCoords(selectedAreaCoords);
+
+    canvasItems.forEach(object => {
+        // loop through object's grid squares
+        for (let i = 0; i < object.filledSquares.length; i++) {
+            if (
+                object.filledSquares[i].x > areaInfo.topLeftCorner.x
+                &&
+                object.filledSquares[i].x < areaInfo.bottomRightCorner.x
+                &&
+                object.filledSquares[i].y > areaInfo.topLeftCorner.y
+                &&
+                object.filledSquares[i].y < areaInfo.bottomRightCorner.y
+            ) {
+               object.selectObject(); 
+            }
+        };
+    });
+}
+
+/* -------------------------------------------------------------------------------------------------- */
+
 // get the location of where the mouse is pressed on the object from its reference position
 function getMouseOffset(gridLocation) {
     let canvasItems = get(canvasObjects);
@@ -41,8 +85,10 @@ function getMouseOffset(gridLocation) {
     });
 }
 
+/* -------------------------------------------------------------------------------------------------- */
+
 function checkClickLocationToDeselectObjects(objects, gridLocation, canvasElement) {
-    
+
     // returns true if mouse position is outside a selected object
     const isOutsideBorder = (object) => {
         if (object.selected) {
@@ -92,4 +138,22 @@ function checkMouseIsOutsideObjectBorder(currentGridLocation, object) {
     }
 }
 
-export { selectObject, getMouseOffset }
+// function to get the values of topL and bottomR corners of a saved rectangle object (drawn in any direction)
+function getSelectedAreaCoords(savedCoords) {
+
+    let topLeftCorner = {
+        x: Math.min(savedCoords[0].x, savedCoords[1].x),
+        y: Math.min(savedCoords[0].y, savedCoords[1].y)
+    }
+    let bottomRightCorner = {
+        x: Math.max(savedCoords[0].x, savedCoords[1].x),
+        y: Math.max(savedCoords[0].y, savedCoords[1].y)
+    }
+
+    return {
+        topLeftCorner,
+        bottomRightCorner
+    }
+}
+
+export { selectObject, selectAreaOnGrid, selectObjectsInsideArea, getMouseOffset }

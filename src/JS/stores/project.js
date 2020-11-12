@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store';
+import { selectStyle } from '../constants/selectTool.js';
 
 // a store to contain all variables related to the canvas element
 
@@ -9,6 +10,8 @@ import { writable } from 'svelte/store';
     context: undefined,
     tool: undefined,
     textNewLine: 'indented',
+    selectMethod: selectStyle.OBJECTS,
+    selectedAreaCoords: [],
     sizeOfProgressBar: 4,
     showProgressPercentage: true,
     startPosition: {x: 0, y: 0},
@@ -105,6 +108,24 @@ function setUpStore() {
     });
   }
 
+  function saveSelectedAreaCoords(startCoords, endCoords) {
+    update(status => {
+      return {
+          ...status,
+          selectedAreaCoords: [startCoords, endCoords]
+      };
+    });
+  }
+
+  function changeSelectMethodToGrab() {
+    update(status => {
+      return {
+          ...status,
+          selectMethod: selectStyle.OBJECTS
+      };
+    });
+  }
+
   return {
 	  subscribe,
     set,
@@ -116,7 +137,9 @@ function setUpStore() {
     turnOnSquareHighlighting,
     turnOffSquareHighlighting,
     updateStartPosition,
-    updateMousePosition
+    updateMousePosition,
+    saveSelectedAreaCoords,
+    changeSelectMethodToGrab
 	};
 
 }

@@ -3,8 +3,10 @@ import { cursesCanvas } from '../stores/project.js';
 import { canvasObjects } from '../stores/objects.js';
 import { tools } from '../constants/toolsList.js';
 
+
 // function to select which canvas tool has been clicked in the toolbar
 function changeTool(buttonPressed) {
+
     cursesCanvas.changeCanvasTool(buttonPressed);
 
     //change the cursor icon depending on the current tool
