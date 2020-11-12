@@ -143,7 +143,7 @@ function handleMouseEnter() {
 }
 
 function handleKeyDown(event) {
-    if (event.ctrlKey && event.key === keyboardKeys.D) {
+    if (event.shiftKey && event.key === keyboardKeys.D) {
         duplicateObject();
     } else {
         handleKeyboardShortcuts(event.key);

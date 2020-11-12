@@ -8,21 +8,10 @@ import { cursesCanvas } from '../stores/project.js';
 function selectObject(gridLocation, canvasElement) {
     let objects = get(canvasObjects);
 
-    // loop through the items array in reverse to only select the object "on top"
+    // loop through the items array in reverse to prioritise the object "on top"
     for (let z = objects.length - 1; z >= 0; z--) {
 
-        if (objects[z].selected) {
-            //criteria for deselection is if mouse is clicked outside of the bordering shape
-            let mouseInsideObject = checkMouseIsInsideObjectBorder(gridLocation, objects[z]);
-            if (!mouseInsideObject) {
-                objects[z].deselectObject();
-                canvasElement.style.cursor = "pointer";
-            }
-            // if an object is already selected, stop function from continuing and selecting another object
-            return;
-        }
-
-        // if no object already selected, loop through object's grid squares
+        // loop through object's grid squares
         for (let i = 0; i < objects[z].filledSquares.length; i++) {
 
             if (
@@ -36,9 +25,26 @@ function selectObject(gridLocation, canvasElement) {
                     canvasElement.style.cursor = "grab";
                     //stop the loop once one object has been selected
                     return;
-            }
+            };
         };
     };
+
+    // returns true if mouse position is outside a selected object
+    const isOutsideBorder = (object) => {
+        if (object.selected) {
+            return checkMouseIsOutsideObjectBorder(gridLocation, object);
+        } else {
+            return true;
+        }
+    }
+
+    //deselect all selected objects if mouse click is outside all of selected objects' border
+    if (objects.every(isOutsideBorder)) {
+        objects.forEach(object =>{
+            object.deselectObject();
+        });
+        canvasElement.style.cursor = "pointer";
+    }
 }
 
 
@@ -106,7 +112,7 @@ function checkMouseOverCorner(object, mousePosition, canvasElement) {
 }
 
 // check if the mouse location is within the border of a specific object
-function checkMouseIsInsideObjectBorder(currentGridLocation, object) {
+function checkMouseIsOutsideObjectBorder(currentGridLocation, object) {
     let xLimits = {
         min: object.rectCorners.topL.x,
         max: object.rectCorners.topR.x
@@ -121,13 +127,17 @@ function checkMouseIsInsideObjectBorder(currentGridLocation, object) {
     }
 
     if ( 
-        mouseLocation.x > xLimits.min && mouseLocation.x < xLimits.max
+        mouseLocation.x > xLimits.min 
+        && 
+        mouseLocation.x < xLimits.max
         &&
-        mouseLocation.y > yLimits.min && mouseLocation.y < yLimits.max
+        mouseLocation.y > yLimits.min 
+        && 
+        mouseLocation.y < yLimits.max
         ) {
-            return true;
+            return false;
     } else {
-        return false;
+            return true;
     }
 }
 
