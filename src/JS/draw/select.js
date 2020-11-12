@@ -1,9 +1,6 @@
 import { get } from 'svelte/store';
 import { gridDimension } from '../constants/canvasSize.js';
-import { cornerSelected, editMode } from '../constants/objectStates.js';
 import { canvasObjects } from '../stores/objects.js';
-import { cursesCanvas } from '../stores/project.js';
-
 
 function selectObject(gridLocation, canvasElement) {
     let objects = get(canvasObjects);
@@ -47,37 +44,6 @@ function selectObject(gridLocation, canvasElement) {
     }
 }
 
-
-function editObject(isDrawing, currentGridLocation, canvasElement) {
-    let canvasItems = get(canvasObjects);
-    let mousePosition = get(cursesCanvas).mousePosition;
-
-    canvasItems.forEach(object => {
-        if (object.selected) {
-            //move the object to the end of the items array so it is drawn last
-            canvasItems.push(canvasItems.splice(canvasItems.indexOf(object), 1)[0]);
-            
-            //check whether the mouse is placed to resize or move the object
-            if (!isDrawing) {
-                checkMouseOverCorner(object, mousePosition, canvasElement);
-            }
-
-            // once the button is held, carry out either the resize or the move
-            if (isDrawing) {
-                switch(object.editMode) {
-                    case(editMode.MOVE):
-                        object.updatePosition(currentGridLocation);
-                        canvasElement.style.cursor = "grabbing";
-                        break;
-                    case(editMode.RESIZE):
-                        object.resizeObject(currentGridLocation);
-                        break;
-                }
-            }
-        }
-    });
-}
-
 // get the location of where the mouse is pressed on the object from its reference position
 function getMouseOffset(gridLocation) {
     let canvasItems = get(canvasObjects);
@@ -89,27 +55,6 @@ function getMouseOffset(gridLocation) {
     });
 }
 
-function checkMouseOverCorner(object, mousePosition, canvasElement) {
-    // check if the mouse is over the highlighting rectangle's corner
-    let cornerUnderMouse = object.isMouseOverCorner(mousePosition);
-
-    switch(cornerUnderMouse) {
-        case(cornerSelected.TL):
-        case(cornerSelected.BR):
-            canvasElement.style.cursor = "nwse-resize";
-            object.selectForResizing();
-            break;
-        case(cornerSelected.TR):
-        case(cornerSelected.BL):
-            canvasElement.style.cursor = "nesw-resize";
-            object.selectForResizing();
-            break;
-        case(cornerSelected.NONE):
-            canvasElement.style.cursor = "grab";
-            object.selectForMoving();
-            break;
-    }
-}
 
 // check if the mouse location is within the border of a specific object
 function checkMouseIsOutsideObjectBorder(currentGridLocation, object) {
@@ -141,4 +86,4 @@ function checkMouseIsOutsideObjectBorder(currentGridLocation, object) {
     }
 }
 
-export { selectObject, editObject, getMouseOffset }
+export { selectObject, getMouseOffset }

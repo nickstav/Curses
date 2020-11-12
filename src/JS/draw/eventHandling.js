@@ -4,7 +4,8 @@ import { canvasObjects } from '../stores/objects.js';
 
 import { tools } from '../constants/toolsList.js';
 import { updateCanvas } from './updateCanvas.js';
-import { selectObject, editObject, getMouseOffset } from './drag.js';
+import { editObject } from './edit.js';
+import { selectObject, getMouseOffset } from './select.js';
 import { handleKeyboardShortcuts } from './keyShortcuts.js';
 import { duplicateObject } from './duplicate.js';
 import { getGridLocation } from './location.js';
