@@ -6,6 +6,7 @@ import { tools } from '../constants/toolsList.js';
 import { updateCanvas } from './updateCanvas.js';
 import { selectObject, editObject, getMouseOffset } from './drag.js';
 import { handleKeyboardShortcuts } from './keyShortcuts.js';
+import { duplicateObject } from './duplicate.js';
 import { getGridLocation } from './location.js';
 
 
@@ -13,6 +14,7 @@ import { TextItem } from '../items/textItem.js';
 import { LineItem } from '../items/lineItem.js';
 import { RectangleItem } from '../items/rectangleItem.js';
 import { ProgressBarItem } from '../items/progressBarItem.js';
+import { keyboardKeys } from '../constants/keyboardKeys.js';
 
 
 
@@ -141,7 +143,11 @@ function handleMouseEnter() {
 }
 
 function handleKeyDown(event) {
-    handleKeyboardShortcuts(event.key);
+    if (event.ctrlKey && event.key === keyboardKeys.D) {
+        duplicateObject();
+    } else {
+        handleKeyboardShortcuts(event.key);
+    }
     updateCanvas();
 }
 
