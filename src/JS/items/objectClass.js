@@ -16,7 +16,7 @@ export class CanvasItem {
         this.filledSquares = [];
         /* variables to help highlight and drag the object */
         this.endPosition = undefined;
-        this.mouseOffset = undefined;
+        this.mouseOffset = {x: 0, y: 0};
         this.rectRefPoint = undefined;
         this.rectWidth = undefined;
         this.rectCorners = undefined;

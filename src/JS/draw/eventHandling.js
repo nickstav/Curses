@@ -5,8 +5,9 @@ import { canvasObjects } from '../stores/objects.js';
 import { tools } from '../constants/toolsList.js';
 import { updateCanvas } from './updateCanvas.js';
 import { selectObject, editObject, getMouseOffset } from './drag.js';
-import { eraseObject } from './erase.js';
+import { handleKeyboardShortcuts } from './keyShortcuts.js';
 import { getGridLocation } from './location.js';
+
 
 import { TextItem } from '../items/textItem.js';
 import { LineItem } from '../items/lineItem.js';
@@ -134,16 +135,14 @@ function handleMouseOut() {
 // turn on square highlighting for relevant tools
 function handleMouseEnter() {
     let toolSelected = get(cursesCanvas).tool;
-    if (toolSelected === tools.TEXT || toolSelected === tools.PROGRESS) {
+    if (toolSelected === tools.TEXT || toolSelected === tools.PROGRESS || toolSelected === tools.KEYBOARD) {
         cursesCanvas.turnOnSquareHighlighting();
     }
 }
 
 function handleKeyDown(event) {
-    if (event.key === "Backspace" || event.key === "Delete") {
-        eraseObject();
-        updateCanvas();
-    }
+    handleKeyboardShortcuts(event.key);
+    updateCanvas();
 }
 
 export { 
