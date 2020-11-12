@@ -3,10 +3,16 @@ import { cursesCanvas } from '../stores/project.js';
 import { canvasObjects } from '../stores/objects.js';
 
 import { tools } from '../constants/toolsList.js';
+import { keyboardKeys } from '../constants/keyboardKeys.js';
+import { selectStyle } from '../constants/selectTool.js';
+
 import { updateCanvas } from './updateCanvas.js';
-import { selectObject, editObject, getMouseOffset } from './drag.js';
-import { eraseObject } from './erase.js';
+import { editObject } from './edit.js';
+import { selectObject, selectAreaOnGrid, selectObjectsInsideArea,getMouseOffset } from './select.js';
+import { handleKeyboardShortcuts } from './keyShortcuts.js';
+import { duplicateObject } from './duplicate.js';
 import { getGridLocation } from './location.js';
+
 
 import { TextItem } from '../items/textItem.js';
 import { LineItem } from '../items/lineItem.js';
@@ -17,6 +23,7 @@ import { ProgressBarItem } from '../items/progressBarItem.js';
 
 function handleMouseClick(event) {
     let toolSelected = get(cursesCanvas).tool;
+    let selectMethod = get(cursesCanvas).selectMethod;
     let canvasElement = get(cursesCanvas).canvasElement;
     
     cursesCanvas.updateMousePosition(event, canvasElement);
@@ -34,7 +41,12 @@ function handleMouseClick(event) {
             canvasObjects.saveObjectToStore(new ProgressBarItem(gridLocation));
             break;
         case(tools.DRAG):
-            selectObject(gridLocation, canvasElement); 
+            if (selectMethod === selectStyle.OBJECTS) {
+                selectObject(gridLocation, canvasElement);
+            } else {
+                // now mouse has been released, change select method to objects to allow for manipulation
+                cursesCanvas.changeSelectMethodToGrab();
+            }
             break;  
     } 
 
@@ -68,6 +80,7 @@ function handleMouseMove(event) {
     let isDrawing = get(cursesCanvas).isDrawing;
     let toolSelected = get(cursesCanvas).tool;
     let canvasElement = get(cursesCanvas).canvasElement;
+    let selectMethod = get(cursesCanvas).selectMethod;
 
     let startPosition = get(cursesCanvas).startPosition;
     let startGridLocation = getGridLocation(startPosition);
@@ -91,7 +104,15 @@ function handleMouseMove(event) {
             }
             break;
         case(tools.DRAG):
-            editObject(isDrawing, currentGridLocation, canvasElement);
+            if (selectMethod === selectStyle.AREA) {
+                canvasElement.style.cursor = "crosshair";
+                if (isDrawing) {
+                    liveObject = selectAreaOnGrid(startGridLocation, currentGridLocation)
+                }
+            } else {
+                editObject(isDrawing, currentGridLocation, canvasElement);
+                canvasElement.style.cursor = "pointer";
+            }
             break;
     };
 
@@ -102,7 +123,7 @@ function handleMouseMove(event) {
 // if mouse button is released, canvas is no longer being drawn on
 function handleMouseRelease() {
     let toolSelected = get(cursesCanvas).tool;
-    let canvasElement = get(cursesCanvas).canvasElement;
+    let selectMethod = get(cursesCanvas).selectMethod;
 
     cursesCanvas.stopDrawing();
 
@@ -119,9 +140,12 @@ function handleMouseRelease() {
             canvasObjects.saveObjectToStore(new RectangleItem(startGridLocation, currentGridLocation));
             break;
         case(tools.DRAG):
-            canvasElement.style.cursor = "pointer";
+            if (selectMethod === selectStyle.AREA) {
+                selectObjectsInsideArea();
+            }
             break;
     }
+    updateCanvas();
 }
 
 // turn off any drawing & ensure canvas remains up to date when the mouse leaves the canvas window
@@ -134,16 +158,18 @@ function handleMouseOut() {
 // turn on square highlighting for relevant tools
 function handleMouseEnter() {
     let toolSelected = get(cursesCanvas).tool;
-    if (toolSelected === tools.TEXT || toolSelected === tools.PROGRESS) {
+    if (toolSelected === tools.TEXT || toolSelected === tools.PROGRESS || toolSelected === tools.KEYBOARD) {
         cursesCanvas.turnOnSquareHighlighting();
     }
 }
 
 function handleKeyDown(event) {
-    if (event.key === "Backspace" || event.key === "Delete") {
-        eraseObject();
-        updateCanvas();
+    if (event.shiftKey && event.key === keyboardKeys.D) {
+        duplicateObject();
+    } else {
+        handleKeyboardShortcuts(event.key);
     }
+    updateCanvas();
 }
 
 export { 

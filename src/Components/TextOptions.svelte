@@ -9,7 +9,7 @@
     </p>
     <div id="radioButtons">
         <input type="radio" bind:group={$cursesCanvas.textNewLine} value={textNewLine.TOLEFT}>
-        <label for="male">to the left</label>
+        <label for="toLeft">to the left</label>
         <input type="radio" bind:group={$cursesCanvas.textNewLine} value={textNewLine.INDENTED}>
         <label for="indented">indented</label>
     </div>

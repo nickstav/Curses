@@ -1,6 +1,7 @@
 <script>
 	import Toolbar from './Components/Toolbar.svelte';
 	import Canvas from './Components/Canvas.svelte';
+	import Shortcuts from './Components/Shortcuts.svelte';
 </script>
 
 <main class="w-full h-full flex flex-col items-center text-center">
