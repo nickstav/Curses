@@ -12,6 +12,7 @@ import { selectStyle } from '../constants/selectTool.js';
     textNewLine: 'indented',
     selectMethod: selectStyle.OBJECTS,
     selectedAreaCoords: [],
+    indexOfFirstSelectedObject: undefined,
     sizeOfProgressBar: 4,
     showProgressPercentage: true,
     startPosition: {x: 0, y: 0},
@@ -126,6 +127,24 @@ function setUpStore() {
     });
   }
 
+  function markObjectIndexAsFirstSelected(index) {
+    update(status => {
+      return {
+          ...status,
+          indexOfFirstSelectedObject: index
+      };
+    });
+  }
+
+  function removeFirstSelectedObject() {
+    update(status => {
+      return {
+          ...status,
+          indexOfFirstSelectedObject: undefined
+      };
+    });
+  }
+
   return {
 	  subscribe,
     set,
@@ -139,7 +158,9 @@ function setUpStore() {
     updateStartPosition,
     updateMousePosition,
     saveSelectedAreaCoords,
-    changeSelectMethodToGrab
+    changeSelectMethodToGrab,
+    markObjectIndexAsFirstSelected,
+    removeFirstSelectedObject
 	};
 
 }

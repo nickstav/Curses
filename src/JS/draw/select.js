@@ -27,6 +27,12 @@ function selectObject(gridLocation, canvasElement) {
                     // if mouse location matches an object's location, mark it as selected
                     objects[z].selectObject();
                     canvasElement.style.cursor = "grab";
+
+                    // if no other object has been marked as first clicked, mark the current object's index
+                    if (get(cursesCanvas).indexOfFirstSelectedObject === undefined) {
+                        cursesCanvas.markObjectIndexAsFirstSelected(objects.indexOf(objects[z]));
+                    }
+
                     //stop the loop once one object has been selected
                     return;
             };
@@ -141,6 +147,8 @@ function checkClickLocationToDeselectObjects(objects, gridLocation, canvasElemen
             object.deselectObject();
         });
         canvasElement.style.cursor = "pointer";
+        // remove the first selected object's index from the project store
+        cursesCanvas.removeFirstSelectedObject();
     }
 }
 

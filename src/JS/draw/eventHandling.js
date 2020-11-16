@@ -8,7 +8,8 @@ import { selectStyle } from '../constants/selectTool.js';
 
 import { updateCanvas } from './updateCanvas.js';
 import { editObject } from './edit.js';
-import { selectObject, selectAreaOnGrid, selectObjectsInsideArea,getMouseOffset } from './select.js';
+import { alignObjects } from './offset.js';
+import { selectObject, selectAreaOnGrid, getMouseOffset } from './select.js';
 import { handleKeyboardShortcuts } from './keyShortcuts.js';
 import { duplicateObject } from './duplicate.js';
 import { getGridLocation } from './location.js';
@@ -160,6 +161,13 @@ function handleMouseEnter() {
 function handleKeyDown(event) {
     if (event.shiftKey && event.key === keyboardKeys.D) {
         duplicateObject();
+    } else if (event.shiftKey && (
+        event.key === keyboardKeys.LEFT || 
+        event.key === keyboardKeys.UP || 
+        event.key === keyboardKeys.RIGHT || 
+        event.key === keyboardKeys.DOWN)
+        ) {
+            alignObjects(event.key);
     } else {
         handleKeyboardShortcuts(event.key);
     }
