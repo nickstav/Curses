@@ -3,13 +3,11 @@
     import { textNewLine } from '../JS/constants/toolsList.js';
 </script>
 
-<div id="textOptions" class="bg-gray-300 w-full h-10 text-xs flex flex-col justify-center items-center py-0 px-5">
-    <p>
-        Select whether text continues on a new line indented, or to the left of the canvas
-    </p>
-    <div id="radioButtons">
+<div id="textOptions" class="bg-gray-400 w-20 h-full text-xs flex flex-col justify-center items-center py-0 px-5">
+    <div id="radioButtons" class="flex flex-col items-center">
         <input type="radio" bind:group={$cursesCanvas.textNewLine} value={textNewLine.TOLEFT}>
         <label for="toLeft">to the left</label>
+        <br>
         <input type="radio" bind:group={$cursesCanvas.textNewLine} value={textNewLine.INDENTED}>
         <label for="indented">indented</label>
     </div>
