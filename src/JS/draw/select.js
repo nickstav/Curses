@@ -100,7 +100,7 @@ function selectObjectsInsideArea() {
                 &&
                 object.filledSquares[i].y > areaInfo.topLeftCorner.y
                 &&
-                object.filledSquares[i].y < areaInfo.bottomRightCorner.y
+                object.filledSquares[i].y < areaInfo.bottomRightCorner.y + 1
             ) {
                 // if any object falls within current selected area, highlight it
                 object.selectObject(); 

@@ -123,7 +123,6 @@ function handleMouseMove(event) {
 // if mouse button is released, canvas is no longer being drawn on
 function handleMouseRelease() {
     let toolSelected = get(cursesCanvas).tool;
-    let selectMethod = get(cursesCanvas).selectMethod;
 
     cursesCanvas.stopDrawing();
 
