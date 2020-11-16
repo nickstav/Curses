@@ -139,11 +139,6 @@ function handleMouseRelease() {
         case(tools.RECTANGLE):
             canvasObjects.saveObjectToStore(new RectangleItem(startGridLocation, currentGridLocation));
             break;
-        case(tools.DRAG):
-            if (selectMethod === selectStyle.AREA) {
-                selectObjectsInsideArea();
-            }
-            break;
     }
     updateCanvas();
 }

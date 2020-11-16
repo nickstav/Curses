@@ -39,7 +39,7 @@ function selectObject(gridLocation, canvasElement) {
 
 /* -------------------------------------------------------------------------------------------------- */
 
-//return a rectangle to highlight an area on the grid, and update the store's selected area coords
+//return a live object to highlight an area on the grid, and update the store's selected area coords
 function selectAreaOnGrid(startGridLocation, currentGridLocation) {
 
     let liveObject = {
@@ -47,11 +47,16 @@ function selectAreaOnGrid(startGridLocation, currentGridLocation) {
         startCoords: startGridLocation,
         endCoords: currentGridLocation
     }
+
     cursesCanvas.saveSelectedAreaCoords(startGridLocation, currentGridLocation);
+
+    //highlight all objects within the selected area
+    selectObjectsInsideArea();
 
     return liveObject;
 }
 
+// draw the highlighting rectangle for the selected area
 function drawHighlightingRectangle(startCoords, endCoords) {
     let context = get(cursesCanvas).context;
     let areaInfo = getSelectedAreaCoords([startCoords, endCoords]);
@@ -82,6 +87,10 @@ function selectObjectsInsideArea() {
     let areaInfo = getSelectedAreaCoords(selectedAreaCoords);
 
     canvasItems.forEach(object => {
+
+        //deselect all objects at the start of each updated position
+        object.deselectObject();
+
         // loop through object's grid squares
         for (let i = 0; i < object.filledSquares.length; i++) {
             if (
@@ -93,7 +102,8 @@ function selectObjectsInsideArea() {
                 &&
                 object.filledSquares[i].y < areaInfo.bottomRightCorner.y
             ) {
-               object.selectObject(); 
+                // if any object falls within current selected area, highlight it
+                object.selectObject(); 
             }
         };
     });
