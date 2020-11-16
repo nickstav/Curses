@@ -23,9 +23,16 @@ function selectObject(gridLocation, canvasElement) {
                 && 
                 gridLocation.y + 1 === objects[z].filledSquares[i].y
                 ) {
+
                     // if mouse location matches an object's location, mark it as selected
                     objects[z].selectObject();
                     canvasElement.style.cursor = "grab";
+
+                    // if no other object has been marked as first clicked, mark the current object's index
+                    if (get(cursesCanvas).indexOfFirstSelectedObject === undefined) {
+                        cursesCanvas.markObjectIndexAsFirstSelected(objects.indexOf(objects[z]));
+                    }
+
                     //stop the loop once one object has been selected
                     return;
             };
@@ -38,13 +45,44 @@ function selectObject(gridLocation, canvasElement) {
 
 /* -------------------------------------------------------------------------------------------------- */
 
-//return a rectangle to highlight an area on the grid, and update the store's selected area coords
+//return a live object to highlight an area on the grid, and update the store's selected area coords
 function selectAreaOnGrid(startGridLocation, currentGridLocation) {
 
-    let liveObject = new RectangleItem(startGridLocation, currentGridLocation);
+    let liveObject = {
+        type: 'highlighting',
+        startCoords: startGridLocation,
+        endCoords: currentGridLocation
+    }
+
     cursesCanvas.saveSelectedAreaCoords(startGridLocation, currentGridLocation);
 
+    //highlight all objects within the selected area
+    selectObjectsInsideArea();
+
     return liveObject;
+}
+
+// draw the highlighting rectangle for the selected area
+function drawHighlightingRectangle(startCoords, endCoords) {
+    let context = get(cursesCanvas).context;
+    let areaInfo = getSelectedAreaCoords([startCoords, endCoords]);
+
+    context.beginPath();
+    context.fillStyle = 'rgb(100, 149, 237, 0.2)';
+    context.strokeStyle = "#6495ED";
+    context.fillRect(
+        areaInfo.topLeftCorner.x * gridDimension.x,
+        areaInfo.topLeftCorner.y * gridDimension.y,
+        (areaInfo.bottomRightCorner.x - areaInfo.topLeftCorner.x) * gridDimension.x,
+        (areaInfo.bottomRightCorner.y - areaInfo.topLeftCorner.y) * gridDimension.y
+    );
+    context.strokeRect(
+        areaInfo.topLeftCorner.x * gridDimension.x,
+        areaInfo.topLeftCorner.y * gridDimension.y,
+        (areaInfo.bottomRightCorner.x - areaInfo.topLeftCorner.x) * gridDimension.x,
+        (areaInfo.bottomRightCorner.y - areaInfo.topLeftCorner.y) * gridDimension.y
+    );
+    context.stroke();
 }
 
 // check if any part of an object is in the highlighted area and select it if so
@@ -55,6 +93,10 @@ function selectObjectsInsideArea() {
     let areaInfo = getSelectedAreaCoords(selectedAreaCoords);
 
     canvasItems.forEach(object => {
+
+        //deselect all objects at the start of each updated position
+        object.deselectObject();
+
         // loop through object's grid squares
         for (let i = 0; i < object.filledSquares.length; i++) {
             if (
@@ -64,9 +106,10 @@ function selectObjectsInsideArea() {
                 &&
                 object.filledSquares[i].y > areaInfo.topLeftCorner.y
                 &&
-                object.filledSquares[i].y < areaInfo.bottomRightCorner.y
+                object.filledSquares[i].y < areaInfo.bottomRightCorner.y + 1
             ) {
-               object.selectObject(); 
+                // if any object falls within current selected area, highlight it
+                object.selectObject(); 
             }
         };
     });
@@ -104,6 +147,8 @@ function checkClickLocationToDeselectObjects(objects, gridLocation, canvasElemen
             object.deselectObject();
         });
         canvasElement.style.cursor = "pointer";
+        // remove the first selected object's index from the project store
+        cursesCanvas.removeFirstSelectedObject();
     }
 }
 
@@ -156,4 +201,4 @@ function getSelectedAreaCoords(savedCoords) {
     }
 }
 
-export { selectObject, selectAreaOnGrid, selectObjectsInsideArea, getMouseOffset }
+export { selectObject, drawHighlightingRectangle, selectAreaOnGrid, selectObjectsInsideArea, getMouseOffset }

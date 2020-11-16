@@ -2,6 +2,7 @@ import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/project.js';
 import { canvasObjects } from '../stores/objects.js';
 import { highlightSquares } from './location.js';
+import { drawHighlightingRectangle } from './select.js';
 
 
 function updateCanvas(liveObject=null) {
@@ -17,7 +18,11 @@ function updateCanvas(liveObject=null) {
 
     // draw any live objects currently being drawn
     if (liveObject !== null) {
-        liveObject.draw();
+        if (liveObject.type === "highlighting") {
+            drawHighlightingRectangle(liveObject.startCoords, liveObject.endCoords);
+        } else {
+            liveObject.draw();
+        }
     }
 
     //highlight the current square if highlighting is turned on

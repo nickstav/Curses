@@ -9,7 +9,7 @@ function editObject(isDrawing, currentGridLocation, canvasElement) {
 
     canvasItems.forEach(object => {
         if (object.selected) {
-            //move the object to the end of the items array so it is drawn last
+            //move the object to the end of the items array so it is drawn over other objects when moved
             canvasItems.push(canvasItems.splice(canvasItems.indexOf(object), 1)[0]);
             
             //check whether the mouse is placed to resize or move the object

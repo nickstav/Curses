@@ -2,9 +2,6 @@
     import SizeInput from './SizeInput.svelte';
     import SizeParagraph from './SizeParagraph.svelte';
     import Button from './Button.svelte';
-    import TextOptions from './TextOptions.svelte';
-    import ProgressOptions from './ProgressOptions.svelte';
-    import SelectOptions from './SelectOptions.svelte';
 
     import { cursesCanvas } from '../JS/stores/project.js';
     import { changeTool } from '../JS/items/selectTool.js';
@@ -24,11 +21,4 @@
         <Button editCanvas={()=>{changeTool(tools.DRAG)}} img={"url('./button_images/select.png')"}/>
     </div>
 </div>
-{#if $cursesCanvas.tool === tools.TEXT}
-    <TextOptions/>
-{:else if $cursesCanvas.tool === tools.PROGRESS}
-    <ProgressOptions/>
-{:else if $cursesCanvas.tool === tools.DRAG}
-    <SelectOptions/>
-{/if}
 <SizeParagraph/>
