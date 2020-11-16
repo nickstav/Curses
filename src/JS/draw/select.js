@@ -23,6 +23,7 @@ function selectObject(gridLocation, canvasElement) {
                 && 
                 gridLocation.y + 1 === objects[z].filledSquares[i].y
                 ) {
+
                     // if mouse location matches an object's location, mark it as selected
                     objects[z].selectObject();
                     canvasElement.style.cursor = "grab";
@@ -41,10 +42,36 @@ function selectObject(gridLocation, canvasElement) {
 //return a rectangle to highlight an area on the grid, and update the store's selected area coords
 function selectAreaOnGrid(startGridLocation, currentGridLocation) {
 
-    let liveObject = new RectangleItem(startGridLocation, currentGridLocation);
+    let liveObject = {
+        type: 'highlighting',
+        startCoords: startGridLocation,
+        endCoords: currentGridLocation
+    }
     cursesCanvas.saveSelectedAreaCoords(startGridLocation, currentGridLocation);
 
     return liveObject;
+}
+
+function drawHighlightingRectangle(startCoords, endCoords) {
+    let context = get(cursesCanvas).context;
+    let areaInfo = getSelectedAreaCoords([startCoords, endCoords]);
+
+    context.beginPath();
+    context.fillStyle = 'rgb(100, 149, 237, 0.2)';
+    context.strokeStyle = "#6495ED";
+    context.fillRect(
+        areaInfo.topLeftCorner.x * gridDimension.x,
+        areaInfo.topLeftCorner.y * gridDimension.y,
+        (areaInfo.bottomRightCorner.x - areaInfo.topLeftCorner.x) * gridDimension.x,
+        (areaInfo.bottomRightCorner.y - areaInfo.topLeftCorner.y) * gridDimension.y
+    );
+    context.strokeRect(
+        areaInfo.topLeftCorner.x * gridDimension.x,
+        areaInfo.topLeftCorner.y * gridDimension.y,
+        (areaInfo.bottomRightCorner.x - areaInfo.topLeftCorner.x) * gridDimension.x,
+        (areaInfo.bottomRightCorner.y - areaInfo.topLeftCorner.y) * gridDimension.y
+    );
+    context.stroke();
 }
 
 // check if any part of an object is in the highlighted area and select it if so
@@ -156,4 +183,4 @@ function getSelectedAreaCoords(savedCoords) {
     }
 }
 
-export { selectObject, selectAreaOnGrid, selectObjectsInsideArea, getMouseOffset }
+export { selectObject, drawHighlightingRectangle, selectAreaOnGrid, selectObjectsInsideArea, getMouseOffset }
