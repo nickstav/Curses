@@ -1,0 +1,21 @@
+{
+    "width": 50,
+    "height": 20,
+    "text": {
+        "message": "Och helloooo!",
+        "position": [4, 10]
+    },
+    "line": {
+        "start": [35,10],
+        "end": [35, 20]
+    },
+    "rectangle": {
+        "start": [20,10],
+        "end": [30, 18]
+    },
+    "progress": {
+        "position": [37,18],
+        "bars": 6,
+        "percentage": 50
+    }
+}
