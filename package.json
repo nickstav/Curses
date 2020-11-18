@@ -2,9 +2,11 @@
   "name": "curses",
   "version": "1.0.0",
   "scripts": {
+    "serverStart": "cd server && node server.js",
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public"
+    "start": "sirv public",
+    "project": "npm-run-all -p serverStart dev"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^1.3.0",
@@ -23,6 +25,11 @@
     "tailwindcss": "^1.1.4"
   },
   "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "npm-run-all": "^4.1.5",
+    "path": "^0.12.7",
+    "pipe": "^1.1.0",
     "sirv-cli": "^0.4.4"
   }
 }
