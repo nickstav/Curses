@@ -1,5 +1,8 @@
 /* ----------------------Get required npm packages------------------------------*/
 
+const pipe = require('./pipe');
+const test = require('./test');
+
 const express = require("express");
 const cors = require("cors");
 const path = require('path');
@@ -12,6 +15,9 @@ app.use(cors());
 app.use(express.static('../public'));
 app.use(express.json({ limit: '1mb' }));
 app.listen(port, () => console.log(`Server running at http://localhost:${port}`));
+
+//define absolute path to encode python file
+let pythonPath = path.resolve(__dirname, '..', 'python', 'javaTest.py');
 
 /* --------------------Interaction with the front end---------------------------*/
 
@@ -34,3 +40,5 @@ async function getUserCanvas(req, res) {
         console.log(error);
     }
 }
+
+pipe.sendDataToPythonScript(JSON.stringify(test.test), pythonPath)

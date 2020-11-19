@@ -11,11 +11,15 @@ from objects.progress import drawProgressBar
 # ----------------------------------------------------------------------------------------------- #
 
 # Get the required window size and objects
+#data = sys.argv[1]
+#params = json.loads(data)
 params = getUserData()
 textData = Namespace(**params['text'])
 lineData = Namespace(**params['line'])
 rectData = Namespace(**params['rectangle'])
 progressData = Namespace(**params['progress'])
+
+print(params)
 
 # ----------------------------------------------------------------------------------------------- #
 
