@@ -1,6 +1,5 @@
 /* ----------------------Get required npm packages------------------------------*/
 
-const pipe = require('./pipe');
 const express = require("express");
 const cors = require("cors");
 const path = require('path');
@@ -16,7 +15,7 @@ app.listen(port, () => console.log(`Server running at http://localhost:${port}`)
 
 /* --------------------Interaction with the front end---------------------------*/
 
-app.get('/userCanvas', getUserCanvas);
+app.post('/userCanvas', getUserCanvas);
 
 
 async function getUserCanvas(req, res) {
