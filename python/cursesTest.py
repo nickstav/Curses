@@ -3,25 +3,23 @@ import json
 import sys, os
 from argparse import Namespace
 
+from userData import getUserData
 from objects.text import addText
 from objects.lines import drawLine
 from objects.rectangle import drawRectangle
 from objects.progress import drawProgressBar
 
-# ----------------------------------------------------------------------------------------------- #
-
 # Get the required window size and objects
-data = sys.argv[1]
-params = json.loads(data)
+#data = sys.argv[1]
+#params = json.loads(data)
+params = getUserData()
 
 textData = params['text']
 lineData = params['line']
 rectData = params['rectangle']
 progressData = params['progress']
 
-#print(textData)
-
-# ----------------------------------------------------------------------------------------------- #
+print(textData)
 
 def draw_canvas(stdscr):
     k = 0

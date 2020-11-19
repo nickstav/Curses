@@ -13,7 +13,7 @@ async function sendDataToPythonScript(data, filePath) {
         //python.stdin.write(data);
 
         python.stdout.on('data', (data)=>{
-            collectData(data)
+            getResponse(data)
         });
         
 		// the 'close' event is emitted when the stdio streams of a child process have been closed. 
@@ -39,7 +39,7 @@ function confirmClosed(code, resolve, reject) {
     }
 }
 
-function collectData(data) {
+function getResponse(data) {
     //collect all the output from python as a string
     let pythonOutputString = data.toString();
     // return the string to the variable declared in parent function

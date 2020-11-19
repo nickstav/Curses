@@ -17,7 +17,7 @@ app.use(express.json({ limit: '1mb' }));
 app.listen(port, () => console.log(`Server running at http://localhost:${port}`));
 
 //define absolute path to encode python file
-let pythonPath = path.resolve(__dirname, '..', 'python', 'javaTest.py');
+let pythonPath = path.resolve(__dirname, '..', 'python', 'pipeTest.py');
 
 /* --------------------Interaction with the front end---------------------------*/
 
