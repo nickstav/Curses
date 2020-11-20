@@ -1,25 +1,19 @@
-import curses
-import json
-import sys, os
-from argparse import Namespace
+const imports = `
+    import curses 
+    import json
+    import sys
+    from argparse import Namespace
+    from curses.textpad import Textbox, rectangle
+`;
 
-from userData import getUserData
-from objects.text import addText
-from objects.lines import drawLine
-from objects.rectangle import drawRectangle
-from objects.progress import drawProgressBar
-
+const cursesScript = `
 # Get the required window size and objects
-#data = sys.argv[1]
-#params = json.loads(data)
-params = getUserData()
+userData = json.loads(canvasData)
 
-textData = params['text']
-lineData = params['line']
-rectData = params['rectangle']
-progressData = params['progress']
-
-print(textData)
+textData = userData['text']
+lineData = userData['line']
+rectData = userData['rectangle']
+progressData = userData['progress']
 
 def draw_canvas(stdscr):
     k = 0
@@ -35,7 +29,7 @@ def draw_canvas(stdscr):
     curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_CYAN)
 
     # define the userWindow (format: lines, columns, start line, start column)
-    userWindow = curses.newwin(params['height'], params['width'], 0, 0)
+    userWindow = curses.newwin(userData['height'], userData['width'], 0, 0)
 
     # Loop where k is the last character key pressed
     while (k != ord('q')):
@@ -81,3 +75,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+`;
+
+export { imports, cursesScript }

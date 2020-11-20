@@ -18,7 +18,9 @@ import { selectStyle } from '../constants/selectTool.js';
     startPosition: {x: 0, y: 0},
     isDrawing: false,
     isHighlighting: false,
-    mousePosition: {x: 0, y: 0}
+    mousePosition: {x: 0, y: 0},
+    pythonScript: '',
+    showPythonScript: false
 };
 
 function setUpStore() {
@@ -145,6 +147,25 @@ function setUpStore() {
     });
   }
 
+  function updatePythonScript(string) {
+    update(status => {
+      return {
+          ...status,
+          pythonScript: string
+      };
+    });
+  }
+
+  function toggleShowPythonScript() {
+    update(status => {
+      return {
+          ...status,
+          showPythonScript: !status.showPythonScript
+      };
+    });
+  }
+  
+
   return {
 	  subscribe,
     set,
@@ -160,7 +181,9 @@ function setUpStore() {
     saveSelectedAreaCoords,
     changeSelectMethodToGrab,
     markObjectIndexAsFirstSelected,
-    removeFirstSelectedObject
+    removeFirstSelectedObject,
+    updatePythonScript,
+    toggleShowPythonScript
 	};
 
 }

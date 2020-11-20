@@ -1,5 +1,5 @@
 <script>
-    import { saveCanvas } from '../JS/export.js';
+    import { saveCanvas } from '../JS/python/export.js';
 </script>
 
 <div style="--imgSource: url('./button_images/export.png')" class="px-6">

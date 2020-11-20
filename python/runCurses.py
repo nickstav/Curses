@@ -1,6 +1,6 @@
 import curses
 import json
-import sys, os
+import sys
 from argparse import Namespace
 
 from objects.text import addText
@@ -12,12 +12,12 @@ from objects.progress import drawProgressBar
 
 # Get the required window size and objects
 data = sys.argv[1]
-params = json.loads(data)
+userData = json.loads(data)
 
-textData = params['text']
-lineData = params['line']
-rectData = params['rectangle']
-progressData = params['progress']
+textData = userData['text']
+lineData = userData['line']
+rectData = userData['rectangle']
+progressData = userData['progress']
 
 #print(textData)
 
@@ -37,7 +37,7 @@ def draw_canvas(stdscr):
     curses.init_pair(2, curses.COLOR_BLACK, curses.COLOR_CYAN)
 
     # define the userWindow (format: lines, columns, start line, start column)
-    userWindow = curses.newwin(params['height'], params['width'], 0, 0)
+    userWindow = curses.newwin(userData['height'], userData['width'], 0, 0)
 
     # Loop where k is the last character key pressed
     while (k != ord('q')):

@@ -1,40 +1,29 @@
 import { get } from 'svelte/store';
-import { cursesCanvas } from './stores/project.js';
-import { canvasObjects } from './stores/objects.js';
-import { tools } from './constants/toolsList.js';
+import { cursesCanvas } from '../stores/project.js';
+import { canvasObjects } from '../stores/objects.js';
+import { tools } from '../constants/toolsList.js';
+import { imports, cursesScript } from './curses.js';
+import { objectFunctions } from './pythonFunctions.js';
 
 // confirm that user is ready to export the canvas, then collect relevant data and send to the server
 export function saveCanvas() {
     let confirmation = confirm("Are you sure you wish to export this canvas?");
 
     if (confirmation) {
-        let infoForServer = collectDataToSend();
-        sendCanvasInfoToServer(infoForServer);
+        let canvasInfo = collectDataToExport();
+        createPythonText(canvasInfo);
+        cursesCanvas.toggleShowPythonScript();
     }
 }
 
-// send info to the server address and receive a confirmation message upon receipt
-async function sendCanvasInfoToServer(info) {
-    const serverAddress = 'http://localhost:4000/userCanvas';
-    const options = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(info)
-      };
-
-    try {
-        const response = await fetch(serverAddress, options);
-        const confirmation = await response.json();
-        console.log(confirmation);
-      } catch (error) {
-        console.error(error);
-      };
+function createPythonText(canvasInfo) {
+    let dataString = `canvasData = ${canvasInfo}`;
+    let pythonScript = imports + dataString + objectFunctions + cursesScript;
+    cursesCanvas.updatePythonScript(pythonScript);
 }
 
 // obtain canvas dimensions and save relevant object data into a specified array for that object type
-function collectDataToSend() {
+function collectDataToExport() {
     let textObjects = [];
     let lineObjects = [];
     let rectObjects = [];
@@ -67,7 +56,7 @@ function collectDataToSend() {
         };
     });
 
-    let infoToSend = {
+    let infoToExport = {
         width: get(cursesCanvas).canvasWidth,
         height: get(cursesCanvas).canvasHeight,
         text: textObjects,
@@ -76,7 +65,7 @@ function collectDataToSend() {
         progress: progressObjects
     }
 
-    return infoToSend;
+    return infoToExport;
 }
 
 // since shapes can be drawn in a negative direction w.r.t. canvas coordinates,
