@@ -1,15 +1,19 @@
 <script>
     import { onMount } from 'svelte';
-    import { cursesCanvas } from '../JS/stores/store.js';
-    import { handleMouseClick, handleMouseMove, handleMouseDown, handleMouseRelease, handleMouseOut } from '../JS/draw/eventHandling.js';
+    import { cursesCanvas } from '../JS/stores/project.js';
     import { gridAxis } from '../JS/stores/grid.js';
-    
+    import { gridDimension } from '../JS/constants/canvasSize.js';
+
+    import { handleMouseClick, handleMouseMove, handleMouseDown, handleMouseRelease, handleMouseOut, handleMouseEnter, handleKeyDown } from '../JS/draw/eventHandling.js';
+  
     let canvas;
     onMount(()=> cursesCanvas.createCanvas(canvas));
 </script>
 
-<div id="canvasHolder" class="w-full flex justify-center items-center flex-1" style="--canvasW: {$gridAxis.x}px;--canvasH: {$gridAxis.y}px; --squareW: {$cursesCanvas.gridDimension.x}px; --squareH: {$cursesCanvas.gridDimension.y}px">
-    <div id="canvasBackground" style="width: var(--canvasW); height: var(--canvasH); background-image: url(./grid_square.png); background-size: var(--squareW) var(--squareH);">
+<svelte:window on:keydown={handleKeyDown}/>
+
+<div id="canvasHolder" class="w-full flex justify-center items-center flex-1 py-5" style="--canvasW: {$gridAxis.x}px;--canvasH: {$gridAxis.y}px; --squareW: {gridDimension.x}px; --squareH: {gridDimension.y}px">
+    <div id="canvasBackground" style="width: var(--canvasW); height: var(--canvasH); background-image: url(./black_square.png); background-size: var(--squareW) var(--squareH);">
         <canvas 
         bind:this={canvas}
         id="cursesCanvas" 
@@ -20,6 +24,7 @@
         on:mousedown={handleMouseDown}
         on:mouseup={handleMouseRelease}
         on:mouseout={handleMouseOut}
+        on:mouseenter={handleMouseEnter}
         >
     </canvas>
     </div>

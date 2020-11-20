@@ -1,18 +1,16 @@
 <script>
-    import { progressBarAppearance } from '../JS/stores/progressBarAppearance.js';
+    import { cursesCanvas } from '../JS/stores/project.js';
+    import { progressBarSize } from '../JS/stores/progressBar.js';
 </script>
 
-<div id="progressOptions" class="bg-gray-300 w-full h-10 text-xs flex justify-center items-center py-0 px-5">
-    <div id="titleInput">
-        <label for="title">Title:</label>
-        <input type="text" id="title" size="10" bind:value={$progressBarAppearance.title}>
+<div id="progressOptions" class="p-2 bg-gray-400 w-20 h-full text-xs flex flex-col justify-center items-center py-0 px-5">
+    <div id="barsInput" class="flex flex-col items-center">
+        <label for="bars">Total bars:</label>
+        <input type="number" id="bars" min={progressBarSize.min} max={progressBarSize.max} class="w-5" bind:value={$cursesCanvas.sizeOfProgressBar}>
     </div>
-    <div id="statusInput">
-        <label for="title">Status text:</label>
-        <input type="text" id="title" size="10" bind:value={$progressBarAppearance.status}>
-    </div>
-    <div id="barsInput">
-        <label for="bars">Number of bars:</label>
-        <input type="number" id="bars" min="4" max="20" size="4" bind:value={$progressBarAppearance.numberOfBars}>
+    <br>
+    <div id="checkbox" class="flex flex-col items-center">
+        <label for="showPerc">Show Percentage Value</label>
+        <input id="showPerc" type=checkbox bind:checked={$cursesCanvas.showProgressPercentage}>
     </div>
 </div>

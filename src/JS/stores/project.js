@@ -1,20 +1,24 @@
 import { writable } from 'svelte/store';
+import { selectStyle } from '../constants/selectTool.js';
 
 // a store to contain all variables related to the canvas element
 
  const defaultValues = {
     canvasHeight: 20,
     canvasWidth: 50,
-    minDimensions: {width: 5, height: 5},
-    maxDimensions: {width: 100, height: 100},
-    gridDimension: {x: 11, y: 24},
     canvasElement: undefined,
     context: undefined,
     tool: undefined,
+    textNewLine: 'indented',
+    selectMethod: selectStyle.OBJECTS,
+    selectedAreaCoords: [],
+    indexOfFirstSelectedObject: undefined,
+    sizeOfProgressBar: 4,
+    showProgressPercentage: true,
     startPosition: {x: 0, y: 0},
     isDrawing: false,
-    mousePosition: {x: 0, y: 0},
-    textNewLine: 'indented'
+    isHighlighting: false,
+    mousePosition: {x: 0, y: 0}
 };
 
 function setUpStore() {
@@ -78,11 +82,65 @@ function setUpStore() {
     });
   }
 
+  function turnOnSquareHighlighting() {
+    update(status => {
+      return {
+          ...status,
+          isHighlighting: true
+      };
+    });
+  }
+
+  function turnOffSquareHighlighting() {
+    update(status => {
+      return {
+          ...status,
+          isHighlighting: false
+      };
+    });
+  }
+
   function updateMousePosition(event, canvasElement) {
     update(status => {
       return {
           ...status,
           mousePosition: getMouseCanvasPosition(event, canvasElement)
+      };
+    });
+  }
+
+  function saveSelectedAreaCoords(startCoords, endCoords) {
+    update(status => {
+      return {
+          ...status,
+          selectedAreaCoords: [startCoords, endCoords]
+      };
+    });
+  }
+
+  function changeSelectMethodToGrab() {
+    update(status => {
+      return {
+          ...status,
+          selectMethod: selectStyle.OBJECTS
+      };
+    });
+  }
+
+  function markObjectIndexAsFirstSelected(index) {
+    update(status => {
+      return {
+          ...status,
+          indexOfFirstSelectedObject: index
+      };
+    });
+  }
+
+  function removeFirstSelectedObject() {
+    update(status => {
+      return {
+          ...status,
+          indexOfFirstSelectedObject: undefined
       };
     });
   }
@@ -95,8 +153,14 @@ function setUpStore() {
     changeCanvasTool,
     startDrawing,
     stopDrawing,
+    turnOnSquareHighlighting,
+    turnOffSquareHighlighting,
     updateStartPosition,
-    updateMousePosition
+    updateMousePosition,
+    saveSelectedAreaCoords,
+    changeSelectMethodToGrab,
+    markObjectIndexAsFirstSelected,
+    removeFirstSelectedObject
 	};
 
 }

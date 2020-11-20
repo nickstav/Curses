@@ -1,51 +1,58 @@
 import { get } from 'svelte/store';
-import { cursesCanvas } from '../stores/store.js';
-import { updateCanvas } from './updateCanvas.js';
+import { cursesCanvas } from '../stores/project.js';
+import { gridDimension } from '../constants/canvasSize.js';
+import { tools } from '../constants/toolsList.js';
 
 // function to return the coordinates of the grid square at which the mouse is at
 function getGridLocation(mousePosition) {
-    let gridDimension = get(cursesCanvas).gridDimension;
     return {
         x: Math.floor(mousePosition.x / gridDimension.x),
         y: Math.floor(mousePosition.y / gridDimension.y)
     }
 }
 
-// function to highlight the current grid square that the mouse is over
-function showCurrentSquare(event, canvasElement) {
-    cursesCanvas.updateMousePosition(event, canvasElement);
-    updateCanvas();
-    highlightSquare();
-}
-
-// function to highlight the grid location that the cursor is currently over
-function highlightSquare(){
+function highlightSquares(){
     let context = get(cursesCanvas).context;
-    let gridDimension = get(cursesCanvas).gridDimension;
     let currentLocation = get(cursesCanvas).mousePosition;
     let gridLocation = getGridLocation(currentLocation);
 
+    let numberOfSquaresToFill = getNumberOfSquaresToHighlight();
+
     context.fillStyle = 'rgb(100, 149, 237, 0.2)';
+    context.beginPath();
     context.fillRect(
-        gridLocation.x * gridDimension.x, 
+        gridLocation.x * gridDimension.x,
         gridLocation.y * gridDimension.y, 
-        gridDimension.x, 
+        gridDimension.x * numberOfSquaresToFill, 
         gridDimension.y
     );
     context.stroke();
 }
 
-// function to clear the grid square of any previous characters before adding a character
-function clearPreviousCharacter(gridLocation, gridDimension, context) {
-    context.clearRect(
-        gridLocation.x * gridDimension.x, 
-        (gridLocation.y - 1) * gridDimension.y,
-        gridDimension.x, 
-        gridDimension.y
-    );
-    /* note grid location is defined by the top corner. Text is added on top of this so we actually 
-       need to clear the rectangle above this point, hence the -1 correction 
-    */
+function getNumberOfSquaresToHighlight() {
+        let toolSelected = get(cursesCanvas).tool;
+        let progressBarInfo = {
+            showPerc: get(cursesCanvas).showProgressPercentage,
+            numberOfBars: get(cursesCanvas).sizeOfProgressBar
+        }
+
+        // define a varaible for the number of grid squares to highlight
+        let numberOfSquaresToFill;
+
+        if (toolSelected === tools.PROGRESS) {
+            // show the full area of a progress bar object at current grid location
+            if (progressBarInfo.showPerc) {
+                numberOfSquaresToFill = progressBarInfo.numberOfBars + 4;
+            } else {
+                numberOfSquaresToFill = progressBarInfo.numberOfBars;
+            }
+        } else {
+            // only highlight the square that the mouse is over
+            numberOfSquaresToFill = 1;
+        }
+
+        return numberOfSquaresToFill;
 }
 
-export { getGridLocation, showCurrentSquare, highlightSquare, clearPreviousCharacter }
+
+export { getGridLocation, highlightSquares }
