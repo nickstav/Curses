@@ -17,7 +17,9 @@ export function saveCanvas() {
 }
 
 function createPythonText(canvasInfo) {
-    let dataString = `canvasData = ${canvasInfo}`;
+    let dataString = `canvasData = ${JSON.stringify(canvasInfo)}
+    
+    `;
     let pythonScript = imports + dataString + objectFunctions + cursesScript;
     cursesCanvas.updatePythonScript(pythonScript);
 }
@@ -47,7 +49,7 @@ function collectDataToExport() {
                 break;
             case(tools.PROGRESS):
                 let progressInfo = {
-                    position: object.position,
+                    position: [object.position.x, object.position.y],
                     bars: object.numberOfBars,
                     percentage: object.percentageValue
                 };
