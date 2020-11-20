@@ -1,5 +1,5 @@
 const imports = `
-    import curses 
+    import curses
     import json
     import sys
     from argparse import Namespace
