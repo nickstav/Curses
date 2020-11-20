@@ -1,9 +1,10 @@
 const imports = `
-    import curses
-    import json
-    import sys
-    from argparse import Namespace
-    from curses.textpad import Textbox, rectangle
+import curses
+import json
+import sys
+from argparse import Namespace
+from curses.textpad import Textbox, rectangle
+
 `;
 
 const cursesScript = `
