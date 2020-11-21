@@ -6,7 +6,7 @@ import sys
 from argparse import Namespace
 from curses.textpad import Textbox, rectangle
 
-canvasData = {"width":50,"height":20,"text":[{"message":"Hello!","position":[26,3]}],"line":[{"start":[23,2],"end":[23,16]},{"start":[26,7],"end":[41,7]}],"rectangle":[{"start":[6,1],"end":[44,17]},{"start":[26,9],"end":[41,16]},{"start":[29,11],"end":[38,15]}],"progress":[{"position":[11,3],"bars":4,"percentage":50},{"position":[11,5],"bars":4,"percentage":50},{"position":[11,9],"bars":4,"percentage":50},{"position":[11,11],"bars":4,"percentage":50},{"position":[11,13],"bars":4,"percentage":50},{"position":[11,15],"bars":4,"percentage":50},{"position":[11,7],"bars":4,"percentage":50}]}
+canvasData = {"width":50,"height":20,"text":[{"message":"hellooooo","position":[11,9]}],"line":[{"start":[10,6],"end":[38,6]}],"rectangle":[{"start":[5,1],"end":[46,18]},{"start":[22,11],"end":[42,17]}],"progress":[{"position":[33,3],"bars":4,"percentage":50}]}
     
     
 def drawLine(lineParams, stdscr):
