@@ -7,21 +7,15 @@ import { objectFunctions } from './pythonFunctions.js';
 
 // confirm that user is ready to export the canvas, then collect relevant data and send to the server
 export function saveCanvas() {
-    let confirmation = confirm("Are you sure you wish to export this canvas?");
-
-    if (confirmation) {
-        let canvasInfo = collectDataToExport();
-        createPythonText(canvasInfo);
-        cursesCanvas.toggleShowPythonScript();
-    }
+    let canvasInfo = collectDataToExport();
+    createPythonText(canvasInfo);
+    cursesCanvas.toggleShowPythonScript();
 }
 
 function createPythonText(canvasInfo) {
-    let dataString = `canvasData = ${JSON.stringify(canvasInfo)}
-    
-    `;
+    let dataString = `canvasData = ${JSON.stringify(canvasInfo)}`;
     let pythonScript = imports + dataString + objectFunctions + cursesScript;
-    cursesCanvas.updatePythonScript(pythonScript);
+    cursesCanvas.updatePythonScript(pythonScript.trim())
 }
 
 // obtain canvas dimensions and save relevant object data into a specified array for that object type
