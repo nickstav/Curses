@@ -6,14 +6,15 @@ import { imports, cursesScript } from './curses.js';
 import { objectFunctions } from './pythonFunctions.js';
 
 // confirm that user is ready to export the canvas, then collect relevant data and send to the server
-export function saveCanvas() {
+function saveCanvas() {
     let canvasInfo = collectDataToExport();
     createPythonText(canvasInfo);
     cursesCanvas.toggleShowPythonScript();
 }
 
 function createPythonText(canvasInfo) {
-    let dataString = `canvasData = ${JSON.stringify(canvasInfo)}`;
+    let dataString = `canvasData = ${JSON.stringify(canvasInfo)}
+    `;
     let pythonScript = imports + dataString + objectFunctions + cursesScript;
     cursesCanvas.updatePythonScript(pythonScript.trim())
 }
@@ -81,3 +82,5 @@ function getMinMaxCoords(initialPosition, finalPosition) {
         end: endCoords
     }
 }
+
+export { saveCanvas }
