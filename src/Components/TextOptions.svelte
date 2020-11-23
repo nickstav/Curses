@@ -3,7 +3,7 @@
     import { textNewLine } from '../JS/constants/toolsList.js';
 </script>
 
-<div id="textOptions" class="bg-gray-400 w-20 h-full text-xs flex flex-col justify-center items-center py-0 px-5">
+<div id="textOptions" class="flex flex-col w-full h-full items-center justify-center">
     <div id="radioButtons" class="flex flex-col items-center">
         <input type="radio" bind:group={$cursesCanvas.textNewLine} value={textNewLine.TOLEFT}>
         <label for="toLeft">to the left</label>

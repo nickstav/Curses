@@ -3,10 +3,10 @@
 </script>
 
 
-<div id="keyboardShortcuts" class="text-xs bg-gray-300 w-20 h-full text-gray700 flex justify-between items-start py-0 px-5">
+<div id="keyboardShortcuts" class="flex flex-col w-full h-full text-xs items-center justify-center">
     <ul>
         <li>Delete Object: {keyboardKeys.DELETE} / {keyboardKeys.BACKSPACE}</li>
-        <li>Select Line Tool: {keyboardKeys.L}</li>
-        <li>Select Text Tool: {keyboardKeys.T}</li>
+        <li>Line Tool: {keyboardKeys.L}</li>
+        <li>SelectTool: {keyboardKeys.T}</li>
       </ul>
 </div>
