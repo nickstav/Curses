@@ -2,6 +2,7 @@
     import SizeInput from './SizeInput.svelte';
     import SizeParagraph from './SizeParagraph.svelte';
     import Button from './Button.svelte';
+    import Export from './Export.svelte';
 
     import { cursesCanvas } from '../JS/stores/project.js';
     import { changeTool } from '../JS/items/selectTool.js';
@@ -19,6 +20,7 @@
         <Button editCanvas={()=>{changeTool(tools.TEXT)}} img={"url('./button_images/text.png')"}/>
         <Button editCanvas={()=>{changeTool(tools.PROGRESS)}} img={"url('./button_images/progress.png')"}/>
         <Button editCanvas={()=>{changeTool(tools.DRAG)}} img={"url('./button_images/select.png')"}/>
+        <Export/>
     </div>
 </div>
 <SizeParagraph/>

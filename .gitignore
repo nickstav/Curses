@@ -1,5 +1,5 @@
 /node_modules/
 /public/build/
-/old_src/
+/python/venv
 
 .DS_Store

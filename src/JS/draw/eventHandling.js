@@ -159,9 +159,10 @@ function handleMouseEnter() {
 }
 
 function handleKeyDown(event) {
-    if (event.shiftKey && event.key === keyboardKeys.D) {
+    if (event.ctrlKey && event.key === keyboardKeys.C) {
+        console.log('dup')
         duplicateObject();
-    } else if (event.shiftKey && (
+    } else if (event.ctrlKey && (
         event.key === keyboardKeys.LEFT || 
         event.key === keyboardKeys.UP || 
         event.key === keyboardKeys.RIGHT || 

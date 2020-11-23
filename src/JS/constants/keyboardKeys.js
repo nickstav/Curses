@@ -2,7 +2,7 @@ export const keyboardKeys = {
     DELETE: "Delete",
     BACKSPACE: "Backspace",
     ESC: 'Escape',
-    D: "d",
+    C: "c",
     L: "l",
     M: 'm',
     P: 'p',
