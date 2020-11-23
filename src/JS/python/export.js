@@ -12,6 +12,7 @@ function saveCanvas() {
     cursesCanvas.toggleShowPythonScript();
 }
 
+//create the python script from its constituent parts
 function createPythonText(canvasInfo) {
     let dataString = `canvasData = ${JSON.stringify(canvasInfo)}
     `;
@@ -23,6 +24,7 @@ function createPythonText(canvasInfo) {
 function collectDataToExport() {
     let textObjects = [];
     let lineObjects = [];
+    let irregularLines = [];
     let rectObjects = [];
     let progressObjects = [];
 
@@ -35,8 +37,13 @@ function collectDataToExport() {
                 textObjects.push(textInfo);
                 break;
             case(tools.LINE):
-                let lineCoords = getMinMaxCoords(object.position, object.endPosition);
-                lineObjects.push({start: lineCoords.start, end: lineCoords.end});
+                // check to see if the line is straight or irregular
+                if (object.position.x === object.endPosition.x || object.position.y === object.endPosition.y) {
+                    let lineCoords = getMinMaxCoords(object.position, object.endPosition);
+                    lineObjects.push({start: lineCoords.start, end: lineCoords.end});
+                } else {
+                    irregularLines.push(object.filledSquares);
+                }
                 break;
             case(tools.RECTANGLE):
                 let rectCoords = getMinMaxCoords(object.position, object.endPosition);
@@ -58,6 +65,7 @@ function collectDataToExport() {
         height: get(cursesCanvas).canvasHeight,
         text: textObjects,
         line: lineObjects,
+        irregularLines: irregularLines,
         rectangle: rectObjects,
         progress: progressObjects
     }

@@ -10,7 +10,6 @@
   
   export let language;
   export let code;
-  export let header;
   
   onMount(() => {
 

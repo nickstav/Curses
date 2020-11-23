@@ -11,6 +11,7 @@ const cursesScript = `
 # Get the required window size and objects
 textData = canvasData['text']
 lineData = canvasData['line']
+irregularLines = canvasData['irregularLines']
 rectData = canvasData['rectangle']
 progressData = canvasData['progress']
 
@@ -51,6 +52,9 @@ def draw_canvas(stdscr):
         for lineObject in lineData:
             lineInfo = Namespace(**lineObject)
             drawLine(lineInfo, userWindow)
+
+        for markedSquares in irregularLines:
+            drawIrregularLine(markedSquares, userWindow)
 
         # Add rectangle object(s)
         for rectObject in rectData:

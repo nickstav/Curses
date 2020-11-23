@@ -9,6 +9,9 @@ def drawLine(lineParams, stdscr):
         for x in range(lineParams.start[0], lineParams.end[0]):
             stdscr.addch( lineParams.start[1], x, curses.ACS_HLINE)
 
+def drawIrregularLine(filledSquares, stdscr):
+    for coord in filledSquares:
+        stdscr.addch(coord['y'], coord['x'], 'x')
 `;
 
 const rectFunction = `
