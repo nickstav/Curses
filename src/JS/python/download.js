@@ -14,6 +14,7 @@ export function downloadPyFile() {
     psuedoDownloadLink.download = 'script.py';
     psuedoDownloadLink.click();
   
-    // tell the DOM that we no longer need to reference the link element
+    // tell the DOM that we no longer need to reference the link element & remove it
     URL.revokeObjectURL(psuedoDownloadLink.href);
+    psuedoDownloadLink.remove();
 }

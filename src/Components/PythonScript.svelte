@@ -18,7 +18,9 @@
     class="flex flex-col items-center h-3/4 w-3/4 text-left font-mono text-sm bg-gray-600 pt-4 px-4" 
     style="height: 75%"
     >
-        <textarea class="w-full flex-1 text-white bg-black whitespace-no-wrap">{$cursesCanvas.pythonScript}</textarea>
+        <div id="codeHolder" class="w-full flex-1 bg-black overflow-scroll">
+            <pre><code class="language-python">{$cursesCanvas.pythonScript}</code></pre>
+        </div>
         <button 
         id="download" 
         on:click={downloadPyFile}
