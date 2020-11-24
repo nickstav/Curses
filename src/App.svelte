@@ -1,4 +1,6 @@
 <script>
+	  import "./index.css"
+
 	import {cursesCanvas} from './JS/stores/project.js';
 
 	import Toolbar from './Components/Toolbar.svelte';

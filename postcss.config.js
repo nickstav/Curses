@@ -1,20 +1,7 @@
-const production = !process.env.ROLLUP_WATCH;
-const purgecss = require("@fullhuman/postcss-purgecss");
-const cssnano = require('cssnano');
-
+// Taken from: https://tailwindcss.com/docs/installation#using-tailwind-with-postcss
 module.exports = {
     plugins: [
-        require("tailwindcss"),
-        require("autoprefixer"),
-        cssnano({
-         autoprefixer: false,
-         preset: ['default'],
-	    }),
-		// Only purge css on production
-        production &&
-            purgecss({
-                content: ["./**/*.html", "./src/**/*.svelte"],
-                defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g || [])
-            })
-    ]
-}
+      require('tailwindcss'),
+      require('autoprefixer'),
+    ],
+  };

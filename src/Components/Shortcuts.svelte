@@ -3,7 +3,7 @@
 </script>
 
 
-<div id="keyboardShortcuts" class="flex flex-col w-full h-full text-xs items-center justify-center">
+<div id="shortcuts" class="bg-gray-400 w-20 h-full text-xs flex flex-col justify-center items-center">
     <ul>
         <li>Delete Object: {keyboardKeys.DELETE} / {keyboardKeys.BACKSPACE}</li>
         <li>Line Tool: {keyboardKeys.L}</li>
