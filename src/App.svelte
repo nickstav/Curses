@@ -6,6 +6,7 @@
 	import Toolbar from './Components/Toolbar.svelte';
 	import Canvas from './Components/Canvas.svelte';
 	import Sidebar from './Components/Sidebar.svelte';
+	import Shortcuts from './Components/Shortcuts.svelte';
 	import PythonScript from './Components/PythonScript.svelte';
 </script>
 
@@ -14,6 +15,7 @@
 			<PythonScript/>
 		{/if}
 		<Toolbar/>
+		<Shortcuts/>
 		<div id="mainWindow" class="w-full flex flex-1 flex-row">
 			<Canvas/>
 			<Sidebar/>

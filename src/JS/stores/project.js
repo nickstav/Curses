@@ -20,7 +20,8 @@ import { selectStyle } from '../constants/selectTool.js';
     isHighlighting: false,
     mousePosition: {x: 0, y: 0},
     pythonScript: '',
-    showPythonScript: false
+    showPythonScript: false,
+    showShortcuts: false
 };
 
 function setUpStore() {
@@ -165,6 +166,14 @@ function setUpStore() {
     });
   }
   
+function toggleShortcutMenu() {
+  update(status => {
+    return {
+        ...status,
+        showShortcuts: !status.showShortcuts
+    };
+  });
+}
 
   return {
 	  subscribe,
@@ -183,7 +192,8 @@ function setUpStore() {
     markObjectIndexAsFirstSelected,
     removeFirstSelectedObject,
     updatePythonScript,
-    toggleShowPythonScript
+    toggleShowPythonScript,
+    toggleShortcutMenu
 	};
 
 }
