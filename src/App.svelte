@@ -1,5 +1,5 @@
 <script>
-	  import "./index.css"
+	import "./index.css"
 
 	import {cursesCanvas} from './JS/stores/project.js';
 
@@ -9,13 +9,13 @@
 	import PythonScript from './Components/PythonScript.svelte';
 </script>
 
-<main class="w-full h-full flex flex-row items-center text-center">
-	<div id="mainWindow" class="h-full flex flex-1 flex-col items-center text-center">
+<main class="w-full h-full flex flex-col items-center text-center">
 		{#if $cursesCanvas.showPythonScript}
 			<PythonScript/>
 		{/if}
 		<Toolbar/>
-		<Canvas/>
-	</div>
-	<Sidebar/>
+		<div id="mainWindow" class=" h-full w-full flex flex-row">
+			<Canvas/>
+			<Sidebar/>
+		</div>
 </main>

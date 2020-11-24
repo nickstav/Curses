@@ -10,15 +10,15 @@
 
 
 {#if $cursesCanvas.tool === tools.TEXT}
-    <div id="sidebar" class="bg-gray-400 w-20 h-full text-xs flex flex-col justify-center items-center">
+    <div id="sidebar" class="bg-gray-200 w-20 h-full text-xs flex flex-col justify-center items-center">
         <TextOptions/>
     </div>
 {:else if $cursesCanvas.tool === tools.PROGRESS}
-    <div id="sidebar" class="bg-gray-400 w-20 h-full text-xs flex flex-col justify-center items-center">
+    <div id="sidebar" class="bg-gray-200 w-20 h-full text-xs flex flex-col justify-center items-center">
         <ProgressOptions/>
     </div>
 {:else if $cursesCanvas.tool === tools.DRAG}
-    <div id="sidebar" class="bg-gray-400 w-20 h-full text-xs flex flex-col justify-center items-center">
+    <div id="sidebar" class="bg-gray-200 w-20 h-full text-xs flex flex-col justify-center items-center">
         <SelectOptions/>
     </div>
 {/if}
