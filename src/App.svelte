@@ -14,7 +14,7 @@
 			<PythonScript/>
 		{/if}
 		<Toolbar/>
-		<div id="mainWindow" class=" h-full w-full flex flex-row">
+		<div id="mainWindow" class="w-full flex flex-1 flex-row">
 			<Canvas/>
 			<Sidebar/>
 		</div>
