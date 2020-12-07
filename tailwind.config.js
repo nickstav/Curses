@@ -8,9 +8,4 @@ module.exports = {
     ]
   },
   darkMode: false, // or 'media' or 'class'
-  theme: {
-    fontSize: {
-     'tiny': '.375rem',
-    }
-  }
 }
