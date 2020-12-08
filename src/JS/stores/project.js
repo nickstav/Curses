@@ -12,7 +12,7 @@ import { selectStyle } from '../constants/selectTool.js';
     textNewLine: 'indented',
     selectMethod: selectStyle.OBJECTS,
     selectedAreaCoords: [],
-    indexOfFirstSelectedObject: undefined,
+    IDOfFirstSelectedObject: undefined,
     sizeOfProgressBar: 4,
     showProgressPercentage: true,
     startPosition: {x: 0, y: 0},
@@ -130,11 +130,11 @@ function setUpStore() {
     });
   }
 
-  function markObjectIndexAsFirstSelected(index) {
+  function markObjectAsFirstSelected(ID) {
     update(status => {
       return {
           ...status,
-          indexOfFirstSelectedObject: index
+          IDOfFirstSelectedObject: ID
       };
     });
   }
@@ -143,7 +143,7 @@ function setUpStore() {
     update(status => {
       return {
           ...status,
-          indexOfFirstSelectedObject: undefined
+          IDOfFirstSelectedObject: undefined
       };
     });
   }
@@ -189,7 +189,7 @@ function toggleShortcutMenu() {
     updateMousePosition,
     saveSelectedAreaCoords,
     changeSelectMethodToGrab,
-    markObjectIndexAsFirstSelected,
+    markObjectAsFirstSelected,
     removeFirstSelectedObject,
     updatePythonScript,
     toggleShowPythonScript,

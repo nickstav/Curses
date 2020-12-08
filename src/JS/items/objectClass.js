@@ -2,9 +2,11 @@ import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/project.js';
 import { gridDimension } from '../constants/canvasSize.js';
 import { cornerSelected, editMode } from '../constants/objectStates.js';
+import { uuidv4 } from './helperFunctions/UUID.js';
 
 export class CanvasItem {
     constructor(location) {
+        this.ID = uuidv4();
         this.context = get(cursesCanvas).context;
         this.canvasWidth = get(cursesCanvas).canvasWidth;
         this.type = null;
