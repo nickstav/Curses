@@ -159,9 +159,9 @@ function handleMouseEnter() {
 }
 
 function handleKeyDown(event) {
-    if (event.ctrlKey && event.key === keyboardKeys.C) {
+    if ((event.ctrlKey || event.metaKey) && event.key === keyboardKeys.C) {
         duplicateObject();
-    } else if (event.ctrlKey && (
+    } else if ((event.ctrlKey || event.metaKey) && (
         event.key === keyboardKeys.LEFT || 
         event.key === keyboardKeys.UP || 
         event.key === keyboardKeys.RIGHT || 
