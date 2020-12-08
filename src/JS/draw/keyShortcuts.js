@@ -49,6 +49,8 @@ function moveObject(arrowDirection) {
     canvasItems.forEach(object => {
         if (object.selected) {
 
+            object.mouseOffset = {x: 0, y: 0}
+            
             switch(arrowDirection) {
                 case(keyboardKeys.UP):
                     object.updatePosition({x: object.position.x, y: object.position.y - 1});

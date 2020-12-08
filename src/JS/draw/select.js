@@ -109,6 +109,11 @@ function selectObjectsInsideArea() {
             ) {
                 // if any object falls within current selected area, highlight it
                 object.selectObject(); 
+
+                 // if no other object has been marked as first selected, mark the current object's index
+                 if (get(cursesCanvas).IDOfFirstSelectedObject === undefined) {
+                    cursesCanvas.markObjectAsFirstSelected(object.ID);
+                }
             }
         };
     });

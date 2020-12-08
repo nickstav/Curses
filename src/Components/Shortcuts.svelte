@@ -29,9 +29,9 @@
         <li>Rectangle tool: <strong>{keyboardKeys.R}</strong></li>
         <li>Progress bar tool: <strong>{keyboardKeys.P}</strong></li>
         <li>Select tool: <strong>{keyboardKeys.M}</strong></li>
-        <li>Duplicate: <strong>ctrl + {keyboardKeys.C}</strong></li>
+        <li>Duplicate: <strong>ctrl/cmd + {keyboardKeys.C}</strong></li>
         <li>Move: <strong>arrow keys</strong></li>
-        <li>Align: <strong>ctrl + arrow keys</strong></li>
+        <li>Align: <strong>ctrl/cmd + arrow keys</strong></li>
       </ul>
 </div>
 {/if}
