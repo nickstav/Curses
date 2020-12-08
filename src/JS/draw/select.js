@@ -3,7 +3,6 @@ import { canvasObjects } from '../stores/objects.js';
 import { cursesCanvas } from '../stores/project.js';
 
 import { gridDimension } from '../constants/canvasSize.js';
-import { RectangleItem } from '../items/rectangleItem.js';
 
 /* -------------------------------------------------------------------------------------------------- */
 
@@ -29,8 +28,8 @@ function selectObject(gridLocation, canvasElement) {
                     canvasElement.style.cursor = "grab";
 
                     // if no other object has been marked as first clicked, mark the current object's index
-                    if (get(cursesCanvas).indexOfFirstSelectedObject === undefined) {
-                        cursesCanvas.markObjectIndexAsFirstSelected(objects.indexOf(objects[z]));
+                    if (get(cursesCanvas).IDOfFirstSelectedObject === undefined) {
+                        cursesCanvas.markObjectAsFirstSelected(objects[z].ID);
                     }
 
                     //stop the loop once one object has been selected

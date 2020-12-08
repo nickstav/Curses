@@ -12,7 +12,7 @@ import { selectStyle } from '../constants/selectTool.js';
     textNewLine: 'indented',
     selectMethod: selectStyle.OBJECTS,
     selectedAreaCoords: [],
-    indexOfFirstSelectedObject: undefined,
+    IDOfFirstSelectedObject: undefined,
     sizeOfProgressBar: 4,
     showProgressPercentage: true,
     startPosition: {x: 0, y: 0},
@@ -20,7 +20,8 @@ import { selectStyle } from '../constants/selectTool.js';
     isHighlighting: false,
     mousePosition: {x: 0, y: 0},
     pythonScript: '',
-    showPythonScript: false
+    showPythonScript: false,
+    showShortcuts: false
 };
 
 function setUpStore() {
@@ -129,11 +130,11 @@ function setUpStore() {
     });
   }
 
-  function markObjectIndexAsFirstSelected(index) {
+  function markObjectAsFirstSelected(ID) {
     update(status => {
       return {
           ...status,
-          indexOfFirstSelectedObject: index
+          IDOfFirstSelectedObject: ID
       };
     });
   }
@@ -142,7 +143,7 @@ function setUpStore() {
     update(status => {
       return {
           ...status,
-          indexOfFirstSelectedObject: undefined
+          IDOfFirstSelectedObject: undefined
       };
     });
   }
@@ -165,6 +166,14 @@ function setUpStore() {
     });
   }
   
+function toggleShortcutMenu() {
+  update(status => {
+    return {
+        ...status,
+        showShortcuts: !status.showShortcuts
+    };
+  });
+}
 
   return {
 	  subscribe,
@@ -180,10 +189,11 @@ function setUpStore() {
     updateMousePosition,
     saveSelectedAreaCoords,
     changeSelectMethodToGrab,
-    markObjectIndexAsFirstSelected,
+    markObjectAsFirstSelected,
     removeFirstSelectedObject,
     updatePythonScript,
-    toggleShowPythonScript
+    toggleShowPythonScript,
+    toggleShortcutMenu
 	};
 
 }

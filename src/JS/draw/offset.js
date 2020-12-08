@@ -10,10 +10,11 @@ export function alignObjects(direction) {
     let canvasItems = get(canvasObjects);
 
     // get the position in the objects array of the first selected object
-    let mainObjectIndex = get(cursesCanvas).indexOfFirstSelectedObject;
+    let mainObjectID = get(cursesCanvas).IDOfFirstSelectedObject;
+    let mainObject = canvasItems.find(object => object.ID === mainObjectID);
 
     // get the required {x,y} position of the object that others will be aligned to
-    let referencePosition = getReferencePosition(direction, canvasItems[mainObjectIndex]);
+    let referencePosition = getReferencePosition(direction, mainObject);
 
     // loop through all selected objects and update its position to align as required
     canvasItems.forEach(object => {

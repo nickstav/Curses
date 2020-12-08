@@ -160,7 +160,6 @@ function handleMouseEnter() {
 
 function handleKeyDown(event) {
     if (event.ctrlKey && event.key === keyboardKeys.C) {
-        console.log('dup')
         duplicateObject();
     } else if (event.ctrlKey && (
         event.key === keyboardKeys.LEFT || 

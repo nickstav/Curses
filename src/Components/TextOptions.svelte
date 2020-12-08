@@ -1,14 +1,27 @@
 <script>
     import { cursesCanvas } from '../JS/stores/project.js';
     import { textNewLine } from '../JS/constants/toolsList.js';
+
+    /* TODO - extra text options
+
+    <div id="textStyle" class="flex flex-row justify-between px-2 py-5">
+        <button class="h-5 w-5 font-bold border border-black">B</button>
+        <button class="h-5 w-5 underline border border-black">U</button>
+    </div>
+
+    */
 </script>
 
-<div id="textOptions" class="bg-gray-400 w-20 h-full text-xs flex flex-col justify-center items-center py-0 px-5">
-    <div id="radioButtons" class="flex flex-col items-center">
-        <input type="radio" bind:group={$cursesCanvas.textNewLine} value={textNewLine.TOLEFT}>
-        <label for="toLeft">to the left</label>
-        <br>
-        <input type="radio" bind:group={$cursesCanvas.textNewLine} value={textNewLine.INDENTED}>
-        <label for="indented">indented</label>
+<div id="textOptions" class="w-full text-xs flex flex-1 flex-col">
+    <div id="newLineOption" class="flex flex-col items-start py-2">
+        <h1 class="font-bold underline">New Line</h1>
+        <div class="flex flex-row items-center">
+            <input type="radio" bind:group={$cursesCanvas.textNewLine} value={textNewLine.TOLEFT}>
+            <label for="toLeft" class="px-1">to the left</label>
+        </div>
+        <div class="flex flex-row items-center">
+            <input type="radio" bind:group={$cursesCanvas.textNewLine} value={textNewLine.INDENTED}>
+            <label for="indented" class="px-1">indented</label>
+        </div>
     </div>
 </div>

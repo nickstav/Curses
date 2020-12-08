@@ -17,7 +17,6 @@
     <div 
     id="window" 
     class="flex flex-col items-center h-3/4 w-3/4 text-left font-mono text-sm bg-gray-600 pt-4 px-4" 
-    style="height: 75%"
     >
         <div id="codeHolder" class="w-full flex-1 overflow-y-auto p-0 m-0">
             <Prism language="python" code="{$cursesCanvas.pythonScript}"/>

@@ -8,10 +8,17 @@
     import { tools } from '../JS/constants/toolsList.js';
 </script>
 
+
 {#if $cursesCanvas.tool === tools.TEXT}
-    <TextOptions/>
+    <div id="sidebar" class="bg-gray-200 w-20 h-full text-xs flex flex-col justify-center items-center">
+        <TextOptions/>
+    </div>
 {:else if $cursesCanvas.tool === tools.PROGRESS}
-    <ProgressOptions/>
+    <div id="sidebar" class="bg-gray-200 w-20 h-full text-xs flex flex-col justify-center items-center">
+        <ProgressOptions/>
+    </div>
 {:else if $cursesCanvas.tool === tools.DRAG}
-    <SelectOptions/>
+    <div id="sidebar" class="bg-gray-200 w-20 h-full text-xs flex flex-col justify-center items-center">
+        <SelectOptions/>
+    </div>
 {/if}
