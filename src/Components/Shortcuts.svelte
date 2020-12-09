@@ -9,6 +9,13 @@
         instruction = 'Show';
     }
 
+    let keyHeld;
+    $: if (navigator.userAgent.indexOf('Mac OS X') != -1) {
+        keyHeld = 'cmd';
+    } else {
+        keyHeld = 'ctrl';
+    }
+
 </script>
 
 <div class="absolute left-4 top-10 w-1/2 text-left">
@@ -29,9 +36,9 @@
         <li>Rectangle tool: <strong>{keyboardKeys.R}</strong></li>
         <li>Progress bar tool: <strong>{keyboardKeys.P}</strong></li>
         <li>Select tool: <strong>{keyboardKeys.V}</strong></li>
-        <li>Duplicate: <strong>ctrl/cmd + {keyboardKeys.C}</strong></li>
+        <li>Duplicate: <strong>{keyHeld} + {keyboardKeys.C}</strong></li>
         <li>Move: <strong>arrow keys</strong></li>
-        <li>Align: <strong>ctrl/cmd + arrow keys</strong></li>
+        <li>Align: <strong>{keyHeld} + arrow keys</strong></li>
       </ul>
 </div>
 {/if}
