@@ -53,16 +53,16 @@ function moveObject(arrowDirection) {
             
             switch(arrowDirection) {
                 case(keyboardKeys.UP):
-                    object.updatePosition({x: object.position.x, y: object.position.y - 1});
+                    object.updatePosition({x: object.position.x, y: object.position.y - 5});
                     break;
                 case(keyboardKeys.DOWN):
-                    object.updatePosition({x: object.position.x, y: object.position.y + 1});
+                    object.updatePosition({x: object.position.x, y: object.position.y + 5});
                     break;
                 case(keyboardKeys.LEFT):
-                    object.updatePosition({x: object.position.x - 1, y: object.position.y});
+                    object.updatePosition({x: object.position.x - 5, y: object.position.y});
                     break;
                 case(keyboardKeys.RIGHT):
-                    object.updatePosition({x: object.position.x + 1, y: object.position.y});
+                    object.updatePosition({x: object.position.x + 5, y: object.position.y});
                     break;
             }
 

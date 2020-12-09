@@ -1,4 +1,4 @@
-1. Change move hotkey to v
+
 2. Change shift+arrow move by 10 spaces instead of 1
 3. Change shortcuts menu to show either ctrl or cmd depending on system
 4. Select tool to drag or select as one function (rather than need to select functionality)
