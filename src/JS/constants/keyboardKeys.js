@@ -4,7 +4,7 @@ export const keyboardKeys = {
     ESC: 'Escape',
     C: "c",
     L: "l",
-    M: 'm',
+    V: 'v',
     P: 'p',
     R: "r",
     T: 't',

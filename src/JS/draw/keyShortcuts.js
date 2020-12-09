@@ -25,7 +25,7 @@ export function handleKeyboardShortcuts(keyPressed) {
         case(keyboardKeys.P):
             changeTool(tools.PROGRESS);
             break;
-        case(keyboardKeys.M):
+        case(keyboardKeys.V):
             changeTool(tools.DRAG);
             break;
         case(keyboardKeys.ESC):
