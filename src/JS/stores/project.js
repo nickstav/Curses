@@ -130,6 +130,15 @@ function setUpStore() {
     });
   }
 
+  function changeSelectMethodToArea() {
+    update(status => {
+      return {
+          ...status,
+          selectMethod: selectStyle.AREA
+      };
+    });
+  }
+
   function markObjectAsFirstSelected(ID) {
     update(status => {
       return {
@@ -189,6 +198,7 @@ function toggleShortcutMenu() {
     updateMousePosition,
     saveSelectedAreaCoords,
     changeSelectMethodToGrab,
+    changeSelectMethodToArea,
     markObjectAsFirstSelected,
     removeFirstSelectedObject,
     updatePythonScript,
