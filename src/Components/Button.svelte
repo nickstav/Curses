@@ -9,4 +9,4 @@
         on:click={editCanvas} 
         >
     </button>
-    </div>
+</div>
