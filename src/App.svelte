@@ -16,8 +16,10 @@
 		{/if}
 		<Toolbar/>
 		<Shortcuts/>
-		<div id="mainWindow" class="w-full flex flex-1 flex-row">
+		<div id="mainWindow" class="w-full flex flex-1 flex-row items-center">
 			<Canvas/>
+		</div>
+		<div id="sidebarHolder" class="absolute right-2 top-20 w-24 h-3/4">
 			<Sidebar/>
 		</div>
 </main>

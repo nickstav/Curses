@@ -28,7 +28,7 @@
 </div>
 
 {#if $cursesCanvas.showShortcuts}
-<div id="shortcuts" class="absolute left-4 top-20 w-25 bg-gray-200 text-xs text-left px-1 py-2">
+<div id="shortcuts" class="absolute left-4 top-20 w-25 bg-gray-200 text-xs text-left border border-black px-1 py-2">
     <ul>
         <li>Erase: <strong>{keyboardKeys.DELETE}</strong></li>
         <li>Text tool: <strong>{keyboardKeys.T}</strong></li>
