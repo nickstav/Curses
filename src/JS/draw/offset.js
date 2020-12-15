@@ -29,6 +29,10 @@ export function alignObjects(direction) {
 
 function getReferencePosition(direction, referenceObject) {
     let referencePosition;
+    
+    if (referenceObject === undefined) {
+        return undefined;
+    }
 
     switch(direction) {
         case(keyboardKeys.LEFT):
