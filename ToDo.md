@@ -1,0 +1,2 @@
+1. As a general rule, everything you can do with a hotkey, you should be able to do with a button somewhere. (This doesn't normally include arrow keys/nudges etc, but everything else...)
+2. Even distribution of objects

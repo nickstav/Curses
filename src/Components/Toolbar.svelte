@@ -3,6 +3,8 @@
     import SizeParagraph from './SizeParagraph.svelte';
     import Button from './Button.svelte';
     import Export from './Export.svelte';
+    import TextOptions from './TextOptions.svelte';
+    import ProgressOptions from './ProgressOptions.svelte';
 
     import { cursesCanvas } from '../JS/stores/project.js';
     import { changeTool } from '../JS/items/selectTool.js';
@@ -23,4 +25,9 @@
         <Export/>
     </div>
 </div>
+{#if $cursesCanvas.tool === tools.TEXT}
+    <TextOptions/>
+{:else if $cursesCanvas.tool === tools.PROGRESS}
+    <ProgressOptions/>
+{/if}
 <SizeParagraph/>

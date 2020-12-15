@@ -6,6 +6,15 @@ import { gridDimension } from '../constants/canvasSize.js';
 
 /* -------------------------------------------------------------------------------------------------- */
 
+// function to check if an area is being highlighted to grab objects
+function checkIfAreaBeingSelected(isDrawing) {
+    let objects = get(canvasObjects);
+    const objectNotSelected = (object) => !object.selected;
+    if (isDrawing && objects.every(objectNotSelected)) {
+        cursesCanvas.changeSelectMethodToArea();
+    };
+}
+
 // function to check if a mouse click at gridLocation is over an object and select it if so
 function selectObject(gridLocation, canvasElement) {
     let objects = get(canvasObjects);
@@ -205,4 +214,11 @@ function getSelectedAreaCoords(savedCoords) {
     }
 }
 
-export { selectObject, drawHighlightingRectangle, selectAreaOnGrid, selectObjectsInsideArea, getMouseOffset }
+export {
+    checkIfAreaBeingSelected,
+    selectObject, 
+    drawHighlightingRectangle, 
+    selectAreaOnGrid, 
+    selectObjectsInsideArea, 
+    getMouseOffset
+}

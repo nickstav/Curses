@@ -1,10 +1,8 @@
-import { get } from 'svelte/store';
-import { canvasObjects } from '../stores/objects.js';
-
 import { tools } from '../constants/toolsList.js';
 import { keyboardKeys } from '../constants/keyboardKeys.js';
 import { eraseObject } from './erase.js';
 import { changeTool, deselectAnySelectedObjects } from '../items/selectTool.js';
+import { moveObject } from './move.js';
 
 // use certain keyboard presses as shortcuts to handling functions 
 export function handleKeyboardShortcuts(keyPressed) {
@@ -25,7 +23,7 @@ export function handleKeyboardShortcuts(keyPressed) {
         case(keyboardKeys.P):
             changeTool(tools.PROGRESS);
             break;
-        case(keyboardKeys.M):
+        case(keyboardKeys.V):
             changeTool(tools.DRAG);
             break;
         case(keyboardKeys.ESC):
@@ -40,32 +38,4 @@ export function handleKeyboardShortcuts(keyPressed) {
         default:
             break;
     }
-}
-
-//update either the x or y coord of an object by +/- 1 grid square with an arrow key press
-function moveObject(arrowDirection) {
-    let canvasItems = get(canvasObjects);
-
-    canvasItems.forEach(object => {
-        if (object.selected) {
-
-            object.mouseOffset = {x: 0, y: 0}
-            
-            switch(arrowDirection) {
-                case(keyboardKeys.UP):
-                    object.updatePosition({x: object.position.x, y: object.position.y - 1});
-                    break;
-                case(keyboardKeys.DOWN):
-                    object.updatePosition({x: object.position.x, y: object.position.y + 1});
-                    break;
-                case(keyboardKeys.LEFT):
-                    object.updatePosition({x: object.position.x - 1, y: object.position.y});
-                    break;
-                case(keyboardKeys.RIGHT):
-                    object.updatePosition({x: object.position.x + 1, y: object.position.y});
-                    break;
-            }
-
-        }
-    });
 }

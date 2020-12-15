@@ -9,7 +9,7 @@ import { selectStyle } from '../constants/selectTool.js';
 import { updateCanvas } from './updateCanvas.js';
 import { editObject } from './edit.js';
 import { alignObjects } from './offset.js';
-import { selectObject, selectAreaOnGrid, getMouseOffset } from './select.js';
+import { checkIfAreaBeingSelected, selectObject, selectAreaOnGrid, getMouseOffset } from './select.js';
 import { handleKeyboardShortcuts } from './keyShortcuts.js';
 import { duplicateObject } from './duplicate.js';
 import { getGridLocation } from './location.js';
@@ -105,14 +105,15 @@ function handleMouseMove(event) {
             }
             break;
         case(tools.DRAG):
+            // check if an area is being selected to highlight objects
+            checkIfAreaBeingSelected(isDrawing);
             if (selectMethod === selectStyle.AREA) {
-                canvasElement.style.cursor = "crosshair";
                 if (isDrawing) {
+                    canvasElement.style.cursor = "crosshair";
                     liveObject = selectAreaOnGrid(startGridLocation, currentGridLocation)
                 }
             } else {
                 editObject(isDrawing, currentGridLocation, canvasElement);
-                canvasElement.style.cursor = "pointer";
             }
             break;
     };
