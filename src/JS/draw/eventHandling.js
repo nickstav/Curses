@@ -114,7 +114,6 @@ function handleMouseMove(event) {
                 }
             } else {
                 editObject(isDrawing, currentGridLocation, canvasElement);
-                canvasElement.style.cursor = "pointer";
             }
             break;
     };
