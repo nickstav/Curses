@@ -12,7 +12,10 @@
     */
 </script>
 
-<div id="textOptions" class="w-1/2 h-8 text-xs flex flex-row justify-center bg-gray-200 m-1 border border-black">
+<div 
+id="textOptions" 
+class="absolute top-10 w-1/2 h-8 text-xs flex flex-row justify-center bg-gray-200 m-1 border border-black"
+>
     <div id="newLineOption" class="flex flex-row items-center py-2">
         <h1 class="font-bold underline">New Line: </h1>
         <div class="flex flex-row items-center">
