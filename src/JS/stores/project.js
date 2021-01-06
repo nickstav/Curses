@@ -4,8 +4,8 @@ import { selectStyle } from '../constants/selectTool.js';
 // a store to contain all variables related to the canvas element
 
  const defaultValues = {
-    canvasHeight: 20,
-    canvasWidth: 50,
+    canvasHeight: 22,
+    canvasWidth: 80,
     canvasElement: undefined,
     context: undefined,
     tool: undefined,
@@ -21,6 +21,7 @@ import { selectStyle } from '../constants/selectTool.js';
     mousePosition: {x: 0, y: 0},
     pythonScript: '',
     showPythonScript: false,
+    showSidebar: false,
     showShortcuts: false
 };
 
@@ -184,6 +185,15 @@ function toggleShortcutMenu() {
   });
 }
 
+function toggleSidebar() {
+  update(status => {
+    return {
+        ...status,
+        showSidebar: !status.showSidebar
+    };
+  });
+}
+
   return {
 	  subscribe,
     set,
@@ -203,6 +213,7 @@ function toggleShortcutMenu() {
     removeFirstSelectedObject,
     updatePythonScript,
     toggleShowPythonScript,
+    toggleSidebar,
     toggleShortcutMenu
 	};
 
