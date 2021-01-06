@@ -5,7 +5,7 @@ import { selectStyle } from '../constants/selectTool.js';
 
  const defaultValues = {
     canvasHeight: 20,
-    canvasWidth: 80,
+    canvasWidth: 60,
     canvasElement: undefined,
     context: undefined,
     tool: undefined,
