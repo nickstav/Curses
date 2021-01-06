@@ -14,7 +14,7 @@ const maxDimensions = {
 // corresponding to a single character size in command prompt
 const gridDimension = {
     x: 11, 
-    y: 24
+    y: 23
 };
 
 export { minDimensions, maxDimensions, gridDimension }

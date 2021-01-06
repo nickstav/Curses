@@ -4,8 +4,8 @@ import { selectStyle } from '../constants/selectTool.js';
 // a store to contain all variables related to the canvas element
 
  const defaultValues = {
-    canvasHeight: 20,
-    canvasWidth: 60,
+    canvasHeight: 22,
+    canvasWidth: 80,
     canvasElement: undefined,
     context: undefined,
     tool: undefined,
