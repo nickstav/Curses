@@ -14,10 +14,10 @@
 
 <div 
 id="textOptions" 
-class="absolute right-2 top-20 w-24 h-1/5 text-xs flex flex-col justify-center bg-gray-200 m-1 border border-black"
+class="text-xs flex flex-col justify-center bg-gray-200"
 >
-    <div id="newLineOption" class="flex flex-col items-center py-2">
-        <h1 class="font-bold underline">New Line: </h1>
+    <div id="newLineOption" class="flex flex-col items-center py-4">
+        <h1 class="font-bold underline">Text New Line: </h1>
         <div class="flex flex-row items-center">
             <input type="radio" bind:group={$cursesCanvas.textNewLine} value={textNewLine.TOLEFT}>
             <label for="toLeft" class="px-1">to the left</label>

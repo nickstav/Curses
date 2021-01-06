@@ -9,7 +9,7 @@
     import { tools } from '../JS/constants/toolsList.js';
 </script>
 
-<div id="toolbar" class="bg-gray-300 w-full h-10 text-gray700 flex justify-between items-center py-0 px-5">
+<div id="toolbar" class="bg-gray-300 w-full h-10 text-gray700 flex justify-between items-center py-0 px-10">
     <div id="appName">
         <h1 class="text-xs">C U R S E S . A P P</h1>
     </div>
