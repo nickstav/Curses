@@ -1,1 +1,0 @@
-1. Objects can be moved off canvas

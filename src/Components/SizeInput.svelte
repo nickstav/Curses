@@ -12,7 +12,7 @@
         maxlength="4" 
         class="text-xs" 
         bind:value={$cursesCanvas.canvasWidth}
-        on:input={updateCanvas}
+        on:input={()=>{updateCanvas()}}
     >
     <label for="height" class="text-xs">Canvas Height:</label>
     <input 
@@ -22,6 +22,6 @@
         maxlength="4" 
         class="text-xs" 
         bind:value={$cursesCanvas.canvasHeight}
-        on:input={updateCanvas}
+        on:input={()=>{updateCanvas()}}
     >
 </form>
