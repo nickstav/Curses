@@ -8,13 +8,6 @@ from curses.textpad import Textbox, rectangle
 `;
 
 const cursesScript = `
-# Get the required window size and objects
-textData = canvasData['text']
-lineData = canvasData['line']
-irregularLines = canvasData['irregularLines']
-rectData = canvasData['rectangle']
-progressData = canvasData['progress']
-
 def draw_canvas(stdscr):
     k = 0
 
@@ -43,28 +36,23 @@ def draw_canvas(stdscr):
         # Render status bar
         stdscr.addstr(height-1, int(width/2) - int(len(statusBarString)/2), statusBarString)
 
-        # Add text object(s)
-        for textObject in textData:
-            textInfo = Namespace(**textObject)
-            addText(textInfo, userWindow)
-
-        # Add line object(s)
-        for lineObject in lineData:
-            lineInfo = Namespace(**lineObject)
-            drawLine(lineInfo, userWindow)
-
-        for markedSquares in irregularLines:
-            drawIrregularLine(markedSquares, userWindow)
-
-        # Add rectangle object(s)
-        for rectObject in rectData:
-            rectInfo = Namespace(**rectObject)
-            drawRectangle(rectInfo, userWindow)
-
-        # Add progress bar object(s)
-        for progressObject in progressData:
-            progressInfo = Namespace(**progressObject)
-            drawProgressBar(progressInfo, userWindow, curses.color_pair(1), curses.color_pair(2))
+        # add each object from canvasData in order to the curses window
+        for canvasObject in canvasData["objects"]:
+            if canvasObject["objectType"] == 'text':
+                textInfo = Namespace(**canvasObject['objectInfo'])
+                addText(textInfo, userWindow)
+            elif canvasObject["objectType"] == 'line':
+                lineInfo = Namespace(**canvasObject['objectInfo'])
+                drawLine(lineInfo, userWindow)
+            elif canvasObject["objectType"] == 'irregularLine':
+                markedSquares = canvasObject['objectInfo']
+                drawIrregularLine(markedSquares, userWindow)
+            elif canvasObject["objectType"] == 'rectangle':
+                rectInfo = Namespace(**canvasObject['objectInfo'])
+                drawRectangle(rectInfo, userWindow)
+            elif canvasObject["objectType"] == 'progress':
+                progressInfo = Namespace(**canvasObject['objectInfo'])
+                drawProgressBar(progressInfo, userWindow, curses.color_pair(1), curses.color_pair(2))
 
         # Refresh the screen & user window
         userWindow.refresh()
@@ -78,7 +66,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 `;
 
 export { imports, cursesScript }

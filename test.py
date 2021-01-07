@@ -5,7 +5,7 @@ import math
 from argparse import Namespace
 from curses.textpad import Textbox, rectangle
 
-canvasData = {"width":80,"height":22,"text":[{"message":"to the leeeeeeeeeeeeeeeeeeeeeft","position":[69,2],"newLine":"toLeft"},{"message":"indenteeeeeeeeed","position":[73,9],"newLine":"indented"}],"line":[],"irregularLines":[],"rectangle":[],"progress":[]}
+canvasData = {"width":80,"height":22,"objects":[{"objectNumber":0,"objectType":"rectangle","objectInfo":{"start":[3,1],"end":[36,20]}},{"objectNumber":1,"objectType":"progress","objectInfo":{"position":[7,3],"bars":4,"percentage":50}},{"objectNumber":2,"objectType":"progress","objectInfo":{"position":[7,5],"bars":4,"percentage":50}},{"objectNumber":3,"objectType":"progress","objectInfo":{"position":[7,7],"bars":4,"percentage":50}},{"objectNumber":4,"objectType":"progress","objectInfo":{"position":[7,9],"bars":4,"percentage":50}},{"objectNumber":5,"objectType":"line","objectInfo":{"start":[6,3],"end":[21,3]}},{"objectNumber":6,"objectType":"text","objectInfo":{"message":"indenteeeeeeeeeeeeeeeeeeeeeeeeeeeed","position":[71,10],"newLine":"indented"}},{"objectNumber":7,"objectType":"irregularLine","objectInfo":[{"x":6,"y":15},{"x":7,"y":15},{"x":8,"y":15},{"x":9,"y":16},{"x":10,"y":16},{"x":11,"y":16},{"x":12,"y":16},{"x":13,"y":16},{"x":14,"y":17},{"x":15,"y":17},{"x":16,"y":17},{"x":17,"y":17},{"x":18,"y":17},{"x":19,"y":18},{"x":20,"y":18},{"x":21,"y":18},{"x":22,"y":18},{"x":23,"y":18},{"x":24,"y":19},{"x":25,"y":19},{"x":26,"y":19},{"x":27,"y":19},{"x":28,"y":19},{"x":29,"y":20},{"x":30,"y":20},{"x":31,"y":20}]},{"objectNumber":8,"objectType":"irregularLine","objectInfo":[{"x":39,"y":15},{"x":40,"y":15},{"x":41,"y":15},{"x":42,"y":15},{"x":43,"y":15},{"x":44,"y":16},{"x":45,"y":16},{"x":46,"y":16},{"x":47,"y":16},{"x":48,"y":16},{"x":49,"y":16},{"x":50,"y":16},{"x":51,"y":16},{"x":52,"y":16},{"x":53,"y":16},{"x":54,"y":17},{"x":55,"y":17},{"x":56,"y":17},{"x":57,"y":17},{"x":58,"y":17},{"x":59,"y":17},{"x":60,"y":17},{"x":61,"y":17},{"x":62,"y":17},{"x":63,"y":18},{"x":64,"y":18},{"x":65,"y":18},{"x":66,"y":18},{"x":67,"y":18},{"x":68,"y":18},{"x":69,"y":18},{"x":70,"y":18},{"x":71,"y":18},{"x":72,"y":18},{"x":73,"y":19},{"x":74,"y":19},{"x":75,"y":19},{"x":76,"y":19},{"x":77,"y":19}]},{"objectNumber":9,"objectType":"text","objectInfo":{"message":"this should overwrite other stuff and start on the left hand siiiiiiiiiiiide","position":[63,18],"newLine":"toLeft"}}]}
     
 def drawLine(lineParams, stdscr):
     # if line is vertical
@@ -35,7 +35,7 @@ def drawProgressBar(progressData, window, barColour, emptyColour):
     window.addstr(progressData.position[1], progressData.position[0] + numberOfFilledBars, emptyBars, emptyColour)
     window.addstr(progressData.position[1], progressData.position[0] + numberOfFilledBars + numberOfEmptyBars, percString)
 
-def addText(textData, canvasData, window):
+def addText(textData, window):
     if textData.newLine == 'toLeft':
         window.addstr(textData.position[1], textData.position[0], textData.message)
     else:
@@ -48,15 +48,6 @@ def addText(textData, canvasData, window):
             xPosition =  (i + textData.position[0]) - (indentedWidth * yCorrection)
 
             window.addch(textData.position[1] + yCorrection, xPosition, char)
-
-
-
-# Get the required window size and objects
-textData = canvasData['text']
-lineData = canvasData['line']
-irregularLines = canvasData['irregularLines']
-rectData = canvasData['rectangle']
-progressData = canvasData['progress']
 
 def draw_canvas(stdscr):
     k = 0
@@ -86,28 +77,23 @@ def draw_canvas(stdscr):
         # Render status bar
         stdscr.addstr(height-1, int(width/2) - int(len(statusBarString)/2), statusBarString)
 
-        # Add text object(s)
-        for textObject in textData:
-            textInfo = Namespace(**textObject)
-            addText(textInfo, canvasData, userWindow)
-
-        # Add line object(s)
-        for lineObject in lineData:
-            lineInfo = Namespace(**lineObject)
-            drawLine(lineInfo, userWindow)
-
-        for markedSquares in irregularLines:
-            drawIrregularLine(markedSquares, userWindow)
-
-        # Add rectangle object(s)
-        for rectObject in rectData:
-            rectInfo = Namespace(**rectObject)
-            drawRectangle(rectInfo, userWindow)
-
-        # Add progress bar object(s)
-        for progressObject in progressData:
-            progressInfo = Namespace(**progressObject)
-            drawProgressBar(progressInfo, userWindow, curses.color_pair(1), curses.color_pair(2))
+        # add each object from canvasData in order to the curses window
+        for canvasObject in canvasData["objects"]:
+            if canvasObject["objectType"] == 'text':
+                textInfo = Namespace(**canvasObject['objectInfo'])
+                addText(textInfo, userWindow)
+            elif canvasObject["objectType"] == 'line':
+                lineInfo = Namespace(**canvasObject['objectInfo'])
+                drawLine(lineInfo, userWindow)
+            elif canvasObject["objectType"] == 'irregularLine':
+                markedSquares = canvasObject['objectInfo']
+                drawIrregularLine(markedSquares, userWindow)
+            elif canvasObject["objectType"] == 'rectangle':
+                rectInfo = Namespace(**canvasObject['objectInfo'])
+                drawRectangle(rectInfo, userWindow)
+            elif canvasObject["objectType"] == 'progress':
+                progressInfo = Namespace(**canvasObject['objectInfo'])
+                drawProgressBar(progressInfo, userWindow, curses.color_pair(1), curses.color_pair(2))
 
         # Refresh the screen & user window
         userWindow.refresh()

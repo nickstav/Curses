@@ -22,11 +22,7 @@ function createPythonText(canvasInfo) {
 
 // obtain canvas dimensions and save relevant object data into a specified array for that object type
 function collectDataToExport() {
-    let textObjects = [];
-    let lineObjects = [];
-    let irregularLines = [];
-    let rectObjects = [];
-    let progressObjects = [];
+    let cursesObjects = []
 
     let canvasItems = get(canvasObjects);
 
@@ -38,20 +34,36 @@ function collectDataToExport() {
                     position: [object.position.x, object.position.y],
                     newLine: object.newLine
                 };
-                textObjects.push(textInfo);
+                cursesObjects.push({
+                    objectNumber: canvasItems.indexOf(object),
+                    objectType: tools.TEXT,
+                    objectInfo: textInfo
+                });
                 break;
             case(tools.LINE):
                 // check to see if the line is straight or irregular
                 if (object.position.x === object.endPosition.x || object.position.y === object.endPosition.y) {
                     let lineCoords = getMinMaxCoords(object.position, object.endPosition);
-                    lineObjects.push({start: lineCoords.start, end: lineCoords.end});
+                    cursesObjects.push({
+                        objectNumber: canvasItems.indexOf(object),
+                        objectType: tools.LINE,
+                        objectInfo: {start: lineCoords.start, end: lineCoords.end}
+                    });
                 } else {
-                    irregularLines.push(object.filledSquares);
+                    cursesObjects.push({
+                        objectNumber: canvasItems.indexOf(object),
+                        objectType: 'irregularLine',
+                        objectInfo: object.filledSquares
+                    });
                 }
                 break;
             case(tools.RECTANGLE):
                 let rectCoords = getMinMaxCoords(object.position, object.endPosition);
-                rectObjects.push({start: rectCoords.start, end: rectCoords.end});
+                cursesObjects.push({
+                    objectNumber: canvasItems.indexOf(object),
+                    objectType: tools.RECTANGLE,
+                    objectInfo: {start: rectCoords.start, end: rectCoords.end}
+                });
                 break;
             case(tools.PROGRESS):
                 let progressInfo = {
@@ -59,7 +71,11 @@ function collectDataToExport() {
                     bars: object.numberOfBars,
                     percentage: object.percentageValue
                 };
-                progressObjects.push(progressInfo);
+                cursesObjects.push({
+                    objectNumber: canvasItems.indexOf(object),
+                    objectType: tools.PROGRESS,
+                    objectInfo: progressInfo
+                });
                 break;
         };
     });
@@ -67,11 +83,7 @@ function collectDataToExport() {
     let infoToExport = {
         width: get(cursesCanvas).canvasWidth,
         height: get(cursesCanvas).canvasHeight,
-        text: textObjects,
-        line: lineObjects,
-        irregularLines: irregularLines,
-        rectangle: rectObjects,
-        progress: progressObjects
+        objects: cursesObjects
     }
 
     return infoToExport;
