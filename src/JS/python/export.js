@@ -33,7 +33,11 @@ function collectDataToExport() {
     canvasItems.forEach(object => {
         switch(object.type) {
             case(tools.TEXT):
-                let textInfo = {message: object.text, position: [object.position.x, object.position.y]};
+                let textInfo = {
+                    message: object.text, 
+                    position: [object.position.x, object.position.y],
+                    newLine: object.newLine
+                };
                 textObjects.push(textInfo);
                 break;
             case(tools.LINE):

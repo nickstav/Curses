@@ -11,7 +11,7 @@ def drawLine(lineParams, stdscr):
 
 def drawIrregularLine(filledSquares, stdscr):
     for coord in filledSquares:
-        stdscr.addch(coord['y'], coord['x'], 'x')
+        stdscr.addch(coord['y'] - 1, coord['x'], 'x')
 `;
 
 const rectFunction = `
@@ -33,8 +33,19 @@ def drawProgressBar(progressData, window, barColour, emptyColour):
 `;
 
 const textFunction = `
-def addText(textData, window):
-    window.addstr(textData.position[1], textData.position[0], textData.message)
+def addText(textData, canvasData, window):
+    if textData.newLine == 'toLeft':
+        window.addstr(textData.position[1], textData.position[0], textData.message)
+    else:
+        for i in range(0, len(textData.message)):
+            char = textData.message[i]
+            indentedWidth = canvasData['width'] - textData.position[0]
+            # move down to the next row for every completed indentedWidth 
+            yCorrection = math.floor(i / indentedWidth)
+            # start a new line indented below the start of the text
+            xPosition =  (i + textData.position[0]) - (indentedWidth * yCorrection)
+
+            window.addch(textData.position[1] + yCorrection, xPosition, char)
 `;
 
 export const objectFunctions = lineFunction + rectFunction + progressFunction + textFunction;
