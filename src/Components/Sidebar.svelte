@@ -20,7 +20,7 @@
     {#if $cursesCanvas.showSidebar}
 
     <div id="sidebar" 
-    class="bg-gray-200 w-full h-full text-xs flex flex-col justify-between items-center pb-8"
+    class="bg-gray-200 w-24 h-full text-xs flex flex-col justify-between items-center pb-8"
     on:click={()=>{updateCanvas()}}
     >
         <div id="firstButtonRow" class=" w-full flex flex-row justify-around py-1">

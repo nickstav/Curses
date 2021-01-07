@@ -21,6 +21,7 @@
 <div class="absolute left-4 top-10 w-1/2 text-left">
     <button 
     class="text-xs text-blue-500 underline border-none bg-none cursor-pointer"
+    style="outline: none"
     on:click={()=>{cursesCanvas.toggleShortcutMenu()}}
     >
         {instruction} Keyboard Shortcuts
