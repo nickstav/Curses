@@ -69,7 +69,8 @@ function collectDataToExport() {
                 let progressInfo = {
                     position: [object.position.x, object.position.y],
                     bars: object.numberOfBars,
-                    percentage: object.percentageValue
+                    percentage: object.percentageValue,
+                    showPercentage: object.showPercentage.toString() // as booleans are different in Python
                 };
                 cursesObjects.push({
                     objectNumber: canvasItems.indexOf(object),

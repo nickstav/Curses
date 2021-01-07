@@ -26,10 +26,12 @@ def drawProgressBar(progressData, window, barColour, emptyColour):
     filledBars = ' ' * numberOfFilledBars
     emptyBars =  ' ' * numberOfEmptyBars
     percString = ' ' + str(progressData.percentage) + '%'
+    showPercentage = (progressData.showPercentage == 'true')
 
     window.addstr(progressData.position[1], progressData.position[0], filledBars, barColour)
     window.addstr(progressData.position[1], progressData.position[0] + numberOfFilledBars, emptyBars, emptyColour)
-    window.addstr(progressData.position[1], progressData.position[0] + numberOfFilledBars + numberOfEmptyBars, percString)
+    if showPercentage:
+        window.addstr(progressData.position[1], progressData.position[0] + numberOfFilledBars + numberOfEmptyBars, percString)
 `;
 
 const textFunction = `
