@@ -16,7 +16,10 @@ function saveCanvas() {
 function createPythonText(canvasInfo) {
     let dataString = `canvasData = ${JSON.stringify(canvasInfo)}
     `;
-    let pythonScript = imports + dataString + objectFunctions + cursesScript;
+    let progressCustomisation = addProgressBarCustomisationOption(canvasInfo);
+
+    let pythonScript = imports + dataString + progressCustomisation + objectFunctions + cursesScript;
+
     cursesCanvas.updatePythonScript(pythonScript.trim())
 }
 
@@ -88,6 +91,31 @@ function collectDataToExport() {
     }
 
     return infoToExport;
+}
+
+function addProgressBarCustomisationOption(canvasInfo) {
+    let progressBarObjects = [];
+
+    for (let i = 0; i < canvasInfo.objects.length; i++) {
+        if (canvasInfo.objects[i].objectType === 'progress') {
+            progressBarObjects.push(canvasInfo.objects[i]);
+        }
+    }
+    
+    if (progressBarObjects.length > 0) {
+        return progressBarCustomisationString(progressBarObjects);
+    } else {
+        return ''
+    }
+}
+
+function progressBarCustomisationString(array) {
+    let pythonScript = '\n# EDIT PERCENTAGE VALUE OF PROGRESS BARS HERE... \n';
+    array.forEach(object => {
+        let line = `# canvasData["objects"][${object.objectNumber}]['percentage] = ____ \n`
+        pythonScript += line;
+    })
+    return pythonScript;
 }
 
 // since shapes can be drawn in a negative direction w.r.t. canvas coordinates,

@@ -12,7 +12,7 @@
 
     <div 
     id="window" 
-    class="flex flex-col items-center h-3/4 w-3/4 rounded-md text-left font-mono text-sm bg-gray-300 pt-4 px-4" 
+    class="flex flex-col items-center h-3/4 w-3/4 opacity-100 rounded-md text-left font-mono text-sm bg-gray-300 pt-4 px-4" 
     use:clickOutside on:click_outside={hideScript}
     >
         <div id="codeHolder" class="w-full flex-1 overflow-auto p-0 m-0">
