@@ -1,2 +1,0 @@
-2) Add a copy script button alongside the download script button OR make select all (ctrl/cmd + A) only select the code so I can quickly grab it.
-3) Repro : Make two lines. Switch to select tool. Click first line. First line should become selected. Click second line. First line should get deselected, second line should get selected. Hold shift and click the first line. Both lines should now be selected. (AKA : standard select behaviour vs shift-click select behaviour). (edited)
