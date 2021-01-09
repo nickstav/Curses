@@ -16,7 +16,7 @@ function checkIfAreaBeingSelected(isDrawing) {
 }
 
 // function to check if a mouse click at gridLocation is over an object and select it if so
-function selectObject(gridLocation, canvasElement) {
+function selectObject(gridLocation, canvasElement, event) {
     let objects = get(canvasObjects);
 
     // loop through the items array in reverse to prioritise the object "on top"
@@ -32,6 +32,12 @@ function selectObject(gridLocation, canvasElement) {
                 gridLocation.y + 1 === objects[z].filledSquares[i].y
                 ) {
 
+                    // deselect any previously selected object if the shift key is not being held
+                    if (!event.shiftKey) {
+                        objects.forEach(object => {
+                            object.deselectObject();
+                        })
+                    }
                     // if mouse location matches an object's location, mark it as selected
                     objects[z].selectObject();
                     canvasElement.style.cursor = "grab";

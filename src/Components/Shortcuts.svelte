@@ -37,6 +37,7 @@
         <li>Rectangle tool: <strong>{keyboardKeys.R}</strong></li>
         <li>Progress bar tool: <strong>{keyboardKeys.P}</strong></li>
         <li>Select tool: <strong>{keyboardKeys.V}</strong></li>
+        <li>Select multiple objects: <strong>hold shift key</strong></li>
         <li>Duplicate: <strong>{keyHeld} + {keyboardKeys.C}</strong></li>
         <li>Move: <strong>arrow keys</strong></li>
         <li>Align: <strong>{keyHeld} + arrow keys</strong></li>

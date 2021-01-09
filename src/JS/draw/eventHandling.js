@@ -43,7 +43,7 @@ function handleMouseClick(event) {
             break;
         case(tools.DRAG):
             if (selectMethod === selectStyle.OBJECTS) {
-                selectObject(gridLocation, canvasElement);
+                selectObject(gridLocation, canvasElement, event);
             } else {
                 // now mouse has been released, change select method to objects to allow for manipulation
                 cursesCanvas.changeSelectMethodToGrab();
