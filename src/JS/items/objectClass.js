@@ -1,6 +1,6 @@
 import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/project.js';
-import { gridDimension } from '../constants/canvasSize.js';
+import { gridDimension, yAlignment } from '../constants/canvasSize.js';
 import { cornerSelected, editMode } from '../constants/objectStates.js';
 import { uuidv4 } from './helperFunctions/UUID.js';
 
@@ -138,11 +138,11 @@ export class CanvasItem {
             },
             bottomL: {
                 x: (refPoint.x - 0.5) * gridDimension.x,
-                y: (refPoint.y + height + 0.5) * gridDimension.y // 1/2 square padding for highlighting box
+                y: ((refPoint.y + height + 0.5) * gridDimension.y) - yAlignment // 1/2 square padding for highlighting box
             },
             bottomR: {
                 x: (refPoint.x - 0.5 + width) * gridDimension.x,
-                y: (refPoint.y + height + 0.5) * gridDimension.y // 1/2 square padding for highlighting box
+                y: ((refPoint.y + height + 0.5) * gridDimension.y) - yAlignment // 1/2 square padding for highlighting box
             }
         }
     }
@@ -154,7 +154,7 @@ export class CanvasItem {
             topLeftCoords.x,
             topLeftCoords.y,
             width * gridDimension.x,
-            (height + 0.5) * gridDimension.y // 1/2 square padding for highlighting box
+            ((height + 0.5) * gridDimension.y) - yAlignment // 1/2 square padding for highlighting box
         );
         this.context.stroke();
     }
