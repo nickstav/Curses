@@ -112,7 +112,7 @@ function addProgressBarCustomisationOption(canvasInfo) {
 function progressBarCustomisationString(array) {
     let pythonScript = '\n# EDIT PERCENTAGE VALUE OF PROGRESS BARS HERE... \n';
     array.forEach(object => {
-        let line = `# canvasData["objects"][${object.objectNumber}]['percentage] = ____ \n`
+        let line = `# canvasData["objects"][${object.objectNumber}]["percentage"] = ____ \n`
         pythonScript += line;
     })
     return pythonScript;
