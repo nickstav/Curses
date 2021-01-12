@@ -11,7 +11,7 @@ export class RectangleItem extends CanvasItem {
         this.endPosition = endLocation;
         this.cornerChar = '+';
         this.vertChar = '|';
-        this.horizChar = '-';
+        this.horizChar = '―';
     }
 
     draw() {

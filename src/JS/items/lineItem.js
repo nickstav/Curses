@@ -146,7 +146,7 @@ export class LineItem extends CanvasItem {
         if (deltaX === 0) {
             return '|';
         } else if (deltaY === 0) {
-            return '-'
+            return '―'
         } else {
             return 'x';
         }
