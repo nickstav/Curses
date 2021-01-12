@@ -5,7 +5,7 @@ import { cursesCanvas } from '../stores/project.js';
 import { progressBarSize } from '../stores/progressBar.js';
 
 import { tools } from '../constants/toolsList.js';
-import { gridDimension } from '../constants/canvasSize.js';
+import { gridDimension, yAlignment } from '../constants/canvasSize.js';
 
 
 
@@ -103,7 +103,7 @@ export class ProgressBarItem extends CanvasItem {
             this.clearPreviousCharacter({x: this.position.x + i, y: this.position.y + 1});
 
             //add the character to its assigned coordinates
-            this.context.fillText(character, canvasCoordinates.x, canvasCoordinates.y);
+            this.context.fillText(character, canvasCoordinates.x, canvasCoordinates.y - yAlignment);
 
             this.markGridSquareAsFilled({x: this.position.x + i, y: this.position.y + 1});
         };

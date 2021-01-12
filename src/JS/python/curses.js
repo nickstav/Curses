@@ -2,6 +2,7 @@ const imports =
 `import curses
 import json
 import sys
+import math
 from argparse import Namespace
 from curses.textpad import Textbox, rectangle
 
@@ -40,7 +41,7 @@ def draw_canvas(stdscr):
         for canvasObject in canvasData["objects"]:
             if canvasObject["objectType"] == 'text':
                 textInfo = Namespace(**canvasObject['objectInfo'])
-                addText(textInfo, userWindow)
+                addText(textInfo, canvasData, userWindow)
             elif canvasObject["objectType"] == 'line':
                 lineInfo = Namespace(**canvasObject['objectInfo'])
                 drawLine(lineInfo, userWindow)

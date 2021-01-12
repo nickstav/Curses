@@ -1,7 +1,7 @@
 import { CanvasItem } from './objectClass.js';
 
 import { tools } from '../constants/toolsList.js';
-import { gridDimension } from '../constants/canvasSize.js';
+import { gridDimension, yAlignment } from '../constants/canvasSize.js';
 import { getSquaresForShallowLine, getSquaresForSteepLine } from './helperFunctions/lineHelper.js';
 
 /* ---------------------------------------------------------------------------------------------- */
@@ -135,7 +135,7 @@ export class LineItem extends CanvasItem {
     // Add relevant character to square
     addCharacterToSquare(xCoord, yCoord, keyCharacter) {
         // add 1 to the y value as coordinate is top corner of grid square
-        this.context.fillText(keyCharacter, xCoord * gridDimension.x, (yCoord + 1) * gridDimension.y);
+        this.context.fillText(keyCharacter, xCoord * gridDimension.x, ((yCoord + 1) * gridDimension.y) - yAlignment);
         
         //mark the grid square as filled
         this.markGridSquareAsFilled({x: xCoord, y: yCoord + 1});
@@ -146,7 +146,7 @@ export class LineItem extends CanvasItem {
         if (deltaX === 0) {
             return '|';
         } else if (deltaY === 0) {
-            return '-'
+            return '―'
         } else {
             return 'x';
         }

@@ -4,7 +4,7 @@ import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/project.js';
 
 import { tools, textNewLine } from '../constants/toolsList.js';
-import { gridDimension } from '../constants/canvasSize.js';
+import { gridDimension, yAlignment } from '../constants/canvasSize.js';
 import { cornerSelected } from '../constants/objectStates.js';
 
 
@@ -36,7 +36,7 @@ export class TextItem extends CanvasItem {
             this.clearPreviousCharacter(gridSquare);
 
             //add the character to its assigned coordinates
-            this.context.fillText(character, canvasCoordinates.x, canvasCoordinates.y);
+            this.context.fillText(character, canvasCoordinates.x, canvasCoordinates.y - yAlignment);
 
             this.markGridSquareAsFilled(gridSquare);
         };
