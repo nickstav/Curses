@@ -17,4 +17,9 @@ const gridDimension = {
     y: 23
 };
 
-export { minDimensions, maxDimensions, gridDimension }
+// since a given location on the canvas will refer to the bottom corner of a grid square, we need to
+// ensure that all characters are bounded by the grid square (e.g. such as g, p j, etc)
+// so define a constant to "lift" a character above the bottom line of the grid square
+const yAlignment = 5;
+
+export { minDimensions, maxDimensions, gridDimension, yAlignment }

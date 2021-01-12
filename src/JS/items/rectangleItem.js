@@ -1,7 +1,7 @@
 import { CanvasItem } from './objectClass.js';
 
 import { tools } from '../constants/toolsList.js';
-import { gridDimension } from '../constants/canvasSize.js';
+import { gridDimension, yAlignment } from '../constants/canvasSize.js';
 import { getVerticalCoords, getHorizontalCoords } from './helperFunctions/rectHelper.js';
 
 export class RectangleItem extends CanvasItem {
@@ -145,7 +145,7 @@ export class RectangleItem extends CanvasItem {
 
     // Add relevant character to square
     addCharacterToSquare(xCoord, yCoord, keyCharacter) {
-        this.context.fillText(keyCharacter, xCoord * gridDimension.x, yCoord * gridDimension.y);
+        this.context.fillText(keyCharacter, xCoord * gridDimension.x, (yCoord * gridDimension.y) - yAlignment);
         
         // mark the grid square as filled
         this.markGridSquareAsFilled({x: xCoord, y: yCoord});
