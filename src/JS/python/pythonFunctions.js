@@ -1,22 +1,45 @@
 const lineFunction = `
-def drawLine(lineParams, stdscr):
+def drawLine(lineParams, window):
     # if line is vertical
     if lineParams.start[0] == lineParams.end[0]:
         for x in range(lineParams.start[1], lineParams.end[1]):
-            stdscr.addch(x, lineParams.start[0], curses.ACS_VLINE) # coords are passed to curses as (y, x)
+            window.addch(x, lineParams.start[0], curses.ACS_VLINE) # coords are passed to curses as (y, x)
     # if line is horizontal
     elif lineParams.start[1] == lineParams.start[1]:
         for x in range(lineParams.start[0], lineParams.end[0]):
-            stdscr.addch( lineParams.start[1], x, curses.ACS_HLINE)
+            window.addch( lineParams.start[1], x, curses.ACS_HLINE)
 
-def drawIrregularLine(filledSquares, stdscr):
+def drawIrregularLine(filledSquares, window):
     for coord in filledSquares:
-        stdscr.addch(coord['y'] - 1, coord['x'], 'x')
+        window.addch(coord['y'] - 1, coord['x'], 'x')
 `;
 
 const rectFunction = `
 def drawRectangle(rectData, window):
-    rectangle(window, rectData.start[1], rectData.start[0], rectData.end[1], rectData.end[0])
+    if rectData.start[1] == rectData.end[1]: # if rect function was used to draw a horizontal line
+        for x in range(rectData.start[0] + 1, rectData.end[0]):
+            window.addch( rectData.start[1], x, curses.ACS_HLINE)
+    elif rectData.start[0] == rectData.end[0]: # if rect function was used to draw a vertical line
+        for x in range(rectData.start[1] + 1, rectData.end[1]):
+            window.addch(x, rectData.start[0], curses.ACS_VLINE)
+    elif abs(rectData.start[1] - rectData.end[1]) == 1: # if rect has height = 1 (no verticals to add)
+        window.addch(rectData.start[1], rectData.start[0], curses.ACS_ULCORNER)
+        window.addch(rectData.end[1], rectData.start[0], curses.ACS_LLCORNER)
+        window.addch(rectData.start[1], rectData.end[0], curses.ACS_URCORNER)
+        window.addch(rectData.end[1], rectData.end[0], curses.ACS_LRCORNER)
+        for x in range(rectData.start[0] + 1, rectData.end[0]):
+            window.addch( rectData.start[1], x, curses.ACS_HLINE)
+            window.addch( rectData.end[1], x, curses.ACS_HLINE)
+    elif abs(rectData.start[0] - rectData.end[0]) == 1: # if rect has width = 1 (no horiz to add)
+        window.addch(rectData.start[1], rectData.start[0], curses.ACS_ULCORNER)
+        window.addch(rectData.end[1], rectData.start[0], curses.ACS_LLCORNER)
+        window.addch(rectData.start[1], rectData.end[0], curses.ACS_URCORNER)
+        window.addch(rectData.end[1], rectData.end[0], curses.ACS_LRCORNER)
+        for x in range(rectData.start[1] + 1, rectData.end[1]):
+            window.addch(x, rectData.start[0], curses.ACS_VLINE)
+            window.addch(x, rectData.end[0], curses.ACS_VLINE)
+    else:
+        rectangle(window, rectData.start[1], rectData.start[0], rectData.end[1], rectData.end[0])
 `;
 
 const progressFunction = `
