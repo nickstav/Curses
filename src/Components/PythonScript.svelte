@@ -8,11 +8,11 @@
     import { copyTextToClipboard } from '../JS/python/copyText.js';
 </script>
 
-<div id="overlay" class="w-full h-full bg-black opacity-90 fixed top-0 left-0 flex items-center justify-center align-center">
+<div id="overlay" class="w-full h-full bg-black bg-opacity-80 fixed top-0 left-0 flex items-center justify-center align-center">
 
     <div 
     id="window" 
-    class="flex flex-col items-center h-3/4 w-3/4 opacity-100 rounded-md text-left font-mono text-sm bg-gray-300 pt-4 px-4" 
+    class="flex flex-col items-center h-3/4 w-3/4 rounded-md text-left font-mono text-sm bg-gray-300 pt-4 px-4" 
     use:clickOutside on:click_outside={hideScript}
     >
         <div id="codeHolder" class="w-full flex-1 overflow-auto p-0 m-0">
