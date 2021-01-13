@@ -2,15 +2,30 @@ const imports =
 `import curses
 import json
 import sys
+import platform
 import math
 from argparse import Namespace
 from curses.textpad import Textbox, rectangle
 
 `;
 
+const userSystemCheck = `
+# get current platform, and define line end points array. These will change depending on Windows/Mac
+userSystem = platform.system()
+lineEndChars = []
+`
+
 const cursesScript = `
 def draw_canvas(stdscr):
     k = 0
+
+    # find if the user is using Windows or Mac/other and define the characters to draw end points of a line
+    # Note: This is because the end points that are used for Windows do not align with the line on a Mac system
+    global lineEndChars
+    if userSystem == 'Windows':
+        lineEndChars = ['╴', '╶', '╵', '╷']
+    else:
+        lineEndChars = [curses.ACS_HLINE, curses.ACS_HLINE, curses.ACS_VLINE, curses.ACS_VLINE]
 
     # Clear and refresh the screen for a blank canvas
     stdscr.clear()
@@ -44,13 +59,13 @@ def draw_canvas(stdscr):
                 addText(textInfo, canvasData, userWindow)
             elif canvasObject["objectType"] == 'line':
                 lineInfo = Namespace(**canvasObject['objectInfo'])
-                drawLine(lineInfo, userWindow)
+                drawLine(lineInfo, userWindow, lineEndChars)
             elif canvasObject["objectType"] == 'irregularLine':
                 markedSquares = canvasObject['objectInfo']
                 drawIrregularLine(markedSquares, userWindow)
             elif canvasObject["objectType"] == 'rectangle':
                 rectInfo = Namespace(**canvasObject['objectInfo'])
-                drawRectangle(rectInfo, userWindow)
+                drawRectangle(rectInfo, userWindow, lineEndChars)
             elif canvasObject["objectType"] == 'progress':
                 progressInfo = Namespace(**canvasObject['objectInfo'])
                 drawProgressBar(progressInfo, userWindow, curses.color_pair(1), curses.color_pair(2))
@@ -69,4 +84,4 @@ if __name__ == "__main__":
     main()
 `;
 
-export { imports, cursesScript }
+export { imports, userSystemCheck, cursesScript }

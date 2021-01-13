@@ -1,15 +1,15 @@
 const lineFunction = `
-def drawLine(lineParams, window):
+def drawLine(lineParams, window, lineEndChars):
     # if line is vertical
     if lineParams.start[0] == lineParams.end[0]:
-        window.addch(lineParams.start[1], lineParams.start[0], '╷')
-        window.addch(lineParams.end[1], lineParams.start[0], '╵')
+        window.addch(lineParams.start[1], lineParams.start[0], lineEndChars[3])
+        window.addch(lineParams.end[1], lineParams.start[0], lineEndChars[2])
         for x in range(lineParams.start[1] + 1, lineParams.end[1]):
             window.addch(x, lineParams.start[0], curses.ACS_VLINE) # coords are passed to curses as (y, x)
     # if line is horizontal
     elif lineParams.start[1] == lineParams.start[1]:
-        window.addch(lineParams.start[1], lineParams.start[0], '╶')
-        window.addch(lineParams.start[1], lineParams.end[0], '╴')
+        window.addch(lineParams.start[1], lineParams.start[0], lineEndChars[1])
+        window.addch(lineParams.start[1], lineParams.end[0], lineEndChars[0])
         for x in range(lineParams.start[0] + 1, lineParams.end[0]):
             window.addch(lineParams.start[1], x, curses.ACS_HLINE)
 def drawIrregularLine(filledSquares, window):
@@ -18,7 +18,7 @@ def drawIrregularLine(filledSquares, window):
 `;
 
 const rectFunction = `
-def drawRectangle(rectData, window):
+def drawRectangle(rectData, window, lineEndChars):
     if rectData.start[1] == rectData.end[1]: # if rect function was used to draw a horizontal line
         window.addch(rectData.start[1], rectData.start[0], '╶')
         window.addch(rectData.start[1], rectData.end[0], '╴')
