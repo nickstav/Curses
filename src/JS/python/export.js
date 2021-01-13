@@ -2,7 +2,7 @@ import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/project.js';
 import { canvasObjects } from '../stores/objects.js';
 import { tools } from '../constants/toolsList.js';
-import { imports, cursesScript } from './curses.js';
+import { imports, userSystemCheck, cursesScript } from './curses.js';
 import { objectFunctions } from './pythonFunctions.js';
 
 // confirm that user is ready to export the canvas, then collect relevant data and send to the server
@@ -18,7 +18,7 @@ function createPythonText(canvasInfo) {
     `;
     let progressCustomisation = addProgressBarCustomisationOption(canvasInfo);
 
-    let pythonScript = imports + dataString + progressCustomisation + objectFunctions + cursesScript;
+    let pythonScript = imports + dataString + userSystemCheck + progressCustomisation + objectFunctions + cursesScript;
 
     cursesCanvas.updatePythonScript(pythonScript.trim())
 }
