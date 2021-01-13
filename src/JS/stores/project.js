@@ -4,6 +4,7 @@ import { selectStyle } from '../constants/selectTool.js';
 // a store to contain all variables related to the canvas element
 
  const defaultValues = {
+    showSplash: true,
     canvasHeight: 22,
     canvasWidth: 80,
     canvasElement: undefined,
@@ -41,6 +42,15 @@ function setUpStore() {
           context: canvasElement.getContext('2d')
         };
       });
+  }
+
+  function hideSplash() {
+    update(status => {
+      return {
+        ...status,
+        showSplash: false
+      };
+    });   
   }
 
   function changeCanvasTool(buttonPressed) {
@@ -199,6 +209,7 @@ function toggleSidebar() {
     set,
     removeCanvas,
     createCanvas,
+    hideSplash,
     changeCanvasTool,
     startDrawing,
     stopDrawing,

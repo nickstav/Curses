@@ -9,6 +9,7 @@
 	import Shortcuts from './Components/Shortcuts.svelte';
 	import PythonScript from './Components/PythonScript.svelte';
 	import DonateLink from './Components/DonateLink.svelte';
+	import Splash from './Components/Splash.svelte';
 </script>
 
 <main class="w-full h-full flex flex-col items-center text-center">
@@ -26,6 +27,10 @@
 	
 	{#if $cursesCanvas.showPythonScript}
 		<PythonScript/>
+	{/if}
+
+	{#if $cursesCanvas.showSplash}
+		<Splash/>
 	{/if}
 	
 </main>
