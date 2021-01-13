@@ -8,6 +8,7 @@
 	import Sidebar from './Components/Sidebar.svelte';
 	import Shortcuts from './Components/Shortcuts.svelte';
 	import PythonScript from './Components/PythonScript.svelte';
+	import DonateLink from './Components/DonateLink.svelte';
 </script>
 
 <main class="w-full h-full flex flex-col items-center text-center">
@@ -20,6 +21,8 @@
 		<Canvas/>
 		<Sidebar/>
 	</div>
+
+	<DonateLink/>
 	
 	{#if $cursesCanvas.showPythonScript}
 		<PythonScript/>
