@@ -12,7 +12,7 @@
 	import Splash from './Components/Splash.svelte';
 </script>
 
-<main class="w-full h-full flex flex-col items-center text-center">
+<main class="font-sans w-full h-full flex flex-col items-center text-center">
 
 	<Toolbar/>
 
