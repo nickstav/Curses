@@ -4,7 +4,6 @@ import { selectStyle } from '../constants/selectTool.js';
 // a store to contain all variables related to the canvas element
 
  const defaultValues = {
-    showSplash: true,
     canvasHeight: 22,
     canvasWidth: 80,
     canvasElement: undefined,
@@ -21,8 +20,13 @@ import { selectStyle } from '../constants/selectTool.js';
     isHighlighting: false,
     mousePosition: {x: 0, y: 0},
     pythonScript: '',
+    showSplash: true,
     showPythonScript: false,
-    showSidebar: false,
+    showSidebar: true,
+    showCanvasOptions: true,
+    showEditOptions: true,
+    showTextOptions: false,
+    showProgressOptions: false,
     showShortcuts: false
 };
 
@@ -195,6 +199,42 @@ function toggleShortcutMenu() {
   });
 }
 
+function toggleCanvasMenu() {
+  update(status => {
+    return {
+        ...status,
+        showCanvasOptions: !status.showCanvasOptions
+    };
+  });
+}
+
+function toggleEditMenu() {
+  update(status => {
+    return {
+        ...status,
+        showEditOptions: !status.showEditOptions
+    };
+  });
+}
+
+function toggleTextMenu() {
+  update(status => {
+    return {
+        ...status,
+        showTextOptions: !status.showTextOptions
+    };
+  });
+}
+
+function toggleProgressMenu() {
+  update(status => {
+    return {
+        ...status,
+        showProgressOptions: !status.showProgressOptions
+    };
+  });
+}
+
 function toggleSidebar() {
   update(status => {
     return {
@@ -225,6 +265,10 @@ function toggleSidebar() {
     updatePythonScript,
     toggleShowPythonScript,
     toggleSidebar,
+    toggleCanvasMenu,
+    toggleEditMenu,
+    toggleTextMenu,
+    toggleProgressMenu,
     toggleShortcutMenu
 	};
 

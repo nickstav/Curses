@@ -6,7 +6,7 @@ import { imports, userSystemCheck, cursesScript } from './curses.js';
 import { objectFunctions } from './pythonFunctions.js';
 
 // confirm that user is ready to export the canvas, then collect relevant data and send to the server
-function saveCanvas() {
+function showScript() {
     let canvasInfo = collectDataToExport();
     createPythonText(canvasInfo);
     cursesCanvas.toggleShowPythonScript();
@@ -136,4 +136,4 @@ function getMinMaxCoords(initialPosition, finalPosition) {
     }
 }
 
-export { saveCanvas }
+export { showScript }

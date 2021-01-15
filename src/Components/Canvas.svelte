@@ -14,7 +14,7 @@
 
 <div id="canvasHolder" class="w-full flex justify-center items-center flex-1 py-5 overflow-auto" style="--canvasW: {$gridAxis.x}px;--canvasH: {$gridAxis.y}px; --squareW: {gridDimension.x}px; --squareH: {gridDimension.y}px">
     <div id="canvasBackground" style="width: var(--canvasW); height: var(--canvasH); background-image: url(./black_square.png); background-size: var(--squareW) var(--squareH);">
-        <canvas 
+        <canvas
         bind:this={canvas}
         id="cursesCanvas" 
         width={$gridAxis.x}
