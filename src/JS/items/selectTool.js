@@ -28,6 +28,7 @@ function changeTool(buttonPressed) {
         default:
             canvasElement.style.cursor = "default"; 
     }
+    toggleSideBarDisplay(buttonPressed);
 }
 
 
@@ -40,6 +41,50 @@ function deselectAnySelectedObjects() {
             object.deselectObject();
         }
     });
+}
+
+function toggleSideBarDisplay(tool) {
+    let showEdit = get(cursesCanvas).showEditOptions;
+    let showText  = get(cursesCanvas).showTextOptions;
+    let showProgress= get(cursesCanvas).showProgressOptions;
+    switch(tool) {
+        case(tools.LINE):
+        case(tools.RECTANGLE):
+            if (showText === true) {
+                cursesCanvas.toggleTextMenu();
+            }
+            if (showProgress === true) {
+                cursesCanvas.toggleProgressMenu();
+            }
+            break;
+        case(tools.TEXT):
+            if (showText === false) {
+                cursesCanvas.toggleTextMenu();
+            }
+            if (showProgress === true) {
+                cursesCanvas.toggleProgressMenu();
+            }
+            break;
+        case(tools.PROGRESS):
+            if (showText === true) {
+                cursesCanvas.toggleTextMenu();
+            }
+            if (showProgress === false) {
+                cursesCanvas.toggleProgressMenu();
+            }
+            break;
+        case(tools.DRAG):
+            if (showEdit === false) {
+                cursesCanvas.toggleEditMenu();
+            }
+            if (showText === true) {
+                cursesCanvas.toggleTextMenu();
+            }
+            if (showProgress === true) {
+                cursesCanvas.toggleProgressMenu();
+            }
+            break;
+    }
 }
 
 export { changeTool, deselectAnySelectedObjects }
