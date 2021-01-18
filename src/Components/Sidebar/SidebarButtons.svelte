@@ -25,7 +25,7 @@
 <div
 id="sidebarButtons" 
 style="--toolsColour: {toolsBGCol}; --exportColour: {exportBGCol}"
-class="w-full flex flex-row justify-between text-xs border-b-1 border-black px-3 py-4"
+class="w-full flex flex-row justify-between text-xs border-b border-black px-3 py-4"
 >
     <button 
     style="background-color: var(--toolsColour);"
