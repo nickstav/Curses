@@ -45,7 +45,7 @@ class="w-full flex flex-col border-t-1 border-black px-3 overflow-y-auto"
                 <li class="flex items-start pb-1.5">align objects</li>
             </ul>
         </div>
-        <div id="keyList" class="flex flex-1 flex-col pl-2 text-left">
+        <div id="keyList" class="flex flex-1 flex-col pl-1 text-xs text-left">
             <ul>
                 <li class="flex items-start pb-1.5"><strong>{keyboardKeys.DELETE}</strong></li>
                 <li class="flex items-start pb-1.5"><strong>{keyboardKeys.T}</strong></li>
@@ -55,8 +55,8 @@ class="w-full flex flex-col border-t-1 border-black px-3 overflow-y-auto"
                 <li class="flex items-start pb-1.5"><strong>{keyboardKeys.V}</strong></li>
                 <li class="flex items-start pb-1.5"><strong>hold shift</strong></li>
                 <li class="flex items-start pb-1.5"><strong>{keyHeld} + {keyboardKeys.C}</strong></li>
-                <li class="flex items-start pb-1.5"><strong>arrow keys</strong></li>
-                <li class="flex items-start pb-1.5"><strong>{keyHeld} + arrow keys</strong></li>
+                <li class="flex items-start pb-1.5"><strong>🡑,🡒,🡓,🡐</strong></li>
+                <li class="flex items-start pb-1.5"><strong>{keyHeld} + 🡑,🡒,🡓,🡐</strong></li>
             </ul>
         </div>
     </div>
