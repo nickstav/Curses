@@ -19,7 +19,10 @@
     }
 </script>
 
-<div id="shortcutsSection" class="w-full flex flex-col border-t-1 border-black overflow-auto px-3">
+<div 
+id="shortcutsSection" 
+class="w-full flex flex-col border-t-1 border-black px-3 overflow-y-auto"
+>
 
     <div id="header" class="w-full flex flex-row pb-1">
         <h1 class="w-full text-left font-semibold">KEYBOARD SHORTCUTS</h1>

@@ -25,18 +25,18 @@
 <div
 id="sidebarButtons" 
 style="--toolsColour: {toolsBGCol}; --exportColour: {exportBGCol}"
-class="w-full flex flex-row justify-between text-xs border-b-1 border-black px-3 py-4"
+class="w-full flex flex-row justify-between text-xs border-b border-black px-3 py-4"
 >
     <button 
-    style="background-color: var(--toolsColour);"
-    class="w-14 border border-gray-600 rounded-md mx-2"
+    style="background-color: var(--toolsColour); outline: none"
+    class="w-14 border border-gray-600 rounded-md mx-2 hover:shadow-lg"
     on:click={showToolsSideBar}
     >
         tools
     </button>
     <button 
-    style="background-color: var(--exportColour);"
-    class="w-14 border border-gray-600 rounded-md mx-2" 
+    style="background-color: var(--exportColour); outline: none"
+    class="w-14 border border-gray-600 rounded-md mx-2 hover:shadow-lg" 
     on:click={showExportSideBar}
     >
         export

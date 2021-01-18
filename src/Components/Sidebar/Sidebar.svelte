@@ -14,8 +14,8 @@
 </script>
 
 
-<div id="sidebar" 
-class="bg-gray-300 w-48 h-full text-xs flex flex-col justify-start items-center border-l-1 border-gray-500 overflow-auto"
+<div id="sidebar"
+class="bg-gray-300 w-48 h-full text-xs flex flex-col justify-start items-center border-l-1 border-gray-500 overflow-hidden"
 on:click={()=>{updateCanvas()}}
 >
     <SidebarButtons/>

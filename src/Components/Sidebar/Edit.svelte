@@ -21,17 +21,17 @@
     {#if $cursesCanvas.showEditOptions}
     <div id="copy/delete" class="w-full flex flex-col items-start border-b border-gray-200">
         <div id="firstButtonRow" class=" w-full flex flex-row justify-around pt-2 pb-4">
-            <Button label={'duplicate (ctrl + c)'} editCanvas={duplicateObject} img={"url('./button_images/duplicate.png')"}/>
-            <Button label={'delete (del)'} editCanvas={eraseObject} img={"url('./button_images/delete.png')"}/>
+            <Button label={'duplicate (ctrl + c)'} location={'sidebar'} editCanvas={duplicateObject} img={"url('./button_images/duplicate.png')"}/>
+            <Button label={'delete (del)'} location={'sidebar'} editCanvas={eraseObject} img={"url('./button_images/delete.png')"}/>
         </div>
     </div>
 
     <div id="alignSection" class="w-full py-1 flex flex-col items-start border-b border-gray-200">
         <div id="alignButtons" class="w-full py-2 flex flex-row justify-between">
-            <Button label={'align left'} editCanvas={()=>{alignObjects(keyboardKeys.LEFT)}} img={"url('./button_images/align_left.png')"}/>
-            <Button label={'align right'} editCanvas={()=>{alignObjects(keyboardKeys.RIGHT)}} img={"url('./button_images/align_right.png')"}/>
-            <Button label={'align top'} editCanvas={()=>{alignObjects(keyboardKeys.UP)}} img={"url('./button_images/align_up.png')"}/>
-            <Button label={'align bottom'} editCanvas={()=>{alignObjects(keyboardKeys.DOWN)}} img={"url('./button_images/align_down.png')"}/>
+            <Button label={'align left'} location={'sidebar'} editCanvas={()=>{alignObjects(keyboardKeys.LEFT)}} img={"url('./button_images/align_left.png')"}/>
+            <Button label={'align right'} location={'sidebar'} editCanvas={()=>{alignObjects(keyboardKeys.RIGHT)}} img={"url('./button_images/align_right.png')"}/>
+            <Button label={'align top'} location={'sidebar'} editCanvas={()=>{alignObjects(keyboardKeys.UP)}} img={"url('./button_images/align_up.png')"}/>
+            <Button label={'align bottom'} location={'sidebar'} editCanvas={()=>{alignObjects(keyboardKeys.DOWN)}} img={"url('./button_images/align_down.png')"}/>
         </div>
     </div>
 

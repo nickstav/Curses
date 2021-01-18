@@ -15,7 +15,7 @@
 
 	<Header/>
 
-	<div id="mainWindow" class="w-full flex flex-1 flex-row items-center">
+	<div id="mainWindow" class="w-full flex flex-1 flex-row items-center overflow-hidden">
 		<Canvas/>
 		<Sidebar/>
 	</div>
