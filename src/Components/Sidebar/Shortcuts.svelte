@@ -19,27 +19,43 @@
     }
 </script>
 
-<div id="shortcutsSection" class="w-full flex flex-col border-t border-b border-black overflow-auto">
+<div id="shortcutsSection" class="w-full flex flex-col border-t-1 border-black overflow-auto px-3">
 
     <div id="header" class="w-full flex flex-row pb-1">
-        <h1 class="w-full text-left pl-1 font-semibold">KEYBOARD SHORTCUTS</h1>
+        <h1 class="w-full text-left font-semibold">KEYBOARD SHORTCUTS</h1>
         <DropDown menuDisplayed={$cursesCanvas.showShortcuts} toggleSubMenu={()=>{cursesCanvas.toggleShortcutMenu()}}/>
     </div>
 
     {#if $cursesCanvas.showShortcuts}
-    <div id="shortcuts" class="flex flex-col py-1">
-        <ul>
-            <li class="flex items-start pl-1">erase: <strong>{keyboardKeys.DELETE}</strong></li>
-            <li class="flex items-start pl-1">text tool: <strong>{keyboardKeys.T}</strong></li>
-            <li class="flex items-start pl-1">line tool: <strong>{keyboardKeys.L}</strong></li>
-            <li class="flex items-start pl-1">rectangle tool: <strong>{keyboardKeys.R}</strong></li>
-            <li class="flex items-start pl-1">progress bar tool: <strong>{keyboardKeys.P}</strong></li>
-            <li class="flex items-start pl-1">select tool: <strong>{keyboardKeys.V}</strong></li>
-            <li class="flex items-start pl-1">sel. multiple: <strong>hold shift</strong></li>
-            <li class="flex items-start pl-1">duplicate: <strong>{keyHeld} + {keyboardKeys.C}</strong></li>
-            <li class="flex items-start pl-1">move: <strong>arrow keys</strong></li>
-            <li class="flex items-start pl-1">align: <strong>{keyHeld} + arrow keys</strong></li>
-        </ul>
+    <div id="shortcuts" class="flex flex-row py-1">
+        <div id="toolList" class="flex flex-col items-start w-18">
+            <ul>
+                <li class="flex items-start pb-1.5">erase</li>
+                <li class="flex items-start pb-1.5">text tool</li>
+                <li class="flex items-start pb-1.5">line tool</li>
+                <li class="flex items-start pb-1.5">rectangle tool</li>
+                <li class="flex items-start pb-1.5">progress bar tool</li>
+                <li class="flex items-start pb-1.5">select tool</li>
+                <li class="flex items-start pb-1.5">select multiple</li>
+                <li class="flex items-start pb-1.5">duplicate</li>
+                <li class="flex items-start pb-1.5">move</li>
+                <li class="flex items-start pb-1.5">align objects</li>
+            </ul>
+        </div>
+        <div id="keyList" class="flex flex-1 flex-col pl-2 text-left">
+            <ul>
+                <li class="flex items-start pb-1.5"><strong>{keyboardKeys.DELETE}</strong></li>
+                <li class="flex items-start pb-1.5"><strong>{keyboardKeys.T}</strong></li>
+                <li class="flex items-start pb-1.5"><strong>{keyboardKeys.L}</strong></li>
+                <li class="flex items-start pb-1.5"><strong>{keyboardKeys.R}</strong></li>
+                <li class="flex items-start pb-1.5"><strong>{keyboardKeys.P}</strong></li>
+                <li class="flex items-start pb-1.5"><strong>{keyboardKeys.V}</strong></li>
+                <li class="flex items-start pb-1.5"><strong>hold shift</strong></li>
+                <li class="flex items-start pb-1.5"><strong>{keyHeld} + {keyboardKeys.C}</strong></li>
+                <li class="flex items-start pb-1.5"><strong>arrow keys</strong></li>
+                <li class="flex items-start pb-1.5"><strong>{keyHeld} + arrow keys</strong></li>
+            </ul>
+        </div>
     </div>
     {/if}
 </div>

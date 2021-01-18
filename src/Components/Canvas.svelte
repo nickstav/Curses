@@ -12,7 +12,7 @@
 
 <svelte:window on:keydown={handleKeyDown}/>
 
-<div id="canvasHolder" class="w-full flex justify-center items-center flex-1 py-5 overflow-auto" style="--canvasW: {$gridAxis.x}px;--canvasH: {$gridAxis.y}px; --squareW: {gridDimension.x}px; --squareH: {gridDimension.y}px">
+<div id="canvasHolder" class="w-full h-full flex justify-center items-center flex-1 overflow-auto bg-gray-100" style="--canvasW: {$gridAxis.x}px;--canvasH: {$gridAxis.y}px; --squareW: {gridDimension.x}px; --squareH: {gridDimension.y}px">
     <div id="canvasBackground" style="width: var(--canvasW); height: var(--canvasH); background-image: url(./black_square.png); background-size: var(--squareW) var(--squareH);">
         <canvas
         bind:this={canvas}
