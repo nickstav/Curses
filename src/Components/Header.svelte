@@ -12,11 +12,11 @@
         <h1 class="text-2xl ml-4">O   R   I   S   O   N</h1>
     </div>
     <div id="buttons" class="flex justify-between space-x-4 mr-3">
-        <Button label={'line (l)'} editCanvas={()=>{changeTool(tools.LINE)}} img={"url('./button_images/line.png')"}/>
-        <Button label={'rectangle (r)'} editCanvas={()=>{changeTool(tools.RECTANGLE)}} img={"url('./button_images/rectangle.png')"}/>
-        <Button label={'text (t)'} editCanvas={()=>{changeTool(tools.TEXT)}} img={"url('./button_images/text.png')"}/>
-        <Button label={'progress bar (p)'} editCanvas={()=>{changeTool(tools.PROGRESS)}} img={"url('./button_images/progress.png')"}/>
-        <Button label={'select (v)'} editCanvas={()=>{changeTool(tools.DRAG)}} img={"url('./button_images/select.png')"}/>
+        <Button label={'line (l)'} location={'header'} editCanvas={()=>{changeTool(tools.LINE)}} img={"url('./button_images/line.png')"}/>
+        <Button label={'rectangle (r)'} location={'header'} editCanvas={()=>{changeTool(tools.RECTANGLE)}} img={"url('./button_images/rectangle.png')"}/>
+        <Button label={'text (t)'} location={'header'} editCanvas={()=>{changeTool(tools.TEXT)}} img={"url('./button_images/text.png')"}/>
+        <Button label={'progress bar (p)'} location={'header'} editCanvas={()=>{changeTool(tools.PROGRESS)}} img={"url('./button_images/progress.png')"}/>
+        <Button label={'select (v)'} location={'header'} editCanvas={()=>{changeTool(tools.DRAG)}} img={"url('./button_images/select.png')"}/>
     </div>
 </div>
 <SizeParagraph/>

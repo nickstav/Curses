@@ -87,4 +87,19 @@ function toggleSideBarDisplay(tool) {
     }
 }
 
-export { changeTool, deselectAnySelectedObjects }
+function buttonCurrentlyPressed(toolSelected) {
+    switch(toolSelected) {
+        case(tools.LINE):
+            return 'line (l)';
+        case(tools.RECTANGLE):
+            return 'rectangle (r)';
+        case(tools.TEXT):
+            return 'text (t)';
+        case(tools.PROGRESS):
+            return 'progress bar (p)';
+        case(tools.DRAG):
+            return 'select (v)'
+    }
+}
+
+export { changeTool, deselectAnySelectedObjects, buttonCurrentlyPressed }
