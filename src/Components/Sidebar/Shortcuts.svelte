@@ -1,5 +1,5 @@
 <script>
-    import DropDown from '../DropDown.svelte';
+    import DropDown from './DropDown.svelte';
 
     import { keyboardKeys } from '../../JS/constants/keyboardKeys.js'; 
     import { cursesCanvas } from '../../JS/stores/project.js';
@@ -21,7 +21,7 @@
 
 <div 
 id="shortcutsSection" 
-class="w-full flex flex-col border-t-1 border-black px-3 overflow-y-auto"
+class="w-full flex flex-col border-t-1 border-black px-3 py-3"
 >
 
     <div id="header" class="w-full flex flex-row pb-1">
