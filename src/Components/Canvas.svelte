@@ -8,6 +8,7 @@
   
     let canvas;
     onMount(()=> cursesCanvas.createCanvas(canvas));
+    
 </script>
 
 <svelte:window on:keydown={handleKeyDown}/>

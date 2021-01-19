@@ -34,6 +34,7 @@ class="w-full flex flex-row text-xs border-b border-gray-600"
     >
         tools
     </button>
+
     <button 
     style="background-color: var(--exportColour); outline: none"
     class="flex-1 h-12" 
@@ -41,4 +42,5 @@ class="w-full flex flex-row text-xs border-b border-gray-600"
     >
         export
     </button>
+    
 </div>
