@@ -21,27 +21,27 @@
     {#if $cursesCanvas.showEditOptions}
     <div id="copy/delete" class="w-full flex flex-col items-start border-b border-gray-200">
         <div id="firstButtonRow" class=" w-full flex flex-row justify-around pt-3 pb-3">
-            <SidebarButton label={'duplicate (ctrl + c)'} editCanvas={duplicateObject} img={'./button_images/duplicate.png'}/>
-            <SidebarButton label={'delete (del)'} editCanvas={eraseObject} img={'./button_images/delete.png'}/>
+            <SidebarButton label={'duplicate (ctrl + c)'} editCanvas={duplicateObject} img={'./images/buttons/duplicate.png'}/>
+            <SidebarButton label={'delete (del)'} editCanvas={eraseObject} img={'./images/buttons/delete.png'}/>
         </div>
     </div>
 
     <div id="alignSection" class="w-full py-3 flex flex-col items-start border-b border-gray-200">
         <div id="alignButtons" class="w-full py-2 flex flex-row justify-between">
-            <SidebarButton label={'align left'} editCanvas={()=>{alignObjects(keyboardKeys.LEFT)}} img={'./button_images/align_left.png'}/>
-            <SidebarButton label={'align right'} editCanvas={()=>{alignObjects(keyboardKeys.RIGHT)}} img={'./button_images/align_right.png'}/>
-            <SidebarButton label={'align top'} editCanvas={()=>{alignObjects(keyboardKeys.UP)}} img={'./button_images/align_up.png'}/>
-            <SidebarButton label={'align bottom'} editCanvas={()=>{alignObjects(keyboardKeys.DOWN)}} img={'./button_images/align_down.png'}/>
+            <SidebarButton label={'align left'} editCanvas={()=>{alignObjects(keyboardKeys.LEFT)}} img={'./images/buttons/align_left.png'}/>
+            <SidebarButton label={'align right'} editCanvas={()=>{alignObjects(keyboardKeys.RIGHT)}} img={'./images/buttons/align_right.png'}/>
+            <SidebarButton label={'align top'} editCanvas={()=>{alignObjects(keyboardKeys.UP)}} img={'./images/buttons/align_up.png'}/>
+            <SidebarButton label={'align bottom'} editCanvas={()=>{alignObjects(keyboardKeys.DOWN)}} img={'./images/buttons/align_down.png'}/>
         </div>
     </div>
 
     <div id="moveButtons" class="w-full flex flex-col justify-center items-center border-b-1 border-gray-200 pt-3">
-        <SidebarButton label={'move up'} editCanvas={()=>{moveObject(keyboardKeys.UP)}} img={'./button_images/up.png'}/>
+        <SidebarButton label={'move up'} editCanvas={()=>{moveObject(keyboardKeys.UP)}} img={'./images/buttons/up.png'}/>
         <div id="horizButtons" class=" w-full flex flex-row justify-around py-1">
-            <SidebarButton label={'move left'} editCanvas={()=>{moveObject(keyboardKeys.LEFT)}} img={'./button_images/left.png'}/>
-            <SidebarButton label={'move right'} editCanvas={()=>{moveObject(keyboardKeys.RIGHT)}} img={'./button_images/right.png'}/>
+            <SidebarButton label={'move left'} editCanvas={()=>{moveObject(keyboardKeys.LEFT)}} img={'./images/buttons/left.png'}/>
+            <SidebarButton label={'move right'} editCanvas={()=>{moveObject(keyboardKeys.RIGHT)}} img={'./images/buttons/right.png'}/>
         </div>
-        <SidebarButton label={'move down'} editCanvas={()=>{moveObject(keyboardKeys.DOWN)}} img={'./button_images/down.png'}/>
+        <SidebarButton label={'move down'} editCanvas={()=>{moveObject(keyboardKeys.DOWN)}} img={'./images/buttons/down.png'}/>
     </div>
     {/if}
 
