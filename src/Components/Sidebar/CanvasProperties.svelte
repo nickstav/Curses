@@ -14,7 +14,7 @@
     {#if $cursesCanvas.showCanvasOptions}
     <div id="canvasSizing" class="w-full flex flex-col items-start pt-3">
 
-        <div id="widthInput" class="w-full flex flex-row pb-2">
+        <div id="widthInput" class="w-full flex flex-row pb-2 items-center">
             <label for="width" class="text-xs w-12 text-left">width</label>
             <input 
             type="text" 
@@ -27,7 +27,7 @@
             >  
         </div>
             
-        <div id="heightInput" class="w-full flex flex-row">
+        <div id="heightInput" class="w-full flex flex-row items-center">
             <label for="height" class="text-xs w-12 text-left">height</label>
             <input 
             type="text" 

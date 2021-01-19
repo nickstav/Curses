@@ -17,7 +17,8 @@ class="w-full text-xs flex flex-col justify-start border-t border-b border-black
     {#if $cursesCanvas.showProgressOptions}
 
     <div id="options" class="w-full flex flex-col items-start pt-3">
-        <div id="barsInput" class="w-full flex flex-row">
+
+        <div id="barsInput" class="w-full flex flex-row items-center">
             <label for="bars" class="flex-1 text-xs text-left">number of bars</label>
             <input 
             type="number" 
@@ -29,15 +30,16 @@ class="w-full text-xs flex flex-col justify-start border-t border-b border-black
             >
         </div>
 
-        <div id="checkbox" class="w-full flex flex-row pt-2">
+        <div id="checkbox" class="w-full flex flex-row pt-2 items-center">
             <label for="showPerc" class="text-xs text-left pr-3">show percentage value</label>
             <input 
             id="showPerc" 
             type=checkbox
-            class="align-middle"
+            class="flex-1"
             bind:checked={$cursesCanvas.showProgressPercentage}
             >
         </div>
+
     </div>
 
     {/if}
