@@ -1,6 +1,5 @@
 <script>
-    import Button from '../Button.svelte';
-    import SidebarButtons from './SidebarButtons.svelte';
+    import SidebarTab from './SidebarTab.svelte';
     import Edit from './Edit.svelte';
     import Export from './Export.svelte'
     import TextOptions from './TextOptions.svelte';
@@ -14,20 +13,22 @@
 </script>
 
 
-<div id="sidebar"
-class="bg-gray-300 w-48 h-full text-xs flex flex-col justify-start items-center border-l-1 border-gray-500 overflow-hidden"
+<aside
+class="bg-gray-300 w-56 h-full text-xs flex flex-col justify-start items-center border-l border-gray-400"
 on:click={()=>{updateCanvas()}}
 >
-    <SidebarButtons/>
+    <SidebarTab/>
 
     {#if $cursesCanvas.showSidebar}
+    <div id="toolsSidebar" class="w-full h-full overflow-auto">
         <CanvasProperties/>
         <Edit/>
         <TextOptions/>
         <ProgressOptions/>
         <Shortcuts/>
+    </div>   
     {:else}
         <Export/>
     {/if}
-</div>
+</aside>
 

@@ -1,10 +1,10 @@
 <script>
-    import DropDown from '../DropDown.svelte';
+    import DropDown from './DropDown.svelte';
     import { cursesCanvas } from '../../JS/stores/project.js';
     import { updateCanvas } from '../../JS/draw/updateCanvas.js';
 </script>
 
-<div id="canvasSection" class="w-full flex flex-col border-b-1 border-black px-3">
+<div id="canvasSection" class="w-full flex flex-col px-3 py-3">
 
     <div id="header" class="w-full flex flex-row">
         <h1 class="w-full flex flex-1 text-left font-semibold">CANVAS OPTIONS</h1>
@@ -12,9 +12,9 @@
     </div>
 
     {#if $cursesCanvas.showCanvasOptions}
-    <div id="canvasSizing" class="w-full flex flex-col items-start py-1">
+    <div id="canvasSizing" class="w-full flex flex-col items-start pt-3">
 
-        <div id="widthInput" class="w-full flex flex-row pb-2">
+        <div id="widthInput" class="w-full flex flex-row pb-2 items-center">
             <label for="width" class="text-xs w-12 text-left">width</label>
             <input 
             type="text" 
@@ -27,7 +27,7 @@
             >  
         </div>
             
-        <div id="heightInput" class="w-full flex flex-row">
+        <div id="heightInput" class="w-full flex flex-row items-center">
             <label for="height" class="text-xs w-12 text-left">height</label>
             <input 
             type="text" 

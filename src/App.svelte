@@ -5,22 +5,26 @@
 
 	import Header from './Components/Header.svelte';
 	import Canvas from './Components/Canvas.svelte';
+	import Toolbar from './Components/Toolbar.svelte';
 	import PythonScript from './Components/PythonScript.svelte';
 	import Footer from './Components/Footer.svelte';
 	import Splash from './Components/Splash.svelte';
 	import Sidebar from './Components/Sidebar/Sidebar.svelte';
 </script>
 
-<main class="font-sans w-full h-full flex flex-col items-center text-center">
+<main class="font-sans w-full h-full flex flex-row items-center text-center">
 
-	<Header/>
-
-	<div id="mainWindow" class="w-full flex flex-1 flex-row items-center overflow-hidden">
-		<Canvas/>
-		<Sidebar/>
+	<div id="mainWindow" class="w-full h-full flex flex-col items-center overflow-hidden bg-gray-100">
+		<Header/>
+		<div id="toolBarAndCanvasHolder" class=" w-full h-full flex flex-row items-center justify-between flex-1 p-0 m-0">
+			<Toolbar/>
+			<Canvas/>
+		</div>
+		<Footer/>
 	</div>
 
-	<Footer/>
+	<Sidebar/>
+	
 
 	
 	{#if $cursesCanvas.showPythonScript}
