@@ -7,7 +7,7 @@
 
     <div 
     id="splashHolder" 
-    class="flex flex-col w-3/4 rounded-md text-left text-sm bg-gray-300 border-2 border-black pt-4 px-4" 
+    class="flex flex-col w-3/4 rounded-md text-left text-sm bg-theme-medium border-2 border-black pt-4 px-4" 
     >
         <h2 class="text-lg text-center font-bold">Welcome to Orison!</h2>
 

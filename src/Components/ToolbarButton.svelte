@@ -1,4 +1,5 @@
 <script>
+    import {activeColour, passiveColour } from '../JS/constants/colours.js';
     import { buttonCurrentlyPressed } from '../JS/items/selectTool.js';
     import { cursesCanvas } from '../JS/stores/project.js';
     export let img, label, editCanvas;
@@ -7,9 +8,9 @@
 
     $: toolSelected = buttonCurrentlyPressed($cursesCanvas.tool);
     $: if (toolSelected === label) {
-            bgColour = 'rgba(249, 250, 251)';
+            bgColour = activeColour;
         } else {
-            bgColour = 'rgba(209, 213, 219)'
+            bgColour = passiveColour
         }
 
 </script>

@@ -1,22 +1,24 @@
 <script>
     import { cursesCanvas } from '../../JS/stores/project.js';
+    import {activeColour, passiveColour } from '../../JS/constants/colours.js';
 
-    let toolsBGCol = 'rgba(243, 244, 246)';
-    let exportBGCol = 'rgba(209, 213, 219)';
+
+    let toolsBGCol = activeColour;
+    let exportBGCol = passiveColour;
 
     function showToolsSideBar() {
         if ($cursesCanvas.showSidebar === false) {
             cursesCanvas.toggleSidebar();
-            toolsBGCol = 'rgba(243, 244, 246)';
-            exportBGCol = 'rgba(209, 213, 219)';
+            toolsBGCol = activeColour;
+            exportBGCol = passiveColour;
         }
     }
 
     function showExportSideBar() {
         if ($cursesCanvas.showSidebar === true) {
             cursesCanvas.toggleSidebar();
-            exportBGCol = 'rgba(243, 244, 246)';
-            toolsBGCol = 'rgba(209, 213, 219)';
+            exportBGCol = activeColour;
+            toolsBGCol = passiveColour;
         }
     }
 </script>
