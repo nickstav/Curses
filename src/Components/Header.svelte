@@ -7,7 +7,7 @@
     import { tools } from '../JS/constants/toolsList.js';
 </script>
 
-<div id="header" class="bg-gray-400 w-full h-12 text-gray700 flex justify-between items-center border-b-1 border-gray800">
+<header class="bg-gray-400 w-full h-12 text-gray700 flex justify-between items-center border-b-1 border-gray800">
     <div id="appName" class="mr-20">
         <h1 class="text-2xl ml-4">O   R   I   S   O   N</h1>
     </div>
@@ -18,5 +18,5 @@
         <Button label={'progress bar (p)'} location={'header'} editCanvas={()=>{changeTool(tools.PROGRESS)}} img={"url('./button_images/progress.png')"}/>
         <Button label={'select (v)'} location={'header'} editCanvas={()=>{changeTool(tools.DRAG)}} img={"url('./button_images/select.png')"}/>
     </div>
-</div>
+</header>
 <SizeParagraph/>

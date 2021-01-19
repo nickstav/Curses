@@ -14,7 +14,7 @@
 </script>
 
 
-<div id="sidebar"
+<aside
 class="bg-gray-300 w-48 h-full text-xs flex flex-col justify-start items-center border-l-1 border-gray-500 overflow-hidden"
 on:click={()=>{updateCanvas()}}
 >
@@ -29,5 +29,5 @@ on:click={()=>{updateCanvas()}}
     {:else}
         <Export/>
     {/if}
-</div>
+</aside>
 
