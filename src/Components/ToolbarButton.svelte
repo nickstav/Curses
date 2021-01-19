@@ -7,21 +7,21 @@
 
     $: toolSelected = buttonCurrentlyPressed($cursesCanvas.tool);
     $: if (toolSelected === label) {
-            bgColour = 'rgba(243, 244, 246)';
+            bgColour = 'rgba(249, 250, 251)';
         } else {
             bgColour = 'rgba(209, 213, 219)'
         }
 
 </script>
 
-<div style="--imgSource: {img}; --bgColour: {bgColour}" class="flex flex-col items-center">
+<div style="--bgColour: {bgColour}" class="py-2 px-2">
     <button
-        id="sidebarButton"
-        title={label}
-        class="h-6 w-6 bg-cover text-xs py-1 px-3 opacity-80 hover:opacity-100 rounded-md"
-        style="background-image: var(--imgSource); background-color: var(--bgColour); outline: none"
-        on:click={editCanvas} 
-        >
+    id="sidebarButton"
+    title={label}
+    class="h-10 w-10 bg-cover text-xs opacity-75 hover:opacity-100 rounded-md"
+    style="background-color: var(--bgColour); outline: none"
+    on:click={editCanvas} 
+    >
+        <img src={img}>
     </button>
-    <label class="text-xs"></label>
 </div>

@@ -4,7 +4,7 @@
     import { updateCanvas } from '../../JS/draw/updateCanvas.js';
 </script>
 
-<div id="canvasSection" class="w-full flex flex-col border-b-1 border-black px-3 py-3">
+<div id="canvasSection" class="w-full flex flex-col px-3 py-3">
 
     <div id="header" class="w-full flex flex-row">
         <h1 class="w-full flex flex-1 text-left font-semibold">CANVAS OPTIONS</h1>

@@ -23,13 +23,13 @@
 
 
 <div
-id="sidebarButtons" 
+id="sidebarTab" 
 style="--toolsColour: {toolsBGCol}; --exportColour: {exportBGCol}"
-class="w-full flex flex-row text-xs border-b border-black"
+class="w-full flex flex-row text-xs border-b border-gray-600"
 >
     <button 
     style="background-color: var(--toolsColour); outline: none"
-    class="flex-1 h-12"
+    class="flex-1 h-12 border-r border-gray-500"
     on:click={showToolsSideBar}
     >
         tools
