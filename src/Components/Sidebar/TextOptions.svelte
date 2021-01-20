@@ -21,7 +21,7 @@ class="w-full text-xs flex flex-col justify-center border-t-1 border-black px-3 
 
             <label for="toLeft" class="pb-1 text-left">
                 <input type="radio" bind:group={$cursesCanvas.textNewLine} value={textNewLine.TOLEFT} class="align-middle">
-                new line from canvas edge
+                align at left of canvas
             </label>
 
             <label for="indented" class="pb-1 text-left">
