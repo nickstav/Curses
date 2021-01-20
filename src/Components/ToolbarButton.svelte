@@ -1,5 +1,5 @@
 <script>
-    import {activeColour, passiveColour } from '../JS/constants/colours.js';
+    import {toolbarActiveColour, toolbarPassiveColour } from '../JS/constants/colours.js';
     import { buttonCurrentlyPressed } from '../JS/items/selectTool.js';
     import { cursesCanvas } from '../JS/stores/project.js';
 
@@ -9,9 +9,9 @@
 
     $: toolSelected = buttonCurrentlyPressed($cursesCanvas.tool);
     $: if (toolSelected === label) {
-            bgColour = activeColour;
+            bgColour = toolbarActiveColour;
         } else {
-            bgColour = passiveColour
+            bgColour = toolbarPassiveColour
         }
 
 </script>

@@ -1,6 +1,8 @@
 //define backgrund colours of buttons depending on state
 
-let activeColour = 'rgba(229, 231, 235)'; // theme-med
-let passiveColour = 'rgba(209, 213, 219)'; // theme-light
+let sidebarPassiveColour = '#bf360c'; 
+let sidebarActiveColour = '#e0e0e0';
+let toolbarPassiveColour = '#f9683a';
+let toolbarActiveColour = '#ffbb93';
 
-export { activeColour, passiveColour }
+export { sidebarActiveColour, sidebarPassiveColour, toolbarPassiveColour, toolbarActiveColour }

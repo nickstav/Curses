@@ -1,4 +1,4 @@
-<footer class="flex h-8 w-full justify-center items-center bg-theme-secondary border-t border-theme-secondary-dark">
+<footer class="flex h-8 w-full justify-center items-center bg-footer border-t border-footer-border">
     <p 
     class="text-xs"
     >

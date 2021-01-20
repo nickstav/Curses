@@ -8,11 +8,11 @@
 
     <div 
     id="splashHolder" 
-    class="flex flex-col w-3/4 rounded-md text-left text-sm bg-theme-secondary border-2 border-theme-secondary-dark" 
+    class="flex flex-col w-3/4 rounded-md text-left text-sm bg-sidebar border-2 border-sidebar-border" 
     use:clickOutside on:click_outside={()=>{cursesCanvas.toggleSplash()}}
     >
-        <header id="previewHeader" class="bg-theme-primary w-full h-12 text-gray700 flex justify-between items-center border-b border-theme-primary-dark">
-            <h1 class="text-2xl ml-4">O   R   I   S   O   N</h1>
+        <header id="previewHeader" class="bg-header w-full h-12 text-gray700 flex justify-between items-center border-b border-header-border">
+            <h1 class="text-2xl font-bold ml-4">O   R   I   S   O   N</h1>
         </header>
 
     <div id="introText" class="flex flex-col justify-between w-full p-3">
@@ -55,13 +55,13 @@
         <div id="buttonHolder" class="flex justify-center py-2">
             <button 
             on:click={()=>{cursesCanvas.toggleSplash()}}
-            class="h-8 w-24 text-xs bg-theme-primary-light hover:bg-transparent text-black font-semibold hover:text-black border-black border 2"
+            class="h-8 w-24 text-xs bg-sidebar-lighter hover:bg-transparent text-black font-semibold hover:text-black border-black border 2"
             >
                 Close
             </button>
             </div>
         
-            <footer class="flex h-6 w-full justify-center items-center bg-theme-secondary-light border-t border-theme-secondary-dark">
+            <footer class="flex h-6 w-full justify-center items-center bg-sidebar-lighter border-t border-sidebar">
                 <p 
                 class="text-xs"
                 > 
