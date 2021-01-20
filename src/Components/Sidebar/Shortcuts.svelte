@@ -17,7 +17,7 @@ class="w-full flex flex-col border-t-1 border-black px-3 py-3"
 >
 
     <div id="header" class="w-full flex flex-row pb-1">
-        <h1 class="w-full text-left font-semibold">KEYBOARD SHORTCUTS</h1>
+        <h1 on:click={()=>{cursesCanvas.toggleShortcutMenu()}} class="w-full text-left font-semibold cursor-pointer select-none">KEYBOARD SHORTCUTS</h1>
         <DropDown menuDisplayed={$cursesCanvas.showShortcuts} toggleSubMenu={()=>{cursesCanvas.toggleShortcutMenu()}}/>
     </div>
 

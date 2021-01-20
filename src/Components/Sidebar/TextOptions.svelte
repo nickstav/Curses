@@ -10,7 +10,7 @@ class="w-full text-xs flex flex-col justify-center border-t-1 border-black px-3 
 >
 
     <div id="header" class="w-full flex flex-row">
-        <h1 class="w-full text-left font-semibold">TEXT OPTIONS</h1>
+        <h1 on:click={()=>{cursesCanvas.toggleTextMenu()}} class="w-full text-left font-semibold cursor-pointer select-none">TEXT OPTIONS</h1>
         <DropDown menuDisplayed={$cursesCanvas.showTextOptions} toggleSubMenu={()=>{cursesCanvas.toggleTextMenu()}}/>
     </div>
 

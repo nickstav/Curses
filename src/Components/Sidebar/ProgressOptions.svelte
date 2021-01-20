@@ -10,7 +10,7 @@ class="w-full text-xs flex flex-col justify-start border-t border-b border-black
 >
 
     <div id="header" class="w-full flex flex-row">
-        <h1 class="w-full text-left font-semibold">PROGRESS BAR OPTIONS</h1>
+        <h1 on:click={()=>{cursesCanvas.toggleProgressMenu()}} class="w-full text-left font-semibold cursor-pointer select-none">PROGRESS BAR OPTIONS</h1>
         <DropDown menuDisplayed={$cursesCanvas.showProgressOptions} toggleSubMenu={()=>{cursesCanvas.toggleProgressMenu()}}/>
     </div>
 

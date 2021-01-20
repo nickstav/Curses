@@ -7,7 +7,7 @@
 <div id="canvasSection" class="w-full flex flex-col px-3 py-3">
 
     <div id="header" class="w-full flex flex-row">
-        <h1 class="w-full flex flex-1 text-left font-semibold">CANVAS OPTIONS</h1>
+        <h1 on:click={()=>{cursesCanvas.toggleCanvasMenu()}} class="w-full flex flex-1 text-left font-semibold cursor-pointer select-none">CANVAS OPTIONS</h1>
         <DropDown menuDisplayed={$cursesCanvas.showCanvasOptions} toggleSubMenu={()=>{cursesCanvas.toggleCanvasMenu()}}/>
     </div>
 
