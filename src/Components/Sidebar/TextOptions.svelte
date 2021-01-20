@@ -19,12 +19,12 @@ class="w-full text-xs flex flex-col justify-center border-t-1 border-black px-3 
 
         <h2 class="font-semibold pb-2">text wrapping</h2>
 
-            <label for="toLeft" class="pb-1">
+            <label for="toLeft" class="pb-1 text-left">
                 <input type="radio" bind:group={$cursesCanvas.textNewLine} value={textNewLine.TOLEFT} class="align-middle">
                 new line from canvas edge
             </label>
 
-            <label for="indented" class="pb-1">
+            <label for="indented" class="pb-1 text-left">
                 <input type="radio" bind:group={$cursesCanvas.textNewLine} value={textNewLine.INDENTED} class="align-middle">
                 align under start of text
             </label>
