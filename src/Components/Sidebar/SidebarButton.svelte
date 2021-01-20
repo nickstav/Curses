@@ -11,5 +11,5 @@
     style="outline: none"
     on:click={editCanvas} 
     >
-        <img src={img}>
+        <img src={img} alt="{img}">
 </button>

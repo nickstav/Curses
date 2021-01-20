@@ -23,6 +23,6 @@
     style="background-color: var(--bgColour); outline: none"
     on:click={editCanvas} 
     >
-        <img src={img} class="h-6 w-6">
+        <img src={img} alt={img} class="h-6 w-6">
     </button>
 </div>
