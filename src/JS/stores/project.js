@@ -51,11 +51,11 @@ function setUpStore() {
       });
   }
 
-  function hideSplash() {
+  function toggleSplash() {
     update(status => {
       return {
         ...status,
-        showSplash: false
+        showSplash: !status.showSplash
       };
     });   
   }
@@ -252,7 +252,7 @@ function toggleSidebar() {
     set,
     removeCanvas,
     createCanvas,
-    hideSplash,
+    toggleSplash,
     changeCanvasTool,
     startDrawing,
     stopDrawing,
