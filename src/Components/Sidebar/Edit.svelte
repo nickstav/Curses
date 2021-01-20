@@ -14,7 +14,7 @@
 <div id="editSection" class="w-full flex flex-col border-t border-b border-black px-3 py-3">
 
     <div id="header" class="w-full flex flex-row">
-        <h1 class="w-full text-left font-semibold">EDIT</h1>
+        <h1 on:click={()=>{cursesCanvas.toggleEditMenu()}} class="w-full text-left font-semibold cursor-pointer select-none">EDIT</h1>
         <DropDown menuDisplayed={$cursesCanvas.showEditOptions} toggleSubMenu={()=>{cursesCanvas.toggleEditMenu()}}/>
     </div>
 

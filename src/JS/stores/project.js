@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store';
 import { selectStyle } from '../constants/selectTool.js';
+import { tools } from '../constants/toolsList.js';
 
 // a store to contain all variables related to the canvas element
 
@@ -8,7 +9,7 @@ import { selectStyle } from '../constants/selectTool.js';
     canvasWidth: 80,
     canvasElement: undefined,
     context: undefined,
-    tool: undefined,
+    tool: tools.LINE,
     textNewLine: 'indented',
     selectMethod: selectStyle.OBJECTS,
     selectedAreaCoords: [],
@@ -40,6 +41,8 @@ function setUpStore() {
 
   function createCanvas(canvasElement) {
     update(status => {
+      // as app starts with line tool selected
+      canvasElement.style.cursor = "crosshair";
         return {
           ...status,
           canvasElement: canvasElement,
@@ -48,11 +51,11 @@ function setUpStore() {
       });
   }
 
-  function hideSplash() {
+  function toggleSplash() {
     update(status => {
       return {
         ...status,
-        showSplash: false
+        showSplash: !status.showSplash
       };
     });   
   }
@@ -249,7 +252,7 @@ function toggleSidebar() {
     set,
     removeCanvas,
     createCanvas,
-    hideSplash,
+    toggleSplash,
     changeCanvasTool,
     startDrawing,
     stopDrawing,

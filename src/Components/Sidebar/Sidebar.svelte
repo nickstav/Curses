@@ -14,7 +14,7 @@
 
 
 <aside
-class="bg-gray-300 w-56 h-full text-xs flex flex-col justify-start items-center border-l border-gray-400"
+class="bg-theme-secondary w-64 h-full text-xs flex flex-col justify-start items-center border-l border-secondary-dark"
 on:click={()=>{updateCanvas()}}
 >
     <SidebarTab/>

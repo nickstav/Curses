@@ -12,27 +12,39 @@
 
     <div 
     id="window" 
-    class="flex flex-col items-center h-3/4 w-3/4 rounded-md text-left font-mono text-sm bg-gray-300 pt-4 px-4" 
+    class="flex flex-col items-center h-5/6 w-3/4 rounded-md text-left font-mono text-sm bg-theme-secondary border border-theme-secondary-dark" 
     use:clickOutside on:click_outside={hideScript}
     >
+
+        <header id="previewHeader" class="bg-theme-primary w-full h-12 text-gray700 flex justify-between items-center border-b border-theme-primary-dark">
+            <h1 class="text-2xl ml-4">O   R   I   S   O   N</h1>
+        </header>    
+
         <div id="codeHolder" class="w-full flex-1 overflow-auto p-0 m-0">
             <Prism language="python" code="{$cursesCanvas.pythonScript}"/>
         </div>
-        <div id="buttonsHolder" class="py-2">
+
+        <div id="buttonsHolder" class="w-1/2 h-10 flex flex-row justify-around mb-1">
             <button 
             id="download" 
             on:click={downloadPyFile}
-            class="h-8 text-xs bg-white hover:bg-transparent text-black font-semibold hover:text-black border-black border 2 p-2"
+            class="flex justify-center items-center h-12 w-12 p-2 hover:bg-gray-400"
+            style="outline: none"
             >
-                Download File
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
             </button>
 
             <button 
             id="copy" 
             on:click={copyTextToClipboard}
-            class="h-8 text-xs bg-white hover:bg-transparent text-black font-semibold hover:text-black border-black border 2 p-2"
+            class="flex justify-center items-center h-12 w-12 p-2 hover:bg-gray-400"
+            style="outline: none"
             >
-                Copy Text
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                </svg>
             </button>
         </div>
         

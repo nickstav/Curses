@@ -1,22 +1,24 @@
 <script>
     import { cursesCanvas } from '../../JS/stores/project.js';
+    import {activeColour, passiveColour } from '../../JS/constants/colours.js';
 
-    let toolsBGCol = 'rgba(243, 244, 246)';
-    let exportBGCol = 'rgba(209, 213, 219)';
+
+    let toolsBGCol = activeColour;
+    let exportBGCol = passiveColour;
 
     function showToolsSideBar() {
         if ($cursesCanvas.showSidebar === false) {
             cursesCanvas.toggleSidebar();
-            toolsBGCol = 'rgba(243, 244, 246)';
-            exportBGCol = 'rgba(209, 213, 219)';
+            toolsBGCol = activeColour;
+            exportBGCol = passiveColour;
         }
     }
 
     function showExportSideBar() {
         if ($cursesCanvas.showSidebar === true) {
             cursesCanvas.toggleSidebar();
-            exportBGCol = 'rgba(243, 244, 246)';
-            toolsBGCol = 'rgba(209, 213, 219)';
+            exportBGCol = activeColour;
+            toolsBGCol = passiveColour;
         }
     }
 </script>
@@ -25,22 +27,22 @@
 <div
 id="sidebarTab" 
 style="--toolsColour: {toolsBGCol}; --exportColour: {exportBGCol}"
-class="w-full flex flex-row text-xs border-b border-gray-600"
+class="w-full h-12 flex flex-row text-xs border-b border-t border-gray-600"
 >
     <button 
     style="background-color: var(--toolsColour); outline: none"
-    class="flex-1 h-12 border-r border-gray-500"
+    class="flex flex-1 justify-center items-center border-r border-theme-secondary-dark"
     on:click={showToolsSideBar}
     >
-        tools
+        <img src={'./images/buttons/toolbar.png'} alt="toolbar" class="h-9 w-9">
     </button>
 
     <button 
     style="background-color: var(--exportColour); outline: none"
-    class="flex-1 h-12" 
+    class="flex flex-1 justify-center items-center" 
     on:click={showExportSideBar}
     >
-        export
+        <img src={'./images/buttons/export.png'} alt="export" class="h-9 w-9">
     </button>
     
 </div>
