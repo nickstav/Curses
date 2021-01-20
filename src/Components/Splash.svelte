@@ -19,16 +19,14 @@
 
         <h2 id="introTitle" class="text-lg text-center font-bold">Welcome to Orison!</h2>
         <br>
-        <p> 
+        <p id="introContent" class="flex flex-col flex-1 w-full">
             <strong>What is Orison?</strong>
-            <br>
             <br>
             Orison is an app that allows you to create a [UI / GUI / progress screen / whatever you want*] 
             for command-line interpreters such as cmd.exe quickly and efficiently using a canvas tool.
             <br>
             <br>
             <strong>How to use it</strong>
-            <br>
             <br>
             Orison allows you to add (and edit) lines, rectangles, text and progress bars on a canvas that 
             represents your cmd shell.
@@ -67,11 +65,11 @@
                 <p 
                 class="text-xs"
                 > 
-                    <a href="https://ko-fi.com/nickstav" target="_blank" class="text-xs text-blue-500 underline">
+                    <a href="https://ko-fi.com/nickstav" rel="noopener" target="_blank" class="text-xs text-blue-500 underline">
                         ko-fi page
                     </a>
                     |
-                    <a href="https://github.com/nickstav" target="_blank" class="text-xs text-blue-500 underline">
+                    <a href="https://github.com/nickstav" rel="noopener" target="_blank" class="text-xs text-blue-500 underline">
                         github profile
                     </a>
                 </p>
