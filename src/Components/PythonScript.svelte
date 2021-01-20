@@ -12,15 +12,15 @@
 
     <div 
     id="window" 
-    class="flex flex-col items-center h-5/6 w-3/4 rounded-md text-left font-mono text-sm bg-theme-secondary border border-theme-secondary-dark" 
+    class="flex flex-col items-center w-3/4 rounded-md text-left font-mono text-sm bg-sidebar border border-sidebar-border" 
     use:clickOutside on:click_outside={hideScript}
     >
 
-        <header id="previewHeader" class="bg-theme-primary w-full h-12 text-gray700 flex justify-between items-center border-b border-theme-primary-dark">
+        <header id="previewHeader" class="bg-header w-full h-12 text-gray700 flex justify-between items-center border-b border-header-border">
             <h1 class="text-2xl ml-4">O   R   I   S   O   N</h1>
         </header>    
 
-        <div id="codeHolder" class="w-full flex-1 overflow-auto p-0 m-0">
+        <div id="codeHolder" class="w-full flex-1 overflow-auto p-2">
             <Prism language="python" code="{$cursesCanvas.pythonScript}"/>
         </div>
 

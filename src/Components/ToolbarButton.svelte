@@ -1,5 +1,5 @@
 <script>
-    import {activeColour, passiveColour } from '../JS/constants/colours.js';
+    import {toolbarActiveColour, toolbarPassiveColour } from '../JS/constants/colours.js';
     import { buttonCurrentlyPressed } from '../JS/items/selectTool.js';
     import { cursesCanvas } from '../JS/stores/project.js';
 
@@ -9,16 +9,16 @@
 
     $: toolSelected = buttonCurrentlyPressed($cursesCanvas.tool);
     $: if (toolSelected === label) {
-            bgColour = activeColour;
+            bgColour = toolbarActiveColour;
         } else {
-            bgColour = passiveColour
+            bgColour = toolbarPassiveColour
         }
 
 </script>
 
 <div on:click={editCanvas} style="--bgColour: {bgColour}" class="py-2 px-2 cursor-pointer">
     <button
-    id="sidebarButton"
+    id="toolbarButton"
     title={label}
     class="flex h-10 w-10 justify-center items-center bg-cover opacity-75 hover:opacity-100 rounded-md"
     style="background-color: var(--bgColour); outline: none"

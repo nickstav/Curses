@@ -10,17 +10,19 @@ module.exports = {
   darkMode: false, // or 'media' or 'class',
   theme: {
     colors: {
-      theme : {
-        'font': '#222', // #000000
         'mainBackground' : 'rgba(243, 244, 246)',
-        'primary-dark': 'rgba(75, 85, 99)', // #b99500
-        'primary': 'rgba(107, 114, 128)', // #f0c526
-        'primary-light': 'rgba(156, 163, 175)',
-        'secondary-light': 'rgba(229, 231, 235)',
-        'secondary': 'rgba(209, 213, 219)', // #f5f5f5
-        'secondary-dark': 'rgba(156, 163, 175)' // #c2c2c2
+        'header': '#bf360c', //'rgba(107, 114, 128)', // ##ff9800
+        'header-border': '#870000', // 'rgba(75, 85, 99)', // #c66900
+        'sidebar': '#e0e0e0', //'rgba(156, 163, 175)', // #ffc947
+        'sidebar-lighter': '#ffffff',
+        'sidebar-border': '#aeaeae', //'rgba(229, 231, 235)', // #ffffff
+        'toolbar': '#f9683a', //'rgba(209, 213, 219)', // #f5f5f5
+        'toolbar-border': '#870000', //'rgba(156, 163, 175)' // #c2c2c2
+        'toolbar-lighter': '#ffbb93',
+        'toolbar-hover': '#ffa270',
+        'footer': '#e0e0e0',
+        'footer-border': '#aeaeae'
         // https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=FF9800&secondary.color=f5f5f5
-      }
     },
     fontSize: {
       '2xs': '.5rem',

@@ -1,24 +1,24 @@
 <script>
     import { cursesCanvas } from '../../JS/stores/project.js';
-    import {activeColour, passiveColour } from '../../JS/constants/colours.js';
+    import {sidebarActiveColour, sidebarPassiveColour } from '../../JS/constants/colours.js';
 
 
-    let toolsBGCol = activeColour;
-    let exportBGCol = passiveColour;
+    let toolsBGCol = sidebarActiveColour;
+    let exportBGCol = sidebarPassiveColour;
 
     function showToolsSideBar() {
         if ($cursesCanvas.showSidebar === false) {
             cursesCanvas.toggleSidebar();
-            toolsBGCol = activeColour;
-            exportBGCol = passiveColour;
+            toolsBGCol = sidebarActiveColour;
+            exportBGCol = sidebarPassiveColour;
         }
     }
 
     function showExportSideBar() {
         if ($cursesCanvas.showSidebar === true) {
             cursesCanvas.toggleSidebar();
-            exportBGCol = activeColour;
-            toolsBGCol = passiveColour;
+            exportBGCol = sidebarActiveColour;
+            toolsBGCol = sidebarPassiveColour;
         }
     }
 </script>
@@ -27,7 +27,7 @@
 <div
 id="sidebarTab" 
 style="--toolsColour: {toolsBGCol}; --exportColour: {exportBGCol}"
-class="w-full h-12 flex flex-row text-xs border-b border-t border-gray-600"
+class="w-full h-12 flex flex-row text-xs border-t border-gray-600"
 >
     <button 
     style="background-color: var(--toolsColour); outline: none"

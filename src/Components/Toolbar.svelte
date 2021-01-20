@@ -6,7 +6,7 @@
     import { tools } from '../JS/constants/toolsList.js';
 </script>
 
-<div id="buttons" class="flex flex-col h-full justify-start bg-theme-secondary mr-4 border-r border-theme-secondary-dark pt-4">
+<div id="buttons" class="flex flex-col h-full justify-start bg-toolbar mr-4 border-r border-toolbar-border pt-4">
     <ToolbarButton label={'select (v)'} editCanvas={()=>{changeTool(tools.DRAG)}} img={'./images/buttons/select.png'}/>
     <ToolbarButton label={'line (l)'} editCanvas={()=>{changeTool(tools.LINE)}} img={'./images/buttons/line.png'}/>
     <ToolbarButton label={'rectangle (r)'} editCanvas={()=>{changeTool(tools.RECTANGLE)}} img={'./images/buttons/rectangle.png'}/>
