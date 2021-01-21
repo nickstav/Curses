@@ -30,12 +30,11 @@ class="w-full text-xs flex flex-col justify-start border-t border-b border-black
             >
         </div>
 
-        <div id="checkbox" class="w-full flex flex-row pt-2 items-center">
+        <div id="checkbox" class="w-full flex flex-row pt-2 justify-between items-center">
             <label for="showPerc" class="text-xs text-left pr-3">show percentage value</label>
             <input 
             id="showPerc" 
             type=checkbox
-            class="flex-1"
             bind:checked={$cursesCanvas.showProgressPercentage}
             >
         </div>
