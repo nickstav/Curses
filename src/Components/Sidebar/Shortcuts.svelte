@@ -13,7 +13,7 @@
 
 <div 
 id="shortcutsSection" 
-class="w-full flex flex-col border-t-1 border-black px-3 py-3 select-none"
+class="w-full flex flex-col border-t-1 border-black px-3 py-3 select-none font-semibold text-gray-700"
 >
 
     <div id="header" class="w-full flex flex-row pb-1">

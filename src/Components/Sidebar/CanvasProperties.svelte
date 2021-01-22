@@ -12,7 +12,7 @@
     </div>
 
     {#if $cursesCanvas.showCanvasOptions}
-    <div id="canvasSizing" class="w-full flex flex-col items-start pt-3">
+    <div id="canvasSizing" class="w-full font-semibold text-gray-700 flex flex-col items-start pt-3">
 
         <div id="widthInput" class="w-full flex flex-row pb-2 items-center">
             <label for="width" class="text-xs w-12 text-left">width</label>

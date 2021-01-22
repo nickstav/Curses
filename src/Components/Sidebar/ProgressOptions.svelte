@@ -16,7 +16,7 @@ class="w-full text-xs flex flex-col justify-start border-t border-b border-black
 
     {#if $cursesCanvas.showProgressOptions}
 
-    <div id="options" class="w-full flex flex-col items-start pt-3">
+    <div id="options" class="w-full flex flex-col items-start pt-3 font-semibold text-gray-700">
 
         <div id="barsInput" class="w-full flex flex-row items-center">
             <label for="bars" class="flex-1 text-xs text-left">number of bars</label>
