@@ -1,6 +1,7 @@
 <script>
     import SidebarButton from './SidebarButton.svelte';
     import DropDown from './DropDown.svelte';
+    import AlignSVG from './AlignSVG.svelte';
 
     import { cursesCanvas } from '../../JS/stores/project.js';
     import { tools } from '../../JS/constants/toolsList.js';
@@ -37,28 +38,16 @@
     <div id="alignSection" class="w-full py-3 flex flex-col items-start border-b border-gray-200">
         <div id="alignButtons" class="w-full py-2 flex flex-row justify-between">
             <SidebarButton label={'align left'} editCanvas={()=>{alignObjects(keyboardKeys.LEFT)}}>
-                <svg xmlns="http://www.w3.org/2000/svg" class="hover:text-header" width="100%" height="100%" fill="currentColor" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M1.5 1a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-1 0v-13a.5.5 0 0 1 .5-.5z"/>
-                    <path d="M3 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7z"/>
-                </svg>
+                <AlignSVG degrees="0"/>
             </SidebarButton>
             <SidebarButton label={'align right'} editCanvas={()=>{alignObjects(keyboardKeys.RIGHT)}}>
-                <svg xmlns="http://www.w3.org/2000/svg" class="hover:text-header" width="100%" height="100%" fill="currentColor" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M14.5 1a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 1 0v-13a.5.5 0 0 0-.5-.5z"/>
-                    <path d="M13 7a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7z"/>
-                </svg>
+                <AlignSVG degrees="180"/>
             </SidebarButton>
             <SidebarButton label={'align top'} editCanvas={()=>{alignObjects(keyboardKeys.UP)}}>
-                <svg xmlns="http://www.w3.org/2000/svg" class="hover:text-header" width="100%" height="100%" fill="currentColor" viewBox="0 0 16 16">
-                    <rect width="4" height="12" rx="1" transform="matrix(1 0 0 -1 6 15)"/>
-                    <path d="M1.5 2a.5.5 0 0 1 0-1v1zm13-1a.5.5 0 0 1 0 1V1zm-13 0h13v1h-13V1z"/>
-                </svg>
+                <AlignSVG degrees="90"/>
             </SidebarButton>
             <SidebarButton label={'align bottom'} editCanvas={()=>{alignObjects(keyboardKeys.DOWN)}}>
-                <svg xmlns="http://www.w3.org/2000/svg" class="hover:text-header" width="100%" height="100%" fill="currentColor" viewBox="0 0 16 16">
-                    <rect width="4" height="12" x="6" y="1" rx="1"/>
-                    <path d="M1.5 14a.5.5 0 0 0 0 1v-1zm13 1a.5.5 0 0 0 0-1v1zm-13 0h13v-1h-13v1z"/>
-                </svg>
+                <AlignSVG degrees="270"/>
             </SidebarButton>
         </div>
     </div>

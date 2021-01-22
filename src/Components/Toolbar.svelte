@@ -14,8 +14,13 @@
     </ToolbarButton>
     
     <ToolbarButton label={'line (l)'} editCanvas={()=>{changeTool(tools.LINE)}}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="100%" height="100%">
+            <defs>
+                <path d="M511.51 44.12C516.69 38.39 525.53 37.95 531.26 43.13C536.83 48.17 543.18 53.92 548.75 58.96C554.47 64.14 554.91 72.98 549.73 78.7C457.04 181.14 188.35 478.09 95.66 580.53C90.48 586.25 81.64 586.69 75.91 581.51C70.34 576.47 63.99 570.73 58.42 565.68C52.7 560.5 52.25 551.66 57.43 545.94C150.13 443.5 418.82 146.55 511.51 44.12Z" id="d3Cway8rNo"></path>
+            </defs>
+            <g><g><g>
+            <use xlink:href="#d3Cway8rNo" opacity="1" fill="currentColor" fill-opacity="1"></use>
+            </g></g></g>
         </svg>
     </ToolbarButton>
     
@@ -32,9 +37,21 @@
     </ToolbarButton>
     
     <ToolbarButton label={'progress bar (p)'} editCanvas={()=>{changeTool(tools.PROGRESS)}}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M14 2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h12zM2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"/>
-            <path d="M3 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z"/>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="100%" height="100%" fill="currentColor">
+            <defs>
+                <path d="M595.24 208.69C606.28 208.69 615.24 217.64 615.24 228.69C615.24 269.21 615.24 370.79 615.24 411.31C615.24 422.36 606.28 431.31 595.24 431.31C481.14 431.31 158.86 431.31 44.76 431.31C33.72 431.31 24.76 422.36 24.76 411.31C24.76 370.79 24.76 269.21 24.76 228.69C24.76 217.64 33.72 208.69 44.76 208.69C158.86 208.69 481.14 208.69 595.24 208.69Z" id="b3iYbB6rmW"></path>
+                <path d="M153.69 227.14C164.74 227.14 173.69 236.1 173.69 247.14C173.69 280.29 173.69 359.71 173.69 392.86C173.69 403.9 164.74 412.86 153.69 412.86C131.98 412.86 86.83 412.86 65.12 412.86C54.07 412.86 45.12 403.9 45.12 392.86C45.12 359.71 45.12 280.29 45.12 247.14C45.12 236.1 54.07 227.14 65.12 227.14C86.83 227.14 131.98 227.14 153.69 227.14Z" id="aYknP2osd"></path>
+                <path d="M293.81 227.14C304.86 227.14 313.81 236.1 313.81 247.14C313.81 280.29 313.81 359.71 313.81 392.86C313.81 403.9 304.86 412.86 293.81 412.86C272.1 412.86 226.95 412.86 205.24 412.86C194.19 412.86 185.24 403.9 185.24 392.86C185.24 359.71 185.24 280.29 185.24 247.14C185.24 236.1 194.19 227.14 205.24 227.14C226.95 227.14 272.1 227.14 293.81 227.14Z" id="b395LxMxtp"></path>
+            </defs>
+            <g><g><g>
+            <use xlink:href="#b3iYbB6rmW" opacity="1" fill-opacity="0"></use>
+            <g>
+            <use xlink:href="#b3iYbB6rmW" opacity="1" fill-opacity="0" stroke="currentColor" stroke-width="24" stroke-opacity="1"></use>
+            </g></g><g>
+            <use xlink:href="#aYknP2osd" opacity="1" fill-opacity="1"></use>
+            </g><g>
+            <use xlink:href="#b395LxMxtp" opacity="1" fill-opacity="1"></use>
+            </g></g></g>
         </svg>
     </ToolbarButton>
 </div>
