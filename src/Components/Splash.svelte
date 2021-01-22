@@ -48,10 +48,10 @@
 
     </div>
 
-        <div id="buttonHolder" class="flex justify-center py-2 hover:text-header">
+        <div id="buttonHolder" class="flex justify-center py-2">
             <button 
             on:click={()=>{cursesCanvas.toggleSplash()}}
-            class="h-8 w-24 text-xs bg-sidebar-lighter hover:border-header text-black font-semibold hover:text-black border-black border 2"
+            class="h-8 w-24 text-xs bg-sidebar-lighter hover:text-header font-semibold hover:text-black border-black border 2"
             >
                 Close
             </button>
