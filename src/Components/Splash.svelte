@@ -8,7 +8,7 @@
 
     <div 
     id="splashHolder" 
-    class="flex flex-col w-3/4 rounded-md text-left text-sm bg-sidebar border-2 border-sidebar-border" 
+    class="flex flex-col w-3/4 rounded-sm text-left text-sm bg-sidebar border" 
     use:clickOutside on:click_outside={()=>{cursesCanvas.toggleSplash()}}
     >
         <header id="previewHeader" class="bg-header w-full h-12 text-gray700 flex justify-between items-center border-b border-header-border">
@@ -19,43 +19,39 @@
 
         <h2 id="introTitle" class="text-lg text-center font-bold">Welcome to Orison!</h2>
         <br>
-        <p id="introContent" class="flex flex-col flex-1 w-full">
-            <strong>What is Orison?</strong>
-            <br>
-            Orison is an app that allows you to create a [UI / GUI / progress screen / whatever you want*] 
-            for command-line interpreters such as cmd.exe quickly and efficiently using a canvas tool.
-            <br>
-            <br>
-            <strong>How to use it</strong>
-            <br>
-            Orison allows you to add (and edit) lines, rectangles, text and progress bars on a canvas that 
-            represents your cmd shell.
-            <br>
-            <br>
-            Once finished with your design, hit the save button to download a Python script that uses the Curses
-            library to build [whatever you just did] when run using the usual "python** script.py" command in
-            your command prompt shell.
-            <br>
-            <br>
-            Thanks for visiting this app, please get in touch with any suggestions*** as future versions will be upcoming!
-            <br>
-            <br>
+        <div id="introContent" class="flex flex-row flex-1 w-full py-2">
+            <p id="what" class="flex flex-col flex-1 px-6 py-2">
+                <strong>What is Orison?</strong>
+                <br>
+                Orison is an app that allows you to create a UI / GUI / progress screen / whatever you want 
+                for command-line interpreters such as cmd.exe quickly and efficiently using a canvas tool.
+                <br>
+            </p>
+            <p id="how" class="flex flex-col flex-1 px-6 py-2">
+                <strong>How to use it</strong>
+                <br>
+                Add (and edit) lines, rectangles, text and progress bars on a canvas that 
+                represents your cmd shell.
+                <br>
+                <br>
+                Once finished with your design, hit the export button to copy or download a Python script that uses the
+                <a href="https://docs.python.org/3/library/curses.html#module-curses" rel="noopener" target="_blank" class="font-mono hover:text-header">curses</a> 
+                library to build your canvas when using the usual "python script.py" command in your command prompt shell.
+                <br>
+            </p>
+        </div>
+        <p id="signOff" class="flex justify-center py-6 px-6">
+            Thanks for visiting this app, please get in touch with any suggestions/criticisms for future versions!
             👍
             <br>
-            <br>
-            (* - "whatever you want" here means "whatever you want that you can do in the app")
-            <br>
-            (** - or python3 or whatever personalised command you have chosen as your own)
-            <br>
-            (*** - criticisms are also welcome)
         </p>
 
     </div>
 
-        <div id="buttonHolder" class="flex justify-center py-2">
+        <div id="buttonHolder" class="flex justify-center py-2 hover:text-header">
             <button 
             on:click={()=>{cursesCanvas.toggleSplash()}}
-            class="h-8 w-24 text-xs bg-sidebar-lighter hover:bg-transparent text-black font-semibold hover:text-black border-black border 2"
+            class="h-8 w-24 text-xs bg-sidebar-lighter hover:border-header text-black font-semibold hover:text-black border-black border 2"
             >
                 Close
             </button>
@@ -65,11 +61,11 @@
                 <p 
                 class="text-xs"
                 > 
-                    <a href="https://ko-fi.com/nickstav" rel="noopener" target="_blank" class="text-xs text-blue-500 underline">
+                    <a href="https://ko-fi.com/nickstav" rel="noopener" target="_blank" class="text-xs underline hover:text-header">
                         ko-fi page
                     </a>
                     |
-                    <a href="https://github.com/nickstav" rel="noopener" target="_blank" class="text-xs text-blue-500 underline">
+                    <a href="https://github.com/nickstav" rel="noopener" target="_blank" class="text-xs underline hover:text-header">
                         github profile
                     </a>
                 </p>
