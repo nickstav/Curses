@@ -21,7 +21,7 @@
             id="width" 
             size="3" 
             maxlength="4" 
-            class="text-xs h-5 flex-1 pl-1 rounded-sm bg-gray-50" 
+            class="text-xs h-5 flex-1 pl-1 rounded-sm bg-gray-50 border border-sidebar-border" 
             bind:value={$cursesCanvas.canvasWidth}
             on:input={()=>{updateCanvas()}}
             >  
@@ -34,7 +34,7 @@
             id="height" 
             size="3" 
             maxlength="4" 
-            class="text-xs h-5 flex-1 pl-1 rounded-sm bg-gray-50" 
+            class="text-xs h-5 flex-1 pl-1 rounded-sm bg-gray-50 border border-sidebar-border" 
             bind:value={$cursesCanvas.canvasHeight}
             on:input={()=>{updateCanvas()}}
             >

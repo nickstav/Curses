@@ -25,7 +25,7 @@ class="w-full text-xs flex flex-col justify-start border-t border-b border-black
             id="bars"
             min={progressBarSize.min} 
             max={progressBarSize.max} 
-            class="w-16 text-xs h-5 pl-1 rounded-sm bg-gray-50" 
+            class="w-16 text-xs h-5 pl-1 rounded-sm bg-gray-50 border border-sidebar-border" 
             bind:value={$cursesCanvas.sizeOfProgressBar}
             >
         </div>
