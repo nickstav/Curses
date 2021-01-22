@@ -14,21 +14,24 @@
 
 
 <aside
-class="bg-sidebar w-64 h-full text-xs flex flex-col justify-start items-center border-l border-sidebar-border"
+class="bg-sidebar w-64 h-full text-xs flex flex-col justify-start items-center"
 on:click={()=>{updateCanvas()}}
 >
     <SidebarTab/>
 
-    {#if $cursesCanvas.showSidebar}
-    <div id="toolsSidebar" class="w-full h-full overflow-auto">
-        <CanvasProperties/>
-        <Edit/>
-        <TextOptions/>
-        <ProgressOptions/>
-        <Shortcuts/>
+    <div id="sidebarBody" class="w-full h-full border-l border-sidebar-border overflow-auto">
+        {#if $cursesCanvas.showSidebar}
+        <div id="toolsSidebar" class="w-full h-full">
+            <CanvasProperties/>
+            <Edit/>
+            <TextOptions/>
+            <ProgressOptions/>
+            <Shortcuts/>
     </div>   
     {:else}
         <Export/>
     {/if}
+    </div>
+    
 </aside>
 

@@ -25,7 +25,12 @@ export class CanvasItem {
     }
 
     setFontAndColour() {
-        this.context.fillStyle = 'white';
+        let appearance = get(cursesCanvas).appearance;
+        if (appearance === 'web') {
+            this.context.fillStyle = 'black';
+        } else if (appearance === 'cmd') {
+            this.context.fillStyle = 'white';
+        }
         this.context.font = "15px monospace";
     }
 

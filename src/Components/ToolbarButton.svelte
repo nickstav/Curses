@@ -20,7 +20,7 @@
     <button
     id="toolbarButton"
     title={label}
-    class="flex h-10 w-10 p-2 justify-center items-center bg-cover opacity-75 hover:opacity-100 rounded-md"
+    class="flex h-10 w-10 p-2 justify-center items-center bg-cover opacity-85 hover:opacity-100 rounded-md"
     style="background-color: var(--bgColour); outline: none"
     >
         <slot></slot>

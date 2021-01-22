@@ -33,11 +33,12 @@
 <div
 id="sidebarTab" 
 style="--toolsColour: {toolsBGCol}; --exportColour: {exportBGCol}"
-class="w-full h-12 flex flex-row text-xs border-t border-gray-600"
+class="w-full h-12 flex flex-row text-xs border-l border-header-border"
 >
     <button 
+    aria-label="tools sidebar button"
     style="background-color: var(--toolsColour); outline: none"
-    class="flex flex-1 justify-center items-center border-r border-theme-secondary-dark"
+    class="flex flex-1 justify-center items-center"
     on:click={showToolsSideBar}
     >
         <svg xmlns="http://www.w3.org/2000/svg" class="p-3 hover:stroke-current" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke={toolsIconCol}>
@@ -46,6 +47,7 @@ class="w-full h-12 flex flex-row text-xs border-t border-gray-600"
     </button>
 
     <button 
+    aria-label="export sidebar button"
     style="background-color: var(--exportColour); outline: none"
     class="flex flex-1 justify-center items-center" 
     on:click={showExportSideBar}

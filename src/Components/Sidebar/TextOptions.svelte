@@ -6,7 +6,7 @@
 
 <div 
 id="textOptions" 
-class="w-full text-xs flex flex-col justify-center border-t-1 border-black px-3 py-3"
+class="w-full text-xs flex flex-col justify-center border-t-1 border-black px-3 py-3 select-none"
 >
 
     <div id="header" class="w-full flex flex-row">
@@ -17,14 +17,14 @@ class="w-full text-xs flex flex-col justify-center border-t-1 border-black px-3 
     {#if $cursesCanvas.showTextOptions}
     <div id="newLineOption" class="flex flex-col items-start pt-3">
 
-        <h2 class="font-semibold pb-2">text wrapping</h2>
+        <h2 class="font-bold pb-2">text wrapping</h2>
 
-            <label for="toLeft" class="pb-1 text-left">
+            <label for="toLeft" class="pb-1 text-left font-semibold text-gray-700">
                 <input type="radio" bind:group={$cursesCanvas.textNewLine} value={textNewLine.TOLEFT} class="align-middle">
                 align at left of canvas
             </label>
 
-            <label for="indented" class="pb-1 text-left">
+            <label for="indented" class="pb-1 text-left font-semibold text-gray-700">
                 <input type="radio" bind:group={$cursesCanvas.textNewLine} value={textNewLine.INDENTED} class="align-middle">
                 align under start of text
             </label>

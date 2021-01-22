@@ -9,7 +9,8 @@ module.exports = {
   },
   darkMode: false, // or 'media' or 'class',
   theme: {
-    colors: {
+    extend: {
+      colors: {
         'mainBackground' : 'rgba(243, 244, 246)',
         'header': '#bf360c',
         'header-border': '#870000',
@@ -17,12 +18,13 @@ module.exports = {
         'sidebar': '#f5f5f5',
         'sidebar-lighter': '#ffffff',
         'sidebar-border': '#c2c2c2',
-        'toolbar': '#f9683a',
-        'toolbar-border': '#ff5722',
-        'toolbar-lighter': '#ffbb93',
+        'toolbar': '#bcaaa4', // #f9683a
+        'toolbar-border': '#8c7b75', // '#ff5722'
+        'toolbar-lighter': '#efdcd5', // ffbb93'
         'toolbar-hover': '#ffa270',
         'footer': '#f5f5f5',
         'footer-border': '#c2c2c2'
+      }
     },
     fontSize: {
       '2xs': '.5rem',

@@ -6,11 +6,11 @@
 
 <div id="buttonsHolder" class="h-full flex flex-col justify-start items-left px-3 py-3">
 
-    <div id="preview" class="flex flex-row justify-start align-middle border-b border-gray-200 hover:text-header">
+    <div id="preview" class="flex flex-row justify-start align-middle border-b border-gray-500 hover:text-header">
         <button 
         id="preview" 
         on:click={showScript}
-        class="flex justify-center items-center my-6 h-10 w-10 p-1 hover:bg-gray-400"
+        class="flex justify-center items-center my-6 h-10 w-10 p-1"
         style="outline: none"
         >
             <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -20,11 +20,11 @@
         <label for="download" on:click={showScript} class="flex flex-1 text-xs font-semibold items-center cursor-pointer">preview Python script</label>
     </div>
     
-    <div id="download" class="flex flex-row justify-start align-middle border-b border-gray-200 hover:text-header">
+    <div id="download" class="flex flex-row justify-start align-middle border-b border-gray-500 hover:text-header">
         <button 
         id="download" 
         on:click={downloadPyFile}
-        class="flex justify-center items-center my-6 h-10 w-10 p-1 hover:bg-gray-400"
+        class="flex justify-center items-center my-6 h-10 w-10 p-1"
         style="outline: none"
         >
             <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor">

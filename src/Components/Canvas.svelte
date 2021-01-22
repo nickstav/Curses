@@ -8,13 +8,20 @@
   
     let canvas;
     onMount(()=> cursesCanvas.createCanvas(canvas));
+
+    let gridImage;
+    $: if ($cursesCanvas.appearance === 'web') {
+        gridImage = 'url(./images/greySquare.png)';
+    } else {
+        gridImage = 'url(./images/blackSquare.png)';
+    }
     
 </script>
 
 <svelte:window on:keydown={handleKeyDown}/>
 
-<div id="canvasHolder" class="w-full h-full flex justify-center items-center flex-1 overflow-auto bg-gray-100" style="--canvasW: {$gridAxis.x}px;--canvasH: {$gridAxis.y}px; --squareW: {gridDimension.x}px; --squareH: {gridDimension.y}px">
-    <div id="canvasBackground" style="width: var(--canvasW); height: var(--canvasH); background-image: url(./images/blackSquare.png); background-size: var(--squareW) var(--squareH);">
+<div id="canvasHolder" class="w-full h-full flex justify-center items-center flex-1 overflow-auto" style="--canvasW: {$gridAxis.x}px;--canvasH: {$gridAxis.y}px; --squareW: {gridDimension.x}px; --squareH: {gridDimension.y}px; --grid: {gridImage}">
+    <div id="canvasBackground" style="width: var(--canvasW); height: var(--canvasH); background-image: var(--grid); background-size: var(--squareW) var(--squareH);" class="rounded-sm">
         <canvas
         bind:this={canvas}
         id="cursesCanvas" 

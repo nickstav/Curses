@@ -8,22 +8,22 @@
 
     <div 
     id="splashHolder" 
-    class="flex flex-col w-3/4 rounded-sm text-left text-sm bg-sidebar border" 
+    class="flex flex-col w-3/5 rounded-sm text-left text-sm bg-sidebar border" 
     use:clickOutside on:click_outside={()=>{cursesCanvas.toggleSplash()}}
     >
-        <header id="previewHeader" class="bg-header w-full h-12 text-gray700 flex justify-between items-center border-b border-header-border">
-            <h1 class="text-2xl text-header-font font-bold ml-4">O   R   I   S   O   N</h1>
-        </header>
+        <div id="previewHeader" class="bg-header w-full h-12 text-gray700 flex justify-between items-center border-b border-header-border select-none">
+            <h1 class="text-2xl text-header-font font-bold tracking-widest ml-4">ORISON</h1>
+        </div>
 
-    <div id="introText" class="flex flex-col justify-between w-full p-3">
+    <div id="introText" class="flex flex-col justify-between w-full p-3 select-none">
 
-        <h2 id="introTitle" class="text-lg text-center font-bold">Welcome to Orison!</h2>
+        <h2 id="introTitle" class="text-lg text-center font-bold">Welcome to <span class="tracking-widest">ORISON</span>!</h2>
         <br>
         <div id="introContent" class="flex flex-row flex-1 w-full py-2">
             <p id="what" class="flex-1 px-6 py-2">
-                <strong>What is Orison?</strong>
+                <strong>What is <span class="tracking-widest">ORISON</span>?</strong>
                 <br>
-                Orison is an app that allows you to create a UI / GUI / progress screen / whatever you want 
+                <span class="tracking-widest">ORISON</span> is an app that allows you to create a UI / GUI / progress screen / whatever you want 
                 for command-line interpreters such as cmd.exe quickly and efficiently using a canvas tool.
                 <br>
             </p>
@@ -48,16 +48,16 @@
 
     </div>
 
-        <div id="buttonHolder" class="flex justify-center py-2">
+        <div id="buttonHolder" class="flex justify-center py-2 select-none">
             <button 
             on:click={()=>{cursesCanvas.toggleSplash()}}
-            class="h-8 w-24 text-xs bg-sidebar-lighter hover:text-header font-semibold hover:text-black border-black border 2"
+            class="h-8 w-24 text-xs bg-sidebar-lighter hover:text-header hover:border-header font-semibold border-black border 2"
             >
                 Close
             </button>
             </div>
         
-            <footer class="flex h-6 w-full justify-center items-center bg-sidebar-lighter border-t border-sidebar">
+            <div class="flex h-6 w-full justify-center items-center bg-sidebar-lighter border-t border-sidebar">
                 <p 
                 class="text-xs"
                 > 
@@ -69,7 +69,7 @@
                         github profile
                     </a>
                 </p>
-            </footer>
+            </div>
 
     </div>
 

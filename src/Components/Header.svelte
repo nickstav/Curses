@@ -3,14 +3,14 @@
     import { cursesCanvas } from '../JS/stores/project.js';
 </script>
 
-<header class="bg-header w-full h-12 text-gray700 flex justify-between items-center border-b border-header-border">
+<header class="bg-header w-full h-12 text-gray700 flex justify-between items-center border-b border-header-border select-none">
        
-    <h1 class="text-2xl text-header-font font-bold ml-4">O   R   I   S   O   N</h1>
+    <h1 class="text-2xl text-header-font  tracking-widest font-bold ml-4">ORISON</h1>
 
     <button
     id="infoButton"
     title="app info"
-    class="h-6 w-6 bg-cover text-xs opacity-80 hover:opacity-100 rounded-md mr-4"
+    class="h-6 w-6 bg-cover text-xs rounded-md mr-4"
     style="outline: none"
     on:click={()=>{cursesCanvas.toggleSplash()}} 
     >
