@@ -33,7 +33,7 @@
 <div
 id="sidebarTab" 
 style="--toolsColour: {toolsBGCol}; --exportColour: {exportBGCol}"
-class="w-full h-12 flex flex-row text-xs border-t border-gray-600"
+class="w-full h-12 flex flex-row text-xs"
 >
     <button 
     style="background-color: var(--toolsColour); outline: none"
