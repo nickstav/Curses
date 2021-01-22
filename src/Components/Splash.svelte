@@ -20,14 +20,14 @@
         <h2 id="introTitle" class="text-lg text-center font-bold">Welcome to Orison!</h2>
         <br>
         <div id="introContent" class="flex flex-row flex-1 w-full py-2">
-            <p id="what" class="flex flex-col flex-1 px-6 py-2">
+            <p id="what" class="flex-1 px-6 py-2">
                 <strong>What is Orison?</strong>
                 <br>
                 Orison is an app that allows you to create a UI / GUI / progress screen / whatever you want 
                 for command-line interpreters such as cmd.exe quickly and efficiently using a canvas tool.
                 <br>
             </p>
-            <p id="how" class="flex flex-col flex-1 px-6 py-2">
+            <p id="how" class="flex-1 px-6 py-2">
                 <strong>How to use it</strong>
                 <br>
                 Add (and edit) lines, rectangles, text and progress bars on a canvas that 
@@ -35,7 +35,7 @@
                 <br>
                 <br>
                 Once finished with your design, hit the export button to copy or download a Python script that uses the
-                <a href="https://docs.python.org/3/library/curses.html#module-curses" rel="noopener" target="_blank" class="font-mono hover:text-header">curses</a> 
+                <a href="https://docs.python.org/3/library/curses.html#module-curses" rel="noopener" target="_blank" class="font-mono hover:text-header">curses</a>
                 library to build your canvas when using the usual "python script.py" command in your command prompt shell.
                 <br>
             </p>
