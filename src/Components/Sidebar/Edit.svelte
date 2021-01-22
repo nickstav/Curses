@@ -1,6 +1,7 @@
 <script>
     import SidebarButton from './SidebarButton.svelte';
     import DropDown from './DropDown.svelte';
+    import AlignSVG from './AlignSVG.svelte';
 
     import { cursesCanvas } from '../../JS/stores/project.js';
     import { tools } from '../../JS/constants/toolsList.js';
@@ -21,27 +22,59 @@
     {#if $cursesCanvas.showEditOptions}
     <div id="copy/delete" class="w-full flex flex-col items-start border-b border-gray-200">
         <div id="firstButtonRow" class=" w-full flex flex-row justify-around pt-3 pb-3">
-            <SidebarButton label={'duplicate (ctrl + c)'} editCanvas={duplicateObject} img={'./images/buttons/duplicate.png'}/>
-            <SidebarButton label={'delete (del)'} editCanvas={eraseObject} img={'./images/buttons/delete.png'}/>
+            <SidebarButton label={'duplicate (ctrl + c)'} editCanvas={duplicateObject}>
+                <svg xmlns="http://www.w3.org/2000/svg" class="hover:text-header" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+            </SidebarButton>
+            <SidebarButton label={'delete (del)'} editCanvas={eraseObject}>
+                <svg xmlns="http://www.w3.org/2000/svg" class="hover:text-header" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+            </SidebarButton>
         </div>
     </div>
 
     <div id="alignSection" class="w-full py-3 flex flex-col items-start border-b border-gray-200">
         <div id="alignButtons" class="w-full py-2 flex flex-row justify-between">
-            <SidebarButton label={'align left'} editCanvas={()=>{alignObjects(keyboardKeys.LEFT)}} img={'./images/buttons/align_left.png'}/>
-            <SidebarButton label={'align right'} editCanvas={()=>{alignObjects(keyboardKeys.RIGHT)}} img={'./images/buttons/align_right.png'}/>
-            <SidebarButton label={'align top'} editCanvas={()=>{alignObjects(keyboardKeys.UP)}} img={'./images/buttons/align_up.png'}/>
-            <SidebarButton label={'align bottom'} editCanvas={()=>{alignObjects(keyboardKeys.DOWN)}} img={'./images/buttons/align_down.png'}/>
+            <SidebarButton label={'align left'} editCanvas={()=>{alignObjects(keyboardKeys.LEFT)}}>
+                <AlignSVG degrees="0"/>
+            </SidebarButton>
+            <SidebarButton label={'align right'} editCanvas={()=>{alignObjects(keyboardKeys.RIGHT)}}>
+                <AlignSVG degrees="180"/>
+            </SidebarButton>
+            <SidebarButton label={'align top'} editCanvas={()=>{alignObjects(keyboardKeys.UP)}}>
+                <AlignSVG degrees="90"/>
+            </SidebarButton>
+            <SidebarButton label={'align bottom'} editCanvas={()=>{alignObjects(keyboardKeys.DOWN)}}>
+                <AlignSVG degrees="270"/>
+            </SidebarButton>
         </div>
     </div>
 
     <div id="moveButtons" class="w-full flex flex-col justify-center items-center border-b-1 border-gray-200 pt-3">
-        <SidebarButton label={'move up'} editCanvas={()=>{moveObject(keyboardKeys.UP)}} img={'./images/buttons/up.png'}/>
+        <SidebarButton label={'move up'} editCanvas={()=>{moveObject(keyboardKeys.UP)}}>
+            <svg xmlns="http://www.w3.org/2000/svg" class="hover:text-header" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+            </svg>
+        </SidebarButton>
         <div id="horizButtons" class=" w-full flex flex-row justify-around py-1">
-            <SidebarButton label={'move left'} editCanvas={()=>{moveObject(keyboardKeys.LEFT)}} img={'./images/buttons/left.png'}/>
-            <SidebarButton label={'move right'} editCanvas={()=>{moveObject(keyboardKeys.RIGHT)}} img={'./images/buttons/right.png'}/>
+            <SidebarButton label={'move left'} editCanvas={()=>{moveObject(keyboardKeys.LEFT)}}>
+                <svg xmlns="http://www.w3.org/2000/svg" class="hover:text-header" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+            </SidebarButton>
+            <SidebarButton label={'move right'} editCanvas={()=>{moveObject(keyboardKeys.RIGHT)}}>
+                <svg xmlns="http://www.w3.org/2000/svg" class="hover:text-header" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+            </SidebarButton>
         </div>
-        <SidebarButton label={'move down'} editCanvas={()=>{moveObject(keyboardKeys.DOWN)}} img={'./images/buttons/down.png'}/>
+        <SidebarButton editCanvas={()=>{moveObject(keyboardKeys.DOWN)}}>
+            <svg xmlns="http://www.w3.org/2000/svg" class="hover:text-header" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+        </SidebarButton>
     </div>
     {/if}
 

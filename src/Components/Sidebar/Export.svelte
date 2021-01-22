@@ -6,7 +6,7 @@
 
 <div id="buttonsHolder" class="h-full flex flex-col justify-start items-left px-3 py-3">
 
-    <div id="preview" class="flex flex-row justify-start align-middle border-b border-gray-200">
+    <div id="preview" class="flex flex-row justify-start align-middle border-b border-gray-200 hover:text-header">
         <button 
         id="preview" 
         on:click={showScript}
@@ -20,7 +20,7 @@
         <label for="download" on:click={showScript} class="flex flex-1 text-xs font-semibold items-center cursor-pointer">preview Python script</label>
     </div>
     
-    <div id="download" class="flex flex-row justify-start align-middle border-b border-gray-200">
+    <div id="download" class="flex flex-row justify-start align-middle border-b border-gray-200 hover:text-header">
         <button 
         id="download" 
         on:click={downloadPyFile}
@@ -34,7 +34,7 @@
         <label for="download" on:click={downloadPyFile} class="flex flex-1 text-xs font-semibold items-center cursor-pointer">download .py file</label>
     </div>
     
-    <div id="copy" class="flex flex-row justify-start align-middle">
+    <div id="copy" class="flex flex-row justify-start align-middle hover:text-header">
         <button 
         id="copy" 
         on:click={copyTextToClipboard}

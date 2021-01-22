@@ -1,6 +1,6 @@
 <script>
     import { cursesCanvas } from '../../JS/stores/project.js';
-    export let img, label, editCanvas;
+    export let label, editCanvas;
 
 </script>
 
@@ -11,5 +11,5 @@
     style="outline: none"
     on:click={editCanvas} 
     >
-        <img src={img} alt="{img}">
+    <slot></slot>
 </button>

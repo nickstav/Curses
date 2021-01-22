@@ -12,12 +12,12 @@
 
     <div 
     id="window" 
-    class="flex flex-col items-center w-3/4 rounded-md text-left font-mono text-sm bg-sidebar border border-sidebar-border" 
+    class="flex flex-col items-center w-3/4 h-5/6 rounded-md text-left font-mono text-sm bg-sidebar border border-sidebar-border" 
     use:clickOutside on:click_outside={hideScript}
     >
 
         <header id="previewHeader" class="bg-header w-full h-12 text-gray700 flex justify-between items-center border-b border-header-border">
-            <h1 class="text-2xl ml-4">O   R   I   S   O   N</h1>
+            <h1 class="text-2xl text-header-font ml-4">O   R   I   S   O   N</h1>
         </header>    
 
         <div id="codeHolder" class="w-full flex-1 overflow-auto p-2">
@@ -28,7 +28,7 @@
             <button 
             id="download" 
             on:click={downloadPyFile}
-            class="flex justify-center items-center h-12 w-12 p-2 hover:bg-gray-400"
+            class="flex justify-center items-center h-12 w-12 p-2 hover:text-header"
             style="outline: none"
             >
                 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -39,7 +39,7 @@
             <button 
             id="copy" 
             on:click={copyTextToClipboard}
-            class="flex justify-center items-center h-12 w-12 p-2 hover:bg-gray-400"
+            class="flex justify-center items-center h-12 w-12 p-2 hover:text-header"
             style="outline: none"
             >
                 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24" stroke="currentColor">
