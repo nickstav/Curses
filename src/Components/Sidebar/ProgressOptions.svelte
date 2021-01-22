@@ -6,7 +6,7 @@
 
 <div 
 id="progressOptions" 
-class="w-full text-xs flex flex-col justify-start border-t border-b border-black px-3 py-3"
+class="w-full text-xs flex flex-col justify-start border-t border-b border-black px-3 py-3 select-none"
 >
 
     <div id="header" class="w-full flex flex-row">

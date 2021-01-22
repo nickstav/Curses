@@ -9,7 +9,8 @@ module.exports = {
   },
   darkMode: false, // or 'media' or 'class',
   theme: {
-    colors: {
+    extend: {
+      colors: {
         'mainBackground' : 'rgba(243, 244, 246)',
         'header': '#bf360c',
         'header-border': '#870000',
@@ -23,6 +24,7 @@ module.exports = {
         'toolbar-hover': '#ffa270',
         'footer': '#f5f5f5',
         'footer-border': '#c2c2c2'
+      }
     },
     fontSize: {
       '2xs': '.5rem',

@@ -6,7 +6,7 @@
 
 <div 
 id="textOptions" 
-class="w-full text-xs flex flex-col justify-center border-t-1 border-black px-3 py-3"
+class="w-full text-xs flex flex-col justify-center border-t-1 border-black px-3 py-3 select-none"
 >
 
     <div id="header" class="w-full flex flex-row">

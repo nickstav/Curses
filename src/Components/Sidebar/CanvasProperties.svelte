@@ -4,7 +4,7 @@
     import { updateCanvas } from '../../JS/draw/updateCanvas.js';
 </script>
 
-<div id="canvasSection" class="w-full flex flex-col px-3 py-3">
+<div id="canvasSection" class="w-full flex flex-col px-3 py-3 select-none">
 
     <div id="header" class="w-full flex flex-row">
         <h1 on:click={()=>{cursesCanvas.toggleCanvasMenu()}} class="w-full flex flex-1 text-left font-semibold cursor-pointer select-none">CANVAS OPTIONS</h1>
