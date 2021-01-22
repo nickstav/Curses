@@ -7,6 +7,7 @@ import { tools } from '../constants/toolsList.js';
  const defaultValues = {
     canvasHeight: 22,
     canvasWidth: 80,
+    appearance: 'web',
     canvasElement: undefined,
     context: undefined,
     tool: tools.LINE,
@@ -49,6 +50,26 @@ function setUpStore() {
           context: canvasElement.getContext('2d')
         };
       });
+  }
+
+  function setWebAppearance() {
+    update(status => {
+      return {
+        ...status,
+        canvasBackground: 'url(./images/greySquare.png)',
+        canvasFont: 'black'
+      };
+    });   
+  }
+
+  function setCMDAppearance() {
+    update(status => {
+      return {
+        ...status,
+        canvasBackground: 'url(./images/blackSquare.png)',
+        canvasFont: 'white'
+      };
+    });   
   }
 
   function toggleSplash() {

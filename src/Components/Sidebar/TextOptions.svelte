@@ -17,7 +17,7 @@ class="w-full text-xs flex flex-col justify-center border-t-1 border-black px-3 
     {#if $cursesCanvas.showTextOptions}
     <div id="newLineOption" class="flex flex-col items-start pt-3">
 
-        <h2 class="font-semibold pb-2">text wrapping</h2>
+        <h2 class="font-bold pb-2">text wrapping</h2>
 
             <label for="toLeft" class="pb-1 text-left font-semibold text-gray-700">
                 <input type="radio" bind:group={$cursesCanvas.textNewLine} value={textNewLine.TOLEFT} class="align-middle">

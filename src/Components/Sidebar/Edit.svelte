@@ -21,7 +21,7 @@
     </div>
 
     {#if $cursesCanvas.showEditOptions}
-    <div id="copy/delete" class="w-full flex flex-col items-start border-b border-gray-200">
+    <div id="copy/delete" class="w-full flex flex-col items-start border-b border-gray-300">
         <div id="firstButtonRow" class=" w-full flex flex-row justify-around pt-3 pb-3">
             <SidebarButton label={'duplicate (ctrl + c)'} editCanvas={duplicateObject}>
                 <svg xmlns="http://www.w3.org/2000/svg" class="hover:text-header" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    <div id="alignSection" class="w-full py-3 flex flex-col items-start border-b border-gray-200">
+    <div id="alignSection" class="w-full py-3 flex flex-col items-start border-b border-gray-300">
         <div id="alignButtons" class="w-full py-2 flex flex-row justify-between">
             <SidebarButton label={'align left'} editCanvas={()=>{alignObjects(keyboardKeys.LEFT)}}>
                 <AlignSVG degrees="0"/>

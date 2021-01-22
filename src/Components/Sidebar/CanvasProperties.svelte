@@ -12,7 +12,7 @@
     </div>
 
     {#if $cursesCanvas.showCanvasOptions}
-    <div id="canvasSizing" class="w-full font-semibold text-gray-700 flex flex-col items-start pt-3">
+    <div id="canvasSizing" class="w-full font-semibold text-gray-700 flex flex-col items-start py-3 border-b border-gray-300">
 
         <div id="widthInput" class="w-full flex flex-row pb-2 items-center">
             <label for="width" class="text-xs w-12 text-left">width</label>
@@ -40,6 +40,23 @@
             >
         </div>
      
+    </div>
+
+    <div id="colourMode" class="w-full flex flex-col items-start pt-3">
+
+        <h2 class="font-bold pb-2">appearance</h2>
+
+        <div id="appearanceMode" class="flex flex-row justify-around w-full"> 
+            <label for="toLeft" class="pb-1 text-left font-semibold text-gray-700">
+                <input type="radio" bind:group={$cursesCanvas.appearance} value={'web'} class="align-middle pr-2" on:change={()=>{updateCanvas()}}>
+                web
+            </label>
+
+            <label for="indented" class="pb-1 text-left font-semibold text-gray-700">
+                <input type="radio" bind:group={$cursesCanvas.appearance} value={'cmd'} class="align-middle" on:change={()=>{updateCanvas()}}>
+                cmd
+            </label>
+        </div>
     </div>
     {/if}
 </div>
