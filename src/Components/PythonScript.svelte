@@ -11,8 +11,8 @@
 <div id="overlay" class="w-full h-full bg-black bg-opacity-80 fixed top-0 left-0 flex items-center justify-center align-center">
 
     <div 
-    id="window" 
-    class="flex flex-col items-center w-3/4 h-5/6 rounded-sm text-left font-mono text-sm bg-sidebar border-2 border-gray-600" 
+    id="previewWindow" 
+    class="flex flex-col items-center w-3/4 h-5/6 rounded-sm text-left font-mono text-sm bg-sidebar border-2 border-gray-600 overflow-hidden" 
     use:clickOutside on:click_outside={hideScript}
     >
 
