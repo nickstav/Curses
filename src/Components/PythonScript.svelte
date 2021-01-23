@@ -11,13 +11,18 @@
 <div id="overlay" class="w-full h-full bg-black bg-opacity-80 fixed top-0 left-0 flex items-center justify-center align-center">
 
     <div 
-    id="window" 
-    class="flex flex-col items-center w-3/4 h-5/6 rounded-md text-left font-mono text-sm bg-sidebar border border-sidebar-border" 
+    id="previewWindow" 
+    class="flex flex-col items-center w-3/4 h-5/6 rounded-sm text-left font-mono text-sm bg-sidebar border-2 border-gray-600 overflow-hidden" 
     use:clickOutside on:click_outside={hideScript}
     >
 
-        <div id="previewHeader" class="bg-header w-full h-12 text-gray700 flex justify-between items-center border-b border-header-border">
-            <h1 class="text-2xl text-header-font  tracking-widest ml-4">ORISON</h1>
+        <div id="previewHeader" class="bg-header w-full h-12 p-0 text-gray700 flex justify-between items-center border-b border-header-border">
+            <h1 
+            class="text-2xl text-header-font font-bold tracking-widest ml-4"
+            style="font-family: 'Montserrat', sans-serif;"
+            >
+                ORISON
+            </h1>
         </div>    
 
         <div id="codeHolder" class="w-full flex-1 overflow-auto p-2">

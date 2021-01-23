@@ -48,13 +48,13 @@
 
         <div id="appearanceMode" class="flex flex-row justify-around w-full"> 
             <label for="toLeft" class="pb-1 text-left font-semibold text-gray-700">
-                <input type="radio" bind:group={$cursesCanvas.appearance} value={'web'} class="align-middle pr-2" on:change={()=>{updateCanvas()}}>
-                web
+                <input type="radio" bind:group={$cursesCanvas.appearance} value={'light'} class="align-middle pr-2" on:change={()=>{updateCanvas()}}>
+                light
             </label>
 
             <label for="indented" class="pb-1 text-left font-semibold text-gray-700">
-                <input type="radio" bind:group={$cursesCanvas.appearance} value={'cmd'} class="align-middle" on:change={()=>{updateCanvas()}}>
-                cmd
+                <input type="radio" bind:group={$cursesCanvas.appearance} value={'dark'} class="align-middle" on:change={()=>{updateCanvas()}}>
+                dark
             </label>
         </div>
     </div>

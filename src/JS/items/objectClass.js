@@ -26,9 +26,9 @@ export class CanvasItem {
 
     setFontAndColour() {
         let appearance = get(cursesCanvas).appearance;
-        if (appearance === 'web') {
+        if (appearance === 'light') {
             this.context.fillStyle = 'black';
-        } else if (appearance === 'cmd') {
+        } else if (appearance === 'dark') {
             this.context.fillStyle = 'white';
         }
         this.context.font = "15px monospace";

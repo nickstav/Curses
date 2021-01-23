@@ -41,7 +41,8 @@ module.exports = {
   },
   variants: {
     extend: {
-     stroke: ['hover', 'focus'],
+      padding: ['hover'],
+      stroke: ['hover', 'focus'],
     }
   }
 }

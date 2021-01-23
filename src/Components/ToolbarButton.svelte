@@ -16,7 +16,18 @@
 
 </script>
 
-<div on:click={editCanvas} style="--bgColour: {bgColour}" class="py-2 px-2 cursor-pointer hover:text-header-font">
+<style>
+    .selected {
+        pointer-events: none;
+	}
+</style>
+
+<div 
+class:selected="{label === toolSelected}"
+on:click={editCanvas} 
+style="--bgColour: {bgColour}" 
+class="py-2 px-2 cursor-pointer hover:text-header-font"
+>
     <button
     id="toolbarButton"
     title={label}

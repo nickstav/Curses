@@ -7,7 +7,7 @@ import { tools } from '../constants/toolsList.js';
  const defaultValues = {
     canvasHeight: 22,
     canvasWidth: 80,
-    appearance: 'web',
+    appearance: 'light',
     canvasElement: undefined,
     context: undefined,
     tool: tools.LINE,
