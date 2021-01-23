@@ -1,11 +1,10 @@
 <script>
-    import SizeParagraph from './SizeParagraph.svelte';
     import { cursesCanvas } from '../JS/stores/project.js';
 </script>
 
 <header class="bg-header w-full h-12 text-gray700 flex justify-between items-center border-b border-header-border select-none">
        
-    <h1 class="text-2xl text-header-font  tracking-widest font-bold ml-4">ORISON</h1>
+    <h1 class="text-2xl text-header-font tracking-widest font-bold ml-4">ORISON</h1>
 
     <button
     id="infoButton"
@@ -20,4 +19,3 @@
     </button>
 
 </header>
-<SizeParagraph/>

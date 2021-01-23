@@ -12,7 +12,7 @@
 	import Sidebar from './Components/Sidebar/Sidebar.svelte';
 </script>
 
-<main class="w-full h-full flex flex-row items-center text-center">
+<main class="w-full h-full flex flex-row items-center text-center bg-gray-100">
 
 	<div id="mainWindow" class="w-full h-full flex flex-col items-center overflow-hidden bg-theme-mainBackground">
 		<Header/>

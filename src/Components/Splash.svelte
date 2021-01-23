@@ -59,7 +59,7 @@
         
             <div class="flex h-6 w-full justify-center items-center bg-sidebar-lighter border-t border-sidebar">
                 <p 
-                class="text-xs"
+                class="text-xs font-semibold text-gray-700"
                 > 
                     <a href="https://ko-fi.com/nickstav" rel="noopener" target="_blank" class="text-xs underline hover:text-header">
                         ko-fi page
