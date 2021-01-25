@@ -48,7 +48,8 @@ function handleMouseClick(event) {
                 // now mouse has been released, change select method to objects to allow for manipulation
                 projectStore.changeSelectMethodToGrab();
             }
-            break;  
+            canvasElement.style.cursor = "pointer";
+            break; 
     } 
 
     //show updated canvas with any added/erased objects when clicking
