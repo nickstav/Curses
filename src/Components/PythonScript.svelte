@@ -2,7 +2,7 @@
     import Prism from "./PrismJS.svelte";
 
     import { clickOutside } from '../JS/eventListeners/clickOutside.js';
-    import { cursesCanvas } from '../JS/stores/project.js';
+    import { projectStore } from '../JS/stores/project.js';
     import { hideScript } from '../JS/python/minimise.js';
     import { downloadPyFile } from '../JS/python/download.js';
     import { copyTextToClipboard } from '../JS/python/copyText.js';
@@ -26,7 +26,7 @@
         </div>    
 
         <div id="codeHolder" class="w-full flex-1 overflow-auto p-2">
-            <Prism language="python" code="{$cursesCanvas.pythonScript}"/>
+            <Prism language="python" code="{$projectStore.pythonScript}"/>
         </div>
 
         <div id="buttonsHolder" class="w-1/2 h-10 flex flex-row justify-around mb-1">

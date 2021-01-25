@@ -2,17 +2,17 @@
     import SizeParagraph from './SizeParagraph.svelte';
 
     import { onMount } from 'svelte';
-    import { cursesCanvas } from '../JS/stores/project.js';
+    import { projectStore } from '../JS/stores/project.js';
     import { gridAxis } from '../JS/stores/grid.js';
     import { gridDimension } from '../JS/constants/canvasSize.js';
 
     import { handleMouseClick, handleMouseMove, handleMouseDown, handleMouseRelease, handleMouseOut, handleMouseEnter, handleKeyDown } from '../JS/draw/eventHandling.js';
   
     let canvas;
-    onMount(()=> cursesCanvas.createCanvas(canvas));
+    onMount(()=> projectStore.createCanvas(canvas));
 
     let gridImage;
-    $: if ($cursesCanvas.appearance === 'light') {
+    $: if ($projectStore.appearance === 'light') {
         gridImage = 'url(./images/greySquare.png)';
     } else {
         gridImage = 'url(./images/blackSquare.png)';
@@ -29,7 +29,7 @@
     <div id="canvasBackground" style="width: var(--canvasW); height: var(--canvasH); background-image: var(--grid); background-size: var(--squareW) var(--squareH);" class="rounded-sm">
         <canvas
         bind:this={canvas}
-        id="cursesCanvas" 
+        id="projectStore" 
         width={$gridAxis.x}
         height={$gridAxis.y}
         on:click={handleMouseClick}

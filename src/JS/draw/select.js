@@ -1,6 +1,6 @@
 import { get } from 'svelte/store';
 import { canvasObjects } from '../stores/objects.js';
-import { cursesCanvas } from '../stores/project.js';
+import { projectStore } from '../stores/project.js';
 
 import { gridDimension } from '../constants/canvasSize.js';
 
@@ -11,7 +11,7 @@ function checkIfAreaBeingSelected(isDrawing) {
     let objects = get(canvasObjects);
     const objectNotSelected = (object) => !object.selected;
     if (isDrawing && objects.every(objectNotSelected)) {
-        cursesCanvas.changeSelectMethodToArea();
+        projectStore.changeSelectMethodToArea();
     };
 }
 
@@ -43,8 +43,8 @@ function selectObject(gridLocation, canvasElement, event) {
                     canvasElement.style.cursor = "grab";
 
                     // if no other object has been marked as first clicked, mark the current object's index
-                    if (get(cursesCanvas).IDOfFirstSelectedObject === undefined) {
-                        cursesCanvas.markObjectAsFirstSelected(objects[z].ID);
+                    if (get(projectStore).IDOfFirstSelectedObject === undefined) {
+                        projectStore.markObjectAsFirstSelected(objects[z].ID);
                     }
 
                     //stop the loop once one object has been selected
@@ -68,7 +68,7 @@ function selectAreaOnGrid(startGridLocation, currentGridLocation) {
         endCoords: currentGridLocation
     }
 
-    cursesCanvas.saveSelectedAreaCoords(startGridLocation, currentGridLocation);
+    projectStore.saveSelectedAreaCoords(startGridLocation, currentGridLocation);
 
     //highlight all objects within the selected area
     selectObjectsInsideArea();
@@ -78,7 +78,7 @@ function selectAreaOnGrid(startGridLocation, currentGridLocation) {
 
 // draw the highlighting rectangle for the selected area
 function drawHighlightingRectangle(startCoords, endCoords) {
-    let context = get(cursesCanvas).context;
+    let context = get(projectStore).context;
     let areaInfo = getSelectedAreaCoords([startCoords, endCoords]);
 
     context.beginPath();
@@ -102,7 +102,7 @@ function drawHighlightingRectangle(startCoords, endCoords) {
 // check if any part of an object is in the highlighted area and select it if so
 function selectObjectsInsideArea() {
     let canvasItems = get(canvasObjects);
-    let selectedAreaCoords = get(cursesCanvas).selectedAreaCoords;
+    let selectedAreaCoords = get(projectStore).selectedAreaCoords;
 
     let areaInfo = getSelectedAreaCoords(selectedAreaCoords);
 
@@ -126,8 +126,8 @@ function selectObjectsInsideArea() {
                 object.selectObject(); 
 
                  // if no other object has been marked as first selected, mark the current object's index
-                 if (get(cursesCanvas).IDOfFirstSelectedObject === undefined) {
-                    cursesCanvas.markObjectAsFirstSelected(object.ID);
+                 if (get(projectStore).IDOfFirstSelectedObject === undefined) {
+                    projectStore.markObjectAsFirstSelected(object.ID);
                 }
             }
         };
@@ -167,7 +167,7 @@ function checkClickLocationToDeselectObjects(objects, gridLocation, canvasElemen
         });
         canvasElement.style.cursor = "pointer";
         // remove the first selected object's index from the project store
-        cursesCanvas.removeFirstSelectedObject();
+        projectStore.removeFirstSelectedObject();
     }
 }
 

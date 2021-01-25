@@ -298,4 +298,4 @@ function toggleSidebar() {
 
 }
 
-export const cursesCanvas = setUpStore();
+export const projectStore = setUpStore();

@@ -1,9 +1,9 @@
 import { get } from 'svelte/store';
-import { cursesCanvas } from '../stores/project.js';
+import { projectStore } from '../stores/project.js';
 
 // copy the python script to the clipboard when requested
 export function copyTextToClipboard() {
-    let script = get(cursesCanvas).pythonScript;
+    let script = get(projectStore).pythonScript;
 
     const pseudoElement = document.createElement('textarea');
     pseudoElement.value = script;

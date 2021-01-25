@@ -1,6 +1,6 @@
 <script>
     import { checkUserInput } from '../JS/stores/grid.js';
-    import { cursesCanvas } from '../JS/stores/project.js';
+    import { projectStore } from '../JS/stores/project.js';
     import { minDimensions, maxDimensions } from '../JS/constants/canvasSize.js';
 </script>
 

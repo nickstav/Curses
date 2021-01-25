@@ -1,6 +1,6 @@
 
 <script>
-    import { cursesCanvas } from '../JS/stores/project.js';
+    import { projectStore } from '../JS/stores/project.js';
     import { clickOutside } from '../JS/eventListeners/clickOutside.js';
 </script>
 
@@ -9,7 +9,7 @@
     <div 
     id="splashHolder" 
     class="flex flex-col w-3/5 rounded-sm text-left text-sm bg-sidebar border" 
-    use:clickOutside on:click_outside={()=>{cursesCanvas.toggleSplash()}}
+    use:clickOutside on:click_outside={()=>{projectStore.toggleSplash()}}
     >
         <div id="previewHeader" class="bg-header w-full h-12 text-gray700 flex justify-between items-center border-b border-header-border select-none">
             <h1 class="text-2xl text-header-font font-bold tracking-widest ml-4">ORISON</h1>
@@ -50,7 +50,7 @@
 
         <div id="buttonHolder" class="flex justify-center py-2 select-none">
             <button 
-            on:click={()=>{cursesCanvas.toggleSplash()}}
+            on:click={()=>{projectStore.toggleSplash()}}
             class="h-8 w-24 text-xs bg-sidebar-lighter hover:text-header hover:border-header font-semibold border-black border 2"
             >
                 Close

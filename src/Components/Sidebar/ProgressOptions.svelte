@@ -1,6 +1,6 @@
 <script>
     import DropDown from './DropDown.svelte';
-    import { cursesCanvas } from '../../JS/stores/project.js';
+    import { projectStore } from '../../JS/stores/project.js';
     import { progressBarSize } from '../../JS/stores/progressBar.js';
 </script>
 
@@ -10,11 +10,11 @@ class="w-full text-xs flex flex-col justify-start border-t border-b border-black
 >
 
     <div id="header" class="w-full flex flex-row">
-        <h1 on:click={()=>{cursesCanvas.toggleProgressMenu()}} class="w-full text-left font-semibold cursor-pointer select-none">PROGRESS BAR OPTIONS</h1>
-        <DropDown menuDisplayed={$cursesCanvas.showProgressOptions} toggleSubMenu={()=>{cursesCanvas.toggleProgressMenu()}}/>
+        <h1 on:click={()=>{projectStore.toggleProgressMenu()}} class="w-full text-left font-semibold cursor-pointer select-none">PROGRESS BAR OPTIONS</h1>
+        <DropDown menuDisplayed={$projectStore.showProgressOptions} toggleSubMenu={()=>{projectStore.toggleProgressMenu()}}/>
     </div>
 
-    {#if $cursesCanvas.showProgressOptions}
+    {#if $projectStore.showProgressOptions}
 
     <div id="options" class="w-full flex flex-col items-start pt-3 font-semibold text-gray-700">
 
@@ -26,7 +26,7 @@ class="w-full text-xs flex flex-col justify-start border-t border-b border-black
             min={progressBarSize.min} 
             max={progressBarSize.max} 
             class="w-16 text-xs h-5 pl-1 rounded-sm bg-gray-50 border border-sidebar-border" 
-            bind:value={$cursesCanvas.sizeOfProgressBar}
+            bind:value={$projectStore.sizeOfProgressBar}
             >
         </div>
 
@@ -35,7 +35,7 @@ class="w-full text-xs flex flex-col justify-start border-t border-b border-black
             <input 
             id="showPerc" 
             type=checkbox
-            bind:checked={$cursesCanvas.showProgressPercentage}
+            bind:checked={$projectStore.showProgressPercentage}
             >
         </div>
 

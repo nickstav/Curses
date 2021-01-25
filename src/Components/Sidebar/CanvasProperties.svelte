@@ -1,17 +1,17 @@
 <script>
     import DropDown from './DropDown.svelte';
-    import { cursesCanvas } from '../../JS/stores/project.js';
+    import { projectStore } from '../../JS/stores/project.js';
     import { updateCanvas } from '../../JS/draw/updateCanvas.js';
 </script>
 
 <div id="canvasSection" class="w-full flex flex-col px-3 py-3 select-none">
 
     <div id="header" class="w-full flex flex-row">
-        <h1 on:click={()=>{cursesCanvas.toggleCanvasMenu()}} class="w-full flex flex-1 text-left font-semibold cursor-pointer select-none">CANVAS OPTIONS</h1>
-        <DropDown menuDisplayed={$cursesCanvas.showCanvasOptions} toggleSubMenu={()=>{cursesCanvas.toggleCanvasMenu()}}/>
+        <h1 on:click={()=>{projectStore.toggleCanvasMenu()}} class="w-full flex flex-1 text-left font-semibold cursor-pointer select-none">CANVAS OPTIONS</h1>
+        <DropDown menuDisplayed={$projectStore.showCanvasOptions} toggleSubMenu={()=>{projectStore.toggleCanvasMenu()}}/>
     </div>
 
-    {#if $cursesCanvas.showCanvasOptions}
+    {#if $projectStore.showCanvasOptions}
     <div id="canvasSizing" class="w-full font-semibold text-gray-700 flex flex-col items-start py-3 border-b border-gray-300">
 
         <div id="widthInput" class="w-full flex flex-row pb-2 items-center">
@@ -22,7 +22,7 @@
             size="3" 
             maxlength="4" 
             class="text-xs h-5 flex-1 pl-1 rounded-sm bg-gray-50 border border-sidebar-border" 
-            bind:value={$cursesCanvas.canvasWidth}
+            bind:value={$projectStore.canvasWidth}
             on:input={()=>{updateCanvas()}}
             >  
         </div>
@@ -35,7 +35,7 @@
             size="3" 
             maxlength="4" 
             class="text-xs h-5 flex-1 pl-1 rounded-sm bg-gray-50 border border-sidebar-border" 
-            bind:value={$cursesCanvas.canvasHeight}
+            bind:value={$projectStore.canvasHeight}
             on:input={()=>{updateCanvas()}}
             >
         </div>
@@ -48,12 +48,12 @@
 
         <div id="appearanceMode" class="flex flex-row justify-around w-full"> 
             <label for="toLeft" class="pb-1 text-left font-semibold text-gray-700">
-                <input type="radio" bind:group={$cursesCanvas.appearance} value={'light'} class="align-middle pr-2" on:change={()=>{updateCanvas()}}>
+                <input type="radio" bind:group={$projectStore.appearance} value={'light'} class="align-middle pr-2" on:change={()=>{updateCanvas()}}>
                 light
             </label>
 
             <label for="indented" class="pb-1 text-left font-semibold text-gray-700">
-                <input type="radio" bind:group={$cursesCanvas.appearance} value={'dark'} class="align-middle" on:change={()=>{updateCanvas()}}>
+                <input type="radio" bind:group={$projectStore.appearance} value={'dark'} class="align-middle" on:change={()=>{updateCanvas()}}>
                 dark
             </label>
         </div>

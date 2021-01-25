@@ -1,11 +1,11 @@
 import { get } from 'svelte/store';
 import { cornerSelected, editMode } from '../constants/objectSelection.js';
 import { canvasObjects } from '../stores/objects.js';
-import { cursesCanvas } from '../stores/project.js';
+import { projectStore } from '../stores/project.js';
 
 function editObject(isDrawing, currentGridLocation, canvasElement) {
     let canvasItems = get(canvasObjects);
-    let mousePosition = get(cursesCanvas).mousePosition;
+    let mousePosition = get(projectStore).mousePosition;
 
     canvasItems.forEach(object => {
         if (object.selected) {

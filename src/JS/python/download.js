@@ -1,8 +1,8 @@
 import { get } from 'svelte/store';
-import { cursesCanvas } from '../stores/project.js';
+import { projectStore } from '../stores/project.js';
 
 export function downloadPyFile() {
-    let script = get(cursesCanvas).pythonScript;
+    let script = get(projectStore).pythonScript;
 
     // create a pseudo link element to create a download path for the script file
     const psuedoDownloadLink = document.createElement('a');

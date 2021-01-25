@@ -1,5 +1,5 @@
 <script>
-    import { cursesCanvas } from '../../JS/stores/project.js';
+    import { projectStore } from '../../JS/stores/project.js';
     import {sidebarActiveColour, sidebarPassiveColour, iconActiveColour, iconPassiveColour } from '../../JS/constants/colours.js';
 
 
@@ -9,8 +9,8 @@
     let exportIconCol = iconPassiveColour;
 
     function showToolsSideBar() {
-        if ($cursesCanvas.showSidebar === false) {
-            cursesCanvas.toggleSidebar();
+        if ($projectStore.showSidebar === false) {
+            projectStore.toggleSidebar();
             toolsBGCol = sidebarActiveColour;
             toolsIconCol = iconActiveColour;
             exportBGCol = sidebarPassiveColour;
@@ -19,8 +19,8 @@
     }
 
     function showExportSideBar() {
-        if ($cursesCanvas.showSidebar === true) {
-            cursesCanvas.toggleSidebar();
+        if ($projectStore.showSidebar === true) {
+            projectStore.toggleSidebar();
             exportBGCol = sidebarActiveColour;
             exportIconCol = iconActiveColour;
             toolsBGCol = sidebarPassiveColour;
@@ -41,7 +41,7 @@ style="--toolsColour: {toolsBGCol}; --exportColour: {exportBGCol}"
 class="w-full h-12 flex flex-row text-xs border-l border-header-border"
 >
     <button
-    class:selected="{$cursesCanvas.showSidebar === true}"
+    class:selected="{$projectStore.showSidebar === true}"
     aria-label="tools sidebar button"
     style="background-color: var(--toolsColour); outline: none"
     class="flex flex-1 justify-center items-center"
@@ -53,7 +53,7 @@ class="w-full h-12 flex flex-row text-xs border-l border-header-border"
     </button>
 
     <button 
-    class:selected="{$cursesCanvas.showSidebar === false}"
+    class:selected="{$projectStore.showSidebar === false}"
     aria-label="export sidebar button"
     style="background-color: var(--exportColour); outline: none"
     class="flex flex-1 justify-center items-center" 

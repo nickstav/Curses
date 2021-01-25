@@ -1,6 +1,6 @@
 <script>
 	import "./index.css"
-	import {cursesCanvas} from './JS/stores/project.js';
+	import {projectStore} from './JS/stores/project.js';
 
 	import Header from './Components/Header.svelte';
 	import Canvas from './Components/Canvas.svelte';
@@ -26,11 +26,11 @@
 	
 
 	
-	{#if $cursesCanvas.showPythonScript}
+	{#if $projectStore.showPythonScript}
 		<PythonScript/>
 	{/if}
 
-	{#if $cursesCanvas.showSplash}
+	{#if $projectStore.showSplash}
 		<Splash/>
 	{/if}
 	

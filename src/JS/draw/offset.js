@@ -1,6 +1,6 @@
 import { get } from 'svelte/store';
 import { canvasObjects } from '../stores/objects.js';
-import { cursesCanvas } from '../stores/project.js';
+import { projectStore } from '../stores/project.js';
 import { keyboardKeys } from '../constants/keyboardKeys.js';
 
 //align a set of selected objects to the left/right/top/bottom of the first selected object
@@ -8,7 +8,7 @@ export function alignObjects(direction) {
     let canvasItems = get(canvasObjects);
 
     // get the position in the objects array of the first selected object
-    let mainObjectID = get(cursesCanvas).IDOfFirstSelectedObject;
+    let mainObjectID = get(projectStore).IDOfFirstSelectedObject;
     let mainObject = canvasItems.find(object => object.ID === mainObjectID);
 
     // get the required {x,y} position of the object that others will be aligned to

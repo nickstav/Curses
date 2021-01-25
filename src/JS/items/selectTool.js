@@ -1,5 +1,5 @@
 import { get } from 'svelte/store';
-import { cursesCanvas } from '../stores/project.js';
+import { projectStore } from '../stores/project.js';
 import { canvasObjects } from '../stores/objects.js';
 import { tools } from '../constants/toolsList.js';
 
@@ -7,10 +7,10 @@ import { tools } from '../constants/toolsList.js';
 // function to select which canvas tool has been clicked in the toolbar
 function changeTool(buttonPressed) {
 
-    cursesCanvas.changeCanvasTool(buttonPressed);
+    projectStore.changeCanvasTool(buttonPressed);
 
     //change the cursor icon depending on the current tool
-    let canvasElement = get(cursesCanvas).canvasElement;
+    let canvasElement = get(projectStore).canvasElement;
     switch(buttonPressed) {
         case(tools.LINE):
         case(tools.RECTANGLE):
@@ -44,44 +44,44 @@ function deselectAnySelectedObjects() {
 }
 
 function toggleSideBarDisplay(tool) {
-    let showEdit = get(cursesCanvas).showEditOptions;
-    let showText  = get(cursesCanvas).showTextOptions;
-    let showProgress= get(cursesCanvas).showProgressOptions;
+    let showEdit = get(projectStore).showEditOptions;
+    let showText  = get(projectStore).showTextOptions;
+    let showProgress= get(projectStore).showProgressOptions;
     switch(tool) {
         case(tools.LINE):
         case(tools.RECTANGLE):
             if (showText === true) {
-                cursesCanvas.toggleTextMenu();
+                projectStore.toggleTextMenu();
             }
             if (showProgress === true) {
-                cursesCanvas.toggleProgressMenu();
+                projectStore.toggleProgressMenu();
             }
             break;
         case(tools.TEXT):
             if (showText === false) {
-                cursesCanvas.toggleTextMenu();
+                projectStore.toggleTextMenu();
             }
             if (showProgress === true) {
-                cursesCanvas.toggleProgressMenu();
+                projectStore.toggleProgressMenu();
             }
             break;
         case(tools.PROGRESS):
             if (showText === true) {
-                cursesCanvas.toggleTextMenu();
+                projectStore.toggleTextMenu();
             }
             if (showProgress === false) {
-                cursesCanvas.toggleProgressMenu();
+                projectStore.toggleProgressMenu();
             }
             break;
         case(tools.DRAG):
             if (showEdit === false) {
-                cursesCanvas.toggleEditMenu();
+                projectStore.toggleEditMenu();
             }
             if (showText === true) {
-                cursesCanvas.toggleTextMenu();
+                projectStore.toggleTextMenu();
             }
             if (showProgress === true) {
-                cursesCanvas.toggleProgressMenu();
+                projectStore.toggleProgressMenu();
             }
             break;
     }

@@ -7,7 +7,7 @@
     import CanvasProperties from './CanvasProperties.svelte';
     import Shortcuts from './Shortcuts.svelte';
 
-    import { cursesCanvas } from '../../JS/stores/project.js';
+    import { projectStore } from '../../JS/stores/project.js';
     import { updateCanvas } from '../../JS/draw/updateCanvas.js';
 
 </script>
@@ -20,7 +20,7 @@ on:click={()=>{updateCanvas()}}
     <SidebarTab/>
 
     <div id="sidebarBody" class="w-full h-full border-l border-sidebar-border overflow-auto">
-        {#if $cursesCanvas.showSidebar}
+        {#if $projectStore.showSidebar}
         <div id="toolsSidebar" class="w-full h-full">
             <CanvasProperties/>
             <Edit/>
