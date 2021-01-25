@@ -34,9 +34,10 @@ function selectObject(gridLocation, canvasElement, event) {
 
                     // deselect any previously selected object if the shift key is not being held
                     if (!event.shiftKey) {
-                        objects.forEach(object => {
-                            object.deselectObject();
-                        })
+                        const selected = (object) => object.selected;
+                        if (objects.some(selected)) {
+                            checkClickLocationToDeselectObjects(objects, gridLocation, canvasElement);
+                        }
                     }
                     // if mouse location matches an object's location, mark it as selected
                     objects[z].selectObject();
