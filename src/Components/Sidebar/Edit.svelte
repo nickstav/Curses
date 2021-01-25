@@ -65,7 +65,7 @@
                 <ArrowSVG degrees="90"/>
             </SidebarButton>
         </div>
-        <SidebarButton editCanvas={()=>{moveObject(keyboardKeys.DOWN)}}>
+        <SidebarButton label={'move down'} editCanvas={()=>{moveObject(keyboardKeys.DOWN)}}>
             <ArrowSVG degrees="180"/>
         </SidebarButton>
     </div>
