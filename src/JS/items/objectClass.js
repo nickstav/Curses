@@ -1,8 +1,10 @@
 import { get } from 'svelte/store';
 import { cursesCanvas } from '../stores/project.js';
 import { gridDimension, yAlignment } from '../constants/canvasSize.js';
-import { cornerSelected, editMode } from '../constants/objectStates.js';
+import { cornerSelected, editMode } from '../constants/objectSelection.js';
 import { uuidv4 } from './helperFunctions/UUID.js';
+
+/* ---------------------------------------------------------------------------------------------- */
 
 export class CanvasItem {
     constructor(location) {

@@ -1,6 +1,5 @@
 <script>
 	import "./index.css"
-
 	import {cursesCanvas} from './JS/stores/project.js';
 
 	import Header from './Components/Header.svelte';

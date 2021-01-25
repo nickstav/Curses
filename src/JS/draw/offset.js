@@ -3,8 +3,6 @@ import { canvasObjects } from '../stores/objects.js';
 import { cursesCanvas } from '../stores/project.js';
 import { keyboardKeys } from '../constants/keyboardKeys.js';
 
-/* ----------------TODO: FIX ALIGNMENT ERROR FOR POSITION/ENDPOSITION CASES------------------ */
-
 //align a set of selected objects to the left/right/top/bottom of the first selected object
 export function alignObjects(direction) {    
     let canvasItems = get(canvasObjects);

@@ -7,8 +7,6 @@ import { progressBarSize } from '../stores/progressBar.js';
 import { tools } from '../constants/toolsList.js';
 import { gridDimension, yAlignment } from '../constants/canvasSize.js';
 
-
-
 /* ---------------------------------------------------------------------------------------------- */
 
 export class ProgressBarItem extends CanvasItem {

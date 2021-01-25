@@ -1,5 +1,5 @@
 import { get } from 'svelte/store';
-import { cornerSelected, editMode } from '../constants/objectStates.js';
+import { cornerSelected, editMode } from '../constants/objectSelection.js';
 import { canvasObjects } from '../stores/objects.js';
 import { cursesCanvas } from '../stores/project.js';
 

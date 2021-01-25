@@ -11,6 +11,7 @@ function getGridLocation(mousePosition) {
     }
 }
 
+// function to highlight relevant squares for text and progress bar tools
 function highlightSquares(){
     let context = get(cursesCanvas).context;
     let currentLocation = get(cursesCanvas).mousePosition;
