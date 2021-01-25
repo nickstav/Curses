@@ -13,7 +13,14 @@ function updateCanvas(liveObject=null) {
     // draw all saved objects to the canvas
     let canvasItems = get(canvasObjects);
     canvasItems.forEach(object => {
-         object.draw();
+        object.draw();
+    });
+
+    // draw any highlighting squares for selected objects
+    canvasItems.forEach(object => {
+        if (object.selected) {
+            object.drawBorder();
+        };
     });
 
     // draw any live objects currently being drawn

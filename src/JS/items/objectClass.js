@@ -38,11 +38,6 @@ export class CanvasItem {
 
     draw() {
         this.setFontAndColour();
-
-        // if the item has been selected, call the highlight function to draw a rectangle around it
-        if (this.selected) {
-            this.drawBorder();
-        }
     }
 
     selectObject() {
