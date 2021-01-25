@@ -39,6 +39,6 @@
         on:mouseout={handleMouseOut}
         on:mouseenter={handleMouseEnter}
         >
-    </canvas>
+        </canvas>
     </div>
 </div>

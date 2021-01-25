@@ -23,7 +23,7 @@
             <p id="what" class="flex-1 px-6 py-2">
                 <strong>What is <span class="tracking-widest">ORISON</span>?</strong>
                 <br>
-                <span class="tracking-widest">ORISON</span> is an app that allows you to create a UI / GUI / progress screen / whatever you want 
+                <span class="tracking-widest">ORISON</span> is an app that allows you to create a UI / progress screen / whatever you want 
                 for command-line interpreters such as cmd.exe quickly and efficiently using a canvas tool.
                 <br>
             </p>

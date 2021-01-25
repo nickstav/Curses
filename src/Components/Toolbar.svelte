@@ -1,7 +1,6 @@
 <script>
     import ToolbarButton from './ToolbarButton.svelte';
 
-    import { cursesCanvas } from '../JS/stores/project.js';
     import { changeTool } from '../JS/items/selectTool.js';
     import { tools } from '../JS/constants/toolsList.js';
 </script>
