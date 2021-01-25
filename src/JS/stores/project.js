@@ -52,26 +52,6 @@ function setUpStore() {
       });
   }
 
-  function setWebAppearance() {
-    update(status => {
-      return {
-        ...status,
-        canvasBackground: 'url(./images/greySquare.png)',
-        canvasFont: 'black'
-      };
-    });   
-  }
-
-  function setCMDAppearance() {
-    update(status => {
-      return {
-        ...status,
-        canvasBackground: 'url(./images/blackSquare.png)',
-        canvasFont: 'white'
-      };
-    });   
-  }
-
   function toggleSplash() {
     update(status => {
       return {

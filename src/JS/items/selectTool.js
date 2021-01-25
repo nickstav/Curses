@@ -16,14 +16,17 @@ function changeTool(buttonPressed) {
         case(tools.RECTANGLE):
             deselectAnySelectedObjects()
             canvasElement.style.cursor = "crosshair";
+            projectStore.turnOffSquareHighlighting();
             break;
         case(tools.TEXT):
         case(tools.PROGRESS):
             deselectAnySelectedObjects()
             canvasElement.style.cursor = "pointer";
+            projectStore.turnOnSquareHighlighting();
             break;
         case(tools.DRAG):
             canvasElement.style.cursor = "pointer";
+            projectStore.turnOffSquareHighlighting();
             break;
         default:
             canvasElement.style.cursor = "default"; 
