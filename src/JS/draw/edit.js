@@ -6,12 +6,17 @@ import { projectStore } from '../stores/project.js';
 function editObject(isDrawing, currentGridLocation, canvasElement) {
     let canvasItems = get(canvasObjects);
     let mousePosition = get(projectStore).mousePosition;
-
+    
     canvasItems.forEach(object => {
         if (object.selected) {
-            //move the object to the end of the items array so it is drawn over other objects when moved
-            canvasItems.push(canvasItems.splice(canvasItems.indexOf(object), 1)[0]);
-            
+
+            const selected = (object) => object.selected;
+            let numberOfSelectedObjects =  canvasItems.filter(selected).length;
+            if (numberOfSelectedObjects === 1) {
+                //move the object to the end of the items array so it is drawn over other objects when moved
+                canvasItems.push(canvasItems.splice(canvasItems.indexOf(object), 1)[0]);
+            }
+
             //check whether the mouse is placed to resize or move the object
             if (!isDrawing) {
                 checkMouseOverCorner(object, mousePosition, canvasElement);
