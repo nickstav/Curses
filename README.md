@@ -3,6 +3,7 @@
 - The user can either download a .py file to run in the terminal, or copy a Python script to edit themselves
 
 # Install instructions
-1. Run `npx degit nickstav/super-fancy-encrytpion your-folder`
+1. Run `npx degit nickstav/orison your-folder`
 2. `cd your-folder`
-3. Run `npm run project` to run the app in dev mode
+3. Run `npm install` to install required dependencies
+4. Run `npm run project` to run the app in dev mode
