@@ -1,3 +1,5 @@
+// object specific functions for the Python script to be generated
+
 const lineFunction = `
 def drawLine(lineParams, window, lineEndChars):
     # if line is vertical

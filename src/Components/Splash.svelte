@@ -1,6 +1,6 @@
 
 <script>
-    import { cursesCanvas } from '../JS/stores/project.js';
+    import { projectStore } from '../JS/stores/project.js';
     import { clickOutside } from '../JS/eventListeners/clickOutside.js';
 </script>
 
@@ -9,7 +9,7 @@
     <div 
     id="splashHolder" 
     class="flex flex-col w-3/5 rounded-sm text-left text-sm bg-sidebar border" 
-    use:clickOutside on:click_outside={()=>{cursesCanvas.toggleSplash()}}
+    use:clickOutside on:click_outside={()=>{projectStore.toggleSplash()}}
     >
         <div id="previewHeader" class="bg-header w-full h-12 text-gray700 flex justify-between items-center border-b border-header-border select-none">
             <h1 class="text-2xl text-header-font font-bold tracking-widest ml-4">ORISON</h1>
@@ -23,7 +23,7 @@
             <p id="what" class="flex-1 px-6 py-2">
                 <strong>What is <span class="tracking-widest">ORISON</span>?</strong>
                 <br>
-                <span class="tracking-widest">ORISON</span> is an app that allows you to create a UI / GUI / progress screen / whatever you want 
+                <span class="tracking-widest">ORISON</span> is an app that allows you to create a UI / progress screen / whatever you want 
                 for command-line interpreters such as cmd.exe quickly and efficiently using a canvas tool.
                 <br>
             </p>
@@ -50,7 +50,7 @@
 
         <div id="buttonHolder" class="flex justify-center py-2 select-none">
             <button 
-            on:click={()=>{cursesCanvas.toggleSplash()}}
+            on:click={()=>{projectStore.toggleSplash()}}
             class="h-8 w-24 text-xs bg-sidebar-lighter hover:text-header hover:border-header font-semibold border-black border 2"
             >
                 Close

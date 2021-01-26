@@ -1,7 +1,7 @@
 <script>
     import DropDown from './DropDown.svelte';
     import { keyboardKeys } from '../../JS/constants/keyboardKeys.js'; 
-    import { cursesCanvas } from '../../JS/stores/project.js';
+    import { projectStore } from '../../JS/stores/project.js';
 
     let keyHeld;
     $: if (navigator.userAgent.indexOf('Mac OS X') != -1) {
@@ -17,11 +17,11 @@ class="w-full flex flex-col border-t-1 border-black px-3 py-3 select-none font-s
 >
 
     <div id="header" class="w-full flex flex-row pb-1">
-        <h1 on:click={()=>{cursesCanvas.toggleShortcutMenu()}} class="w-full text-left font-semibold cursor-pointer select-none">KEYBOARD SHORTCUTS</h1>
-        <DropDown menuDisplayed={$cursesCanvas.showShortcuts} toggleSubMenu={()=>{cursesCanvas.toggleShortcutMenu()}}/>
+        <h1 on:click={()=>{projectStore.toggleShortcutMenu()}} class="w-full text-left font-semibold cursor-pointer select-none">KEYBOARD SHORTCUTS</h1>
+        <DropDown menuDisplayed={$projectStore.showShortcuts} toggleSubMenu={()=>{projectStore.toggleShortcutMenu()}}/>
     </div>
 
-    {#if $cursesCanvas.showShortcuts}
+    {#if $projectStore.showShortcuts}
 
     <div id="shortcuts" class="flex flex-row py-1">
         <div id="toolList" class="flex flex-col items-start w-18">

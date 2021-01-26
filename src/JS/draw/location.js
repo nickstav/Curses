@@ -1,5 +1,5 @@
 import { get } from 'svelte/store';
-import { cursesCanvas } from '../stores/project.js';
+import { projectStore } from '../stores/project.js';
 import { gridDimension } from '../constants/canvasSize.js';
 import { tools } from '../constants/toolsList.js';
 
@@ -11,9 +11,10 @@ function getGridLocation(mousePosition) {
     }
 }
 
+// function to highlight relevant squares for text and progress bar tools
 function highlightSquares(){
-    let context = get(cursesCanvas).context;
-    let currentLocation = get(cursesCanvas).mousePosition;
+    let context = get(projectStore).context;
+    let currentLocation = get(projectStore).mousePosition;
     let gridLocation = getGridLocation(currentLocation);
 
     let numberOfSquaresToFill = getNumberOfSquaresToHighlight();
@@ -30,10 +31,10 @@ function highlightSquares(){
 }
 
 function getNumberOfSquaresToHighlight() {
-        let toolSelected = get(cursesCanvas).tool;
+        let toolSelected = get(projectStore).tool;
         let progressBarInfo = {
-            showPerc: get(cursesCanvas).showProgressPercentage,
-            numberOfBars: get(cursesCanvas).sizeOfProgressBar
+            showPerc: get(projectStore).showProgressPercentage,
+            numberOfBars: get(projectStore).sizeOfProgressBar
         }
 
         // define a varaible for the number of grid squares to highlight

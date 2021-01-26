@@ -1,5 +1,5 @@
 <script>
-    import { cursesCanvas } from '../../JS/stores/project.js';
+    import { projectStore } from '../../JS/stores/project.js';
     export let label, editCanvas;
 
 </script>

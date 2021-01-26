@@ -1,5 +1,5 @@
 import { get } from 'svelte/store';
-import { cursesCanvas } from '../stores/project.js';
+import { projectStore } from '../stores/project.js';
 import { canvasObjects } from '../stores/objects.js';
 import { tools } from '../constants/toolsList.js';
 import { imports, userSystemCheck, cursesScript } from './curses.js';
@@ -9,7 +9,7 @@ import { objectFunctions } from './pythonFunctions.js';
 function showScript() {
     let canvasInfo = collectDataToExport();
     createPythonText(canvasInfo);
-    cursesCanvas.toggleShowPythonScript();
+    projectStore.toggleShowPythonScript();
 }
 
 //create the python script from its constituent parts
@@ -20,7 +20,7 @@ function createPythonText(canvasInfo) {
 
     let pythonScript = imports + dataString + userSystemCheck + progressCustomisation + objectFunctions + cursesScript;
 
-    cursesCanvas.updatePythonScript(pythonScript.trim())
+    projectStore.updatePythonScript(pythonScript.trim())
 }
 
 // obtain canvas dimensions and save relevant object data into a specified array for that object type
@@ -85,8 +85,8 @@ function collectDataToExport() {
     });
 
     let infoToExport = {
-        width: get(cursesCanvas).canvasWidth,
-        height: get(cursesCanvas).canvasHeight,
+        width: get(projectStore).canvasWidth,
+        height: get(projectStore).canvasHeight,
         objects: cursesObjects
     }
 

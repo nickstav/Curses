@@ -4,6 +4,8 @@ import { tools } from '../constants/toolsList.js';
 import { gridDimension, yAlignment } from '../constants/canvasSize.js';
 import { getVerticalCoords, getHorizontalCoords } from './helperFunctions/rectHelper.js';
 
+/* ---------------------------------------------------------------------------------------------- */
+
 export class RectangleItem extends CanvasItem {
     constructor(startLocation, endLocation) {
         super(startLocation)

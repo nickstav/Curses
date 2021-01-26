@@ -1,11 +1,11 @@
-import { cursesCanvas } from './project.js';
+import { projectStore } from './project.js';
 import { derived } from 'svelte/store';
 
 export const progressBarSize = derived(
-    cursesCanvas,
-    $cursesCanvas => ({
+    projectStore,
+    $projectStore => ({
         min: 2,
-        max: getmaxProgressBarSize($cursesCanvas.canvasWidth, $cursesCanvas.showProgressPercentage)
+        max: getmaxProgressBarSize($projectStore.canvasWidth, $projectStore.showProgressPercentage)
     })
 )
 

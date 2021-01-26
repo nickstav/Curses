@@ -4,7 +4,7 @@
     import AlignSVG from './AlignSVG.svelte';
     import ArrowSVG from './ArrowSVG.svelte';
 
-    import { cursesCanvas } from '../../JS/stores/project.js';
+    import { projectStore } from '../../JS/stores/project.js';
     import { tools } from '../../JS/constants/toolsList.js';
     import { keyboardKeys } from '../../JS/constants/keyboardKeys.js';
     import { duplicateObject } from '../../JS/draw/duplicate.js';
@@ -16,11 +16,11 @@
 <div id="editSection" class="w-full flex flex-col border-t border-b border-black px-3 py-3">
 
     <div id="header" class="w-full flex flex-row">
-        <h1 on:click={()=>{cursesCanvas.toggleEditMenu()}} class="w-full text-left font-semibold cursor-pointer select-none">EDIT</h1>
-        <DropDown menuDisplayed={$cursesCanvas.showEditOptions} toggleSubMenu={()=>{cursesCanvas.toggleEditMenu()}}/>
+        <h1 on:click={()=>{projectStore.toggleEditMenu()}} class="w-full text-left font-semibold cursor-pointer select-none">EDIT</h1>
+        <DropDown menuDisplayed={$projectStore.showEditOptions} toggleSubMenu={()=>{projectStore.toggleEditMenu()}}/>
     </div>
 
-    {#if $cursesCanvas.showEditOptions}
+    {#if $projectStore.showEditOptions}
     <div id="copy/delete" class="w-full flex flex-col items-start border-b border-gray-300">
         <div id="firstButtonRow" class=" w-full flex flex-row justify-around pt-3 pb-3">
             <SidebarButton label={'duplicate (ctrl + c)'} editCanvas={duplicateObject}>
@@ -65,7 +65,7 @@
                 <ArrowSVG degrees="90"/>
             </SidebarButton>
         </div>
-        <SidebarButton editCanvas={()=>{moveObject(keyboardKeys.DOWN)}}>
+        <SidebarButton label={'move down'} editCanvas={()=>{moveObject(keyboardKeys.DOWN)}}>
             <ArrowSVG degrees="180"/>
         </SidebarButton>
     </div>

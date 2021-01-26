@@ -1,13 +1,13 @@
-import { cursesCanvas } from './project.js';
+import { projectStore } from './project.js';
 import { derived } from 'svelte/store';
 import { minDimensions, maxDimensions, gridDimension} from '../constants/canvasSize.js';
 
-// store to take cursesCanvas width/height values and draw correct canvas size
+// store to take projectStore width/height values and draw correct canvas size
 const gridAxis = derived(
-    cursesCanvas,
-    $cursesCanvas => ({
-        x: adjustForMinMax('width', $cursesCanvas.canvasWidth) * gridDimension.x,
-        y: adjustForMinMax('height', $cursesCanvas.canvasHeight) * gridDimension.y
+    projectStore,
+    $projectStore => ({
+        x: adjustForMinMax('width', $projectStore.canvasWidth) * gridDimension.x,
+        y: adjustForMinMax('height', $projectStore.canvasHeight) * gridDimension.y
     })
 )
 
@@ -15,10 +15,10 @@ const gridAxis = derived(
 
 // store to give live values to confirm whether user entered width/height are below/above min max values
 const checkUserInput = derived(
-    cursesCanvas,
-    $cursesCanvas => ({
-        belowMin: checkMinValues($cursesCanvas),
-        aboveMax: checkMaxValues($cursesCanvas)
+    projectStore,
+    $projectStore => ({
+        belowMin: checkMinValues($projectStore),
+        aboveMax: checkMaxValues($projectStore)
     })
 )
 

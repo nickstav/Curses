@@ -1,5 +1,5 @@
 import { get } from 'svelte/store';
-import { cursesCanvas } from '../stores/project.js';
+import { projectStore } from '../stores/project.js';
 import { canvasObjects } from '../stores/objects.js';
 
 import { tools } from '../constants/toolsList.js';
@@ -23,12 +23,12 @@ import { ProgressBarItem } from '../items/progressBarItem.js';
 
 
 function handleMouseClick(event) {
-    let toolSelected = get(cursesCanvas).tool;
-    let selectMethod = get(cursesCanvas).selectMethod;
-    let canvasElement = get(cursesCanvas).canvasElement;
+    let toolSelected = get(projectStore).tool;
+    let selectMethod = get(projectStore).selectMethod;
+    let canvasElement = get(projectStore).canvasElement;
     
-    cursesCanvas.updateMousePosition(event, canvasElement);
-    let mouseLocation = get(cursesCanvas).mousePosition;
+    projectStore.updateMousePosition(event, canvasElement);
+    let mouseLocation = get(projectStore).mousePosition;
     let gridLocation = getGridLocation(mouseLocation);
 
     switch(toolSelected) {
@@ -46,9 +46,10 @@ function handleMouseClick(event) {
                 selectObject(gridLocation, canvasElement, event);
             } else {
                 // now mouse has been released, change select method to objects to allow for manipulation
-                cursesCanvas.changeSelectMethodToGrab();
+                projectStore.changeSelectMethodToGrab();
             }
-            break;  
+            canvasElement.style.cursor = "pointer";
+            break; 
     } 
 
     //show updated canvas with any added/erased objects when clicking
@@ -56,19 +57,19 @@ function handleMouseClick(event) {
 }
 
 function handleMouseDown(event) {
-    let toolSelected = get(cursesCanvas).tool;
-    let canvasElement = get(cursesCanvas).canvasElement;
+    let toolSelected = get(projectStore).tool;
+    let canvasElement = get(projectStore).canvasElement;
 
     // update the current position of the mouse
-    cursesCanvas.updateMousePosition(event, canvasElement);
-    let mouseLocation = get(cursesCanvas).mousePosition;
+    projectStore.updateMousePosition(event, canvasElement);
+    let mouseLocation = get(projectStore).mousePosition;
     let gridLocation = getGridLocation(mouseLocation);
 
     // update the start position of the cursor when the mouse is first pressed
-    cursesCanvas.updateStartPosition(event, canvasElement);
+    projectStore.updateStartPosition(event, canvasElement);
 
     // confirm that the canvas is being drawn on now the button is being held down
-    cursesCanvas.startDrawing();
+    projectStore.startDrawing();
 
     switch(toolSelected) {
         case(tools.DRAG):
@@ -78,16 +79,16 @@ function handleMouseDown(event) {
 }
 
 function handleMouseMove(event) {
-    let isDrawing = get(cursesCanvas).isDrawing;
-    let toolSelected = get(cursesCanvas).tool;
-    let canvasElement = get(cursesCanvas).canvasElement;
-    let selectMethod = get(cursesCanvas).selectMethod;
+    let isDrawing = get(projectStore).isDrawing;
+    let toolSelected = get(projectStore).tool;
+    let canvasElement = get(projectStore).canvasElement;
+    let selectMethod = get(projectStore).selectMethod;
 
-    let startPosition = get(cursesCanvas).startPosition;
+    let startPosition = get(projectStore).startPosition;
     let startGridLocation = getGridLocation(startPosition);
 
-    cursesCanvas.updateMousePosition(event, canvasElement);
-    let mouseLocation = get(cursesCanvas).mousePosition;
+    projectStore.updateMousePosition(event, canvasElement);
+    let mouseLocation = get(projectStore).mousePosition;
     let currentGridLocation = getGridLocation(mouseLocation);
 
     // define a variable to pass any live drawn shapes to updateCanvas() 
@@ -124,13 +125,13 @@ function handleMouseMove(event) {
 
 // if mouse button is released, canvas is no longer being drawn on
 function handleMouseRelease() {
-    let toolSelected = get(cursesCanvas).tool;
+    let toolSelected = get(projectStore).tool;
 
-    cursesCanvas.stopDrawing();
+    projectStore.stopDrawing();
 
-    let startPosition = get(cursesCanvas).startPosition;
+    let startPosition = get(projectStore).startPosition;
     let startGridLocation = getGridLocation(startPosition);
-    let mouseLocation = get(cursesCanvas).mousePosition;
+    let mouseLocation = get(projectStore).mousePosition;
     let currentGridLocation = getGridLocation(mouseLocation);
 
     switch(toolSelected) {
@@ -146,16 +147,16 @@ function handleMouseRelease() {
 
 // turn off any drawing & ensure canvas remains up to date when the mouse leaves the canvas window
 function handleMouseOut() {
-    cursesCanvas.stopDrawing();
-    cursesCanvas.turnOffSquareHighlighting();
+    projectStore.stopDrawing();
+    projectStore.turnOffSquareHighlighting();
     updateCanvas();
 }
 
 // turn on square highlighting for relevant tools
 function handleMouseEnter() {
-    let toolSelected = get(cursesCanvas).tool;
+    let toolSelected = get(projectStore).tool;
     if (toolSelected === tools.TEXT || toolSelected === tools.PROGRESS || toolSelected === tools.KEYBOARD) {
-        cursesCanvas.turnOnSquareHighlighting();
+        projectStore.turnOnSquareHighlighting();
     }
 }
 

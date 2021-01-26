@@ -1,9 +1,9 @@
 import { get } from 'svelte/store';
-import { cursesCanvas } from '../stores/project.js';
+import { projectStore } from '../stores/project.js';
 
 export function hideScript() {
-    let scriptShowing = get(cursesCanvas).showPythonScript;
+    let scriptShowing = get(projectStore).showPythonScript;
     if (scriptShowing) {
-        cursesCanvas.toggleShowPythonScript();
+        projectStore.toggleShowPythonScript();
     }
 }

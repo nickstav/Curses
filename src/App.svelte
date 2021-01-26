@@ -1,7 +1,6 @@
 <script>
 	import "./index.css"
-
-	import {cursesCanvas} from './JS/stores/project.js';
+	import {projectStore} from './JS/stores/project.js';
 
 	import Header from './Components/Header.svelte';
 	import Canvas from './Components/Canvas.svelte';
@@ -12,11 +11,11 @@
 	import Sidebar from './Components/Sidebar/Sidebar.svelte';
 </script>
 
-<main class="w-full h-full flex flex-row items-center text-center bg-gray-100">
+<main class="w-full h-full flex flex-row text-center bg-gray-100">
 
-	<div id="mainWindow" class="w-full h-full flex flex-col items-center overflow-hidden bg-theme-mainBackground">
+	<div id="mainWindow" class="w-full h-full flex flex-col overflow-hidden bg-theme-mainBackground">
 		<Header/>
-		<div id="toolBarAndCanvasHolder" class=" bg-gray-100 w-full h-full flex flex-row items-center justify-between flex-1 p-0 m-0">
+		<div id="toolBarAndCanvasHolder" class=" bg-gray-100 w-full h-full flex flex-row justify-between flex-1 p-0 m-0 overflow-auto">
 			<Toolbar/>
 			<Canvas/>
 		</div>
@@ -27,11 +26,11 @@
 	
 
 	
-	{#if $cursesCanvas.showPythonScript}
+	{#if $projectStore.showPythonScript}
 		<PythonScript/>
 	{/if}
 
-	{#if $cursesCanvas.showSplash}
+	{#if $projectStore.showSplash}
 		<Splash/>
 	{/if}
 	

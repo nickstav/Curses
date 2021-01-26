@@ -1,3 +1,5 @@
+// elements of the Python script to be generated
+
 const imports = 
 `import curses
 import json

@@ -1,14 +1,16 @@
 import { get } from 'svelte/store';
-import { cursesCanvas } from '../stores/project.js';
+import { projectStore } from '../stores/project.js';
 import { gridDimension, yAlignment } from '../constants/canvasSize.js';
-import { cornerSelected, editMode } from '../constants/objectStates.js';
+import { cornerSelected, editMode } from '../constants/objectSelection.js';
 import { uuidv4 } from './helperFunctions/UUID.js';
+
+/* ---------------------------------------------------------------------------------------------- */
 
 export class CanvasItem {
     constructor(location) {
         this.ID = uuidv4();
-        this.context = get(cursesCanvas).context;
-        this.canvasWidth = get(cursesCanvas).canvasWidth;
+        this.context = get(projectStore).context;
+        this.canvasWidth = get(projectStore).canvasWidth;
         this.type = null;
         this.position = location;
         this.selected = false;
@@ -25,7 +27,7 @@ export class CanvasItem {
     }
 
     setFontAndColour() {
-        let appearance = get(cursesCanvas).appearance;
+        let appearance = get(projectStore).appearance;
         if (appearance === 'light') {
             this.context.fillStyle = 'black';
         } else if (appearance === 'dark') {
@@ -36,11 +38,6 @@ export class CanvasItem {
 
     draw() {
         this.setFontAndColour();
-
-        // if the item has been selected, call the highlight function to draw a rectangle around it
-        if (this.selected) {
-            this.drawBorder();
-        }
     }
 
     selectObject() {

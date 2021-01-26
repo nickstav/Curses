@@ -1,13 +1,13 @@
 <script>
     import {toolbarActiveColour, toolbarPassiveColour } from '../JS/constants/colours.js';
     import { buttonCurrentlyPressed } from '../JS/items/selectTool.js';
-    import { cursesCanvas } from '../JS/stores/project.js';
+    import { projectStore } from '../JS/stores/project.js';
 
     export let label, editCanvas;
 
     let bgColour;
 
-    $: toolSelected = buttonCurrentlyPressed($cursesCanvas.tool);
+    $: toolSelected = buttonCurrentlyPressed($projectStore.tool);
     $: if (toolSelected === label) {
             bgColour = toolbarActiveColour;
         } else {

@@ -1,13 +1,11 @@
 import { CanvasItem } from './objectClass.js';
 
 import { get } from 'svelte/store';
-import { cursesCanvas } from '../stores/project.js';
+import { projectStore } from '../stores/project.js';
 import { progressBarSize } from '../stores/progressBar.js';
 
 import { tools } from '../constants/toolsList.js';
 import { gridDimension, yAlignment } from '../constants/canvasSize.js';
-
-
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -17,9 +15,9 @@ export class ProgressBarItem extends CanvasItem {
         this.type = tools.PROGRESS;
         this.bar = '▮',
         this.emptyBar = '▯',
-        this.numberOfBars = get(cursesCanvas).sizeOfProgressBar;
+        this.numberOfBars = get(projectStore).sizeOfProgressBar;
         this.percentageValue = 50,
-        this.showPercentage = get(cursesCanvas).showProgressPercentage;
+        this.showPercentage = get(projectStore).showProgressPercentage;
         // obtain the min/max dimensions for the progresss bar based on canvas width
         this.progressBarSize = {
             min: get(progressBarSize).min,
