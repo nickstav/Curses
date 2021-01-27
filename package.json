@@ -1,7 +1,7 @@
 {
   "name": "orison",
   "version": "1.0.0",
-  "homepage": "http://nickstav.github.io/Orison",
+  "homepage": "https://orison.app",
   "scripts": {
     "dev": "snowpack dev",
     "build": "snowpack build --clean",
