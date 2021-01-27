@@ -4,7 +4,7 @@
   "homepage": "http://nickstav.github.io/Orison",
   "scripts": {
     "dev": "snowpack dev",
-    "build": "snowpack build",
+    "build": "snowpack build --clean",
     "serve": "http-server ./build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
@@ -15,6 +15,7 @@
   "devDependencies": {
     "@snowpack/plugin-dotenv": "^2.0.4",
     "@snowpack/plugin-svelte": "^3.3.0",
+    "@snowpack/plugin-webpack": "^2.3.0",
     "autoprefixer": "^10.0.2",
     "gh-pages": "^3.1.0",
     "postcss": "^8.1.9",
