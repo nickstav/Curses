@@ -15,7 +15,7 @@
 
 	<div id="mainWindow" class="w-full h-full flex flex-col overflow-hidden bg-theme-mainBackground">
 		<Header/>
-		<div id="toolBarAndCanvasHolder" class=" bg-gray-100 w-full h-full flex flex-row justify-between flex-1 p-0 m-0 overflow-auto">
+		<div id="toolBarAndCanvasHolder" class=" bg-gray-100 w-full h-full flex flex-row justify-between flex-1 overflow-hidden">
 			<Toolbar/>
 			<Canvas/>
 		</div>
