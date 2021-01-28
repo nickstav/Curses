@@ -129,7 +129,7 @@ function create_fragment(ctx) {
 			t5 = space();
 			if (if_block1) if_block1.c();
 			attr(div0, "id", "toolBarAndCanvasHolder");
-			attr(div0, "class", " bg-gray-100 w-full h-full flex flex-row justify-between flex-1 p-0 m-0 overflow-auto");
+			attr(div0, "class", " bg-gray-100 w-full h-full flex flex-row justify-between flex-1 overflow-hidden");
 			attr(div1, "id", "mainWindow");
 			attr(div1, "class", "w-full h-full flex flex-col overflow-hidden bg-theme-mainBackground");
 			attr(main, "class", "w-full h-full flex flex-row text-center bg-gray-100");

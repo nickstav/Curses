@@ -299,8 +299,8 @@ function create_fragment(ctx) {
 			create_component(toolbarbutton3.$$.fragment);
 			t3 = space();
 			create_component(toolbarbutton4.$$.fragment);
-			attr(div, "id", "buttons");
-			attr(div, "class", "flex flex-col h-full justify-start bg-toolbar border-r border-toolbar-border pt-4");
+			attr(div, "id", "toolbar");
+			attr(div, "class", "flex flex-col w-14 h-full justify-start bg-toolbar border-r border-toolbar-border pt-4");
 		},
 		m(target, anchor) {
 			insert(target, div, anchor);

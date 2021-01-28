@@ -38,6 +38,7 @@ import {
 } from "../JS/draw/eventHandling.js";
 
 function create_fragment(ctx) {
+	let div2;
 	let div1;
 	let sizeparagraph;
 	let t;
@@ -52,12 +53,13 @@ function create_fragment(ctx) {
 
 	return {
 		c() {
+			div2 = element("div");
 			div1 = element("div");
 			create_component(sizeparagraph.$$.fragment);
 			t = space();
 			div0 = element("div");
 			canvas_1 = element("canvas");
-			attr(canvas_1, "id", "projectStore");
+			attr(canvas_1, "id", "projectCanvas");
 			attr(canvas_1, "width", canvas_1_width_value = /*$gridAxis*/ ctx[2].x);
 			attr(canvas_1, "height", canvas_1_height_value = /*$gridAxis*/ ctx[2].y);
 			attr(div0, "id", "canvasBackground");
@@ -66,16 +68,19 @@ function create_fragment(ctx) {
 			set_style(div0, "background-image", "var(--grid)");
 			set_style(div0, "background-size", "var(--squareW) var(--squareH)");
 			attr(div0, "class", "rounded-sm");
-			attr(div1, "id", "canvasHolder");
-			attr(div1, "class", "w-full h-full flex flex-col justify-center items-center flex-1 overflow-auto");
-			set_style(div1, "--canvasW", /*$gridAxis*/ ctx[2].x + "px");
-			set_style(div1, "--canvasH", /*$gridAxis*/ ctx[2].y + "px");
-			set_style(div1, "--squareW", gridDimension.x + "px");
-			set_style(div1, "--squareH", gridDimension.y + "px");
-			set_style(div1, "--grid", /*gridImage*/ ctx[1]);
+			attr(div1, "id", "scrollableContainer");
+			attr(div1, "class", "m-auto");
+			attr(div2, "id", "canvasHolder");
+			attr(div2, "class", "w-full h-full flex flex-col justify-center items-center flex-1 overflow-auto");
+			set_style(div2, "--canvasW", /*$gridAxis*/ ctx[2].x + "px");
+			set_style(div2, "--canvasH", /*$gridAxis*/ ctx[2].y + "px");
+			set_style(div2, "--squareW", gridDimension.x + "px");
+			set_style(div2, "--squareH", gridDimension.y + "px");
+			set_style(div2, "--grid", /*gridImage*/ ctx[1]);
 		},
 		m(target, anchor) {
-			insert(target, div1, anchor);
+			insert(target, div2, anchor);
+			append(div2, div1);
 			mount_component(sizeparagraph, div1, null);
 			append(div1, t);
 			append(div1, div0);
@@ -107,15 +112,15 @@ function create_fragment(ctx) {
 			}
 
 			if (!current || dirty & /*$gridAxis*/ 4) {
-				set_style(div1, "--canvasW", /*$gridAxis*/ ctx[2].x + "px");
+				set_style(div2, "--canvasW", /*$gridAxis*/ ctx[2].x + "px");
 			}
 
 			if (!current || dirty & /*$gridAxis*/ 4) {
-				set_style(div1, "--canvasH", /*$gridAxis*/ ctx[2].y + "px");
+				set_style(div2, "--canvasH", /*$gridAxis*/ ctx[2].y + "px");
 			}
 
 			if (!current || dirty & /*gridImage*/ 2) {
-				set_style(div1, "--grid", /*gridImage*/ ctx[1]);
+				set_style(div2, "--grid", /*gridImage*/ ctx[1]);
 			}
 		},
 		i(local) {
@@ -128,7 +133,7 @@ function create_fragment(ctx) {
 			current = false;
 		},
 		d(detaching) {
-			if (detaching) detach(div1);
+			if (detaching) detach(div2);
 			destroy_component(sizeparagraph);
 			/*canvas_1_binding*/ ctx[3](null);
 			mounted = false;
