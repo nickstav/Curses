@@ -21,7 +21,7 @@ module.exports = {
     /* ... */
   },
   buildOptions: {
-    baseUrl: '/Orison'
+    /* ... */
   },
   proxy: {
     /* ... */
