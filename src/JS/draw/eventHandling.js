@@ -60,10 +60,12 @@ function handleMouseDown(event) {
     let toolSelected = get(projectStore).tool;
     let canvasElement = get(projectStore).canvasElement;
 
-    // update the current position of the mouse
+    // update the current position of the mouse & register button as held
     projectStore.updateMousePosition(event, canvasElement);
     let mouseLocation = get(projectStore).mousePosition;
     let gridLocation = getGridLocation(mouseLocation);
+    projectStore.toggleMouseHeld();
+
 
     // update the start position of the cursor when the mouse is first pressed
     projectStore.updateStartPosition(event, canvasElement);
@@ -128,6 +130,7 @@ function handleMouseRelease() {
     let toolSelected = get(projectStore).tool;
 
     projectStore.stopDrawing();
+    projectStore.toggleMouseHeld();
 
     let startPosition = get(projectStore).startPosition;
     let startGridLocation = getGridLocation(startPosition);
@@ -157,6 +160,11 @@ function handleMouseEnter() {
     let toolSelected = get(projectStore).tool;
     if (toolSelected === tools.TEXT || toolSelected === tools.PROGRESS || toolSelected === tools.KEYBOARD) {
         projectStore.turnOnSquareHighlighting();
+    }
+
+    let mouseButtonHeld = get(projectStore).mouseButtonHeld;
+    if (mouseButtonHeld) {
+        projectStore.startDrawing();
     }
 }
 

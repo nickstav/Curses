@@ -18,6 +18,7 @@ import { tools } from '../constants/toolsList.js';
     sizeOfProgressBar: 4,
     showProgressPercentage: true,
     startPosition: {x: 0, y: 0},
+    mouseButtonHeld: false,
     isDrawing: false,
     isHighlighting: false,
     mousePosition: {x: 0, y: 0},
@@ -82,6 +83,15 @@ function setUpStore() {
       return {
         ...status,
         startPosition: getMouseCanvasPosition(event, canvasElement)
+      };
+    });
+  }
+
+  function toggleMouseHeld() {
+    update(status => {
+      return {
+        ...status,
+        mouseButtonHeld: !status.mouseButtonHeld
       };
     });
   }
@@ -255,6 +265,7 @@ function toggleSidebar() {
     createCanvas,
     toggleSplash,
     changeCanvasTool,
+    toggleMouseHeld,
     startDrawing,
     stopDrawing,
     turnOnSquareHighlighting,
