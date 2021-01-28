@@ -5,9 +5,15 @@ import { tools } from '../constants/toolsList.js';
 
 // function to return the coordinates of the grid square at which the mouse is at
 function getGridLocation(mousePosition) {
+
+    // allow for any amount scrolled in the canvas container
+    let canvasHolder = document.getElementById('canvasHolder');
+    let xScrolledAmount = canvasHolder.scrollLeft;
+    let yScrolledAmount = canvasHolder.scrollTop;
+    
     return {
-        x: Math.floor(mousePosition.x / gridDimension.x),
-        y: Math.floor(mousePosition.y / gridDimension.y)
+        x: Math.floor((mousePosition.x + xScrolledAmount) / gridDimension.x),
+        y: Math.floor((mousePosition.y + yScrolledAmount) / gridDimension.y)
     }
 }
 

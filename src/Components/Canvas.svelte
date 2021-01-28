@@ -35,7 +35,7 @@ style="--canvasW: {$gridAxis.x}px;--canvasH: {$gridAxis.y}px; --squareW: {gridDi
         <div id="canvasBackground" style="width: var(--canvasW); height: var(--canvasH); background-image: var(--grid); background-size: var(--squareW) var(--squareH);" class="rounded-sm">
             <canvas
             bind:this={canvas}
-            id="projectStore" 
+            id="projectCanvas" 
             width={$gridAxis.x}
             height={$gridAxis.y}
             on:click={handleMouseClick}

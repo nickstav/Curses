@@ -54,7 +54,6 @@ function handleMouseClick(event) {
 
     //show updated canvas with any added/erased objects when clicking
     updateCanvas();
-    console.log(gridLocation.x, gridLocation.y)
 }
 
 function handleMouseDown(event) {
