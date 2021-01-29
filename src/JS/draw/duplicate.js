@@ -33,7 +33,9 @@ export function duplicateObject() {
                     newObject = new RectangleItem(offsetPostion, offsetEndPosition);
                     break;
                 case(tools.PROGRESS):
+                    let numberOfBars = object.numberOfBars;
                     newObject = new ProgressBarItem(offsetPostion);
+                    newObject.numberOfBars = numberOfBars;
                     break;
             }
             canvasObjects.saveObjectToStore(newObject);

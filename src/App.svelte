@@ -13,7 +13,12 @@
 
 <main class="w-full h-full flex flex-row text-center bg-gray-100">
 
-	<div id="mainWindow" class="w-full h-full flex flex-col overflow-hidden bg-theme-mainBackground">
+	<div 
+	id="mainWindow" 
+	class="w-full h-full flex flex-col overflow-hidden bg-theme-mainBackground"
+	on:mousedown={projectStore.toggleMouseHeld}
+    on:mouseup={projectStore.toggleMouseHeld}
+	>
 		<Header/>
 		<div id="toolBarAndCanvasHolder" class=" bg-gray-100 w-full h-full flex flex-row justify-between flex-1 overflow-hidden">
 			<Toolbar/>

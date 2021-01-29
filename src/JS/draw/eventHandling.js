@@ -60,11 +60,10 @@ function handleMouseDown(event) {
     let toolSelected = get(projectStore).tool;
     let canvasElement = get(projectStore).canvasElement;
 
-    // update the current position of the mouse & register button as held
+    // update the current position of the mouse
     projectStore.updateMousePosition(event, canvasElement);
     let mouseLocation = get(projectStore).mousePosition;
     let gridLocation = getGridLocation(mouseLocation);
-    projectStore.toggleMouseHeld();
 
 
     // update the start position of the cursor when the mouse is first pressed
@@ -130,7 +129,6 @@ function handleMouseRelease() {
     let toolSelected = get(projectStore).tool;
 
     projectStore.stopDrawing();
-    projectStore.toggleMouseHeld();
 
     let startPosition = get(projectStore).startPosition;
     let startGridLocation = getGridLocation(startPosition);
