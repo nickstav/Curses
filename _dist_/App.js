@@ -12,7 +12,9 @@ import {
 	group_outros,
 	init,
 	insert,
+	listen,
 	mount_component,
+	run_all,
 	safe_not_equal,
 	space,
 	transition_in,
@@ -57,7 +59,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (33:1) {#if $projectStore.showSplash}
+// (38:1) {#if $projectStore.showSplash}
 function create_if_block(ctx) {
 	let splash;
 	let current;
@@ -102,6 +104,8 @@ function create_fragment(ctx) {
 	let t4;
 	let t5;
 	let current;
+	let mounted;
+	let dispose;
 	header = new Header({});
 	toolbar = new Toolbar({});
 	canvas = new Canvas({});
@@ -152,6 +156,15 @@ function create_fragment(ctx) {
 			append(main, t5);
 			if (if_block1) if_block1.m(main, null);
 			current = true;
+
+			if (!mounted) {
+				dispose = [
+					listen(div1, "mousedown", projectStore.toggleMouseHeld),
+					listen(div1, "mouseup", projectStore.toggleMouseHeld)
+				];
+
+				mounted = true;
+			}
 		},
 		p(ctx, [dirty]) {
 			if (/*$projectStore*/ ctx[0].showPythonScript) {
@@ -226,6 +239,8 @@ function create_fragment(ctx) {
 			destroy_component(sidebar);
 			if (if_block0) if_block0.d();
 			if (if_block1) if_block1.d();
+			mounted = false;
+			run_all(dispose);
 		}
 	};
 }
